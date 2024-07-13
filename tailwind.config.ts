@@ -18,6 +18,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [nextui(), require('@tailwindcss/typography')],
+  plugins: [nextui(), require('@tailwindcss/typography'), require("tailwindcss-animate")],
 };
 export default config;
