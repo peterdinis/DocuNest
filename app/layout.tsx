@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NextUiProvider from "./_components/shared/providers/NextUiProvider";
-import Navbar from "./_components/shared/Navbar";
+import Navigation from "./_components/shared/Navigation";
 import ScrollToTop from "./_components/shared/ScrollToTop";
 import ThemeProvider from "./_components/shared/providers/ThemeProvider";
 
@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <NextUiProvider>
           <ThemeProvider>
-            <Navbar />
+            <Navigation />
             {children}
             <ScrollToTop />
           </ThemeProvider>
