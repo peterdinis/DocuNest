@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { FileText } from "lucide-react";
+import ThemeButton from "./ThemeButton";
 
 const Navbar: FC = () => {
   return (
@@ -78,6 +79,9 @@ const Navbar: FC = () => {
                     Login
                   </span>
                 </a>
+              </div>
+              <div className="ml-3">
+              <ThemeButton />
               </div>
             </div>
           </div>
