@@ -5,6 +5,8 @@ import NextUiProvider from "./_components/shared/providers/NextUiProvider";
 import Navigation from "./_components/shared/Navigation";
 import ScrollToTop from "./_components/shared/ScrollToTop";
 import ThemeProvider from "./_components/shared/providers/ThemeProvider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +27,7 @@ export default function RootLayout({
           <ThemeProvider>
             <Navigation />
             {children}
+            <ToastContainer />
             <ScrollToTop />
           </ThemeProvider>
         </NextUiProvider>
