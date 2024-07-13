@@ -1,94 +1,95 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-wrap: balance;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-wrap: balance;
 }
 
 html::-webkit-scrollbar {
-  width: 16px;
-  height: 16px;
+    width: 16px;
+    height: 16px;
 }
 
 html::-webkit-scrollbar-thumb {
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, 0.25),
-    inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow:
+        inset 2px 2px 2px hsla(0, 0%, 100%, 0.25),
+        inset -2px -2px 2px rgba(0, 0, 0, 0.25);
 }
 
 ::-webkit-scrollbar {
-  display: none;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+    display: none;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 .top-to-btm {
-  position: relative;
+    position: relative;
 }
 
 .icon-position {
-  position: fixed;
-  bottom: 40px;
-  right: 25px;
-  z-index: 20;
+    position: fixed;
+    bottom: 40px;
+    right: 25px;
+    z-index: 20;
 }
 
 .icon-style {
-  background-color: #002745;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  height: 50px;
-  width: 50px;
-  color: #fff;
-  cursor: pointer;
-  animation: movebtn 3s ease-in-out infinite;
-  transition: all 0.5s ease-in-out;
+    background-color: #002745;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    color: #fff;
+    cursor: pointer;
+    animation: movebtn 3s ease-in-out infinite;
+    transition: all 0.5s ease-in-out;
 }
 
 .icon-style:hover {
-  animation: none;
-  background: #fff;
-  color: #0d0047;
-  border: 2px solid #16003e;
+    animation: none;
+    background: #fff;
+    color: #0d0047;
+    border: 2px solid #16003e;
 }
 
 @keyframes movebtn {
-  0% {
-    transform: translateY(0px);
-  }
-  25% {
-    transform: translateY(20px);
-  }
-  50% {
-    transform: translateY(0px);
-  }
-  75% {
-    transform: translateY(-20px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+    0% {
+        transform: translateY(0px);
+    }
+    25% {
+        transform: translateY(20px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+    75% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+    .text-balance {
+        text-wrap: balance;
+    }
 }
 
 @layer components {
-  .navbar-active .hamburger div:first-child {
-  @apply rotate-45 translate-y-1.5;
-  }
-  .navbar-active .hamburger div:last-child {
-  @apply -rotate-45 -translate-y-1;
-  }
-  .navbar-active div:first-child div:first-child div:last-child{
-      @apply block lg:flex
-  }
+    .navbar-active .hamburger div:first-child {
+        @apply translate-y-1.5 rotate-45;
+    }
+    .navbar-active .hamburger div:last-child {
+        @apply -translate-y-1 -rotate-45;
+    }
+    .navbar-active div:first-child div:first-child div:last-child {
+        @apply block lg:flex;
+    }
 }
