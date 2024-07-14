@@ -4,7 +4,7 @@ import authOptions from '../auth/authOptions';
 import { db } from '@/app/_utils/database';
 
 export async function GET() {
-    const session = (await getServerSession(authOptions));
+    const session = await getServerSession(authOptions);
 
     if (!session || !session.user) {
         return NextResponse.json(
