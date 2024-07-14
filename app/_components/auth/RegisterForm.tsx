@@ -13,7 +13,7 @@ import { FC, ReactNode} from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema } from './schemas';
 import { toast } from 'react-toastify';
@@ -35,22 +35,20 @@ const RegisterForm: FC = () => {
             await axios.post('/api/register', data);
         },
         onSuccess: () => {
-            toast.success('Register Done');
+            toast.success('Registration successful');
             router.push('/login');
         },
         onError: () => {
-            toast.error('Register Failed');
+            toast.error('Registration failed');
         },
-
-        onSettled: () => {
-            console.log("Error");
-        }
     });
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: FieldValues) => {
+        console.log("Data submitted:", data);
         registerUserMut.mutate(data);
         reset();
     };
+
     return (
         <div className='flex h-screen flex-col items-center justify-center'>
             <Card className='w-full max-w-md'>
@@ -70,10 +68,7 @@ const RegisterForm: FC = () => {
                             />
                             {errors.name && (
                                 <p className='font-bold text-red-600'>
-                                    {
-                                        errors.name
-                                            .message as unknown as ReactNode
-                                    }
+                                    {errors.name.message as ReactNode}
                                 </p>
                             )}
                         </div>
@@ -89,10 +84,7 @@ const RegisterForm: FC = () => {
                             />
                             {errors.email && (
                                 <p className='font-bold text-red-600'>
-                                    {
-                                        errors.email
-                                            .message as unknown as ReactNode
-                                    }
+                                    {errors.email.message as ReactNode}
                                 </p>
                             )}
                         </div>
@@ -105,19 +97,15 @@ const RegisterForm: FC = () => {
                                 type='password'
                                 required
                             />
-
                             {errors.password && (
                                 <p className='font-bold text-red-600'>
-                                    {
-                                        errors.password
-                                            .message as unknown as ReactNode
-                                    }
+                                    {errors.password.message as ReactNode}
                                 </p>
                             )}
                         </div>
                     </CardBody>
                     <CardFooter className='flex flex-col space-y-2'>
-                        <Button color="primary" className='w-full'>Register</Button>
+                        <Button type='submit' color="primary" className='w-full'>Register</Button>
                     </CardFooter>
                 </form>
             </Card>
