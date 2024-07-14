@@ -18,6 +18,24 @@ import ThemeButton from './ThemeButton';
 const Navigation: FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    const servicesScroll = () => {
+        const serviceSection = document.querySelector(
+            '#services',
+        ) as unknown as HTMLElement;
+        serviceSection.scrollIntoView({
+            behavior: 'smooth',
+        });
+    };
+
+    const pricingScroll = () => {
+        const priceSection = document.querySelector(
+            '#pricing',
+        ) as unknown as HTMLElement;
+        priceSection.scrollIntoView({
+            behavior: 'smooth',
+        });
+    };
+
     return (
         <Navbar
             isBordered
@@ -45,12 +63,12 @@ const Navigation: FC = () => {
                     <span className='ml-4 font-bold'>Docu Nest</span>
                 </NavbarBrand>
                 <NavbarItem className='ml-4'>
-                    <Link color='foreground' href='#'>
+                    <Link color='foreground' onClick={servicesScroll}>
                         Services
                     </Link>
                 </NavbarItem>
                 <NavbarItem isActive>
-                    <Link href='#' aria-current='page'>
+                    <Link onClick={pricingScroll} aria-current='page'>
                         Pricing
                     </Link>
                 </NavbarItem>

@@ -3,7 +3,7 @@ import { Edit3, Mic, FolderOpen, Users } from 'lucide-react';
 
 const HeroServices: FC = () => {
     return (
-        <div className='py-16'>
+        <div id="services" className='py-16'>
             <div className='m-auto space-y-16 px-6 text-gray-500 xl:container md:px-12'>
                 <div>
                     <h2 className='mt-4 text-2xl font-bold text-gray-800 dark:text-white md:text-4xl'>
