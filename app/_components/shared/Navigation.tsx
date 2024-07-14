@@ -33,7 +33,9 @@ const Navigation: FC = () => {
             <NavbarContent className='pr-3 sm:hidden' justify='center'>
                 <NavbarBrand>
                     <FileText />{' '}
-                    <span className='ml-4 font-bold'>Docu Nest</span>
+                    <span className='ml-4 font-bold'>
+                        <Link href="/">Docu Nest</Link>
+                    </span>
                 </NavbarBrand>
             </NavbarContent>
 
