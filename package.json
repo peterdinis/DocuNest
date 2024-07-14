@@ -13,6 +13,8 @@
     "dependencies": {
         "@nextui-org/react": "^2.4.2",
         "@prisma/client": "^5.16.2",
+        "@tanstack/react-query": "^5.51.1",
+        "@tanstack/react-query-devtools": "^5.51.1",
         "axios": "^1.7.2",
         "framer-motion": "^11.3.2",
         "lucide-react": "^0.408.0",
@@ -28,6 +30,7 @@
     },
     "devDependencies": {
         "@tailwindcss/typography": "^0.5.13",
+        "@tanstack/eslint-plugin-query": "^5.51.1",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",

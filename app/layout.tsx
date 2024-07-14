@@ -7,6 +7,7 @@ import ScrollToTop from './_components/shared/ScrollToTop';
 import ThemeProvider from './_components/shared/providers/ThemeProvider';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import QueryProvider from './_components/shared/providers/QueryProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,10 +26,12 @@ export default function RootLayout({
             <body className={inter.className}>
                 <NextUiProvider>
                     <ThemeProvider>
-                        <Navigation />
-                        {children}
-                        <ToastContainer />
-                        <ScrollToTop />
+                        <QueryProvider>
+                            <Navigation />
+                            {children}
+                            <ToastContainer />
+                            <ScrollToTop />
+                        </QueryProvider>
                     </ThemeProvider>
                 </NextUiProvider>
             </body>
