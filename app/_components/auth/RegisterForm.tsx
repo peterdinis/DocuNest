@@ -41,6 +41,10 @@ const RegisterForm: FC = () => {
         onError: () => {
             toast.error('Register Failed');
         },
+
+        onSettled: () => {
+            console.log("Error");
+        }
     });
 
     const onSubmit = (data: any) => {
@@ -118,13 +122,13 @@ const RegisterForm: FC = () => {
                 </form>
             </Card>
             <div className='mt-4'>
-                <span className='text-sm'>Don't have an account? </span>
+                <span className='text-sm'>Already have an account?</span>
                 <Link
-                    href='/register'
-                    className='text-sm text-blue-500'
+                    href='/login'
+                    className='text-sm text-blue-500 ml-4'
                     prefetch={false}
                 >
-                    Sign up
+                    Login
                 </Link>
             </div>
         </div>
