@@ -43,7 +43,14 @@ const Sidebar: FC = () => {
                             href='#home'
                             className={`group relative rounded-xl bg-gray-100 p-2 text-blue-600 hover:bg-gray-50 ${!isOpen && 'text-center'}`}
                         >
-                            {isOpen ? 'Home' : <Home className='h-6 w-6' />}
+                            {isOpen ? (
+                                <span>
+                                    <Home className='h-6 w-6' />
+                                    Home
+                                </span>
+                            ) : (
+                                <Home className='h-6 w-6' />
+                            )}
                         </a>
                     </Tooltip>
                     <Tooltip content='About' placement='right'>
@@ -51,7 +58,14 @@ const Sidebar: FC = () => {
                             href='#about'
                             className={`group relative rounded-xl p-2 text-gray-400 hover:bg-gray-50 ${!isOpen && 'text-center'}`}
                         >
-                            {isOpen ? 'About' : <Info className='h-6 w-6' />}
+                            {isOpen ? (
+                                <span>
+                                    <Info className='h-6 w-6' />
+                                    Info
+                                </span>
+                            ) : (
+                                <Info className='h-6 w-6' />
+                            )}
                         </a>
                     </Tooltip>
                     <Tooltip content='Services' placement='right'>
@@ -60,7 +74,10 @@ const Sidebar: FC = () => {
                             className={`group relative rounded-xl p-2 text-gray-400 hover:bg-gray-50 ${!isOpen && 'text-center'}`}
                         >
                             {isOpen ? (
-                                'Services'
+                                <span>
+                                    <Briefcase className='h-6 w-6' />
+                                    Services
+                                </span>
                             ) : (
                                 <Briefcase className='h-6 w-6' />
                             )}
@@ -71,7 +88,14 @@ const Sidebar: FC = () => {
                             href='#contact'
                             className={`group relative rounded-xl p-2 text-gray-400 hover:bg-gray-50 ${!isOpen && 'text-center'}`}
                         >
-                            {isOpen ? 'Contact' : <Mail className='h-6 w-6' />}
+                            {isOpen ? (
+                                <span>
+                                    <Mail className='h-6 w-6' />
+                                    Contact
+                                </span>
+                            ) : (
+                                <Mail className='h-6 w-6' />
+                            )}
                         </a>
                     </Tooltip>
                 </nav>
