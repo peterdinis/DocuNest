@@ -2,7 +2,7 @@
 
 import { FC, useState } from 'react';
 import { FileText, Menu, X, Home, Info, Briefcase, Mail } from 'lucide-react';
-import { Tooltip } from '@nextui-org/tooltip';
+import { Tooltip } from '@nextui-org/react';
 
 const Sidebar: FC = () => {
     const [isOpen, setIsOpen] = useState(true);
