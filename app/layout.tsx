@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-quill/dist/quill.snow.css';
 import QueryProvider from './_components/shared/providers/QueryProvider';
+import SessionAppProvider from './_components/shared/providers/SessionProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,10 +29,12 @@ export default function RootLayout({
                 <NextUiProvider>
                     <ThemeProvider>
                         <QueryProvider>
-                            <Navigation />
-                            {children}
-                            <ToastContainer />
-                            <ScrollToTop />
+                            <SessionAppProvider>
+                                <Navigation />
+                                {children}
+                                <ToastContainer />
+                                <ScrollToTop />
+                            </SessionAppProvider>
                         </QueryProvider>
                     </ThemeProvider>
                 </NextUiProvider>

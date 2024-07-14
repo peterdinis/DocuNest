@@ -2,13 +2,28 @@
 
 import { FC, useState } from 'react';
 import { FileText, Menu, X, Home, Info, Briefcase, Mail } from 'lucide-react';
-import { Tooltip } from '@nextui-org/react';
+import { Button, Tooltip } from '@nextui-org/react';
+import { useSession, signOut } from 'next-auth/react';
+import { toast } from 'react-toastify';
 
 const Sidebar: FC = () => {
     const [isOpen, setIsOpen] = useState(true);
+    const { data: session } = useSession();
+    const loggedUser = session?.user?.email;
 
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
+    };
+
+    const loggedOut = async () => {
+        try {
+            await signOut({
+                redirect: false,
+            });
+            toast.success('Successfully logged out');
+        } catch (err) {
+            toast.error('Failed to logged out');
+        }
     };
 
     return (
@@ -95,6 +110,30 @@ const Sidebar: FC = () => {
                                 </span>
                             ) : (
                                 <Mail className='h-6 w-6' />
+                            )}
+                        </a>
+                    </Tooltip>
+
+                    <Tooltip content='Services' placement='right'>
+                        <a
+                            href='#services'
+                            className={`group relative rounded-xl p-2 text-gray-400 hover:bg-gray-50 ${!isOpen && 'text-center'}`}
+                        >
+                            {isOpen && loggedUser}
+                        </a>
+                    </Tooltip>
+
+                    <Tooltip content='Services' placement='right'>
+                        <a
+                            href='#services'
+                            className={`group relative rounded-xl p-2 text-gray-400 hover:bg-gray-50 ${!isOpen && 'text-center'}`}
+                        >
+                            {isOpen && loggedUser && (
+                                <Button variant='ghost' onClick={loggedOut}
+                                className={`group relative rounded-xl p-2 text-gray-400 hover:bg-gray-50 ${!isOpen && 'text-center'}`}
+                            >
+                                {isOpen && loggedUser}
+                            </Button>
                             )}
                         </a>
                     </Tooltip>
