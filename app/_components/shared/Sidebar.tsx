@@ -1,10 +1,11 @@
+import { FileText } from 'lucide-react';
 import { FC } from 'react';
 
 const Sidebar: FC = () => {
     return (
         <aside className='flex h-screen w-20 flex-col items-center border-r border-gray-200 bg-white'>
             <div className='flex h-[4.5rem] w-full items-center justify-center border-b border-gray-200 p-2'>
-                <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThsapwuIZ2JPUVRaWSoX_xoEIOHWxneY7EupS8gsFriA&s' />
+                <FileText />
             </div>
             <nav className='flex flex-1 flex-col gap-y-4 pt-10'>
                 <a
