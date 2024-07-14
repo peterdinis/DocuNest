@@ -7,7 +7,7 @@ import Link from 'next/link';
 const HeroWrapper: FC = () => {
     return (
         <>
-            <div className='bg-gray-100'>
+            <div className='bg-gray-100 dark:bg-gray-950'>
                 <div className='container mx-auto flex flex-col items-center py-12 sm:py-24'>
                     <div className='mb-5 w-11/12 flex-col items-center justify-center sm:mb-10 sm:w-2/3 lg:flex'>
                         <h1 className='prose prose-h1: text-center text-2xl font-black leading-7 text-gray-800 sm:text-3xl md:text-4xl md:leading-10 lg:text-5xl xl:text-6xl'>
