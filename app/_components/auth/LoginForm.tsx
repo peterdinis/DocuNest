@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { FC, ReactNode, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema } from './schemas';
 import { toast } from 'react-toastify';
@@ -28,7 +28,7 @@ const LoginForm: FC = () => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
-    const loginUser = async (data: any) => {
+    const loginUser = async (data: FieldValues) => {
         setLoading(true);
 
         try {
@@ -38,13 +38,13 @@ const LoginForm: FC = () => {
             });
 
             if (result?.error) {
-                toast.error('Login error');
+                toast.error('Login error: ' + result.error);
             } else {
-                toast.success('Login DONE');
+                toast.success('Login successful!');
                 router.push('/dashboard');
             }
         } catch (error) {
-            toast.error('Login error');
+            toast.error('An unexpected error occurred.');
         } finally {
             setLoading(false);
         }
@@ -66,6 +66,11 @@ const LoginForm: FC = () => {
                                 disabled={loading}
                                 {...register('email')}
                             />
+                            {errors.email && (
+                                <p className='font-bold text-red-600'>
+                                    {errors.email.message as ReactNode}
+                                </p>
+                            )}
                         </div>
                         <div className='space-y-2'>
                             <div>Password</div>
@@ -76,10 +81,17 @@ const LoginForm: FC = () => {
                                 type='password'
                                 required
                             />
+                            {errors.password && (
+                                <p className='font-bold text-red-600'>
+                                    {errors.password.message as ReactNode}
+                                </p>
+                            )}
                         </div>
                     </CardBody>
                     <CardFooter className='flex flex-col space-y-2'>
-                        <Button color="primary" className='w-full'>Login</Button>
+                        <Button type='submit' color="primary" className='w-full' disabled={loading}>
+                            {loading ? 'Logging in...' : 'Login'}
+                        </Button>
                     </CardFooter>
                 </form>
             </Card>
