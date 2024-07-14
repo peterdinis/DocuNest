@@ -6,7 +6,7 @@ interface IHeaderProps {
 
 const Header: FC<IHeaderProps> = ({text}: IHeaderProps) => {
     return (
-        <h1 className="flex justify-center align-top mt-5 text-4xl font-bold">
+        <h1 className="mt-5 text-4xl font-bold">
             {text}
         </h1>
     )
