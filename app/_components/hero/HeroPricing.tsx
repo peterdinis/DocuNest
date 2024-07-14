@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Check } from "lucide-react";
 
 const HeroPricing: FC = () => {
     return (
@@ -24,16 +25,16 @@ const HeroPricing: FC = () => {
                                 </div>
                             </div>
                             <ul role="list" className="m-auto w-max space-y-4 pb-6 text-gray-600 dark:text-gray-300">
-                                <li className="space-x-2">
-                                    <span className="font-semibold text-primary">&check;</span>
+                                <li className="flex items-center space-x-2">
+                                    <Check className="w-4 h-4 text-primary" />
                                     <span>Basic note-taking</span>
                                 </li>
-                                <li className="space-x-2">
-                                    <span className="font-semibold text-primary">&check;</span>
+                                <li className="flex items-center space-x-2">
+                                    <Check className="w-4 h-4 text-primary" />
                                     <span>Basic AI summarization</span>
                                 </li>
-                                <li className="space-x-2">
-                                    <span className="font-semibold text-primary">&check;</span>
+                                <li className="flex items-center space-x-2">
+                                    <Check className="w-4 h-4 text-primary" />
                                     <span>Limited cloud storage</span>
                                 </li>
                             </ul>
@@ -71,20 +72,20 @@ const HeroPricing: FC = () => {
                                 >1 Discount applied</span>
                             </div>
                             <ul role="list" className="m-auto w-max space-y-4 pb-6 text-gray-600 dark:text-gray-300">
-                                <li className="space-x-2">
-                                    <span className="font-semibold text-primary">&check;</span>
+                                <li className="flex items-center space-x-2">
+                                    <Check className="w-4 h-4 text-primary" />
                                     <span>All free features</span>
                                 </li>
-                                <li className="space-x-2">
-                                    <span className="font-semibold text-primary">&check;</span>
+                                <li className="flex items-center space-x-2">
+                                    <Check className="w-4 h-4 text-primary" />
                                     <span>Advanced AI summarization</span>
                                 </li>
-                                <li className="space-x-2">
-                                    <span className="font-semibold text-primary">&check;</span>
+                                <li className="flex items-center space-x-2">
+                                    <Check className="w-4 h-4 text-primary" />
                                     <span>Increased cloud storage</span>
                                 </li>
-                                <li className="space-x-2">
-                                    <span className="font-semibold text-primary">&check;</span>
+                                <li className="flex items-center space-x-2">
+                                    <Check className="w-4 h-4 text-primary" />
                                     <span>Priority support</span>
                                 </li>
                             </ul>
@@ -109,20 +110,20 @@ const HeroPricing: FC = () => {
                                 <span className="absolute right-9 bottom-2 text-xl font-bold text-primary">/ Month</span>
                             </div>
                             <ul role="list" className="m-auto w-max space-y-4 pb-6 text-gray-600 dark:text-gray-300">
-                                <li className="space-x-2">
-                                    <span className="font-semibold text-primary">&check;</span>
+                                <li className="flex items-center space-x-2">
+                                    <Check className="w-4 h-4 text-primary" />
                                     <span>All free features</span>
                                 </li>
-                                <li className="space-x-2">
-                                    <span className="font-semibold text-primary">&check;</span>
+                                <li className="flex items-center space-x-2">
+                                    <Check className="w-4 h-4 text-primary" />
                                     <span>Advanced AI summarization</span>
                                 </li>
-                                <li className="space-x-2">
-                                    <span className="font-semibold text-primary">&check;</span>
+                                <li className="flex items-center space-x-2">
+                                    <Check className="w-4 h-4 text-primary" />
                                     <span>Increased cloud storage</span>
                                 </li>
-                                <li className="space-x-2">
-                                    <span className="font-semibold text-primary">&check;</span>
+                                <li className="flex items-center space-x-2">
+                                    <Check className="w-4 h-4 text-primary" />
                                     <span>Priority support</span>
                                 </li>
                             </ul>
@@ -134,7 +135,7 @@ const HeroPricing: FC = () => {
                 </div>
             </div>
         </>
-    )
+    );
 }
 
 export default HeroPricing;
