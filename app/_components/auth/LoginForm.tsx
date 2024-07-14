@@ -89,7 +89,12 @@ const LoginForm: FC = () => {
                         </div>
                     </CardBody>
                     <CardFooter className='flex flex-col space-y-2'>
-                        <Button type='submit' color="primary" className='w-full' disabled={loading}>
+                        <Button
+                            type='submit'
+                            color='primary'
+                            className='w-full'
+                            disabled={loading}
+                        >
                             {loading ? 'Logging in...' : 'Login'}
                         </Button>
                     </CardFooter>
@@ -99,7 +104,7 @@ const LoginForm: FC = () => {
                 <span className='text-sm'>Don't have an account? </span>
                 <Link
                     href='/register'
-                    className='text-sm text-blue-500 ml-4'
+                    className='ml-4 text-sm text-blue-500'
                     prefetch={false}
                 >
                     Register

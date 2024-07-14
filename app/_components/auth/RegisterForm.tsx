@@ -9,7 +9,7 @@ import {
     CardBody,
 } from '@nextui-org/react';
 import Link from 'next/link';
-import { FC, ReactNode} from 'react';
+import { FC, ReactNode } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
@@ -44,7 +44,7 @@ const RegisterForm: FC = () => {
     });
 
     const onSubmit = (data: FieldValues) => {
-        console.log("Data submitted:", data);
+        console.log('Data submitted:', data);
         registerUserMut.mutate(data);
         reset();
     };
@@ -105,7 +105,13 @@ const RegisterForm: FC = () => {
                         </div>
                     </CardBody>
                     <CardFooter className='flex flex-col space-y-2'>
-                        <Button type='submit' color="primary" className='w-full'>Register</Button>
+                        <Button
+                            type='submit'
+                            color='primary'
+                            className='w-full'
+                        >
+                            Register
+                        </Button>
                     </CardFooter>
                 </form>
             </Card>
@@ -113,7 +119,7 @@ const RegisterForm: FC = () => {
                 <span className='text-sm'>Already have an account?</span>
                 <Link
                     href='/login'
-                    className='text-sm text-blue-500 ml-4'
+                    className='ml-4 text-sm text-blue-500'
                     prefetch={false}
                 >
                     Login

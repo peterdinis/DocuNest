@@ -34,7 +34,7 @@ const Navigation: FC = () => {
                 <NavbarBrand>
                     <FileText />{' '}
                     <span className='ml-4 font-bold'>
-                        <Link href="/">Docu Nest</Link>
+                        <Link href='/'>Docu Nest</Link>
                     </span>
                 </NavbarBrand>
             </NavbarContent>
@@ -61,7 +61,12 @@ const Navigation: FC = () => {
                     <Link href='/login'>Login</Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Button as={Link} color='warning' href='/register' variant='flat'>
+                    <Button
+                        as={Link}
+                        color='warning'
+                        href='/register'
+                        variant='flat'
+                    >
                         Sign Up
                     </Button>
                 </NavbarItem>
@@ -72,11 +77,15 @@ const Navigation: FC = () => {
 
             <NavbarMenu>
                 <NavbarMenuItem>
-                    <Link href="/login" className='w-full'>Login</Link>
+                    <Link href='/login' className='w-full'>
+                        Login
+                    </Link>
                 </NavbarMenuItem>
 
                 <NavbarMenuItem>
-                    <Link href="/register" className='w-full'>Register</Link>
+                    <Link href='/register' className='w-full'>
+                        Register
+                    </Link>
                 </NavbarMenuItem>
             </NavbarMenu>
         </Navbar>
