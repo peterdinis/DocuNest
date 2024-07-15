@@ -29,7 +29,8 @@ const Sidebar: FC = () => {
                 'grid min-h-screen': true,
                 'grid-cols-sidebar': !collapsed,
                 'grid-cols-sidebar-collapsed': collapsed,
-                'transition-[grid-template-columns] duration-300 ease-in-out': true,
+                'transition-[grid-template-columns] duration-300 ease-in-out':
+                    true,
             })}
         >
             <div className='bg-white text-black'>
@@ -41,16 +42,19 @@ const Sidebar: FC = () => {
                     )}
                 </button>
                 <motion.div
-                    initial={{ width: collapsed ? 80 : 240 }}
-                    animate={{ width: collapsed ? 80 : 240 }}
+                    initial={{ width: collapsed ? 100 : 240 }}
+                    animate={{ width: collapsed ? 100 : 240 }}
                     transition={{ duration: 0.3 }}
                     className='overflow-hidden'
                 >
                     {collapsed === false ? (
                         <>
                             <div>
+                                <span className='prose-span: prose ml-5 mt-4 p-2 text-xl font-bold'>
+                                    Docu Nest
+                                </span>
                                 <div className='mt-8'>
-                                    <div className='mt-8'>
+                                    <div className='ml-4 mt-8'>
                                         <Button
                                             variant={'ghost'}
                                             value='sm'
@@ -61,13 +65,15 @@ const Sidebar: FC = () => {
                                         </Button>
                                     </div>
                                 </div>
-                                <div className='mt-8'>
+                                <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
                                         <Upload />
-                                        <Link href='/upload'>Upload new file</Link>
+                                        <Link href='/upload'>
+                                            Upload new file
+                                        </Link>
                                     </Button>
                                 </div>
-                                <div className='mt-8'>
+                                <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
                                         <Files />
                                         <Link href='/files'>My all files</Link>
@@ -78,7 +84,7 @@ const Sidebar: FC = () => {
                     ) : (
                         <div>
                             <div className='mt-8'>
-                                <div className='mt-8'>
+                                <div className='ml-4 mt-8'>
                                     <Tooltip showArrow={true} content='Logout'>
                                         <Button
                                             onClick={logoutUser}
@@ -89,7 +95,7 @@ const Sidebar: FC = () => {
                                         </Button>
                                     </Tooltip>
                                 </div>
-                                <div className='mt-8'>
+                                <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
                                         content='Upload new file'
@@ -101,8 +107,11 @@ const Sidebar: FC = () => {
                                         </Button>
                                     </Tooltip>
                                 </div>
-                                <div className='mt-8'>
-                                    <Tooltip showArrow={true} content='All Files'>
+                                <div className='ml-4 mt-8'>
+                                    <Tooltip
+                                        showArrow={true}
+                                        content='All Files'
+                                    >
                                         <Button variant={'ghost'} size={'sm'}>
                                             <Link href='/files'>
                                                 <Files />
