@@ -11,13 +11,21 @@ import {
     Link,
     Button,
     NavbarMenuItem,
+    Dropdown,
+    DropdownTrigger,
+    DropdownMenu,
+    DropdownItem,
 } from '@nextui-org/react';
 import { FileText } from 'lucide-react';
 import ThemeButton from './ThemeButton';
+import { useSession, signOut } from 'next-auth/react';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 const Navigation: FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    const { data: session } = useSession();
+    const router = useRouter();
     const servicesScroll = () => {
         const serviceSection = document.querySelector(
             '#services',
@@ -34,6 +42,16 @@ const Navigation: FC = () => {
         priceSection.scrollIntoView({
             behavior: 'smooth',
         });
+    };
+
+    const loggedUser = session?.user?.email;
+
+    const logoutUser = () => {
+        signOut({
+            redirect: false
+        });
+        toast.success('Successful logout');
+        router.push('/login');
     };
 
     return (
@@ -62,36 +80,56 @@ const Navigation: FC = () => {
                     <FileText />{' '}
                     <span className='ml-4 font-bold'>Docu Nest</span>
                 </NavbarBrand>
-                <NavbarItem className='ml-4'>
-                    <Link color='foreground' onClick={servicesScroll}>
-                        Services
-                    </Link>
-                </NavbarItem>
-                <NavbarItem isActive>
-                    <Link onClick={pricingScroll} aria-current='page'>
-                        Pricing
-                    </Link>
-                </NavbarItem>
+                {!loggedUser && (
+                    <>
+                        <NavbarItem className='ml-4'>
+                            <Link color='foreground' onClick={servicesScroll}>
+                                Services
+                            </Link>
+                        </NavbarItem>
+                        <NavbarItem isActive>
+                            <Link onClick={pricingScroll} aria-current='page'>
+                                Pricing
+                            </Link>
+                        </NavbarItem>
+                    </>
+                )}
             </NavbarContent>
 
-            <NavbarContent justify='end'>
-                <NavbarItem className='hidden lg:flex'>
-                    <Link href='/login'>Login</Link>
-                </NavbarItem>
-                <NavbarItem>
-                    <Button
-                        as={Link}
-                        color='warning'
-                        href='/register'
-                        variant='flat'
-                    >
-                        Sign Up
-                    </Button>
-                </NavbarItem>
-                <NavbarItem>
-                    <ThemeButton />
-                </NavbarItem>
-            </NavbarContent>
+            {!loggedUser ? (
+                <NavbarContent justify='end'>
+                    <NavbarItem className='hidden lg:flex'>
+                        <Link href='/login'>Login</Link>
+                    </NavbarItem>
+                    <NavbarItem>
+                        <Button
+                            as={Link}
+                            color='warning'
+                            href='/register'
+                            variant='flat'
+                        >
+                            Sign Up
+                        </Button>
+                    </NavbarItem>
+                    <NavbarItem>
+                        <ThemeButton />
+                    </NavbarItem>
+                </NavbarContent>
+            ) : (
+                <NavbarContent justify='end'>
+                    <Dropdown>
+                        <DropdownTrigger>
+                            <Button variant='bordered'>Profile</Button>
+                        </DropdownTrigger>
+                        <DropdownMenu aria-label='Static Actions'>
+                            <DropdownItem>{loggedUser}</DropdownItem>
+                            <DropdownItem onClick={logoutUser}>
+                                Logout
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
+                </NavbarContent>
+            )}
 
             <NavbarMenu>
                 <NavbarMenuItem>
