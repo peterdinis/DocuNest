@@ -6,16 +6,13 @@ import { XCircle, Menu, LogOut, Upload, Files, Folder, FolderCheck } from 'lucid
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
-import { signOut, useSession } from 'next-auth/react';
+import { signOut} from 'next-auth/react';
 import { Button, Tooltip } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 
 const Sidebar: FC = () => {
     const [collapsed, setSidebarCollapsed] = useState(false);
     const router = useRouter();
-    const { data: session } = useSession();
-
-    const loggedUser = session?.user;
 
     const logoutUser = () => {
         signOut();
