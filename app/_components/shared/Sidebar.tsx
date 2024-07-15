@@ -69,7 +69,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
                                         <Upload />
-                                        <Link href='/document/new'>
+                                        <Link href='/documents/new'>
                                             Create new document
                                         </Link>
                                     </Button>
@@ -91,7 +91,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
                                         <Files />
-                                        <Link href='/files/all'>All my documents</Link>
+                                        <Link href='/documents/all'>All my documents</Link>
                                     </Button>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@ const Sidebar: FC = () => {
                                         content='All my documents'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
-                                            <Link href='/files/all'>
+                                            <Link href='/documents/all'>
                                                 <Files />
                                             </Link>
                                         </Button>
