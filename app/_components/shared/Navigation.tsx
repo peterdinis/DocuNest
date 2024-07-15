@@ -19,12 +19,13 @@ import {
 import { FileText } from 'lucide-react';
 import ThemeButton from './ThemeButton';
 import { useSession, signOut } from 'next-auth/react';
-import {toast} from "react-toastify";
+import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 
 const Navigation: FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { data: session } = useSession();
+    const router = useRouter();
     const servicesScroll = () => {
         const serviceSection = document.querySelector(
             '#services',
@@ -120,7 +121,9 @@ const Navigation: FC = () => {
                         </DropdownTrigger>
                         <DropdownMenu aria-label='Static Actions'>
                             <DropdownItem>{loggedUser}</DropdownItem>
-                            <DropdownItem onClick={}>Copy link</DropdownItem>
+                            <DropdownItem onClick={logoutUser}>
+                                Logout
+                            </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                 </NavbarContent>
