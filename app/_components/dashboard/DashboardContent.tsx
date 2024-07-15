@@ -3,7 +3,7 @@ import DocumentsWrapper from '../docs/DocumentsWrapper';
 
 const DashboardContent: FC = () => {
     return (
-        <main className='overflow-x-hidden ml-5 py-4 px-8 flex-grow flex-1'>
+        <main className='ml-5 flex-1 flex-grow overflow-x-hidden px-8 py-4'>
             <DocumentsWrapper />
         </main>
     );

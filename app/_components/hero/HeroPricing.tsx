@@ -4,7 +4,10 @@ import { Check } from 'lucide-react';
 const HeroPricing: FC = () => {
     return (
         <>
-            <div id="pricing" className='m-auto px-6 py-20 xl:container md:px-12 lg:px-20'>
+            <div
+                id='pricing'
+                className='m-auto px-6 py-20 xl:container md:px-12 lg:px-20'
+            >
                 <div className='m-auto text-center lg:w-7/12'>
                     <h2 className='text-2xl font-bold text-gray-800 dark:text-white md:text-4xl'>
                         Choose the Right Plan for Your Note-Taking Needs
