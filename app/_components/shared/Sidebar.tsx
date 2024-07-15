@@ -114,11 +114,23 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
-                                        content='Create new document'
+                                        content='Create new folder'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
                                             <Link href='/folders/new'>
                                                 <Folder />
+                                            </Link>
+                                        </Button>
+                                    </Tooltip>
+                                </div>
+                                <div className='ml-4 mt-8'>
+                                    <Tooltip
+                                        showArrow={true}
+                                        content='Create new document'
+                                    >
+                                        <Button variant={'ghost'} size={'sm'}>
+                                            <Link href='/documents/new'>
+                                                <Upload />
                                             </Link>
                                         </Button>
                                     </Tooltip>
