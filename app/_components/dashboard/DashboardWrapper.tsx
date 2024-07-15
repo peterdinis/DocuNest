@@ -4,10 +4,10 @@ import DashboardContent from './DashboardContent';
 
 const DashboardWrapper: FC = () => {
     return (
-        <div className='flex min-h-screen flex-row bg-gray-100 text-gray-800'>
-            <Sidebar />
-            <DashboardContent />
-        </div>
+        <div className='flex text-gray-900 bg-gray-100 dark:bg-dark dark:text-light'>
+      <Sidebar />
+      <DashboardContent />
+    </div>
     );
 };
 

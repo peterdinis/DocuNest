@@ -1,144 +1,115 @@
 'use client';
 
 import { FC, useState } from 'react';
-import { FileText, Menu, X, Home, Info, Briefcase, Mail } from 'lucide-react';
-import { Button, Tooltip } from '@nextui-org/react';
-import { useSession, signOut } from 'next-auth/react';
+import classNames from 'classnames';
+import { XCircle, Menu, LogOut, Upload, Files } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { toast } from 'react-toastify';
+import { signOut, useSession } from 'next-auth/react';
+import { Button, Tooltip } from '@nextui-org/react';
 
 const Sidebar: FC = () => {
-    const [isOpen, setIsOpen] = useState(true);
+    const [collapsed, setSidebarCollapsed] = useState(false);
+    const router = useRouter();
     const { data: session } = useSession();
-    const loggedUser = session?.user?.email;
 
-    const toggleSidebar = () => {
-        setIsOpen(!isOpen);
-    };
+    const loggedUser = session?.user;
 
-    const loggedOut = async () => {
-        try {
-            await signOut({
-                redirect: false,
-            });
-            toast.success('Successfully logged out');
-        } catch (err) {
-            toast.error('Failed to logged out');
-        }
+    const logoutUser = () => {
+        signOut();
+        toast.success('Successfull logout');
+        router.push('/login');
     };
 
     return (
-        <div className='flex h-screen'>
-            <aside
-                className={`flex flex-col items-center border-r border-gray-200 bg-white transition-all duration-300 ${
-                    isOpen ? 'w-64' : 'w-20'
-                }`}
-            >
-                <div className='flex h-[4.5rem] w-full items-center justify-between border-b border-gray-200 p-2'>
-                    <div className='flex w-full items-center justify-center'>
-                        {isOpen ? (
-                            <span className='ml-2 font-bold'>DocuNest</span>
-                        ) : (
-                            <FileText />
-                        )}
+        <div
+            className={classNames({
+                'grid min-h-screen': true,
+                'grid-cols-sidebar': !collapsed,
+                'grid-cols-sidebar-collapsed': collapsed,
+                'transition-[grid-template-columns] duration-300 ease-in-out':
+                    true,
+            })}
+        >
+            <div className='bg-white text-black'>
+                <button onClick={() => setSidebarCollapsed((prev) => !prev)}>
+                    {collapsed === true ? (
+                        <Menu className='h-7 w-7' />
+                    ) : (
+                        <XCircle className='h-7 w-7' />
+                    )}
+                </button>
+                {collapsed === false ? (
+                    <>
+                        <div>
+                            <div className='mt-8'>
+                                <div className='mt-8'>
+                                    <Button
+                                        variant={'ghost'}
+                                        value='sm'
+                                        onClick={logoutUser}
+                                    >
+                                        <LogOut onClick={logoutUser} />
+                                        Logout
+                                    </Button>
+                                </div>{' '}
+                            </div>
+
+                            <div className='mt-8'>
+                                <Button variant={'ghost'} value='sm'>
+                                    <Upload />
+                                    <Link href='/upload'>Upload new file</Link>
+                                </Button>
+                            </div>
+
+                            <div className='mt-8'>
+                                <Button variant={'ghost'} value='sm'>
+                                    <Files />
+                                    <Link href='/files'>My all files</Link>
+                                </Button>
+                            </div>
+                        </div>
+                    </>
+                ) : (
+                    <div>
+                        <div className='mt-8'>
+                            <div className='mt-8'>
+                                <Tooltip showArrow={true} content='Logout'>
+                                    <Button
+                                        onClick={logoutUser}
+                                        variant={'ghost'}
+                                        size={'sm'}
+                                    >
+                                        <LogOut />
+                                    </Button>
+                                </Tooltip>
+                            </div>
+                            <div className='mt-8'>
+                                <Tooltip
+                                    showArrow={true}
+                                    content='Upload new file'
+                                >
+                                    <Button variant={'ghost'} size={'sm'}>
+                                        <Link href='/upload'>
+                                            <Upload />
+                                        </Link>
+                                    </Button>
+                                </Tooltip>
+                            </div>
+                            <div className='mt-8'>
+                                <Tooltip showArrow={true} content='All Files'>
+                                    <Button variant={'ghost'} size={'sm'}>
+                                        <Link href='/files'>
+                                            <Files />
+                                        </Link>
+                                    </Button>
+                                </Tooltip>
+                            </div>
+                        </div>
                     </div>
-                    <button
-                        onClick={toggleSidebar}
-                        className='p-2 focus:outline-none'
-                    >
-                        {isOpen ? (
-                            <X className='h-6 w-6' />
-                        ) : (
-                            <Menu className='h-6 w-6' />
-                        )}
-                    </button>
-                </div>
-                <nav className='flex flex-1 flex-col gap-y-4 pt-10'>
-                    <Tooltip content='Home' placement='right'>
-                        <a
-                            href='#home'
-                            className={`group relative rounded-xl bg-gray-100 p-2 text-blue-600 hover:bg-gray-50 ${!isOpen && 'text-center'}`}
-                        >
-                            {isOpen ? (
-                                <span>
-                                    <Home className='h-6 w-6' />
-                                    Home
-                                </span>
-                            ) : (
-                                <Home className='h-6 w-6' />
-                            )}
-                        </a>
-                    </Tooltip>
-                    <Tooltip content='About' placement='right'>
-                        <a
-                            href='#about'
-                            className={`group relative rounded-xl p-2 text-gray-400 hover:bg-gray-50 ${!isOpen && 'text-center'}`}
-                        >
-                            {isOpen ? (
-                                <span>
-                                    <Info className='h-6 w-6' />
-                                    Info
-                                </span>
-                            ) : (
-                                <Info className='h-6 w-6' />
-                            )}
-                        </a>
-                    </Tooltip>
-                    <Tooltip content='Services' placement='right'>
-                        <a
-                            href='#services'
-                            className={`group relative rounded-xl p-2 text-gray-400 hover:bg-gray-50 ${!isOpen && 'text-center'}`}
-                        >
-                            {isOpen ? (
-                                <span>
-                                    <Briefcase className='h-6 w-6' />
-                                    Services
-                                </span>
-                            ) : (
-                                <Briefcase className='h-6 w-6' />
-                            )}
-                        </a>
-                    </Tooltip>
-                    <Tooltip content='Contact' placement='right'>
-                        <a
-                            href='#contact'
-                            className={`group relative rounded-xl p-2 text-gray-400 hover:bg-gray-50 ${!isOpen && 'text-center'}`}
-                        >
-                            {isOpen ? (
-                                <span>
-                                    <Mail className='h-6 w-6' />
-                                    Contact
-                                </span>
-                            ) : (
-                                <Mail className='h-6 w-6' />
-                            )}
-                        </a>
-                    </Tooltip>
-
-                    <Tooltip content='Services' placement='right'>
-                        <a
-                            href='#services'
-                            className={`group relative rounded-xl p-2 text-gray-400 hover:bg-gray-50 ${!isOpen && 'text-center'}`}
-                        >
-                            {isOpen && loggedUser}
-                        </a>
-                    </Tooltip>
-
-                    <Tooltip content='Services' placement='right'>
-                        <a
-                            href='#services'
-                            className={`group relative rounded-xl p-2 text-gray-400 hover:bg-gray-50 ${!isOpen && 'text-center'}`}
-                        >
-                            {isOpen && loggedUser && (
-                                <Button variant='ghost' onClick={loggedOut}
-                                className={`group relative rounded-xl p-2 text-gray-400 hover:bg-gray-50 ${!isOpen && 'text-center'}`}
-                            >
-                                {isOpen && loggedUser}
-                            </Button>
-                            )}
-                        </a>
-                    </Tooltip>
-                </nav>
-            </aside>
+                )}
+            </div>
         </div>
     );
 };
