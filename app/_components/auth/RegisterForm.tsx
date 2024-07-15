@@ -9,7 +9,7 @@ import {
     CardBody,
 } from '@nextui-org/react';
 import Link from 'next/link';
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
@@ -17,8 +17,13 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema } from './schemas';
 import { toast } from 'react-toastify';
+import { Eye, EyeOff } from 'lucide-react';
 
 const RegisterForm: FC = () => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    const toggleVisibility = () => setIsVisible(!isVisible);
+
     const router = useRouter();
     const {
         register,
@@ -92,10 +97,21 @@ const RegisterForm: FC = () => {
                         <div className='space-y-2'>
                             <div>Password</div>
                             <Input
-                                id='password'
+                                placeholder='Enter your password'
                                 {...register('password')}
-                                type='password'
-                                required
+                                endContent={
+                                    <button
+                                        type='button'
+                                        onClick={toggleVisibility}
+                                    >
+                                        {isVisible ? (
+                                            <EyeOff className='pointer-events-none text-2xl text-default-400' />
+                                        ) : (
+                                            <Eye className='pointer-events-none text-2xl text-default-400' />
+                                        )}
+                                    </button>
+                                }
+                                type={isVisible ? 'text' : 'password'}
                             />
                             {errors.password && (
                                 <p className='font-bold text-red-600'>
