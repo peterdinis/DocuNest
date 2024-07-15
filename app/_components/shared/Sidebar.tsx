@@ -2,7 +2,7 @@
 
 import { FC, useState } from 'react';
 import classNames from 'classnames';
-import { XCircle, Menu, LogOut, Upload, Files } from 'lucide-react';
+import { XCircle, Menu, LogOut, Upload, Files, Folder, FolderCheck } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
@@ -75,8 +75,24 @@ const Sidebar: FC = () => {
                                 </div>
                                 <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
+                                        <Folder />
+                                        <Link href='/folders/new'>
+                                            Create new folder
+                                        </Link>
+                                    </Button>
+                                </div>
+                                <div className='ml-4 mt-8'>
+                                    <Button variant={'ghost'} value='sm'>
+                                        <FolderCheck />
+                                        <Link href='/folders/all'>
+                                            All my folders
+                                        </Link>
+                                    </Button>
+                                </div>
+                                <div className='ml-4 mt-8'>
+                                    <Button variant={'ghost'} value='sm'>
                                         <Files />
-                                        <Link href='/files'>All my documents</Link>
+                                        <Link href='/files/all'>All my documents</Link>
                                     </Button>
                                 </div>
                             </div>
@@ -98,11 +114,11 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
-                                        content='Upload new file'
+                                        content='Create new document'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
-                                            <Link href='/upload'>
-                                                <Upload />
+                                            <Link href='/folders/new'>
+                                                <Folder />
                                             </Link>
                                         </Button>
                                     </Tooltip>
@@ -110,10 +126,22 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
-                                        content='All Files'
+                                        content='All my folders'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
-                                            <Link href='/files'>
+                                            <Link href='/folders/all'>
+                                                <FolderCheck />
+                                            </Link>
+                                        </Button>
+                                    </Tooltip>
+                                </div>
+                                <div className='ml-4 mt-8'>
+                                    <Tooltip
+                                        showArrow={true}
+                                        content='All my documents'
+                                    >
+                                        <Button variant={'ghost'} size={'sm'}>
+                                            <Link href='/files/all'>
                                                 <Files />
                                             </Link>
                                         </Button>
