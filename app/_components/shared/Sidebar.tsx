@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { toast } from 'react-toastify';
 import { signOut, useSession } from 'next-auth/react';
 import { Button, Tooltip } from '@nextui-org/react';
+import { motion } from 'framer-motion';
 
 const Sidebar: FC = () => {
     const [collapsed, setSidebarCollapsed] = useState(false);
@@ -18,7 +19,7 @@ const Sidebar: FC = () => {
 
     const logoutUser = () => {
         signOut();
-        toast.success('Successfull logout');
+        toast.success('Successful logout');
         router.push('/login');
     };
 
@@ -28,8 +29,7 @@ const Sidebar: FC = () => {
                 'grid min-h-screen': true,
                 'grid-cols-sidebar': !collapsed,
                 'grid-cols-sidebar-collapsed': collapsed,
-                'transition-[grid-template-columns] duration-300 ease-in-out':
-                    true,
+                'transition-[grid-template-columns] duration-300 ease-in-out': true,
             })}
         >
             <div className='bg-white text-black'>
@@ -40,75 +40,80 @@ const Sidebar: FC = () => {
                         <XCircle className='h-7 w-7' />
                     )}
                 </button>
-                {collapsed === false ? (
-                    <>
+                <motion.div
+                    initial={{ width: collapsed ? 80 : 240 }}
+                    animate={{ width: collapsed ? 80 : 240 }}
+                    transition={{ duration: 0.3 }}
+                    className='overflow-hidden'
+                >
+                    {collapsed === false ? (
+                        <>
+                            <div>
+                                <div className='mt-8'>
+                                    <div className='mt-8'>
+                                        <Button
+                                            variant={'ghost'}
+                                            value='sm'
+                                            onClick={logoutUser}
+                                        >
+                                            <LogOut onClick={logoutUser} />
+                                            Logout
+                                        </Button>
+                                    </div>
+                                </div>
+                                <div className='mt-8'>
+                                    <Button variant={'ghost'} value='sm'>
+                                        <Upload />
+                                        <Link href='/upload'>Upload new file</Link>
+                                    </Button>
+                                </div>
+                                <div className='mt-8'>
+                                    <Button variant={'ghost'} value='sm'>
+                                        <Files />
+                                        <Link href='/files'>My all files</Link>
+                                    </Button>
+                                </div>
+                            </div>
+                        </>
+                    ) : (
                         <div>
                             <div className='mt-8'>
                                 <div className='mt-8'>
-                                    <Button
-                                        variant={'ghost'}
-                                        value='sm'
-                                        onClick={logoutUser}
+                                    <Tooltip showArrow={true} content='Logout'>
+                                        <Button
+                                            onClick={logoutUser}
+                                            variant={'ghost'}
+                                            size={'sm'}
+                                        >
+                                            <LogOut />
+                                        </Button>
+                                    </Tooltip>
+                                </div>
+                                <div className='mt-8'>
+                                    <Tooltip
+                                        showArrow={true}
+                                        content='Upload new file'
                                     >
-                                        <LogOut onClick={logoutUser} />
-                                        Logout
-                                    </Button>
-                                </div>{' '}
-                            </div>
-
-                            <div className='mt-8'>
-                                <Button variant={'ghost'} value='sm'>
-                                    <Upload />
-                                    <Link href='/upload'>Upload new file</Link>
-                                </Button>
-                            </div>
-
-                            <div className='mt-8'>
-                                <Button variant={'ghost'} value='sm'>
-                                    <Files />
-                                    <Link href='/files'>My all files</Link>
-                                </Button>
+                                        <Button variant={'ghost'} size={'sm'}>
+                                            <Link href='/upload'>
+                                                <Upload />
+                                            </Link>
+                                        </Button>
+                                    </Tooltip>
+                                </div>
+                                <div className='mt-8'>
+                                    <Tooltip showArrow={true} content='All Files'>
+                                        <Button variant={'ghost'} size={'sm'}>
+                                            <Link href='/files'>
+                                                <Files />
+                                            </Link>
+                                        </Button>
+                                    </Tooltip>
+                                </div>
                             </div>
                         </div>
-                    </>
-                ) : (
-                    <div>
-                        <div className='mt-8'>
-                            <div className='mt-8'>
-                                <Tooltip showArrow={true} content='Logout'>
-                                    <Button
-                                        onClick={logoutUser}
-                                        variant={'ghost'}
-                                        size={'sm'}
-                                    >
-                                        <LogOut />
-                                    </Button>
-                                </Tooltip>
-                            </div>
-                            <div className='mt-8'>
-                                <Tooltip
-                                    showArrow={true}
-                                    content='Upload new file'
-                                >
-                                    <Button variant={'ghost'} size={'sm'}>
-                                        <Link href='/upload'>
-                                            <Upload />
-                                        </Link>
-                                    </Button>
-                                </Tooltip>
-                            </div>
-                            <div className='mt-8'>
-                                <Tooltip showArrow={true} content='All Files'>
-                                    <Button variant={'ghost'} size={'sm'}>
-                                        <Link href='/files'>
-                                            <Files />
-                                        </Link>
-                                    </Button>
-                                </Tooltip>
-                            </div>
-                        </div>
-                    </div>
-                )}
+                    )}
+                </motion.div>
             </div>
         </div>
     );
