@@ -20,7 +20,7 @@ const DocumentsWrapper: FC = () => {
             />
             <br />
             <DocumentsLists />
-            <div className='mt-60 flex justify-center align-top'>
+            <div className='mt-40 flex justify-center align-top'>
                 <AppPagination total={10} initialPage={1} />
             </div>
         </>

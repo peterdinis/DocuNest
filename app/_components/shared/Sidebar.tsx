@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { signOut, useSession } from 'next-auth/react';
 import { Button, Tooltip } from '@nextui-org/react';
 import { motion } from 'framer-motion';
+import CreateFolderModal from '../folders/CreateFolderModal';
 
 const Sidebar: FC = () => {
     const [collapsed, setSidebarCollapsed] = useState(false);
@@ -76,9 +77,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
                                         <Folder />
-                                        <Link href='/folders/new'>
-                                            Create new folder
-                                        </Link>
+                                        <CreateFolderModal btnName={'Create new folder'} />
                                     </Button>
                                 </div>
                                 <div className='ml-4 mt-8'>
@@ -117,9 +116,8 @@ const Sidebar: FC = () => {
                                         content='Create new folder'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
-                                            <Link href='/folders/new'>
-                                                <Folder />
-                                            </Link>
+                                            <Folder />
+                                            <CreateFolderModal btnName='' />
                                         </Button>
                                     </Tooltip>
                                 </div>
