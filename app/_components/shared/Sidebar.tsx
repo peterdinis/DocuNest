@@ -88,7 +88,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
                                         <Files />
-                                        <Link href='/documents/all'>All my documents</Link>
+                                        <Link href='/dashboard'>All my documents</Link>
                                     </Button>
                                 </div>
                             </div>
@@ -148,7 +148,7 @@ const Sidebar: FC = () => {
                                         content='All my documents'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
-                                            <Link href='/documents/all'>
+                                            <Link href='/dashboard'>
                                                 <Files />
                                             </Link>
                                         </Button>
