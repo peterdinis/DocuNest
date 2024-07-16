@@ -3,7 +3,6 @@ import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import authOptions from '../../auth/authOptions';
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
 
 export async function GET(request: NextRequest) {
     const url = new URL(request.url);
