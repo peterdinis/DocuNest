@@ -1,17 +1,17 @@
-'use client';
+"use client"
 
 import { FC } from 'react';
 import Header from '../shared/Header';
-import DocumentsLists from './DocumentsLists';
 import { Input } from '@nextui-org/input';
 import { Search } from 'lucide-react';
+import FoldersLists from './FoldersLists';
 import AppPagination from '../shared/AppPagination';
 
-const DocumentsWrapper: FC = () => {
+const AllFoldersWrapper: FC = () => {
     return (
         <>
             <div className='flex justify-center align-top'>
-                <Header text='My Documents' />
+                <Header text='My Folders' />
             </div>
             <Input
                 startContent={<Search />}
@@ -19,7 +19,7 @@ const DocumentsWrapper: FC = () => {
                 placeholder='Search...'
             />
             <br />
-            <DocumentsLists />
+            <FoldersLists />
             <div className='mt-40 flex justify-center align-top'>
                 <AppPagination total={10} initialPage={1} />
             </div>
@@ -27,4 +27,4 @@ const DocumentsWrapper: FC = () => {
     );
 };
 
-export default DocumentsWrapper;
+export default AllFoldersWrapper;
