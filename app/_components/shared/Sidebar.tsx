@@ -2,11 +2,19 @@
 
 import { FC, useState } from 'react';
 import classNames from 'classnames';
-import { XCircle, Menu, LogOut, Upload, Files, Folder, FolderCheck } from 'lucide-react';
+import {
+    XCircle,
+    Menu,
+    LogOut,
+    Upload,
+    Files,
+    Folder,
+    FolderCheck,
+} from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
-import { signOut} from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import { Button, Tooltip } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 import CreateFolderModal from '../folders/CreateFolderModal';
@@ -74,7 +82,9 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
                                         <Folder />
-                                        <CreateFolderModal btnName={'Create new folder'} />
+                                        <CreateFolderModal
+                                            btnName={'Create new folder'}
+                                        />
                                     </Button>
                                 </div>
                                 <div className='ml-4 mt-8'>
@@ -88,7 +98,9 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
                                         <Files />
-                                        <Link href='/dashboard'>All my documents</Link>
+                                        <Link href='/dashboard'>
+                                            All my documents
+                                        </Link>
                                     </Button>
                                 </div>
                             </div>

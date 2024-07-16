@@ -14,7 +14,7 @@ const HeroWrapper: FC = () => {
                             Docu
                             <span className='text-indigo-700'>Nest</span>
                         </h1>
-                        <p className='prose-p: prose mt-5 text-center text-sm text-gray-600 font-bold sm:mt-10 sm:text-lg lg:w-10/12'>
+                        <p className='prose-p: prose mt-5 text-center text-sm font-bold text-gray-600 sm:mt-10 sm:text-lg lg:w-10/12'>
                             Lorem ipsum dolor sit amet consectetur adipisicing
                             elit. Temporibus corrupti esse officia in nemo
                             voluptates distinctio iure blanditiis aspernatur

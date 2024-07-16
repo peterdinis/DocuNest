@@ -1,14 +1,11 @@
-import { FC } from "react";
-import Sidebar from "../shared/Sidebar";
-import AllFoldersWrapper from "./AllFoldersWrapper";
+import { FC } from 'react';
 
 const AllFoldersContent: FC = () => {
     return (
-        <div className='dark:bg-dark dark:text-light flex bg-gray-100 text-gray-900'>
-        <Sidebar />
-        <AllFoldersWrapper />
-    </div>
-    )
-}
+        <main className='ml-5 flex-1 flex-grow overflow-x-hidden px-8 py-4'>
+            rorororor
+        </main>
+    );
+};
 
 export default AllFoldersContent;

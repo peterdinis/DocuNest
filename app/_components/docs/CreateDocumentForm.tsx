@@ -1,11 +1,7 @@
-import { FC } from "react";
+import { FC } from 'react';
 
 const CreateDocumentForm: FC = () => {
-    return (
-        <>
-        aaa
-        </>
-    )
-}
+    return <>aaa</>;
+};
 
 export default CreateDocumentForm;

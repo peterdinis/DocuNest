@@ -48,7 +48,7 @@ const Navigation: FC = () => {
 
     const logoutUser = () => {
         signOut({
-            redirect: false
+            redirect: false,
         });
         toast.success('Successful logout');
         router.push('/login');

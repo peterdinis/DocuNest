@@ -26,21 +26,15 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({
 
     return (
         <div className='flex flex-wrap gap-3'>
-            <div
-                onClick={() => handleOpen()}
-            >
-                {btnName}
-            </div>
+            <div onClick={() => handleOpen()}>{btnName}</div>
             <Modal backdrop={'blur'} isOpen={isOpen} onClose={onClose}>
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className='flex text-xl prose prose-h2: flex-col gap-1'>
+                            <ModalHeader className='prose-h2: prose flex flex-col gap-1 text-xl'>
                                 Create new folder
                             </ModalHeader>
-                            <ModalBody>
-                                FORM FOR CREATE NEW FOLDER
-                            </ModalBody>
+                            <ModalBody>FORM FOR CREATE NEW FOLDER</ModalBody>
                             <ModalFooter>
                                 <Button
                                     color='danger'

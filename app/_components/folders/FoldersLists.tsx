@@ -1,11 +1,7 @@
-import { FC } from "react";
+import { FC } from 'react';
 
 const FoldersLists: FC = () => {
-    return (
-        <>
-        aaaaa
-        </>
-    )
-}
+    return <>aaaaa</>;
+};
 
 export default FoldersLists;
