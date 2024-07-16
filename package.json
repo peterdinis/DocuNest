@@ -9,7 +9,9 @@
         "lint": "next lint",
         "format": "prettier --check --ignore-path .gitignore .",
         "format:fix": "prettier --write --ignore-path .gitignore .",
-        "studio": "bun run prisma studio"
+        "studio": "bun run prisma studio",
+        "test": "cypress open",
+        "cypress": "cypress install"
     },
     "dependencies": {
         "@hookform/resolvers": "^3.9.0",
