@@ -6,6 +6,7 @@ import { db } from '@/app/_utils/database';
 export async function GET() {
     const session = await getServerSession(authOptions);
 
+    console.log("S", session);
     if (!session || !session.user) {
         return NextResponse.json(
             { error: 'Not authenticated' },
