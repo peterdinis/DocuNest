@@ -4,8 +4,6 @@ declare global {
             DATABASE_URL: string;
             NODE_ENV: 'development' | 'production';
             NEXTAUTH_SECRET: string;
-            CUSTOM_PASSWORD: string;
-            NEXT_PUBLIC_OPENAI_API_KEY: string;
         }
     }
 }
