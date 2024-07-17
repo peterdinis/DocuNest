@@ -45,23 +45,24 @@ const AllFoldersContent: FC = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <br />
-            {data && data.map((item: DisplayFolder) => {
-                return (
-                    <div key={item.id} className="mt-5 flex">
-                        <Card className='w-[200px] space-y-5 p-4' radius='lg'>
-                            <div className='h-24 rounded-lg mt-5 flex justify-center align-top'>
-                                <Folder size={50} />
-                            </div>
-                            <div className='flex justify-center'>
-                                <Button color="primary">
-                                    <Link href={`/folder/${item.id}`}>{item.name}</Link>
-                                </Button>
-                            </div>
-                        </Card>
-                    </div>
-                )
-            })}
+            <div className="mt-5 flex flex-wrap gap-5">
+                {data && data.map((item: DisplayFolder) => {
+                    return (
+                        <div key={item.id} className="w-[200px]">
+                            <Card className='space-y-5 p-4' radius='lg'>
+                                <div className='h-24 rounded-lg flex justify-center align-top'>
+                                    <Folder size={50} />
+                                </div>
+                                <div className='flex justify-center'>
+                                    <Button color="primary">
+                                        <Link href={`/folder/${item.id}`}>{item.name}</Link>
+                                    </Button>
+                                </div>
+                            </Card>
+                        </div>
+                    )
+                })}
+            </div>
             <div className='mt-40 flex justify-center align-top'>
                 <AppPagination
                     total={data.totalPages}
