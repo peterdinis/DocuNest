@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
 import "react-quill/dist/quill.snow.css";
+import Header from "../shared/Header";
 
 interface CreateDocumentFormProps {
   onChange: (value: string) => void;
@@ -45,11 +46,12 @@ const CreateDocumentForm = ({ onChange, value }: CreateDocumentFormProps) => {
   );
   return (
     <div>
+      <h2 className="flex justify-center align-top mt-5 text-4xl prose prose-h2:">New document</h2>
       <ReactQuill
         theme="snow"
         value={value}
         onChange={onChange}
-        className="h-[65vh] mb-6 whitespace-pre-wrap"
+        className="h-[100vh] mt-10 mb-6 whitespace-pre-wrap"
         modules={modules}
         formats={formats}
        />
