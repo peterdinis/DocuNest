@@ -1,45 +1,47 @@
 import React from "react";
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalProps,
-} from "@nextui-org/react";
+import { Modal, ModalContent} from "@nextui-org/react";
 
-import "./styles.css";
+interface Props extends React.HTMLProps<HTMLDivElement> {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
+}
 
-type Props = Omit<
-  ModalProps,
-  "className" | "fullScreen" | "closeButton" | "animated" | "blur"
->;
-
-const Drawer: React.FC<Props> = ({ children, ...props }) => {
-  const { isOpen } = props;
-
+const CustomDrawer: React.FC<Props> = ({ ...props }) => {
   return (
     <Modal
-      classNames={{
-        wrapper: "w-full",
-      }}
-      className={`drawer drawer-animated ${
-        isOpen ? "drawer-animated-slide-in" : "drawer-animated-slide-out"
-      }`}
-      animated={false}
-      placement="top"
-      hideCloseButton
+      scrollBehavior="inside"
+      isOpen={props.isOpen}
+      onOpenChange={props.onOpenChange}
+      placement="center"
+      backdrop="opaque"
       size="full"
-      {...props}
-    >
-      {children}
+      classNames={{
+        wrapper: "flex justify-end",
+      }}
+      motionProps={{
+        variants: {
+          enter: {
+            x: 0,
+            opacity: 1,
+            transition: {
+              duration: 0.3,
+              ease: "easeOut",
+            },
+          },
+          exit: {
+            x: 50,
+            opacity: 0,
+            transition: {
+              duration: 0.2,
+              ease: "easeIn",
+            },
+          },
+        }
+      }}
+      className="rounded-md max-w-sm w-full h-screen max-h-screen">
+      <ModalContent>{(onClose) => <>{props.children}</>}</ModalContent>
     </Modal>
   );
 };
 
-export const DrawerContent = ModalContent;
-export const DrawerHeader = ModalHeader;
-export const DrawerBody = ModalBody;
-export const DrawerFooter = ModalFooter;
-
-export default Drawer;
+export default CustomDrawer;
