@@ -1,3 +1,5 @@
+"use client"
+
 import CreateDocumentForm from '@/app/_components/docs/CreateDocumentForm';
 import { NextPage } from 'next';
 /* TODO: Update later */

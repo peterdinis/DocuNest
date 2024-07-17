@@ -52,7 +52,7 @@ const CreateDocumentForm = ({ onChange, value }: CreateDocumentFormProps) => {
         className="h-[65vh] mb-6 whitespace-pre-wrap"
         modules={modules}
         formats={formats}
-      ></ReactQuill>
+       />
     </div>
   );
 };
