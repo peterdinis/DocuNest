@@ -5,10 +5,11 @@ import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
 import { Folder, Loader2, Search } from 'lucide-react';
 import AppPagination from '../shared/AppPagination';
-import {useQuery} from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { fetchAllFolders } from '@/app/_store/queries/folderQueries';
-import { Badge, Card, CardHeader } from '@nextui-org/react';
+import { Card, Button } from '@nextui-org/react';
 import { Folder as DisplayFolder } from '@prisma/client';
+import Link from 'next/link';
 
 const AllFoldersContent: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -47,12 +48,16 @@ const AllFoldersContent: FC = () => {
             <br />
             {data && data.map((item: DisplayFolder) => {
                 return (
-                    <div className="mt-5 flex">
+                    <div key={item.id} className="mt-5 flex">
                         <Card className='w-[200px] space-y-5 p-4' radius='lg'>
-                        <div className='h-24 rounded-lg mt-5 flex justify-center align-top'>
-                            <Folder size={50} />
-                        </div>
-                        <Badge color='primary'>{item.name}</Badge>
+                            <div className='h-24 rounded-lg mt-5 flex justify-center align-top'>
+                                <Folder size={50} />
+                            </div>
+                            <div className='flex justify-center'>
+                                <Button color="primary">
+                                    <Link href={`/folder/${item.id}`}>{item.name}</Link>
+                                </Button>
+                            </div>
                         </Card>
                     </div>
                 )
