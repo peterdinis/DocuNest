@@ -1,10 +1,21 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const HeroWrapper: FC = () => {
+    const router = useRouter();
+    const {data: session} = useSession();
+
+    useEffect(() => {
+        if(session) {
+            router.push("/dashboard");
+        }
+    }, [session, router])
+    
     return (
         <>
             <div className='bg-gray-100'>
