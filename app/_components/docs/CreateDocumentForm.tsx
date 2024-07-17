@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import 'react-quill/dist/quill.snow.css';
 import CustomDrawer from '../shared/Drawer';
 import { Button } from '@nextui-org/react';
+import AIDoc from './AIDoc';
 
 interface CreateDocumentFormProps {
     onChange: (value: string) => void;
@@ -84,7 +85,7 @@ const CreateDocumentForm = ({ onChange, value }: CreateDocumentFormProps) => {
             </div>
 
             <CustomDrawer isOpen={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
-                DRAWER
+                <AIDoc />
             </CustomDrawer>
 
             <ReactQuill
