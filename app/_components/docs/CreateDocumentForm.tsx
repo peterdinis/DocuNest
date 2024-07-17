@@ -77,7 +77,7 @@ const CreateDocumentForm = ({ onChange, value }: CreateDocumentFormProps) => {
                     color='primary'
                     className='ml-5'
                     onClick={() => {
-                        router.push('/documents');
+                        router.push('/dashboard');
                     }}
                 >
                     Go back
