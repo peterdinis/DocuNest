@@ -7,37 +7,7 @@ import 'react-quill/dist/quill.snow.css';
 import CustomDrawer from '../shared/Drawer';
 import { Button } from '@nextui-org/react';
 import AIDoc from './AIDoc';
-
-const modules = {
-    toolbar: [
-        [{ header: [1, 2, false] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [
-            { list: 'ordered' },
-            { list: 'bullet' },
-            { indent: '-1' },
-            { indent: '+1' },
-        ],
-        ['link', 'image'],
-        [{ font: [] }],
-        ['clean'],
-        [{ align: [] }],
-    ],
-};
-
-const formats = [
-    'header',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'blockquote',
-    'list',
-    'bullet',
-    'indent',
-    'link',
-    'image',
-];
+import { formats, modules } from './quill-config';
 
 const CreateDocumentForm = () => {
     const ReactQuill = useMemo(
