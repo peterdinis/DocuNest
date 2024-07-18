@@ -1,6 +1,4 @@
-'use client';
-
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect} from 'react';
 import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
 import { Ghost, Loader2, Search, X } from 'lucide-react';
@@ -8,8 +6,9 @@ import AppPagination from '../shared/AppPagination';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllDocuments } from '@/app/_store/queries/documentQueries';
 import { Document } from '@prisma/client';
-import { Button, Card, Spacer } from '@nextui-org/react';
+import { Button, Card} from '@nextui-org/react';
 import Link from 'next/link';
+import {format} from "date-fns";
 
 const DocumentsWrapper: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -25,6 +24,26 @@ const DocumentsWrapper: FC = () => {
     useEffect(() => {
         refetch();
     }, [searchQuery, currentPage, refetch]);
+
+    /* TODO: Create hook fro this and search problem must be fixed later */
+    // Debounce function
+    const debounce = (func: () => void, delay: number) => {
+        let timer: NodeJS.Timeout;
+        return () => {
+            clearTimeout(timer);
+            timer = setTimeout(func, delay);
+        };
+    };
+
+    // Debounced setSearchQuery function
+    const debouncedSetSearchQuery = debounce(() => {
+        refetch();
+    }, 300);
+
+    const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value);
+        debouncedSetSearchQuery();
+    };
 
     if (isLoading) {
         return <Loader2 className='h-8 w-8 animate-spin' />;
@@ -48,44 +67,40 @@ const DocumentsWrapper: FC = () => {
                 className='mt-5'
                 placeholder='Search...'
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleSearchInputChange}
             />
             <br />
-            {data?.documents.length === 0 ? (
-                <p className='text-xl font-bold text-gray-700'>
-                    <Ghost className='h-8 w-8 animate-bounce' />
-                    No documents found
-                </p>
-            ) : (
-                data.documents.map((item: Document) => (
-                    <div key={item.id} className='mt-5'>
-                        <div className='flex'>
-                            <Card
-                                className='w-[250px] space-y-5 p-4'
-                                radius='lg'
-                            >
-                                <div className='h-24 rounded-lg bg-default-300'></div>
+            <div className='flex flex-wrap justify-start mt-5'>
+                {data?.documents.length === 0 ? (
+                    <p className='text-xl font-bold text-gray-700'>
+                        <Ghost className='h-8 w-8 animate-bounce' />
+                        No documents found
+                    </p>
+                ) : (
+                    data.documents.map((item: Document) => (
+                        <div key={item.id} className='flex flex-col mr-4 mb-4'>
+                            <Card className='w-[250px] space-y-5 p-4' radius='lg'>
                                 <div className='space-y-3'>
                                     <h1 className='break-all font-bold'>
                                         {item.title}
                                     </h1>
+                                    <p className='text-sm text-gray-600 font-bold'>
+                                        {format(new Date(item.createAt), 'yyyy-MM-dd')}
+                                    </p>
                                     <span className='float-right'>
                                         <X className='rounded-lg bg-red-700 text-white' />
                                     </span>
                                     <Button>
-                                        <Link
-                                            href={`/document/detail/${item.id}`}
-                                        >
+                                        <Link href={`/document/detail/${item.id}`}>
                                             Detail
                                         </Link>
                                     </Button>
                                 </div>
                             </Card>
                         </div>
-                        <Spacer x={4} />
-                    </div>
-                ))
-            )}
+                    ))
+                )}
+            </div>
             <div className='mt-40 flex justify-center align-top'>
                 <AppPagination
                     total={data.totalPages}
