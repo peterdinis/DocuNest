@@ -1,19 +1,49 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useMemo, useState } from 'react';
+import { FC, ReactNode, SetStateAction, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import 'react-quill/dist/quill.snow.css';
 import CustomDrawer from '../shared/Drawer';
 import { Button } from '@nextui-org/react';
 import AIDoc from './AIDoc';
 import { formats, modules } from './quill-config';
+import { FieldValues, useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
+import {
+    createNewDocument,
+    ICreateDocumentData,
+} from '@/app/_store/mutations/documentMutations';
 
-const CreateDocumentForm = () => {
+const CreateDocumentForm: FC = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm();
+
+    const newDocumentMut = useMutation({
+        mutationKey: ['newDocument'],
+        mutationFn: async (data: ICreateDocumentData) => {
+            return await createNewDocument(data);
+        },
+        onSuccess: () => {
+            toast.success('New document was created');
+            reset();
+        },
+    });
+
+    const [description, setDescription] = useState(""); // State for ReactQuill content
     const ReactQuill = useMemo(
         () => dynamic(() => import('react-quill'), { ssr: false }),
         [],
     );
+
+    const handleDescriptionChange = (editor: any) => {
+        setDescription(editor.getHTML());
+    };
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -22,6 +52,10 @@ const CreateDocumentForm = () => {
     };
 
     const router = useRouter();
+
+    const onSubmit = (formData: any) => {
+        newDocumentMut.mutate(formData);
+    };
 
     return (
         <div>
@@ -53,12 +87,31 @@ const CreateDocumentForm = () => {
                 <AIDoc />
             </CustomDrawer>
 
-            <ReactQuill
-                theme='snow'
-                className='mb-6 mt-10 h-[100vh] whitespace-pre-wrap'
-                modules={modules}
-                formats={formats}
-            />
+            <form onSubmit={handleSubmit(onSubmit)} className="mt-5 flex flex-col items-center">
+                <input
+                    type="text"
+                    {...register("title", { required: "Title is required" })}
+                    placeholder="Title"
+                    className="mb-2 p-2 border border-gray-300"
+                />
+                {errors.title && <span className="text-red-500">{errors.title.message as unknown as ReactNode}</span>}
+                <ReactQuill
+                    theme='snow'
+                    className='mb-6 mt-10 h-[100vh] whitespace-pre-wrap'
+                    modules={modules}
+                    formats={formats}
+                    onChange={handleDescriptionChange}
+                    value={description}
+                />
+                {errors.description && <span className="text-red-500">{errors.description.message as unknown as ReactNode}</span>}
+                <Button
+                    type="submit"
+                    variant='flat'
+                    color='primary'
+                >
+                    Create Document
+                </Button>
+            </form>
         </div>
     );
 };

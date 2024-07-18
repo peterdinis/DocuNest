@@ -1,6 +1,6 @@
 import axios from "axios";
 
-interface ICreateDocumentData {
+export interface ICreateDocumentData {
     title: string;
     description: string;
 }
