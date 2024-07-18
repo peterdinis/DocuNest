@@ -1,5 +1,3 @@
-"use client"
-
 import { FC, useState, useEffect } from 'react';
 import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
@@ -26,6 +24,26 @@ const DocumentsWrapper: FC = () => {
         refetch();
     }, [searchQuery, currentPage, refetch]);
 
+    /* TODO: Create hook fro this and search problem must be fixed later */
+    // Debounce function
+    const debounce = (func: () => void, delay: number) => {
+        let timer: NodeJS.Timeout;
+        return () => {
+            clearTimeout(timer);
+            timer = setTimeout(func, delay);
+        };
+    };
+
+    // Debounced setSearchQuery function
+    const debouncedSetSearchQuery = debounce(() => {
+        refetch();
+    }, 300);
+
+    const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value);
+        debouncedSetSearchQuery();
+    };
+
     if (isLoading) {
         return <Loader2 className='h-8 w-8 animate-spin' />;
     }
@@ -48,7 +66,7 @@ const DocumentsWrapper: FC = () => {
                 className='mt-5'
                 placeholder='Search...'
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleSearchInputChange}
             />
             <br />
             <div className='flex flex-wrap justify-start mt-5'>

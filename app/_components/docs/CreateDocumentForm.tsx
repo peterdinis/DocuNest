@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { FC, ReactNode, SetStateAction, useMemo, useState } from 'react';
+import { FC, ReactNode, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import 'react-quill/dist/quill.snow.css';
 import CustomDrawer from '../shared/Drawer';
@@ -35,7 +35,7 @@ const CreateDocumentForm: FC = () => {
         },
     });
 
-    const [description, setDescription] = useState(""); // State for ReactQuill content
+    const [description, setDescription] = useState("");
     const ReactQuill = useMemo(
         () => dynamic(() => import('react-quill'), { ssr: false }),
         [],
