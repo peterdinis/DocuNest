@@ -8,7 +8,7 @@ import AppPagination from '../shared/AppPagination';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllDocuments } from '@/app/_store/queries/documentQueries';
 import { Document } from '@prisma/client';
-import { Badge, Button, Card, Spacer } from '@nextui-org/react';
+import { Button, Card, Spacer } from '@nextui-org/react';
 import Link from 'next/link';
 
 const DocumentsWrapper: FC = () => {
@@ -70,9 +70,7 @@ const DocumentsWrapper: FC = () => {
                                         {item.title}
                                     </h1>
                                     <span className='float-right'>
-                                        <Badge color="warning" content="">
-                                            <X className='bg-red-700 text-white rounded-lg' />
-                                        </Badge>
+                                        <X className='rounded-lg bg-red-700 text-white' />
                                     </span>
                                     <Button>
                                         <Link
