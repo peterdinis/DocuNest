@@ -4,7 +4,7 @@ import { fetchDocumentDetail } from '@/app/_store/queries/documentQueries';
 import { useQuery } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { Button, Input } from '@nextui-org/react';
 import Link from 'next/link';
 import 'react-quill/dist/quill.snow.css';
@@ -17,6 +17,7 @@ const DocInfo: FC = () => {
         [],
     );
     const { id } = useParams<{ id: string }>();
+    const [isEditMode, setIsEditMode] = useState(false);
 
     const { data, isLoading, isError } = useQuery({
         queryKey: ['docDetail', id],
@@ -37,7 +38,9 @@ const DocInfo: FC = () => {
         );
     }
 
-    console.log('D', data);
+    const handleEditToggle = () => {
+        setIsEditMode(!isEditMode);
+    };
 
     return (
         <div>
@@ -47,16 +50,28 @@ const DocInfo: FC = () => {
             <Button variant='solid' color='primary'>
                 <Link href='/dashboard'>Go Back</Link>
             </Button>
+            <Button
+                variant='solid'
+                color='secondary'
+                onClick={handleEditToggle}
+                className='ml-4'
+            >
+                {isEditMode ? 'Cancel Edit' : 'Enable Edit'}
+            </Button>
 
             <div className='mt-6'>
                 <form>
-                    <Input value={data.title} />
+                    <Input
+                        value={data.title}
+                        disabled={!isEditMode}
+                    />
                     <ReactQuill
                         theme='snow'
-                        className='mb-6 mt-10 h-[100vh] whitespace-pre-wrap'
+                        className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${!isEditMode ? 'ql-disabled' : ''}`}
                         modules={modules}
                         formats={formats}
                         value={data.description}
+                        readOnly={!isEditMode}
                     />
                 </form>
             </div>
