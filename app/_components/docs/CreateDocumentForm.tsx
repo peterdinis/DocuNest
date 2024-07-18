@@ -8,7 +8,7 @@ import CustomDrawer from '../shared/Drawer';
 import { Button } from '@nextui-org/react';
 import AIDoc from './AIDoc';
 import { formats, modules } from './quill-config';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import {
@@ -33,16 +33,21 @@ const CreateDocumentForm: FC = () => {
             toast.success('New document was created');
             reset();
         },
+
+        onError: () => {
+            toast.error("Failed to create document");
+        }
     });
 
     const [description, setDescription] = useState("");
+    
     const ReactQuill = useMemo(
         () => dynamic(() => import('react-quill'), { ssr: false }),
         [],
     );
 
-    const handleDescriptionChange = (editor: any) => {
-        setDescription(editor.getHTML());
+    const handleDescriptionChange = (content: string) => {
+        setDescription(content);
     };
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -54,6 +59,7 @@ const CreateDocumentForm: FC = () => {
     const router = useRouter();
 
     const onSubmit = (formData: any) => {
+        formData.description = description;
         newDocumentMut.mutate(formData);
     };
 
@@ -95,6 +101,14 @@ const CreateDocumentForm: FC = () => {
                     className="mb-2 p-2 border border-gray-300"
                 />
                 {errors.title && <span className="text-red-500">{errors.title.message as unknown as ReactNode}</span>}
+                <Button
+                    type="submit"
+                    variant='flat'
+                    color='success'
+                    className='mt-6'
+                >
+                    Create Document
+                </Button>
                 <ReactQuill
                     theme='snow'
                     className='mb-6 mt-10 h-[100vh] whitespace-pre-wrap'
@@ -104,13 +118,6 @@ const CreateDocumentForm: FC = () => {
                     value={description}
                 />
                 {errors.description && <span className="text-red-500">{errors.description.message as unknown as ReactNode}</span>}
-                <Button
-                    type="submit"
-                    variant='flat'
-                    color='primary'
-                >
-                    Create Document
-                </Button>
             </form>
         </div>
     );
