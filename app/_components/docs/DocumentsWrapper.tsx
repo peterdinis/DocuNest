@@ -79,7 +79,7 @@ const DocumentsWrapper: FC = () => {
                                         <X className='rounded-lg bg-red-700 text-white' />
                                     </span>
                                     <Button>
-                                        <Link href={`/document/detail/${item.id}`}>
+                                        <Link href={`/documents/${item.id}`}>
                                             Detail
                                         </Link>
                                     </Button>

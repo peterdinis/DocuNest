@@ -9,3 +9,11 @@ export const fetchAllFolders = async ({ query = '', page = 1 }) => {
     });
     return response.data;
 }
+
+
+export const fetchFolderDetail = async(id: number | string) => {
+    const response = await axios.get(`/api/folders/${id}`);
+    if(!id) return;
+
+    return response.data;
+}

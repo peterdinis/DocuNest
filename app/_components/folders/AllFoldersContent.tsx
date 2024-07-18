@@ -62,7 +62,7 @@ const AllFoldersContent: FC = () => {
                                 </div>
                                 <div className='flex justify-center'>
                                     <Button color="primary">
-                                        <Link href={`/folder/${item.id}`}>{item.name}</Link>
+                                        <Link href={`/folders/${item.id}`}>{item.name}</Link>
                                     </Button>
                                 </div>
                             </Card>
