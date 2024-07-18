@@ -8,11 +8,6 @@ import CustomDrawer from '../shared/Drawer';
 import { Button } from '@nextui-org/react';
 import AIDoc from './AIDoc';
 
-interface CreateDocumentFormProps {
-    onChange: (value: string) => void;
-    value: string;
-}
-
 const modules = {
     toolbar: [
         [{ header: [1, 2, false] }],
@@ -44,7 +39,7 @@ const formats = [
     'image',
 ];
 
-const CreateDocumentForm = ({ onChange, value }: CreateDocumentFormProps) => {
+const CreateDocumentForm = () => {
     const ReactQuill = useMemo(
         () => dynamic(() => import('react-quill'), { ssr: false }),
         [],
@@ -90,8 +85,6 @@ const CreateDocumentForm = ({ onChange, value }: CreateDocumentFormProps) => {
 
             <ReactQuill
                 theme='snow'
-                value={value}
-                onChange={onChange}
                 className='mb-6 mt-10 h-[100vh] whitespace-pre-wrap'
                 modules={modules}
                 formats={formats}
