@@ -17,7 +17,7 @@ const DocumentsWrapper: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
 
-    const debouncedSearchQuery = useDebounce(searchQuery, 500);
+    const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
     const { data, isLoading, isError, refetch } = useQuery({
         queryKey: ['myDocuments', debouncedSearchQuery, currentPage],

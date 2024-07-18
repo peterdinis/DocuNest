@@ -10,20 +10,27 @@ import { fetchAllFolders } from '@/app/_store/queries/folderQueries';
 import { Card, Button } from '@nextui-org/react';
 import { Folder as DisplayFolder } from '@prisma/client';
 import Link from 'next/link';
+import { useDebounce } from '@/app/_hooks/useDebounce';
 
 const AllFoldersContent: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
+    
+    const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
     const { data, isLoading, isError, refetch } = useQuery({
-        queryKey: ['myFolders', searchQuery, currentPage],
-        queryFn: () => fetchAllFolders({ query: searchQuery, page: currentPage }),
+        queryKey: ['myFolders', debouncedSearchQuery, currentPage],
+        queryFn: () => fetchAllFolders({ query: debouncedSearchQuery, page: currentPage }),
         staleTime: Infinity,
     });
 
     useEffect(() => {
         refetch();
-    }, [searchQuery, currentPage, refetch]);
+    }, [debouncedSearchQuery, currentPage, refetch]);
+
+    const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value);
+    };
 
     if (isLoading) {
         return <Loader2 className='animate-spin h-8 w-8' />;
@@ -43,7 +50,7 @@ const AllFoldersContent: FC = () => {
                 className='mt-5'
                 placeholder='Search...'
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleSearchInputChange}
             />
             <div className="mt-5 flex flex-wrap gap-5">
                 {data && data.map((item: DisplayFolder) => {
