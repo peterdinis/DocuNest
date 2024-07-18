@@ -5,11 +5,12 @@ import { useQuery } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { FC, useMemo, useState } from 'react';
-import { Button, Input } from '@nextui-org/react';
+import { Button, ButtonGroup, Input } from '@nextui-org/react';
 import Link from 'next/link';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { formats, modules } from './quill-config';
+import FolderSelect from './FolderSelect';
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(
@@ -47,6 +48,8 @@ const DocInfo: FC = () => {
             <h2 className='prose-h2: prose mt-5 flex justify-center align-top text-3xl'>
                 Document Info
             </h2>
+            
+            <ButtonGroup className='mt-6 ml-4'>
             <Button variant='solid' color='primary'>
                 <Link href='/dashboard'>Go Back</Link>
             </Button>
@@ -58,8 +61,12 @@ const DocInfo: FC = () => {
             >
                 {isEditMode ? 'Cancel Edit' : 'Enable Edit'}
             </Button>
+            <div className="ml-8">
+            <FolderSelect />
+            </div>
+            </ButtonGroup>
 
-            <div className='mt-6'>
+            <div className='mt-6 ml-4'>
                 <form>
                     <Input
                         value={data.title}
