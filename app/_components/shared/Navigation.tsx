@@ -69,16 +69,14 @@ const Navigation: FC = () => {
             <NavbarContent className='pr-3 sm:hidden' justify='center'>
                 <NavbarBrand>
                     <FileText />{' '}
-                    <span className='ml-4 font-bold'>
-                        <Link href='/'>Docu Nest</Link>
-                    </span>
+                        <Link className='ml-4 font-bold' href='/'>Docu Nest</Link>
                 </NavbarBrand>
             </NavbarContent>
 
             <NavbarContent className='hidden gap-4 sm:flex' justify='center'>
                 <NavbarBrand>
                     <FileText />{' '}
-                    <span className='ml-4 font-bold'>Docu Nest</span>
+                    <Link className='ml-4 font-bold' href='/'>Docu Nest</Link>
                 </NavbarBrand>
                 {!loggedUser && (
                     <>
