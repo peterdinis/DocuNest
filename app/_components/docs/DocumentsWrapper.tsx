@@ -1,4 +1,6 @@
-import { FC, useState, useEffect} from 'react';
+"use client";
+
+import { FC, useState, useEffect } from 'react';
 import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
 import { Ghost, Loader2, Search, X } from 'lucide-react';
@@ -6,43 +8,29 @@ import AppPagination from '../shared/AppPagination';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllDocuments } from '@/app/_store/queries/documentQueries';
 import { Document } from '@prisma/client';
-import { Button, Card} from '@nextui-org/react';
+import { Button, Card } from '@nextui-org/react';
 import Link from 'next/link';
-import {format} from "date-fns";
+import { format } from 'date-fns';
+import { useDebounce } from '@/app/_hooks/useDebounce';
 
 const DocumentsWrapper: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
 
+    const debouncedSearchQuery = useDebounce(searchQuery, 500);
+
     const { data, isLoading, isError, refetch } = useQuery({
-        queryKey: ['myDocuments', searchQuery, currentPage],
-        queryFn: () =>
-            fetchAllDocuments({ query: searchQuery, page: currentPage }),
+        queryKey: ['myDocuments', debouncedSearchQuery, currentPage],
+        queryFn: () => fetchAllDocuments({ query: debouncedSearchQuery, page: currentPage }),
         staleTime: Infinity,
     });
 
     useEffect(() => {
         refetch();
-    }, [searchQuery, currentPage, refetch]);
-
-    /* TODO: Create hook fro this and search problem must be fixed later */
-    // Debounce function
-    const debounce = (func: () => void, delay: number) => {
-        let timer: NodeJS.Timeout;
-        return () => {
-            clearTimeout(timer);
-            timer = setTimeout(func, delay);
-        };
-    };
-
-    // Debounced setSearchQuery function
-    const debouncedSetSearchQuery = debounce(() => {
-        refetch();
-    }, 300);
+    }, [debouncedSearchQuery, currentPage, refetch]);
 
     const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value);
-        debouncedSetSearchQuery();
     };
 
     if (isLoading) {
