@@ -3,7 +3,7 @@
 import { FC, useState, useEffect } from 'react';
 import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
-import { Ghost, Loader2, Search } from 'lucide-react';
+import { Ghost, Loader2, Search, X } from 'lucide-react';
 import AppPagination from '../shared/AppPagination';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllDocuments } from '@/app/_store/queries/documentQueries';
@@ -17,7 +17,8 @@ const DocumentsWrapper: FC = () => {
 
     const { data, isLoading, isError, refetch } = useQuery({
         queryKey: ['myDocuments', searchQuery, currentPage],
-        queryFn: () => fetchAllDocuments({ query: searchQuery, page: currentPage }),
+        queryFn: () =>
+            fetchAllDocuments({ query: searchQuery, page: currentPage }),
         staleTime: Infinity,
     });
 
@@ -26,11 +27,15 @@ const DocumentsWrapper: FC = () => {
     }, [searchQuery, currentPage, refetch]);
 
     if (isLoading) {
-        return <Loader2 className='animate-spin h-8 w-8' />;
+        return <Loader2 className='h-8 w-8 animate-spin' />;
     }
 
     if (isError) {
-        return <p className='font-bold text-red-700 text-xl'>Something went wrong</p>;
+        return (
+            <p className='text-xl font-bold text-red-700'>
+                Something went wrong
+            </p>
+        );
     }
 
     return (
@@ -47,17 +52,32 @@ const DocumentsWrapper: FC = () => {
             />
             <br />
             {data?.documents.length === 0 ? (
-                <p className='font-bold text-gray-700 text-xl'><Ghost className='animate-bounce w-8 h-8' />No documents found</p>
+                <p className='text-xl font-bold text-gray-700'>
+                    <Ghost className='h-8 w-8 animate-bounce' />
+                    No documents found
+                </p>
             ) : (
                 data.documents.map((item: Document) => (
                     <div key={item.id} className='mt-5'>
                         <div className='flex'>
-                            <Card className='w-[200px] space-y-5 p-4' radius='lg'>
+                            <Card
+                                className='w-[250px] space-y-5 p-4'
+                                radius='lg'
+                            >
                                 <div className='h-24 rounded-lg bg-default-300'></div>
                                 <div className='space-y-3'>
-                                    <h1 className='break-all font-bold'>{item.title}</h1>
+                                    <h1 className='break-all font-bold'>
+                                        {item.title}
+                                    </h1>
+                                    <span className='float-right'>
+                                        <X className='rounded-lg bg-red-700 text-white' />
+                                    </span>
                                     <Button>
-                                        <Link href={`/document/detail/${item.id}`}>Detail</Link>
+                                        <Link
+                                            href={`/document/detail/${item.id}`}
+                                        >
+                                            Detail
+                                        </Link>
                                     </Button>
                                 </div>
                             </Card>
