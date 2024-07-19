@@ -34,7 +34,7 @@ const FolderInfo: FC = () => {
             </p>
         );
     }
-    
+
     return (
         <div>
             <h2 className='prose-h2: prose mt-5 flex justify-center align-top text-3xl'>

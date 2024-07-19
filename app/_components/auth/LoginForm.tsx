@@ -80,7 +80,7 @@ const LoginForm: FC = () => {
                         <div className='space-y-2'>
                             <div>Password</div>
                             <Input
-                                id="password"
+                                id='password'
                                 placeholder='Enter your password'
                                 {...register('password')}
                                 disabled={loading}

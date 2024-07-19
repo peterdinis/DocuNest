@@ -1,23 +1,23 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const fetchAllPaginatedDocuments = async ({ query = '', page = 1 }) => {
-    const response = await axios.get("/api/docs/paginated", {
+    const response = await axios.get('/api/docs/paginated', {
         params: {
             query,
-            page
-        }
+            page,
+        },
     });
     return response.data;
-}
+};
 
-export const fetchAllDocuments = async() => {
-    const response = await axios.get("/api/docs");
+export const fetchAllDocuments = async () => {
+    const response = await axios.get('/api/docs');
     return response.data;
-}
+};
 
-export const fetchDocumentDetail = async(id: number | string) => {
+export const fetchDocumentDetail = async (id: number | string) => {
     const response = await axios.get(`/api/docs/${id}`);
-    if(!id) return;
+    if (!id) return;
 
     return response.data;
-}
+};

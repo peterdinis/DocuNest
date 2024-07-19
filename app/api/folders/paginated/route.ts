@@ -21,13 +21,13 @@ export async function GET(request: Request) {
         where: {
             userId: session.user.id,
 
-           name: {
-            contains: query,
-                mode: 'insensitive'
-           }
+            name: {
+                contains: query,
+                mode: 'insensitive',
+            },
         },
         skip: (page - 1) * pageSize,
-        take: pageSize
+        take: pageSize,
     });
 
     const totalFolders = await db.folder.count({
@@ -35,9 +35,9 @@ export async function GET(request: Request) {
             userId: session.user.id,
             name: {
                 contains: query,
-                mode: 'insensitive'
-            }
-        }
+                mode: 'insensitive',
+            },
+        },
     });
 
     if (!allUsersPaginatedFolders) {
@@ -46,6 +46,6 @@ export async function GET(request: Request) {
 
     return NextResponse.json({
         folders: allUsersPaginatedFolders,
-        totalPages: Math.ceil(totalFolders / pageSize)
+        totalPages: Math.ceil(totalFolders / pageSize),
     });
 }

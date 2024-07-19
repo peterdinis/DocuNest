@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { FC, useState, useEffect, ChangeEvent } from 'react';
 import Header from '../shared/Header';
@@ -21,7 +21,11 @@ const DocumentsWrapper: FC = () => {
 
     const { data, isLoading, isError, refetch } = useQuery({
         queryKey: ['myPaginatedDocuments', debouncedSearchQuery, currentPage],
-        queryFn: () => fetchAllPaginatedDocuments({ query: debouncedSearchQuery, page: currentPage }),
+        queryFn: () =>
+            fetchAllPaginatedDocuments({
+                query: debouncedSearchQuery,
+                page: currentPage,
+            }),
         staleTime: Infinity,
     });
 
@@ -58,7 +62,7 @@ const DocumentsWrapper: FC = () => {
                 onChange={handleSearchInputChange}
             />
             <br />
-            <div className='flex flex-wrap justify-start mt-5'>
+            <div className='mt-5 flex flex-wrap justify-start'>
                 {data?.documents.length === 0 ? (
                     <p className='text-xl font-bold text-gray-700'>
                         <Ghost className='h-8 w-8 animate-bounce' />
@@ -66,14 +70,20 @@ const DocumentsWrapper: FC = () => {
                     </p>
                 ) : (
                     data.documents.map((item: Document) => (
-                        <div key={item.id} className='flex flex-col mr-4 mb-4'>
-                            <Card className='w-[250px] space-y-5 p-4' radius='lg'>
+                        <div key={item.id} className='mb-4 mr-4 flex flex-col'>
+                            <Card
+                                className='w-[250px] space-y-5 p-4'
+                                radius='lg'
+                            >
                                 <div className='space-y-3'>
                                     <h1 className='break-all font-bold'>
                                         {item.title}
                                     </h1>
-                                    <p className='text-sm text-gray-600 font-bold'>
-                                        {format(new Date(item.createAt), 'yyyy-MM-dd')}
+                                    <p className='text-sm font-bold text-gray-600'>
+                                        {format(
+                                            new Date(item.createAt),
+                                            'yyyy-MM-dd',
+                                        )}
                                     </p>
                                     <span className='float-right'>
                                         <X className='rounded-lg bg-red-700 text-white' />

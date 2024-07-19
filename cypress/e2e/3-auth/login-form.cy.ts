@@ -16,16 +16,16 @@ describe('Login Form', () => {
         cy.get('input[id="email"]').should('exist');
         cy.get('input[id="password"]').should('exist');
         cy.get('button[type="submit"]').should('exist');
-        cy.contains('Don\'t have an account?').should('exist');
+        cy.contains("Don't have an account?").should('exist');
         cy.get('a[href="/register"]').should('exist');
     });
 
     it('should successfully submit the form with valid data', () => {
         cy.intercept('POST', '/api/login', { statusCode: 200 }).as('loginUser');
-        
+
         cy.get('input[id="email"]').type('john.doe@example.com');
         cy.get('input[id="password"]').type('password123');
-        
+
         cy.get('button[type="submit"]').click();
 
         cy.wait('@loginUser').its('response.statusCode').should('eq', 200);
@@ -42,15 +42,23 @@ describe('Login Form', () => {
         cy.get('button[type="submit"]').click();
 
         // Check that the validation error for password is displayed
-        cy.get('p').should('contain.text', 'String must contain at least 1 character(s)').should('exist');
-        
+        cy.get('p')
+            .should(
+                'contain.text',
+                'String must contain at least 1 character(s)',
+            )
+            .should('exist');
+
         // Verify that no request was sent to the server
         cy.wait('@loginUser').then((interception) => {
             expect(interception.response!.statusCode).to.be.oneOf([null, 0]);
         });
 
         // Optionally, check that the form fields have not been cleared or altered
-        cy.get('input[id="email"]').should('have.value', 'john.doe@example.com');
+        cy.get('input[id="email"]').should(
+            'have.value',
+            'john.doe@example.com',
+        );
         cy.get('input[id="password"]').should('have.value', '');
     });
 });

@@ -69,14 +69,18 @@ const Navigation: FC = () => {
             <NavbarContent className='pr-3 sm:hidden' justify='center'>
                 <NavbarBrand>
                     <FileText />{' '}
-                        <Link className='ml-4 font-bold' href='/'>Docu Nest</Link>
+                    <Link className='ml-4 font-bold' href='/'>
+                        Docu Nest
+                    </Link>
                 </NavbarBrand>
             </NavbarContent>
 
             <NavbarContent className='hidden gap-4 sm:flex' justify='center'>
                 <NavbarBrand>
                     <FileText />{' '}
-                    <Link className='ml-4 font-bold' href='/'>Docu Nest</Link>
+                    <Link className='ml-4 font-bold' href='/'>
+                        Docu Nest
+                    </Link>
                 </NavbarBrand>
                 {!loggedUser && (
                     <>
@@ -101,7 +105,7 @@ const Navigation: FC = () => {
                     </NavbarItem>
                     <NavbarItem>
                         <Button
-                            id="registerBtn"
+                            id='registerBtn'
                             as={Link}
                             color='warning'
                             href='/register'

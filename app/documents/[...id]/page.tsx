@@ -1,8 +1,8 @@
-import DocInfo from "@/app/_components/docs/DocInfo";
-import { NextPage } from "next";
+import DocInfo from '@/app/_components/docs/DocInfo';
+import { NextPage } from 'next';
 
 const DocumentDetailPage: NextPage = () => {
-    return <DocInfo />
-}
+    return <DocInfo />;
+};
 
 export default DocumentDetailPage;

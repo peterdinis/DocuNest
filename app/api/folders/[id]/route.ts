@@ -19,8 +19,8 @@ export async function GET(request: NextRequest) {
         const folderDetail = await db.folder.findFirst({
             where: { id },
             include: {
-                documents: true
-            }
+                documents: true,
+            },
         });
 
         if (!folderDetail) {
