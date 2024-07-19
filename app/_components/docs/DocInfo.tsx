@@ -11,6 +11,7 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { formats, modules } from './quill-config';
 import FolderSelect from './FolderSelect';
+import { updateDocumentFolder } from '@/app/_store/mutations/documentMutations';
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(
@@ -26,6 +27,20 @@ const DocInfo: FC = () => {
             return await fetchDocumentDetail(id);
         },
     });
+
+    const addToFolderMut = useMutation({
+        mutationKey: ["addToFolder"],
+        mutationFn: (folderId: string) => updateDocumentFolder(id, folderId),
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["docDetail", id]
+            })
+        }
+    });
+
+    const handleFolderSelect = (folderId: string) => {
+        addToFolderMut.mutate(folderId);
+    }
 
     if (isLoading) {
         return <Loader2 className='h-8 w-8 animate-spin' />;
@@ -62,7 +77,7 @@ const DocInfo: FC = () => {
                     {isEditMode ? 'Cancel Edit' : 'Enable Edit'}
                 </Button>
                 <div className='ml-8'>
-                    <FolderSelect />
+                    <FolderSelect onSelectFolder={handleFolderSelect} />
                 </div>
             </ButtonGroup>
 

@@ -12,8 +12,8 @@ export const createNewDocument = async (data: ICreateDocumentData) => {
 
 
 export const updateDocumentFolder = async (
-    documentId: number,
-    folderId: number,
+    documentId: string,
+    folderId: string,
 ) => {
     const response = await axios.put(`/api/docs/add-to-folder/${documentId}`, folderId);
     return response.data;
