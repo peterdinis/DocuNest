@@ -1,12 +1,12 @@
 'use client';
 
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, ChangeEvent } from 'react';
 import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
 import { Folder, Loader2, Search } from 'lucide-react';
 import AppPagination from '../shared/AppPagination';
 import { useQuery } from "@tanstack/react-query";
-import { fetchAllFolders } from '@/app/_store/queries/folderQueries';
+import { fetchAllPaginatedFolders } from '@/app/_store/queries/folderQueries';
 import { Card, Button } from '@nextui-org/react';
 import { Folder as DisplayFolder } from '@prisma/client';
 import Link from 'next/link';
@@ -19,8 +19,8 @@ const AllFoldersContent: FC = () => {
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
     const { data, isLoading, isError, refetch } = useQuery({
-        queryKey: ['myFolders', debouncedSearchQuery, currentPage],
-        queryFn: () => fetchAllFolders({ query: debouncedSearchQuery, page: currentPage }),
+        queryKey: ['myPaginatedFolders', debouncedSearchQuery, currentPage],
+        queryFn: () => fetchAllPaginatedFolders({ query: debouncedSearchQuery, page: currentPage }),
         staleTime: Infinity,
     });
 
@@ -28,7 +28,7 @@ const AllFoldersContent: FC = () => {
         refetch();
     }, [debouncedSearchQuery, currentPage, refetch]);
 
-    const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value);
     };
 
