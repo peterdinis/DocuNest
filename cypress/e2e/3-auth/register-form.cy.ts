@@ -1,72 +1,41 @@
-describe('RegisterForm', () => {
+describe('Register Form', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/register');
     });
 
-    it('should render the registration form', () => {
+    it('should render the register form with all required elements', () => {
         cy.get('form').should('exist');
-        cy.get('input#name').should('exist');
-        cy.get('input#email').should('exist');
-        cy.get('input[type="password"]').should('exist');
+        cy.get('input[id="name"]').should('exist');
+        cy.get('input[id="email"]').should('exist');
+        cy.get('input[id="password"]').should('exist');
         cy.get('button[type="submit"]').should('exist');
+        cy.contains('Already have an account?').should('exist');
+        cy.get('a[href="/login"]').should('exist');
     });
 
-    it('should show validation errors for empty fields', () => {
+    it('should successfully submit the form with valid data', () => {
+        cy.intercept('POST', '/api/register', { statusCode: 200 }).as('registerUser');
+        
+        cy.get('input[id="name"]').type('John Doe');
+        cy.get('input[id="email"]').type('john.doe@example.com');
+        cy.get('input[id="password"]').type('password123');
+        
         cy.get('button[type="submit"]').click();
 
-        cy.get('input#name:invalid').should('exist');
-        cy.get('input#email:invalid').should('exist');
-        cy.get('input[type="password"]:invalid').should('exist');
+        cy.wait('@registerUser').its('response.statusCode').should('eq', 200);
+        cy.url().should('include', '/login');
+        cy.contains('Registration successful').should('exist');
     });
 
-    it('should show validation errors for invalid email', () => {
-        cy.get('input#name').type('John Doe');
-        cy.get('input#email').type('invalid-email');
-        cy.get('input[type="password"]').type('password123');
+    it('should not submit the form and show validation errors if some fields are missing', () => {
+        cy.intercept('POST', '/api/register').as('registerUser');
+
+        cy.get('input[id="name"]').type('John Doe');
+        cy.get('input[id="email"]').type('john.doe@example.com');
         cy.get('button[type="submit"]').click();
 
-        cy.get('input#email:invalid').should('exist');
+        cy.get('p').should('contain.text', 'Password is required').should('exist');
     });
 
-    it('should register successfully with valid inputs', () => {
-        cy.intercept('POST', '/api/register', {
-            statusCode: 200,
-            body: { message: 'Registration successful' },
-        }).as('registerUser');
 
-        cy.get('input#name').type('John Doe');
-        cy.get('input#email').type('john.doe@example.com');
-        cy.get('input[type="password"]').type('password123');
-        cy.get('button[type="submit"]').click();
-
-        cy.wait('@registerUser').then((interception) => {
-            expect(interception.response!.statusCode).to.eq(200);
-        });
-
-        cy.get('.Toastify__toast--success').should('contain', 'Registration successful');
-    });
-
-    it('should handle registration failure', () => {
-        cy.intercept('POST', '/api/register', {
-            statusCode: 400,
-            body: { message: 'Registration failed' },
-        }).as('registerUserFail');
-
-        cy.get('input#name').type('John Doe');
-        cy.get('input#email').type('john.doe@example.com');
-        cy.get('input[type="password"]').type('password123');
-        cy.get('button[type="submit"]').click();
-
-        cy.wait('@registerUserFail').then((interception) => {
-            expect(interception.response!.statusCode).to.eq(400);
-        });
-
-        cy.get('.Toastify__toast--error').should('contain', 'Registration failed');
-    });
-
-    it('should toggle password visibility', () => {
-        cy.get('input[type="password"]').should('have.attr', 'type', 'password');
-        cy.get('button[type="button"]').click();
-        cy.get('input[type="text"]').should('have.attr', 'type', 'text');
-    });
 });

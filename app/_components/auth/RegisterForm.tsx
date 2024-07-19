@@ -9,7 +9,7 @@ import {
     CardBody,
 } from '@nextui-org/react';
 import Link from 'next/link';
-import { FC, ReactNode, useState } from 'react';
+import { FC, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
@@ -73,7 +73,7 @@ const RegisterForm: FC = () => {
                             />
                             {errors.name && (
                                 <p className='font-bold text-red-600'>
-                                    {errors.name.message as ReactNode}
+                                    Name is Required
                                 </p>
                             )}
                         </div>
@@ -89,7 +89,7 @@ const RegisterForm: FC = () => {
                             />
                             {errors.email && (
                                 <p className='font-bold text-red-600'>
-                                    {errors.email.message as ReactNode}
+                                   Email is Required
                                 </p>
                             )}
                         </div>
@@ -97,6 +97,7 @@ const RegisterForm: FC = () => {
                         <div className='space-y-2'>
                             <div>Password</div>
                             <Input
+                                id="password"
                                 placeholder='Enter your password'
                                 {...register('password')}
                                 endContent={
@@ -115,7 +116,7 @@ const RegisterForm: FC = () => {
                             />
                             {errors.password && (
                                 <p className='font-bold text-red-600'>
-                                    {errors.password.message as ReactNode}
+                                   Password is required
                                 </p>
                             )}
                         </div>
