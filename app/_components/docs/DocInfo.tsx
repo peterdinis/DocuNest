@@ -66,7 +66,7 @@ const DocInfo: FC = () => {
             setTitle(updatedData.title);
             setDescription(updatedData.description);
             toast.success('Document was edited');
-            router.push("/dashboard")
+            router.push('/dashboard');
         },
         onError: () => {
             toast.error('Document was not edited');
@@ -127,15 +127,6 @@ const DocInfo: FC = () => {
                         disabled={!isEditMode}
                         onChange={(e) => setTitle(e.target.value)}
                     />
-                    <ReactQuill
-                        theme='snow'
-                        className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${!isEditMode ? 'ql-disabled' : ''}`}
-                        modules={modules}
-                        formats={formats}
-                        value={description}
-                        readOnly={!isEditMode}
-                        onChange={setDescription}
-                    />
                     {isEditMode && (
                         <Button
                             onClick={handleSave}
@@ -146,6 +137,15 @@ const DocInfo: FC = () => {
                             Save
                         </Button>
                     )}
+                    <ReactQuill
+                        theme='snow'
+                        className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${!isEditMode ? 'ql-disabled' : ''}`}
+                        modules={modules}
+                        formats={formats}
+                        value={description}
+                        readOnly={!isEditMode}
+                        onChange={setDescription}
+                    />
                 </form>
             </div>
         </div>
