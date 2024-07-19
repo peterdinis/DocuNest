@@ -49,7 +49,6 @@ const RegisterForm: FC = () => {
     });
 
     const onSubmit = (data: FieldValues) => {
-        console.log('Data submitted:', data);
         registerUserMut.mutate(data);
         reset();
     };

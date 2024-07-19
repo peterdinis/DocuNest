@@ -13,6 +13,7 @@ import { formats, modules } from './quill-config';
 import FolderSelect from './FolderSelect';
 import { updateDocumentFolder } from '@/app/_store/mutations/documentMutations';
 import { queryClient } from '@/app/_store/queryClient';
+import {toast} from "react-toastify";
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(
@@ -35,10 +36,17 @@ const DocInfo: FC = () => {
             queryClient.invalidateQueries({
                 queryKey: ["docDetail", id]
             })
+            toast.success("Docuemnt was added to folder");
+        },
+
+        onError: (error) => {
+            console.log("E", error);
+            toast.error("Failed to add document to folder");
         }
     });
 
     const handleFolderSelect = (folderId: string) => {
+        console.log(folderId);
         addToFolderMut.mutate(folderId);
     }
 
