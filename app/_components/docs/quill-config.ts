@@ -10,10 +10,16 @@ export const modules = {
         ],
         ['link', 'image'],
         [{ 'script': 'sub'}, { 'script': 'super' }],  
+        [{ 'indent': '-1'}, { 'indent': '+1' }],  
         [{ font: [] }],
         ['clean'],
         [{ align: [] }],
     ],
+
+    history: {
+        delay: 2000,
+    }
+    
 };
 
 export const formats = [
