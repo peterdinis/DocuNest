@@ -20,6 +20,8 @@ import { queryClient } from '@/app/_store/queryClient';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 
+/* TODO: Funguje ale stále nie dobré */
+
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(
         () => dynamic(() => import('react-quill'), { ssr: false }),
@@ -64,7 +66,7 @@ const DocInfo: FC = () => {
             setTitle(updatedData.title);
             setDescription(updatedData.description);
             toast.success('Document was edited');
-            router.push("/dashboard");
+            router.push("/dashboard")
         },
         onError: () => {
             toast.error('Document was not edited');
