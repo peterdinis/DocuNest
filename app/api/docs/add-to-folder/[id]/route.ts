@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/app/_utils/database';
-import authOptions from '../../auth/authOptions';
+import authOptions from '../../../auth/authOptions';
 
 export async function PUT(request: NextRequest) {
     const url = new URL(request.url);

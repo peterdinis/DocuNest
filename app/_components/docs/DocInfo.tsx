@@ -1,7 +1,7 @@
 'use client';
 
 import { fetchDocumentDetail } from '@/app/_store/queries/documentQueries';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { FC, useMemo, useState } from 'react';
@@ -19,7 +19,7 @@ const DocInfo: FC = () => {
     );
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
-
+    const queryClient = useQueryClient();
     const { data, isLoading, isError } = useQuery({
         queryKey: ['docDetail', id],
         queryFn: async () => {
@@ -48,30 +48,27 @@ const DocInfo: FC = () => {
             <h2 className='prose-h2: prose mt-5 flex justify-center align-top text-3xl'>
                 Document Info
             </h2>
-            
-            <ButtonGroup className='mt-6 ml-4'>
-            <Button variant='solid' color='primary'>
-                <Link href='/dashboard'>Go Back</Link>
-            </Button>
-            <Button
-                variant='solid'
-                color='secondary'
-                onClick={handleEditToggle}
-                className='ml-4'
-            >
-                {isEditMode ? 'Cancel Edit' : 'Enable Edit'}
-            </Button>
-            <div className="ml-8">
-            <FolderSelect />
-            </div>
+
+            <ButtonGroup className='ml-4 mt-6'>
+                <Button variant='solid' color='primary'>
+                    <Link href='/dashboard'>Go Back</Link>
+                </Button>
+                <Button
+                    variant='solid'
+                    color='secondary'
+                    onClick={handleEditToggle}
+                    className='ml-4'
+                >
+                    {isEditMode ? 'Cancel Edit' : 'Enable Edit'}
+                </Button>
+                <div className='ml-8'>
+                    <FolderSelect />
+                </div>
             </ButtonGroup>
 
-            <div className='mt-6 ml-4'>
+            <div className='ml-4 mt-6'>
                 <form>
-                    <Input
-                        value={data.title}
-                        disabled={!isEditMode}
-                    />
+                    <Input value={data.title} disabled={!isEditMode} />
                     <ReactQuill
                         theme='snow'
                         className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${!isEditMode ? 'ql-disabled' : ''}`}
