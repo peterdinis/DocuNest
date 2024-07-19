@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const fetchAllFolders = async ({ query = '', page = 1 }) => {
-    const response = await axios.get("/api/folders", {
+export const fetchAllPaginatedFolders = async ({ query = '', page = 1 }) => {
+    const response = await axios.get("/api/folders/paginated", {
         params: {
             query,
             page
@@ -10,6 +10,10 @@ export const fetchAllFolders = async ({ query = '', page = 1 }) => {
     return response.data;
 }
 
+export const fetchAllFolders = async () => {
+    const response = await axios.get("/api/folders");
+    return response.data;
+}
 
 export const fetchFolderDetail = async(id: number | string) => {
     const response = await axios.get(`/api/folders/${id}`);

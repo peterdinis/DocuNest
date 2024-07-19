@@ -1,12 +1,12 @@
 "use client";
 
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, ChangeEvent } from 'react';
 import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
 import { Ghost, Loader2, Search, X } from 'lucide-react';
 import AppPagination from '../shared/AppPagination';
 import { useQuery } from '@tanstack/react-query';
-import { fetchAllDocuments } from '@/app/_store/queries/documentQueries';
+import { fetchAllPaginatedDocuments } from '@/app/_store/queries/documentQueries';
 import { Document } from '@prisma/client';
 import { Button, Card } from '@nextui-org/react';
 import Link from 'next/link';
@@ -20,8 +20,8 @@ const DocumentsWrapper: FC = () => {
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
     const { data, isLoading, isError, refetch } = useQuery({
-        queryKey: ['myDocuments', debouncedSearchQuery, currentPage],
-        queryFn: () => fetchAllDocuments({ query: debouncedSearchQuery, page: currentPage }),
+        queryKey: ['myPaginatedDocuments', debouncedSearchQuery, currentPage],
+        queryFn: () => fetchAllPaginatedDocuments({ query: debouncedSearchQuery, page: currentPage }),
         staleTime: Infinity,
     });
 
@@ -29,7 +29,7 @@ const DocumentsWrapper: FC = () => {
         refetch();
     }, [debouncedSearchQuery, currentPage, refetch]);
 
-    const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value);
     };
 
