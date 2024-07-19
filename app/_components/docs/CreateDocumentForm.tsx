@@ -35,12 +35,12 @@ const CreateDocumentForm: FC = () => {
         },
 
         onError: () => {
-            toast.error("Failed to create document");
-        }
+            toast.error('Failed to create document');
+        },
     });
 
-    const [description, setDescription] = useState("");
-    
+    const [description, setDescription] = useState('');
+
     const ReactQuill = useMemo(
         () => dynamic(() => import('react-quill'), { ssr: false }),
         [],
@@ -93,16 +93,23 @@ const CreateDocumentForm: FC = () => {
                 <AIDoc />
             </CustomDrawer>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="mt-5 flex flex-col items-center">
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className='mt-5 flex flex-col items-center'
+            >
                 <input
-                    type="text"
-                    {...register("title", { required: "Title is required" })}
-                    placeholder="Title"
-                    className="mb-2 p-2 border border-gray-300"
+                    type='text'
+                    {...register('title', { required: 'Title is required' })}
+                    placeholder='Title'
+                    className='mb-2 border border-gray-300 p-2'
                 />
-                {errors.title && <span className="text-red-500">{errors.title.message as unknown as ReactNode}</span>}
+                {errors.title && (
+                    <span className='text-red-500'>
+                        {errors.title.message as unknown as ReactNode}
+                    </span>
+                )}
                 <Button
-                    type="submit"
+                    type='submit'
                     variant='flat'
                     color='success'
                     className='mt-6'
@@ -117,7 +124,11 @@ const CreateDocumentForm: FC = () => {
                     onChange={handleDescriptionChange}
                     value={description}
                 />
-                {errors.description && <span className="text-red-500">{errors.description.message as unknown as ReactNode}</span>}
+                {errors.description && (
+                    <span className='text-red-500'>
+                        {errors.description.message as unknown as ReactNode}
+                    </span>
+                )}
             </form>
         </div>
     );

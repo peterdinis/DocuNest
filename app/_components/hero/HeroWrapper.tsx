@@ -8,14 +8,14 @@ import { useRouter } from 'next/navigation';
 
 const HeroWrapper: FC = () => {
     const router = useRouter();
-    const {data: session} = useSession();
+    const { data: session } = useSession();
 
     useEffect(() => {
-        if(session) {
-            router.push("/dashboard");
+        if (session) {
+            router.push('/dashboard');
         }
-    }, [session, router])
-    
+    }, [session, router]);
+
     return (
         <>
             <div className='bg-gray-100'>

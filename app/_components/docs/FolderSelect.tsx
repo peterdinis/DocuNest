@@ -19,14 +19,18 @@ const FolderSelect: FC<FolderSelectProps> = ({ onSelectFolder }) => {
     });
 
     const selectItems = useMemo(() => {
-        return data ? data.map((item: Folder) => (
-            <SelectItem key={item.id} value={item.id}>{item.name}</SelectItem>
-        )) : [];
+        return data
+            ? data.map((item: Folder) => (
+                  <SelectItem key={item.id} value={item.id}>
+                      {item.name}
+                  </SelectItem>
+              ))
+            : [];
     }, [data]);
 
     if (isLoading) {
         return (
-            <div className="flex justify-center items-center h-full w-full">
+            <div className='flex h-full w-full items-center justify-center'>
                 <Loader2 className='h-8 w-8 animate-spin' />
             </div>
         );
@@ -34,7 +38,7 @@ const FolderSelect: FC<FolderSelectProps> = ({ onSelectFolder }) => {
 
     if (isError) {
         return (
-            <div className="flex justify-center items-center h-full w-full">
+            <div className='flex h-full w-full items-center justify-center'>
                 <p className='text-xl font-bold text-red-700'>
                     Something went wrong
                 </p>
@@ -42,7 +46,9 @@ const FolderSelect: FC<FolderSelectProps> = ({ onSelectFolder }) => {
         );
     }
 
-    const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleSelectChange = (
+        event: React.ChangeEvent<HTMLSelectElement>,
+    ) => {
         const folderId = event.target.value;
         if (onSelectFolder) {
             onSelectFolder(folderId);
@@ -50,9 +56,9 @@ const FolderSelect: FC<FolderSelectProps> = ({ onSelectFolder }) => {
     };
 
     return (
-        <div className="w-full max-w-md mx-auto px-4 sm:px-6 lg:px-8">
+        <div className='mx-auto w-full max-w-md px-4 sm:px-6 lg:px-8'>
             <Select
-                className="w-full"
+                className='w-full'
                 scrollShadowProps={{
                     isEnabled: true,
                 }}

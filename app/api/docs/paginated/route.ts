@@ -22,11 +22,11 @@ export async function GET(request: Request) {
             userId: session.user.id,
             title: {
                 contains: query,
-                mode: 'insensitive'
-            }
+                mode: 'insensitive',
+            },
         },
         skip: (page - 1) * pageSize,
-        take: pageSize
+        take: pageSize,
     });
 
     const totalDocuments = await db.document.count({
@@ -34,9 +34,9 @@ export async function GET(request: Request) {
             userId: session.user.id,
             title: {
                 contains: query,
-                mode: 'insensitive'
-            }
-        }
+                mode: 'insensitive',
+            },
+        },
     });
 
     if (!allUsersPaginatedDocuments) {
@@ -45,6 +45,6 @@ export async function GET(request: Request) {
 
     return NextResponse.json({
         documents: allUsersPaginatedDocuments,
-        totalPages: Math.ceil(totalDocuments / pageSize)
+        totalPages: Math.ceil(totalDocuments / pageSize),
     });
 }
