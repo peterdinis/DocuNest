@@ -11,7 +11,7 @@ import {
     Input,
     useDisclosure,
 } from '@nextui-org/react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation} from '@tanstack/react-query';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -20,6 +20,7 @@ import {
     createNewFolder,
     ICreateFolder,
 } from '@/app/_store/mutations/folderMutations';
+import { queryClient } from '@/app/_store/queryClient';
 
 interface ICreateFolderModalProps {
     btnName: string;
@@ -36,8 +37,6 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
     } = useForm<FolderData>({
         resolver: zodResolver(schema),
     });
-
-    const queryClient = useQueryClient();
 
     const createFolderMut = useMutation({
         mutationKey: ['createFolder'],

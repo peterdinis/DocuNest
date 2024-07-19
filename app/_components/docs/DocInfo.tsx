@@ -1,7 +1,7 @@
 'use client';
 
 import { fetchDocumentDetail } from '@/app/_store/queries/documentQueries';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation} from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { FC, useMemo, useState } from 'react';
@@ -12,6 +12,7 @@ import dynamic from 'next/dynamic';
 import { formats, modules } from './quill-config';
 import FolderSelect from './FolderSelect';
 import { updateDocumentFolder } from '@/app/_store/mutations/documentMutations';
+import { queryClient } from '@/app/_store/queryClient';
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(
@@ -20,7 +21,6 @@ const DocInfo: FC = () => {
     );
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
-    const queryClient = useQueryClient();
     const { data, isLoading, isError } = useQuery({
         queryKey: ['docDetail', id],
         queryFn: async () => {
