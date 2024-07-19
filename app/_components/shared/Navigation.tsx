@@ -101,6 +101,7 @@ const Navigation: FC = () => {
                     </NavbarItem>
                     <NavbarItem>
                         <Button
+                            id="registerBtn"
                             as={Link}
                             color='warning'
                             href='/register'
