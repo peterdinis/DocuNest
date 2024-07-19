@@ -50,11 +50,9 @@ const DocInfo: FC = () => {
         mutationKey: ['updateDocument'],
         mutationFn: (data: UpdateDocumentData) => updateDocument(id, data),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ["docDetail", id]
-            });
             setIsEditMode(false);
             toast.success("Document was edited");
+            window.location.reload();
         },
 
         onError: () => {
@@ -112,7 +110,7 @@ const DocInfo: FC = () => {
             <div className='ml-4 mt-6'>
             <form>
                     <Input
-                        value={title}
+                        value={data.title}
                         disabled={!isEditMode}
                         onChange={(e) => setTitle(e.target.value)}
                     />
@@ -121,11 +119,11 @@ const DocInfo: FC = () => {
                         className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${!isEditMode ? 'ql-disabled' : ''}`}
                         modules={modules}
                         formats={formats}
-                        value={description}
+                        value={data.description}
                         readOnly={!isEditMode}
                         onChange={setDescription}
                     />
-                    {isEditMode && (
+                    {isEditMode === true && (
                         <Button onClick={handleSave} variant='solid' color='primary' className='mt-4'>
                             Save
                         </Button>
