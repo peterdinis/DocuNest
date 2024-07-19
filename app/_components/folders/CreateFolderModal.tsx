@@ -11,7 +11,7 @@ import {
     Input,
     useDisclosure,
 } from '@nextui-org/react';
-import { useMutation} from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';

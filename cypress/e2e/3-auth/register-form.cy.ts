@@ -14,12 +14,14 @@ describe('Register Form', () => {
     });
 
     it('should successfully submit the form with valid data', () => {
-        cy.intercept('POST', '/api/register', { statusCode: 200 }).as('registerUser');
-        
+        cy.intercept('POST', '/api/register', { statusCode: 200 }).as(
+            'registerUser',
+        );
+
         cy.get('input[id="name"]').type('John Doe');
         cy.get('input[id="email"]').type('john.doe@example.com');
         cy.get('input[id="password"]').type('password123');
-        
+
         cy.get('button[type="submit"]').click();
 
         cy.wait('@registerUser').its('response.statusCode').should('eq', 200);
@@ -34,8 +36,8 @@ describe('Register Form', () => {
         cy.get('input[id="email"]').type('john.doe@example.com');
         cy.get('button[type="submit"]').click();
 
-        cy.get('p').should('contain.text', 'Password is required').should('exist');
+        cy.get('p')
+            .should('contain.text', 'Password is required')
+            .should('exist');
     });
-
-
 });

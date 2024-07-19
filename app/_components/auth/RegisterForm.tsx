@@ -88,7 +88,7 @@ const RegisterForm: FC = () => {
                             />
                             {errors.email && (
                                 <p className='font-bold text-red-600'>
-                                   Email is Required
+                                    Email is Required
                                 </p>
                             )}
                         </div>
@@ -96,7 +96,7 @@ const RegisterForm: FC = () => {
                         <div className='space-y-2'>
                             <div>Password</div>
                             <Input
-                                id="password"
+                                id='password'
                                 placeholder='Enter your password'
                                 {...register('password')}
                                 endContent={
@@ -115,7 +115,7 @@ const RegisterForm: FC = () => {
                             />
                             {errors.password && (
                                 <p className='font-bold text-red-600'>
-                                   Password is required
+                                    Password is required
                                 </p>
                             )}
                         </div>

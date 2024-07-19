@@ -1,19 +1,26 @@
 'use client';
 
 import { fetchDocumentDetail } from '@/app/_store/queries/documentQueries';
-import { useQuery, useMutation} from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { FC, useMemo, useState } from 'react';
+import { FC, useMemo, useState, useEffect } from 'react';
 import { Button, ButtonGroup, Input } from '@nextui-org/react';
 import Link from 'next/link';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { formats, modules } from './quill-config';
 import FolderSelect from './FolderSelect';
-import { updateDocumentFolder } from '@/app/_store/mutations/documentMutations';
+import {
+    updateDocument,
+    UpdateDocumentData,
+    updateDocumentFolder,
+} from '@/app/_store/mutations/documentMutations';
 import { queryClient } from '@/app/_store/queryClient';
-import {toast} from "react-toastify";
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+
+/* TODO: Funguje ale stále nie dobré */
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(
@@ -22,6 +29,9 @@ const DocInfo: FC = () => {
     );
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
+    const [title, setTitle] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+
     const { data, isLoading, isError } = useQuery({
         queryKey: ['docDetail', id],
         queryFn: async () => {
@@ -29,26 +39,44 @@ const DocInfo: FC = () => {
         },
     });
 
+    const router = useRouter();
+
+    useEffect(() => {
+        if (data) {
+            setTitle(data.title);
+            setDescription(data.description);
+        }
+    }, [data]);
+
     const addToFolderMut = useMutation({
-        mutationKey: ["addToFolder"],
+        mutationKey: ['addToFolder'],
         mutationFn: (folderId: string) => updateDocumentFolder(id, folderId),
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ["docDetail", id]
-            })
-            toast.success("Docuemnt was added to folder");
+                queryKey: ['docDetail', id],
+            });
         },
+    });
 
-        onError: (error) => {
-            console.log("E", error);
-            toast.error("Failed to add document to folder");
-        }
+    const updateDocumentMut = useMutation({
+        mutationKey: ['updateDocument'],
+        mutationFn: (data: UpdateDocumentData) => updateDocument(id, data),
+        onSuccess: (updatedData) => {
+            setIsEditMode(false);
+            setTitle(updatedData.title);
+            setDescription(updatedData.description);
+            toast.success('Document was edited');
+            router.push("/dashboard")
+        },
+        onError: () => {
+            toast.error('Document was not edited');
+        },
     });
 
     const handleFolderSelect = (folderId: string) => {
         console.log(folderId);
         addToFolderMut.mutate(folderId);
-    }
+    };
 
     if (isLoading) {
         return <Loader2 className='h-8 w-8 animate-spin' />;
@@ -64,6 +92,10 @@ const DocInfo: FC = () => {
 
     const handleEditToggle = () => {
         setIsEditMode(!isEditMode);
+    };
+
+    const handleSave = () => {
+        updateDocumentMut.mutate({ title, description });
     };
 
     return (
@@ -91,15 +123,30 @@ const DocInfo: FC = () => {
 
             <div className='ml-4 mt-6'>
                 <form>
-                    <Input value={data.title} disabled={!isEditMode} />
+                    <Input
+                        value={title}
+                        disabled={!isEditMode}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
                     <ReactQuill
                         theme='snow'
                         className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${!isEditMode ? 'ql-disabled' : ''}`}
                         modules={modules}
                         formats={formats}
-                        value={data.description}
+                        value={description}
                         readOnly={!isEditMode}
+                        onChange={setDescription}
                     />
+                    {isEditMode && (
+                        <Button
+                            onClick={handleSave}
+                            variant='solid'
+                            color='primary'
+                            className='mt-4'
+                        >
+                            Save
+                        </Button>
+                    )}
                 </form>
             </div>
         </div>
