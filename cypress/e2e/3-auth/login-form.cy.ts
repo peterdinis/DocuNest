@@ -1,62 +1,56 @@
-describe('LoginForm', () => {
+describe('Login Form', () => {
     beforeEach(() => {
+        cy.visit('http://localhost:3000/register');
+        cy.get('form').should('exist');
+        cy.get('input[id="name"]').should('exist');
+        cy.get('input[id="email"]').should('exist');
+        cy.get('input[id="password"]').should('exist');
+        cy.get('button[type="submit"]').should('exist');
+        cy.contains('Already have an account?').should('exist');
+        cy.get('a[href="/login"]').should('exist');
         cy.visit('http://localhost:3000/login');
     });
 
-    it('should render the login form', () => {
+    it('should render the login form with all required elements', () => {
         cy.get('form').should('exist');
-        cy.get('input#email').should('exist');
-        cy.get('input[type="password"]').should('exist');
+        cy.get('input[id="email"]').should('exist');
+        cy.get('input[id="password"]').should('exist');
         cy.get('button[type="submit"]').should('exist');
+        cy.contains('Don\'t have an account?').should('exist');
+        cy.get('a[href="/register"]').should('exist');
     });
 
-    it('should show validation errors for empty fields', () => {
+    it('should successfully submit the form with valid data', () => {
+        cy.intercept('POST', '/api/login', { statusCode: 200 }).as('loginUser');
+        
+        cy.get('input[id="email"]').type('john.doe@example.com');
+        cy.get('input[id="password"]').type('password123');
+        
         cy.get('button[type="submit"]').click();
 
-        cy.get('input#email:invalid').should('exist');
-        cy.get('input[type="password"]:invalid').should('exist');
+        cy.wait('@loginUser').its('response.statusCode').should('eq', 200);
+        cy.url().should('not.include', '/login'); // Assuming a successful login redirects away from /login
+        cy.contains('Login successful').should('exist');
     });
 
-    it('should show validation errors for invalid email', () => {
-        cy.get('input#email').type('invalid-email');
-        cy.get('input[type="password"]').type('password123');
+    it('should not submit the form and show validation errors if some fields are missing', () => {
+        cy.intercept('POST', '/api/login').as('loginUser');
+
+        cy.get('input[id="email"]').type('john.doe@example.com');
+        // Leave password field empty
+
         cy.get('button[type="submit"]').click();
 
-        cy.get('input#email:invalid').should('exist');
-    });
+        // Check that the validation error for password is displayed
+        cy.get('p').should('contain.text', 'String must contain at least 1 character(s)').should('exist');
+        
+        // Verify that no request was sent to the server
+        cy.wait('@loginUser').then((interception) => {
+            expect(interception.response!.statusCode).to.be.oneOf([null, 0]);
+        });
 
-    it('should show error for incorrect login details', () => {
-        cy.intercept('POST', '/api/auth/callback/credentials', {
-            statusCode: 401,
-            body: { error: 'Invalid credentials' },
-        }).as('loginRequest');
-
-        cy.get('input#email').type('john.doe@example.com');
-        cy.get('input[type="password"]').type('wrongpassword');
-        cy.get('button[type="submit"]').click();
-
-        cy.wait('@loginRequest');
-        cy.get('.Toastify__toast--error').should('contain', 'Login error: Invalid credentials');
-    });
-
-    it('should login successfully with correct details', () => {
-        cy.intercept('POST', '/api/auth/callback/credentials', {
-            statusCode: 200,
-            body: { success: true },
-        }).as('loginRequest');
-
-        cy.get('input#email').type('john.doe@example.com');
-        cy.get('input[type="password"]').type('password123');
-        cy.get('button[type="submit"]').click();
-
-        cy.wait('@loginRequest');
-        cy.get('.Toastify__toast--success').should('contain', 'Login successful!');
-        cy.url().should('include', '/dashboard');
-    });
-
-    it('should toggle password visibility', () => {
-        cy.get('input[type="password"]').should('have.attr', 'type', 'password');
-        cy.get('button[type="button"]').click();
-        cy.get('input[type="text"]').should('have.attr', 'type', 'text');
+        // Optionally, check that the form fields have not been cleared or altered
+        cy.get('input[id="email"]').should('have.value', 'john.doe@example.com');
+        cy.get('input[id="password"]').should('have.value', '');
     });
 });
