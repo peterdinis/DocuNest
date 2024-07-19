@@ -4,7 +4,7 @@ import { fetchDocumentDetail } from '@/app/_store/queries/documentQueries';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { FC, useMemo, useState, useEffect } from 'react';
+import { FC, useMemo, useState, useEffect, useCallback} from 'react';
 import { Button, ButtonGroup, Input } from '@nextui-org/react';
 import Link from 'next/link';
 import 'react-quill/dist/quill.snow.css';
@@ -20,8 +20,6 @@ import { queryClient } from '@/app/_store/queryClient';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 
-/* TODO: Funguje ale stále nie dobré */
-
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(
         () => dynamic(() => import('react-quill'), { ssr: false }),
@@ -32,11 +30,13 @@ const DocInfo: FC = () => {
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
 
-    const { data, isLoading, isError } = useQuery({
+    const { data, isLoading, isError} = useQuery({
         queryKey: ['docDetail', id],
-        queryFn: async () => {
-            return await fetchDocumentDetail(id);
-        },
+        queryFn: async () => fetchDocumentDetail(id),
+        refetchOnWindowFocus: true,
+        refetchInterval: isEditMode ? 5000 : false,
+        refetchIntervalInBackground: true,
+        refetchOnReconnect: true
     });
 
     const router = useRouter();
@@ -66,17 +66,19 @@ const DocInfo: FC = () => {
             setTitle(updatedData.title);
             setDescription(updatedData.description);
             toast.success('Document was edited');
-            router.push("/dashboard")
+            queryClient.invalidateQueries({
+                queryKey: ["docDetail", id]
+            });
+            router.push('/dashboard');
         },
         onError: () => {
             toast.error('Document was not edited');
         },
     });
 
-    const handleFolderSelect = (folderId: string) => {
-        console.log(folderId);
+    const handleFolderSelect = useCallback((folderId: string) => {
         addToFolderMut.mutate(folderId);
-    };
+    }, [id]);
 
     if (isLoading) {
         return <Loader2 className='h-8 w-8 animate-spin' />;
@@ -128,6 +130,16 @@ const DocInfo: FC = () => {
                         disabled={!isEditMode}
                         onChange={(e) => setTitle(e.target.value)}
                     />
+                    {isEditMode && (
+                        <Button
+                            onClick={handleSave}
+                            variant='solid'
+                            color='primary'
+                            className='mt-4'
+                        >
+                            Save document
+                        </Button>
+                    )}
                     <ReactQuill
                         theme='snow'
                         className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${!isEditMode ? 'ql-disabled' : ''}`}
@@ -137,16 +149,6 @@ const DocInfo: FC = () => {
                         readOnly={!isEditMode}
                         onChange={setDescription}
                     />
-                    {isEditMode && (
-                        <Button
-                            onClick={handleSave}
-                            variant='solid'
-                            color='primary'
-                            className='mt-4'
-                        >
-                            Save
-                        </Button>
-                    )}
                 </form>
             </div>
         </div>
