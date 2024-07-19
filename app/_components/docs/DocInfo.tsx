@@ -31,12 +31,14 @@ const DocInfo: FC = () => {
     const [isEditMode, setIsEditMode] = useState(false);
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
+    const [intervalMs, ] = useState(100);
 
     const { data, isLoading, isError } = useQuery({
         queryKey: ['docDetail', id],
         queryFn: async () => {
             return await fetchDocumentDetail(id);
         },
+        refetchInterval: () => intervalMs
     });
 
     const router = useRouter();
@@ -134,7 +136,7 @@ const DocInfo: FC = () => {
                             color='primary'
                             className='mt-4'
                         >
-                            Save
+                            Save document
                         </Button>
                     )}
                     <ReactQuill
