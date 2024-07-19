@@ -4,7 +4,7 @@ import { fetchDocumentDetail } from '@/app/_store/queries/documentQueries';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { FC, useMemo, useState } from 'react';
+import { FC, useMemo, useState, useEffect } from 'react';
 import { Button, ButtonGroup, Input } from '@nextui-org/react';
 import Link from 'next/link';
 import 'react-quill/dist/quill.snow.css';
@@ -18,6 +18,7 @@ import {
 } from '@/app/_store/mutations/documentMutations';
 import { queryClient } from '@/app/_store/queryClient';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(
@@ -36,6 +37,15 @@ const DocInfo: FC = () => {
         },
     });
 
+    const router = useRouter();
+
+    useEffect(() => {
+        if (data) {
+            setTitle(data.title);
+            setDescription(data.description);
+        }
+    }, [data]);
+
     const addToFolderMut = useMutation({
         mutationKey: ['addToFolder'],
         mutationFn: (folderId: string) => updateDocumentFolder(id, folderId),
@@ -49,12 +59,13 @@ const DocInfo: FC = () => {
     const updateDocumentMut = useMutation({
         mutationKey: ['updateDocument'],
         mutationFn: (data: UpdateDocumentData) => updateDocument(id, data),
-        onSuccess: () => {
+        onSuccess: (updatedData) => {
             setIsEditMode(false);
+            setTitle(updatedData.title);
+            setDescription(updatedData.description);
             toast.success('Document was edited');
-            window.location.reload();
+            router.push("/dashboard");
         },
-
         onError: () => {
             toast.error('Document was not edited');
         },
@@ -109,41 +120,21 @@ const DocInfo: FC = () => {
 
             <div className='ml-4 mt-6'>
                 <form>
-                    {isEditMode === true ? (
-                        <Input
-                            value={title}
-                            disabled={!isEditMode}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                    ) : (
-                        <Input
-                            value={data.title}
-                            disabled={!isEditMode}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                    )}
-                    {isEditMode ? (
-                        <ReactQuill
-                            theme='snow'
-                            className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${!isEditMode ? 'ql-disabled' : ''}`}
-                            modules={modules}
-                            formats={formats}
-                            value={description}
-                            readOnly={!isEditMode}
-                            onChange={setDescription}
-                        />
-                    ) : (
-                        <ReactQuill
-                            theme='snow'
-                            className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${!isEditMode ? 'ql-disabled' : ''}`}
-                            modules={modules}
-                            formats={formats}
-                            value={data.description}
-                            readOnly={!isEditMode}
-                            onChange={setDescription}
-                        />
-                    )}
-                    {isEditMode === true && (
+                    <Input
+                        value={title}
+                        disabled={!isEditMode}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                    <ReactQuill
+                        theme='snow'
+                        className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${!isEditMode ? 'ql-disabled' : ''}`}
+                        modules={modules}
+                        formats={formats}
+                        value={description}
+                        readOnly={!isEditMode}
+                        onChange={setDescription}
+                    />
+                    {isEditMode && (
                         <Button
                             onClick={handleSave}
                             variant='solid'
