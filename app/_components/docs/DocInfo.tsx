@@ -17,7 +17,7 @@ import {
     updateDocumentFolder,
 } from '@/app/_store/mutations/documentMutations';
 import { queryClient } from '@/app/_store/queryClient';
-import {toast} from "react-toastify";
+import { toast } from 'react-toastify';
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(
@@ -51,13 +51,13 @@ const DocInfo: FC = () => {
         mutationFn: (data: UpdateDocumentData) => updateDocument(id, data),
         onSuccess: () => {
             setIsEditMode(false);
-            toast.success("Document was edited");
+            toast.success('Document was edited');
             window.location.reload();
         },
 
         onError: () => {
-            toast.error("Document was not edited");
-        }
+            toast.error('Document was not edited');
+        },
     });
 
     const handleFolderSelect = (folderId: string) => {
@@ -108,23 +108,48 @@ const DocInfo: FC = () => {
             </ButtonGroup>
 
             <div className='ml-4 mt-6'>
-            <form>
-                    <Input
-                        value={data.title}
-                        disabled={!isEditMode}
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                    <ReactQuill
-                        theme='snow'
-                        className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${!isEditMode ? 'ql-disabled' : ''}`}
-                        modules={modules}
-                        formats={formats}
-                        value={data.description}
-                        readOnly={!isEditMode}
-                        onChange={setDescription}
-                    />
+                <form>
+                    {isEditMode === true ? (
+                        <Input
+                            value={title}
+                            disabled={!isEditMode}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    ) : (
+                        <Input
+                            value={data.title}
+                            disabled={!isEditMode}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    )}
+                    {isEditMode ? (
+                        <ReactQuill
+                            theme='snow'
+                            className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${!isEditMode ? 'ql-disabled' : ''}`}
+                            modules={modules}
+                            formats={formats}
+                            value={description}
+                            readOnly={!isEditMode}
+                            onChange={setDescription}
+                        />
+                    ) : (
+                        <ReactQuill
+                            theme='snow'
+                            className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${!isEditMode ? 'ql-disabled' : ''}`}
+                            modules={modules}
+                            formats={formats}
+                            value={data.description}
+                            readOnly={!isEditMode}
+                            onChange={setDescription}
+                        />
+                    )}
                     {isEditMode === true && (
-                        <Button onClick={handleSave} variant='solid' color='primary' className='mt-4'>
+                        <Button
+                            onClick={handleSave}
+                            variant='solid'
+                            color='primary'
+                            className='mt-4'
+                        >
                             Save
                         </Button>
                     )}
