@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const fetchAllPaginatedFolders = async ({ query = '', page = 1 }) => {
-    const response = await axios.get("/api/folders/pagintated", {
+    const response = await axios.get("/api/folders/paginated", {
         params: {
             query,
             page

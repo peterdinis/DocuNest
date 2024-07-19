@@ -53,7 +53,7 @@ const AllFoldersContent: FC = () => {
                 onChange={handleSearchInputChange}
             />
             <div className="mt-5 flex flex-wrap gap-5">
-                {data && data.map((item: DisplayFolder) => {
+                {data?.folders && data?.folders.map((item: DisplayFolder) => {
                     return (
                         <div key={item.id} className="w-[200px]">
                             <Card className='space-y-5 p-4' radius='lg'>
