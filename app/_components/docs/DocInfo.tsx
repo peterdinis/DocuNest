@@ -11,7 +11,7 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { formats, modules } from './quill-config';
 import FolderSelect from './FolderSelect';
-import { updateDocumentFolder } from '@/app/_store/mutations/documentMutations';
+import { updateDocument, UpdateDocumentData, updateDocumentFolder } from '@/app/_store/mutations/documentMutations';
 import { queryClient } from '@/app/_store/queryClient';
 
 const DocInfo: FC = () => {
@@ -21,6 +21,7 @@ const DocInfo: FC = () => {
     );
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
+
     const { data, isLoading, isError } = useQuery({
         queryKey: ['docDetail', id],
         queryFn: async () => {
@@ -37,6 +38,13 @@ const DocInfo: FC = () => {
             })
         }
     });
+
+    const updateDocumentMut = useMutation({
+        mutationKey: ["updateDocument"],
+        mutationFn: (data: UpdateDocumentData) => updateDocument(id, data),
+    })
+
+    
 
     const handleFolderSelect = (folderId: string) => {
         addToFolderMut.mutate(folderId);
