@@ -11,4 +11,9 @@ describe('Navigation Component', () => {
         cy.contains('Sign Up').click();
         cy.visit("http://localhost:3000/register");
     });
+
+    it('should navigate to the login page', () => {
+        cy.contains('Login').click();
+        cy.visit("http://localhost:3000/login");
+    });
 });
