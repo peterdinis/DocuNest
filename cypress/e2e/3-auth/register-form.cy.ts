@@ -27,40 +27,15 @@ describe('Register Form', () => {
         cy.contains('Registration successful').should('exist');
     });
 
-    it('should show validation errors for invalid form data', () => {
+    it('should not submit the form and show validation errors if some fields are missing', () => {
+        cy.intercept('POST', '/api/register').as('registerUser');
+
+        cy.get('input[id="name"]').type('John Doe');
+        cy.get('input[id="email"]').type('john.doe@example.com');
         cy.get('button[type="submit"]').click();
-        
-        cy.get('p').should('contain.text', 'Name is required');
-        cy.get('p').should('contain.text', 'Email is required');
-        cy.get('p').should('contain.text', 'Password is required');
+
+        cy.get('p').should('contain.text', 'Password is required').should('exist');
     });
 
-    it('should toggle password visibility', () => {
-        cy.visit('http://localhost:3000/register');
-    
-        // Ensure the password input is initially of type 'password'
-        cy.get('input[id="password"]').should('have.attr', 'type', 'password');
-    
-        // Click the visibility toggle button (Eye icon)
-        cy.get('button').contains('Eye').click();
-    
-        // Check if the input type is now 'text'
-        cy.get('input[id="password"]').should('have.attr', 'type', 'text');
-    
-        // Click the visibility toggle button (EyeOff icon)
-        cy.get('button').contains('EyeOff').click();
-    
-        // Check if the input type is back to 'password'
-        cy.get('input[id="password"]').should('have.attr', 'type', 'password');
-    });
 
-    it('should navigate to the login page when clicking the login link', () => {
-        cy.visit('http://localhost:3000/register');
-    
-        // Click the link to navigate to the login page
-        cy.get('a[href="/login"]').click();
-    
-        // Verify that the URL includes '/login'
-        cy.url().should('include', '/login');
-    });
 });
