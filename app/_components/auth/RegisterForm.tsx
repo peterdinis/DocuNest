@@ -97,6 +97,7 @@ const RegisterForm: FC = () => {
                         <div className='space-y-2'>
                             <div>Password</div>
                             <Input
+                                id="password"
                                 placeholder='Enter your password'
                                 {...register('password')}
                                 endContent={
