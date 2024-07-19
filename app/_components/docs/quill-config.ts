@@ -18,6 +18,10 @@ export const modules = {
 
     history: {
         delay: 2000,
+    },
+
+    clipboard: {
+        matchVisual: true
     }
     
 };

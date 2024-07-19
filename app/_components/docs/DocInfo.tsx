@@ -4,7 +4,7 @@ import { fetchDocumentDetail } from '@/app/_store/queries/documentQueries';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { FC, useMemo, useState, useEffect, useCallback } from 'react';
+import { FC, useMemo, useState, useEffect, useCallback, useRef } from 'react';
 import { Button, ButtonGroup, Input } from '@nextui-org/react';
 import Link from 'next/link';
 import 'react-quill/dist/quill.snow.css';
