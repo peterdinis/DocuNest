@@ -75,7 +75,7 @@ const CreateDocumentForm: FC = () => {
                     color='secondary'
                     onClick={handleDrawerOpen}
                 >
-                    Open Drawer
+                    Use AI
                 </Button>
                 <Button
                     variant='flat'
