@@ -29,8 +29,3 @@ export const updateDocumentFolder = async (
     );
     return response.data;
 };
-
-
-export const deleteDocument = async(documentId: string) => {
-    return await axios.delete(`/api/docs/${documentId}`);
-}

@@ -13,19 +13,21 @@ import {
 import { X } from 'lucide-react';
 import { toast } from "react-toastify";
 import { useMutation } from '@tanstack/react-query';
-import { deleteDocument } from '@/app/_store/mutations/documentMutations';
+import axios from "axios";
 import { queryClient } from '@/app/_store/queryClient';
-import { useRouter } from 'next/navigation';
 
 interface IDeleteDocModalProps {
     docId: string;
 }
 
+const deleteDocument = async(documentId: string) => {
+    if (!documentId) return;
+    return await axios.delete(`/api/docs/${documentId}`);
+}
+
 const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }: IDeleteDocModalProps) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { handleSubmit } = useForm();
-
-    const router = useRouter();
     
     const deleteDocMut = useMutation({
         mutationKey: ["deleteDocument", docId],
@@ -33,9 +35,8 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }: IDeleteDocModalProp
         onSuccess: () => {
             toast.success("Document was deleted");
             queryClient.invalidateQueries({
-                queryKey: ["docDetail", docId]
-            });
-            router.push("/folders");
+                queryKey: ["myPaginatedDocuments"]
+            })
         },
         onError: () => {
             toast.error("Failed to delete document");
@@ -43,6 +44,7 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }: IDeleteDocModalProp
     });
 
     const onSubmit = () => {
+        console.log("Zbhenem")
         deleteDocMut.mutate();
     };
 
