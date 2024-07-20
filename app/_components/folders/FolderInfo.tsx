@@ -1,7 +1,6 @@
 'use client';
 
-import { fetchFolderDetail } from '@/app/_store/queries/folderQueries';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation} from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
