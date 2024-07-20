@@ -2,21 +2,16 @@
 
 import { Select, SelectItem } from '@nextui-org/react';
 import { FC, useMemo } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { fetchAllFolders } from '@/app/_store/queries/folderQueries';
 import { Loader2 } from 'lucide-react';
 import { Folder } from '@prisma/client';
+import useFolders from '@/app/_hooks/useFolders';
 
 interface FolderSelectProps {
     onSelectFolder?: (folderId: string) => void;
 }
 
 const FolderSelect: FC<FolderSelectProps> = ({ onSelectFolder }) => {
-    const { data, isLoading, isError } = useQuery({
-        queryKey: ['folders'],
-        queryFn: fetchAllFolders,
-        staleTime: Infinity,
-    });
+    const {data, isLoading, isError} = useFolders();
 
     const selectItems = useMemo(() => {
         return data

@@ -1,7 +1,6 @@
 'use client';
 
-import { fetchDocumentDetail } from '@/app/_store/queries/documentQueries';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { FC, useMemo, useState, useEffect, useCallback} from 'react';
@@ -19,6 +18,7 @@ import {
 import { queryClient } from '@/app/_store/queryClient';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import useDocumentDetail from '@/app/_hooks/useDocumentDetail';
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(
@@ -30,14 +30,7 @@ const DocInfo: FC = () => {
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
 
-    const { data, isLoading, isError } = useQuery({
-        queryKey: ['docDetail', id],
-        queryFn: async () => fetchDocumentDetail(id),
-        refetchOnWindowFocus: true,
-        refetchInterval: isEditMode ? 5000 : false,
-        refetchIntervalInBackground: true,
-        refetchOnReconnect: true,
-    });
+    const { data, isLoading, isError } = useDocumentDetail({ id, isEditMode });
 
     const router = useRouter();
 

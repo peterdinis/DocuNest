@@ -8,43 +8,21 @@ import CustomDrawer from '../shared/Drawer';
 import { Button } from '@nextui-org/react';
 import AIDoc from './AIDoc';
 import { formats, modules } from './quill-config';
-import { useForm } from 'react-hook-form';
-import { useMutation } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
-import {
-    createNewDocument,
-    ICreateDocumentData,
-} from '@/app/_store/mutations/documentMutations';
+import { useForm, FieldValues } from 'react-hook-form';
+import useCreateDocument from '@/app/_hooks/useCreateDocument';
+import { ICreateDocumentData } from '@/app/_store/mutations/documentMutations';
 
 const CreateDocumentForm: FC = () => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        reset,
-    } = useForm();
-
-    const newDocumentMut = useMutation({
-        mutationKey: ['newDocument'],
-        mutationFn: async (data: ICreateDocumentData) => {
-            return await createNewDocument(data);
-        },
-        onSuccess: () => {
-            toast.success('New document was created');
-            reset();
-        },
-
-        onError: () => {
-            toast.error('Failed to create document');
-        },
-    });
-
     const [description, setDescription] = useState('');
 
     const ReactQuill = useMemo(
         () => dynamic(() => import('react-quill'), { ssr: false }),
         [],
     );
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
+    const { mutate: createDocumentMut, isPending } = useCreateDocument();
 
     const handleDescriptionChange = (content: string) => {
         setDescription(content);
@@ -60,7 +38,8 @@ const CreateDocumentForm: FC = () => {
 
     const onSubmit = (formData: any) => {
         formData.description = description;
-        newDocumentMut.mutate(formData);
+        createDocumentMut(formData);
+        reset();
     };
 
     return (
@@ -113,8 +92,9 @@ const CreateDocumentForm: FC = () => {
                     variant='flat'
                     color='success'
                     className='mt-6'
+                    disabled={isPending}
                 >
-                    Create Document
+                    {isPending ? 'Creating...' : 'Create Document'}
                 </Button>
                 <ReactQuill
                     theme='snow'

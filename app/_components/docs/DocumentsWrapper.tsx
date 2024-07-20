@@ -3,16 +3,15 @@
 import { FC, useState, useEffect, ChangeEvent } from 'react';
 import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
-import { Ghost, Loader2, Search, X } from 'lucide-react';
+import { Ghost, Loader2, Search} from 'lucide-react';
 import AppPagination from '../shared/AppPagination';
-import { useQuery } from '@tanstack/react-query';
-import { fetchAllPaginatedDocuments } from '@/app/_store/queries/documentQueries';
 import { Document } from '@prisma/client';
 import { Button, Card } from '@nextui-org/react';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import { useDebounce } from '@/app/_hooks/useDebounce';
 import DeleteDocModal from './DeleteDocModal';
+import usePaginatedDocuments from '@/app/_hooks/usePaginatedDocuments';
 
 const DocumentsWrapper: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -20,14 +19,9 @@ const DocumentsWrapper: FC = () => {
 
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
-    const { data, isLoading, isError, refetch } = useQuery({
-        queryKey: ['myPaginatedDocuments', debouncedSearchQuery, currentPage],
-        queryFn: () =>
-            fetchAllPaginatedDocuments({
-                query: debouncedSearchQuery,
-                page: currentPage,
-            }),
-        staleTime: Infinity,
+    const { data, isLoading, isError, refetch } = usePaginatedDocuments({
+        query: debouncedSearchQuery,
+        page: currentPage,
     });
 
     useEffect(() => {
