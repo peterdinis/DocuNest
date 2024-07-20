@@ -1,57 +1,63 @@
 'use client';
 
 import { FC } from 'react';
+import { useForm } from 'react-hook-form';
 import {
     Modal,
     ModalContent,
     ModalHeader,
-    ModalBody,
     ModalFooter,
     Button,
     useDisclosure,
 } from '@nextui-org/react';
 import { X } from 'lucide-react';
+import { toast } from "react-toastify";
+import { useMutation } from '@tanstack/react-query';
+import { deleteDocument } from '@/app/_store/mutations/documentMutations';
+import { queryClient } from '@/app/_store/queryClient';
+import { useRouter } from 'next/navigation';
 
-const DeleteDocModal: FC = () => {
+interface IDeleteDocModalProps {
+    docId: string;
+}
+
+const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }: IDeleteDocModalProps) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const { handleSubmit } = useForm();
+
+    const router = useRouter();
+
+    const deleteDocMut = useMutation({
+        mutationKey: ["deleteDocument"],
+        mutationFn: () => deleteDocument(docId),
+        onSuccess: () => {
+            toast.success("Document was deleted");
+            queryClient.invalidateQueries({
+                queryKey: ["docDetail", docId]
+            });
+            router.push("/folders");
+        },
+        onError: () => {
+            toast.error("Failed to delete document");
+        }
+    });
+
+    const onSubmit = () => {
+        deleteDocMut.mutate();
+    };
 
     return (
         <>
-            <Button onPress={onOpen}>
+            <button onClick={onOpen}>
                 <X className='rounded-lg bg-red-700 text-white' />
-            </Button>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            </button>
+            <Modal backdrop='blur' isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
-                        <>
+                        <form onSubmit={handleSubmit(onSubmit)}>
                             <ModalHeader className='flex flex-col gap-1'>
-                                Modal Title
+                                Do you want to delete document?
                             </ModalHeader>
-                            <ModalBody>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Nullam pulvinar risus non
-                                    risus hendrerit venenatis. Pellentesque sit
-                                    amet hendrerit risus, sed porttitor quam.
-                                </p>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing elit. Nullam pulvinar risus non
-                                    risus hendrerit venenatis. Pellentesque sit
-                                    amet hendrerit risus, sed porttitor quam.
-                                </p>
-                                <p>
-                                    Magna exercitation reprehenderit magna aute
-                                    tempor cupidatat consequat elit dolor
-                                    adipisicing. Mollit dolor eiusmod sunt ex
-                                    incididunt cillum quis. Velit duis sit
-                                    officia eiusmod Lorem aliqua enim laboris do
-                                    dolor eiusmod. Et mollit incididunt nisi
-                                    consectetur esse laborum eiusmod pariatur
-                                    proident Lorem eiusmod et. Culpa deserunt
-                                    nostrud ad veniam.
-                                </p>
-                            </ModalBody>
                             <ModalFooter>
                                 <Button
                                     color='danger'
@@ -60,11 +66,11 @@ const DeleteDocModal: FC = () => {
                                 >
                                     Close
                                 </Button>
-                                <Button color='primary' onPress={onClose}>
-                                    Action
+                                <Button color='primary' type='submit'>
+                                    Delete Document
                                 </Button>
                             </ModalFooter>
-                        </>
+                        </form>
                     )}
                 </ModalContent>
             </Modal>
