@@ -10,47 +10,24 @@ import {
 } from '@nextui-org/react';
 import Link from 'next/link';
 import { FC, useState } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import { useMutation } from '@tanstack/react-query';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useForm, FieldValues } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema } from './schemas';
-import { toast } from 'react-toastify';
 import { Eye, EyeOff } from 'lucide-react';
+import useRegisterUser from '@/app/_hooks/useRegisterUser';
 
 const RegisterForm: FC = () => {
     const [isVisible, setIsVisible] = useState(false);
-
-    const toggleVisibility = () => setIsVisible(!isVisible);
-
-    const router = useRouter();
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        reset,
-    } = useForm({
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: zodResolver(registerSchema),
     });
 
-    const registerUserMut = useMutation({
-        mutationKey: ['registerUser'],
-        mutationFn: async (data: any) => {
-            await axios.post('/api/register', data);
-        },
-        onSuccess: () => {
-            toast.success('Registration successful');
-            router.push('/login');
-        },
-        onError: () => {
-            toast.error('Registration failed');
-        },
-    });
+    const { mutate: registerUserMut, isPending } = useRegisterUser();
+
+    const toggleVisibility = () => setIsVisible(!isVisible);
 
     const onSubmit = (data: FieldValues) => {
-        console.log('Data submitted:', data);
-        registerUserMut.mutate(data);
+        registerUserMut(data);
         reset();
     };
 
@@ -126,8 +103,9 @@ const RegisterForm: FC = () => {
                             type='submit'
                             color='primary'
                             className='w-full'
+                            disabled={isPending}
                         >
-                            Register
+                            {isPending ? 'Registering...' : 'Register'}
                         </Button>
                     </CardFooter>
                 </form>
