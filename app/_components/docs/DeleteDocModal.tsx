@@ -28,7 +28,7 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }: IDeleteDocModalProp
     const router = useRouter();
 
     const deleteDocMut = useMutation({
-        mutationKey: ["deleteDocument"],
+        mutationKey: ["deleteDocument", docId],
         mutationFn: () => deleteDocument(docId),
         onSuccess: () => {
             toast.success("Document was deleted");
