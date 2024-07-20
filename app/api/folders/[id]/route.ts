@@ -73,3 +73,37 @@ export async function PUT(request: NextRequest) {
 
     return new NextResponse('Succesfully updated data', { status: 200 });
 }
+
+export async function DELETE(request: NextRequest) {
+    const url = new URL(request.url);
+    const id = url.pathname.split('/').pop();
+
+    if (!id) {
+        return NextResponse.json({ error: 'Missing id parameter' }, { status: 400 });
+    }
+
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user) {
+        return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
+    }
+
+    try {
+        const folder = await db.folder.findUnique({
+            where: { id },
+        });
+
+        if (!folder || folder.userId !== session.user.id) {
+            return NextResponse.json({ message: 'Folder not found or access denied' }, { status: 404 });
+        }
+
+        await db.folder.delete({
+            where: { id: folder.id },
+        });
+
+        return NextResponse.json({ message: 'Folder deleted successfully' }, { status: 200 });
+    } catch (error) {
+        console.error('Error deleting folder:', error);
+        return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
+    }
+}
