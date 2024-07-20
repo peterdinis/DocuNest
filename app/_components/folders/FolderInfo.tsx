@@ -1,27 +1,64 @@
 'use client';
 
 import { fetchFolderDetail } from '@/app/_store/queries/folderQueries';
-import { Button, ButtonGroup } from '@nextui-org/react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
-import Header from '../shared/Header';
-import { Accordion, AccordionItem } from '@nextui-org/react';
+import { Button, ButtonGroup, Input } from '@nextui-org/react';
+import { toast } from 'react-toastify';
+import {
+    updateFolder,
+    UpdateFolderData,
+} from '@/app/_store/mutations/folderMutations';
+import { queryClient } from '@/app/_store/queryClient';
+import { useRouter } from 'next/navigation';
 
 const FolderInfo: FC = () => {
     const { id } = useParams<{ id: string }>();
+    const [isEditMode, setIsEditMode] = useState(false);
+    const [name, setName] = useState('');
+    const router = useRouter();
 
     const { data, isLoading, isError } = useQuery({
         queryKey: ['folderDetail', id],
         queryFn: async () => {
             return await fetchFolderDetail(id);
         },
+        refetchOnWindowFocus: true,
+        refetchInterval: isEditMode ? 5000 : false,
+        refetchIntervalInBackground: true,
+        refetchOnReconnect: true,
     });
 
-    const defaultContent =
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
+    useEffect(() => {
+        if (data) {
+            setName(data.name);
+        }
+    }, [data]);
+
+    const updateFolderMut = useMutation({
+        mutationKey: ['updateFolder'],
+        mutationFn: (data: UpdateFolderData) => updateFolder(id, data),
+        onSuccess: (updatedData: any) => {
+            setIsEditMode(false);
+            setName(updatedData.name);
+            toast.success('Folder was edited');
+            queryClient.invalidateQueries({
+                queryKey: ['folderDetail', id],
+            });
+            router.push('/folders/all');
+        },
+
+        onError: () => {
+            toast.error('Folder was not edited');
+        },
+    });
+
+    const handleSave = () => {
+        updateFolderMut.mutate({ name });
+    };
 
     if (isLoading) {
         return <Loader2 className='h-8 w-8 animate-spin' />;
@@ -35,47 +72,51 @@ const FolderInfo: FC = () => {
         );
     }
 
+    const handleEditToggle = () => {
+        setIsEditMode(!isEditMode);
+    };
+
     return (
         <div>
             <h2 className='prose-h2: prose mt-5 flex justify-center align-top text-3xl'>
                 Folder Info
             </h2>
-
             <ButtonGroup className='ml-4 mt-6'>
                 <Button variant='solid' color='primary'>
-                    <Link href='/folders'>Go Back</Link>
+                    <Link href='/folders/all'>Go Back</Link>
+                </Button>
+                <Button
+                    variant='solid'
+                    color='secondary'
+                    onClick={handleEditToggle}
+                    className='ml-4'
+                >
+                    {isEditMode ? 'Cancel Edit' : 'Enable Edit'}
                 </Button>
             </ButtonGroup>
-
             <hr className='mt-3' />
             <div className='ml-5 mt-5'>
-                <Header text={data.name} />
+                <form>
+                    <Input
+                        placeholder='Input name'
+                        value={name}
+                        className='max-w-[300px]'
+                        disabled={!isEditMode}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    {isEditMode && (
+                        <Button
+                            onClick={handleSave}
+                            variant='solid'
+                            color='primary'
+                            className='mt-4'
+                        >
+                            Save document
+                        </Button>
+                    )}
+                </form>
             </div>
-
-            {/* Later add documents */}
-            <Accordion selectionMode='multiple'>
-                <AccordionItem
-                    key='1'
-                    aria-label='Accordion 1'
-                    title='Accordion 1'
-                >
-                    {defaultContent}
-                </AccordionItem>
-                <AccordionItem
-                    key='2'
-                    aria-label='Accordion 2'
-                    title='Accordion 2'
-                >
-                    {defaultContent}
-                </AccordionItem>
-                <AccordionItem
-                    key='3'
-                    aria-label='Accordion 3'
-                    title='Accordion 3'
-                >
-                    {defaultContent}
-                </AccordionItem>
-            </Accordion>
+            TODO: Display documents later
         </div>
     );
 };

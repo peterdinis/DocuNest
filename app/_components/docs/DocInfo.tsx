@@ -30,13 +30,13 @@ const DocInfo: FC = () => {
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
 
-    const { data, isLoading, isError} = useQuery({
+    const { data, isLoading, isError } = useQuery({
         queryKey: ['docDetail', id],
         queryFn: async () => fetchDocumentDetail(id),
         refetchOnWindowFocus: true,
         refetchInterval: isEditMode ? 5000 : false,
         refetchIntervalInBackground: true,
-        refetchOnReconnect: true
+        refetchOnReconnect: true,
     });
 
     const router = useRouter();
@@ -67,7 +67,7 @@ const DocInfo: FC = () => {
             setDescription(updatedData.description);
             toast.success('Document was edited');
             queryClient.invalidateQueries({
-                queryKey: ["docDetail", id]
+                queryKey: ['docDetail', id],
             });
             router.push('/dashboard');
         },
@@ -76,9 +76,12 @@ const DocInfo: FC = () => {
         },
     });
 
-    const handleFolderSelect = useCallback((folderId: string) => {
-        addToFolderMut.mutate(folderId);
-    }, [id]);
+    const handleFolderSelect = useCallback(
+        (folderId: string) => {
+            addToFolderMut.mutate(folderId);
+        },
+        [id],
+    );
 
     if (isLoading) {
         return <Loader2 className='h-8 w-8 animate-spin' />;

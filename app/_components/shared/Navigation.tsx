@@ -131,6 +131,10 @@ const Navigation: FC = () => {
                             </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
+
+                    <NavbarItem>
+                        <ThemeButton />
+                    </NavbarItem>
                 </NavbarContent>
             )}
 
