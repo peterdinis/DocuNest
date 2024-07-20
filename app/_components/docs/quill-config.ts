@@ -38,4 +38,7 @@ export const formats = [
     'indent',
     'link',
     'image',
+    'font',
+    'color',
+    'background',
 ];
