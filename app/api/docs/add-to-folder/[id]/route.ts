@@ -7,6 +7,8 @@ export async function PUT(request: NextRequest) {
     const url = new URL(request.url);
     const id = url.pathname.split('/').pop();
 
+    console.log('ID', id);
+
     if (!id) {
         return NextResponse.json(
             { error: 'Missing id parameter' },
@@ -37,6 +39,8 @@ export async function PUT(request: NextRequest) {
         const body = await request.json();
         const { folderId } = body;
 
+        console.log('FolderID', folderId);
+
         if (!folderId) {
             return NextResponse.json(
                 { error: 'Missing folderId parameter' },
@@ -47,6 +51,8 @@ export async function PUT(request: NextRequest) {
         const folderDetail = await db.folder.findFirst({
             where: { id: folderId },
         });
+
+        console.log('FolderDetail', folderDetail);
 
         if (!folderDetail) {
             return NextResponse.json(
@@ -60,11 +66,13 @@ export async function PUT(request: NextRequest) {
             data: { folderId },
         });
 
-        return NextResponse.json(updatedDocument, { status: 200 });
+        console.log('UpdatedDocument', updatedDocument);
+
+        return NextResponse.json("OFOFOFOF", { status: 200 });
     } catch (error) {
         console.error('Error updating document:', error);
         return NextResponse.json(
-            { error: 'Internal Server Error' },
+            { error, },
             { status: 500 },
         );
     }

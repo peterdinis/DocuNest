@@ -9,7 +9,7 @@ const AIDoc: FC = () => {
         <>
             <Header text='Ask AI' />
             <div className='ml-5 mt-5'>
-                OWEOREOEOEOEOWPQ
+                TODO: Later
                 <br />
                 <Button className='mt-10' variant='solid' color='success'>
                     Generate

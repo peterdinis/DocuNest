@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-quill/dist/quill.snow.css';
 import QueryProvider from './_components/shared/providers/QueryProvider';
 import SessionAppProvider from './_components/shared/providers/SessionProvider';
+import { Suspense } from 'react';
+import PreLoader from './_components/shared/PreLoader';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,16 +29,18 @@ export default function RootLayout({
         <html lang='en'>
             <body className={inter.className}>
                 <NextUiProvider>
-                    <ThemeProvider>
-                        <QueryProvider>
-                            <SessionAppProvider>
-                                <Navigation />
-                                {children}
-                                <ToastContainer />
-                                <ScrollToTop />
-                            </SessionAppProvider>
-                        </QueryProvider>
-                    </ThemeProvider>
+                    <Suspense fallback={<PreLoader />}>
+                        <ThemeProvider>
+                            <QueryProvider>
+                                <SessionAppProvider>
+                                    <Navigation />
+                                    {children}
+                                    <ToastContainer />
+                                    <ScrollToTop />
+                                </SessionAppProvider>
+                            </QueryProvider>
+                        </ThemeProvider>
+                    </Suspense>
                 </NextUiProvider>
             </body>
         </html>
