@@ -1,7 +1,6 @@
 'use client';
 
-import { fetchFolderDetail } from '@/app/_store/queries/folderQueries';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation} from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
@@ -14,6 +13,7 @@ import {
 } from '@/app/_store/mutations/folderMutations';
 import { queryClient } from '@/app/_store/queryClient';
 import { useRouter } from 'next/navigation';
+import useFolderDetail from '@/app/_hooks/useFolderDetail';
 
 const FolderInfo: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -21,16 +21,7 @@ const FolderInfo: FC = () => {
     const [name, setName] = useState('');
     const router = useRouter();
 
-    const { data, isLoading, isError } = useQuery({
-        queryKey: ['folderDetail', id],
-        queryFn: async () => {
-            return await fetchFolderDetail(id);
-        },
-        refetchOnWindowFocus: true,
-        refetchInterval: isEditMode ? 5000 : false,
-        refetchIntervalInBackground: true,
-        refetchOnReconnect: true,
-    });
+    const {data, isLoading, isError} = useFolderDetail({id, isEditMode});
 
     useEffect(() => {
         if (data) {
