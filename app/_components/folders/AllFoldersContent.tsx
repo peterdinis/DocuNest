@@ -10,6 +10,7 @@ import { Folder as DisplayFolder } from '@prisma/client';
 import Link from 'next/link';
 import { useDebounce } from '@/app/_hooks/useDebounce';
 import usePaginatedFolders from '@/app/_hooks/usePaginatedFolders';
+import DeleteFolder from './DeleteFolderModal';
 
 const AllFoldersContent: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -60,7 +61,7 @@ const AllFoldersContent: FC = () => {
                         return (
                             <div key={item.id} className='w-[200px]'>
                                 <Card className='space-y-5 p-4' radius='lg'>
-                                    <div className='flex h-24 justify-center rounded-lg align-top'>
+                                    <div className='flex justify-center rounded-lg align-top'>
                                         <Folder size={50} />
                                     </div>
                                     <div className='flex justify-center'>
@@ -69,6 +70,10 @@ const AllFoldersContent: FC = () => {
                                                 {item.name}
                                             </Link>
                                         </Button>
+                                    </div>
+
+                                    <div className="mt-6">
+                                        <DeleteFolder folderId={item.id} />
                                     </div>
                                 </Card>
                             </div>
