@@ -32,5 +32,6 @@ export const updateDocumentFolder = async (
 
 
 export const deleteDocument = async(documentId: string) => {
+    if (!documentId) return;
     return await axios.delete(`/api/docs/${documentId}`);
 }

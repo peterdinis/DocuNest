@@ -32,10 +32,7 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }: IDeleteDocModalProp
         mutationFn: () => deleteDocument(docId),
         onSuccess: () => {
             toast.success("Document was deleted");
-            queryClient.invalidateQueries({
-                queryKey: ["docDetail", docId]
-            });
-            router.push("/folders");
+            router.push("/dashboard");
         },
         onError: () => {
             toast.error("Failed to delete document");
@@ -43,6 +40,7 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }: IDeleteDocModalProp
     });
 
     const onSubmit = () => {
+        console.log("Zbhenem")
         deleteDocMut.mutate();
     };
 
