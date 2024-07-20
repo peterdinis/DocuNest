@@ -3,28 +3,21 @@
 import { useMutation } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { FC, useMemo, useState, useEffect, useCallback} from 'react';
+import { FC, useMemo, useState, useEffect, useCallback } from 'react';
 import { Button, ButtonGroup, Input } from '@nextui-org/react';
 import Link from 'next/link';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { formats, modules } from './quill-config';
 import FolderSelect from './FolderSelect';
-import {
-    updateDocument,
-    UpdateDocumentData,
-    updateDocumentFolder,
-} from '@/app/_store/mutations/documentMutations';
+import { updateDocument, UpdateDocumentData, updateDocumentFolder } from '@/app/_store/mutations/documentMutations';
 import { queryClient } from '@/app/_store/queryClient';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import useDocumentDetail from '@/app/_hooks/useDocumentDetail';
 
 const DocInfo: FC = () => {
-    const ReactQuill = useMemo(
-        () => dynamic(() => import('react-quill'), { ssr: false }),
-        [],
-    );
+    const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), []);
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
     const [title, setTitle] = useState<string>('');
@@ -45,9 +38,7 @@ const DocInfo: FC = () => {
         mutationKey: ['addToFolder'],
         mutationFn: (folderId: string) => updateDocumentFolder(id, folderId),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['docDetail', id],
-            });
+            queryClient.invalidateQueries({ queryKey: ['docDetail', id] });
         },
     });
 
@@ -59,9 +50,7 @@ const DocInfo: FC = () => {
             setTitle(updatedData.title);
             setDescription(updatedData.description);
             toast.success('Document was edited');
-            queryClient.invalidateQueries({
-                queryKey: ['docDetail', id],
-            });
+            queryClient.invalidateQueries({ queryKey: ['docDetail', id] });
             router.push('/dashboard');
         },
         onError: () => {
@@ -73,7 +62,7 @@ const DocInfo: FC = () => {
         (folderId: string) => {
             addToFolderMut.mutate(folderId);
         },
-        [id],
+        [id]
     );
 
     if (isLoading) {
