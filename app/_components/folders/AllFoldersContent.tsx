@@ -5,12 +5,11 @@ import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
 import { Folder, Loader2, Search } from 'lucide-react';
 import AppPagination from '../shared/AppPagination';
-import { useQuery } from '@tanstack/react-query';
-import { fetchAllPaginatedFolders } from '@/app/_store/queries/folderQueries';
 import { Card, Button } from '@nextui-org/react';
 import { Folder as DisplayFolder } from '@prisma/client';
 import Link from 'next/link';
 import { useDebounce } from '@/app/_hooks/useDebounce';
+import usePaginatedFolders from '@/app/_hooks/usePaginatedFolders';
 
 const AllFoldersContent: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -18,15 +17,10 @@ const AllFoldersContent: FC = () => {
 
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
-    const { data, isLoading, isError, refetch } = useQuery({
-        queryKey: ['myPaginatedFolders', debouncedSearchQuery, currentPage],
-        queryFn: () =>
-            fetchAllPaginatedFolders({
-                query: debouncedSearchQuery,
-                page: currentPage,
-            }),
-        staleTime: Infinity,
-    });
+    const {data, isLoading, isError, refetch} = usePaginatedFolders({
+        query: debouncedSearchQuery,
+        page: currentPage
+    })
 
     useEffect(() => {
         refetch();

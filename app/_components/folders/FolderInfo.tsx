@@ -1,36 +1,19 @@
 'use client';
 
-import { fetchFolderDetail } from '@/app/_store/queries/folderQueries';
-import { useMutation, useQuery } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button, ButtonGroup, Input } from '@nextui-org/react';
-import { toast } from 'react-toastify';
-import {
-    updateFolder,
-    UpdateFolderData,
-} from '@/app/_store/mutations/folderMutations';
-import { queryClient } from '@/app/_store/queryClient';
-import { useRouter } from 'next/navigation';
+import useFolderDetail from '@/app/_hooks/useFolderDetail';
+import useUpdateFolder from '@/app/_hooks/useUpdateFolder';
 
 const FolderInfo: FC = () => {
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
     const [name, setName] = useState('');
-    const router = useRouter();
 
-    const { data, isLoading, isError } = useQuery({
-        queryKey: ['folderDetail', id],
-        queryFn: async () => {
-            return await fetchFolderDetail(id);
-        },
-        refetchOnWindowFocus: true,
-        refetchInterval: isEditMode ? 5000 : false,
-        refetchIntervalInBackground: true,
-        refetchOnReconnect: true,
-    });
+    const {data, isLoading, isError} = useFolderDetail({id, isEditMode});
 
     useEffect(() => {
         if (data) {
@@ -38,23 +21,7 @@ const FolderInfo: FC = () => {
         }
     }, [data]);
 
-    const updateFolderMut = useMutation({
-        mutationKey: ['updateFolder'],
-        mutationFn: (data: UpdateFolderData) => updateFolder(id, data),
-        onSuccess: (updatedData: any) => {
-            setIsEditMode(false);
-            setName(updatedData.name);
-            toast.success('Folder was edited');
-            queryClient.invalidateQueries({
-                queryKey: ['folderDetail', id],
-            });
-            router.push('/folders/all');
-        },
-
-        onError: () => {
-            toast.error('Folder was not edited');
-        },
-    });
+    const updateFolderMut = useUpdateFolder({ id, setIsEditMode, setName });
 
     const handleSave = () => {
         updateFolderMut.mutate({ name });
