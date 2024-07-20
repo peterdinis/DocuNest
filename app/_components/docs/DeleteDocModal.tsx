@@ -13,12 +13,17 @@ import {
 import { X } from 'lucide-react';
 import { toast } from "react-toastify";
 import { useMutation } from '@tanstack/react-query';
-import { deleteDocument } from '@/app/_store/mutations/documentMutations';
-import { queryClient } from '@/app/_store/queryClient';
 import { useRouter } from 'next/navigation';
+import axios from "axios";
+import { queryClient } from '@/app/_store/queryClient';
 
 interface IDeleteDocModalProps {
     docId: string;
+}
+
+const deleteDocument = async(documentId: string) => {
+    if (!documentId) return;
+    return await axios.delete(`/api/docs/${documentId}`);
 }
 
 const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }: IDeleteDocModalProps) => {
@@ -32,7 +37,9 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }: IDeleteDocModalProp
         mutationFn: () => deleteDocument(docId),
         onSuccess: () => {
             toast.success("Document was deleted");
-            router.push("/dashboard");
+            queryClient.invalidateQueries({
+                queryKey: ["myPaginatedDocuments"]
+            })
         },
         onError: () => {
             toast.error("Failed to delete document");
