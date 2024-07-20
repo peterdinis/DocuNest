@@ -60,7 +60,7 @@ const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }: IDeleteFolderProps) 
                             <ModalHeader className='flex flex-col gap-1'>
                                 Do you want to delete folder
                             </ModalHeader>
-                            <p className='ml-5 font-bold text-xl text-red-700'>Attention, if you delete this folder, the files contained in the given folder will also be deleted</p>
+                            <p className='ml-5 font-bold text-xl prose prose-p: text-red-700'>Attention, if you delete this folder, the files contained in the given folder will also be deleted</p>
                             <ModalFooter>
                                <ButtonGroup className='mt-5'>
                                <Button
@@ -71,7 +71,7 @@ const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }: IDeleteFolderProps) 
                                     Close
                                 </Button>
                                 <Button color='primary' className='ml-2' type='submit'>
-                                    Delete Document
+                                    Delete Folder
                                 </Button>
                                </ButtonGroup>
                             </ModalFooter>
