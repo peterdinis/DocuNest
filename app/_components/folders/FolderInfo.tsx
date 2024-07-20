@@ -4,7 +4,7 @@ import { fetchFolderDetail } from '@/app/_store/queries/folderQueries';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button, ButtonGroup, Input } from '@nextui-org/react';
 import { toast } from 'react-toastify';
@@ -31,6 +31,12 @@ const FolderInfo: FC = () => {
         refetchIntervalInBackground: true,
         refetchOnReconnect: true,
     });
+
+    useEffect(() => {
+        if (data) {
+            setName(data.name);
+        }
+    }, [data]);
 
     const updateFolderMut = useMutation({
         mutationKey: ['updateFolder'],
