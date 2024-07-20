@@ -13,7 +13,6 @@ import {
 import { X } from 'lucide-react';
 import { toast } from "react-toastify";
 import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 import axios from "axios";
 import { queryClient } from '@/app/_store/queryClient';
 
@@ -29,8 +28,6 @@ const deleteDocument = async(documentId: string) => {
 const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }: IDeleteDocModalProps) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { handleSubmit } = useForm();
-
-    const router = useRouter();
     
     const deleteDocMut = useMutation({
         mutationKey: ["deleteDocument", docId],
