@@ -76,7 +76,7 @@ export async function PUT(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
     const url = new URL(request.url);
     const id = url.pathname.split('/').pop();
-
+    console.log("ID", id);
     if (!id) {
         return NextResponse.json(
             { error: 'Missing id parameter' },

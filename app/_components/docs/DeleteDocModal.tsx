@@ -26,7 +26,7 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }: IDeleteDocModalProp
     const { handleSubmit } = useForm();
 
     const router = useRouter();
-
+    
     const deleteDocMut = useMutation({
         mutationKey: ["deleteDocument", docId],
         mutationFn: () => deleteDocument(docId),
