@@ -12,6 +12,7 @@ import { Button, Card } from '@nextui-org/react';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import { useDebounce } from '@/app/_hooks/useDebounce';
+import DeleteDocModal from './DeleteDocModal';
 
 const DocumentsWrapper: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -86,7 +87,7 @@ const DocumentsWrapper: FC = () => {
                                         )}
                                     </p>
                                     <span className='float-right'>
-                                        <X className='rounded-lg bg-red-700 text-white' />
+                                        <DeleteDocModal docId={item.id} />
                                     </span>
                                     <Button>
                                         <Link href={`/documents/${item.id}`}>
