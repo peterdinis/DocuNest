@@ -14,6 +14,7 @@ export const modules = {
         [{ font: [] }],
         ['clean'],
         [{ align: [] }],
+        [{ 'color': [] }, { 'background': [] }], 
     ],
 
     history: {
