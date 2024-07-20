@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 import { useDebounce } from '@/app/_hooks/useDebounce';
 import DeleteDocModal from './DeleteDocModal';
+import usePaginatedDocuments from '@/app/_hooks/usePaginatedDocuments';
 
 const DocumentsWrapper: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -20,14 +21,9 @@ const DocumentsWrapper: FC = () => {
 
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
-    const { data, isLoading, isError, refetch } = useQuery({
-        queryKey: ['myPaginatedDocuments', debouncedSearchQuery, currentPage],
-        queryFn: () =>
-            fetchAllPaginatedDocuments({
-                query: debouncedSearchQuery,
-                page: currentPage,
-            }),
-        staleTime: Infinity,
+    const { data, isLoading, isError, refetch } = usePaginatedDocuments({
+        query: debouncedSearchQuery,
+        page: currentPage,
     });
 
     useEffect(() => {
