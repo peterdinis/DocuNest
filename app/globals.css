@@ -9,6 +9,22 @@
     text-wrap: balance;
 }
 
+.ql-editor {
+    font-family: 'Roboto', sans-serif;
+}
+
+.ql-font-roboto {
+    font-family: 'Roboto', sans-serif;
+}
+
+.ql-font-opensans {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.ql-font-lobster {
+    font-family: 'Lobster', cursive;
+}
+
 html::-webkit-scrollbar {
     width: 16px;
     height: 16px;
