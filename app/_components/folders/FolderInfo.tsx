@@ -26,6 +26,10 @@ const FolderInfo: FC = () => {
         queryFn: async () => {
             return await fetchFolderDetail(id);
         },
+        refetchOnWindowFocus: true,
+        refetchInterval: isEditMode ? 5000 : false,
+        refetchIntervalInBackground: true,
+        refetchOnReconnect: true,
     });
 
     const updateFolderMut = useMutation({
@@ -38,7 +42,7 @@ const FolderInfo: FC = () => {
             queryClient.invalidateQueries({
                 queryKey: ['folderDetail', id],
             });
-            router.push('/folder');
+            router.push('/folders/all');
         },
 
         onError: () => {
