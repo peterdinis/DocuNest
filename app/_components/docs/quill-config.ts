@@ -1,6 +1,7 @@
 export const modules = {
     toolbar: [
         [{ header: [1, 2, 3, 4, 5, false] }],
+        [{ font: [] }],
         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
         [
             { list: 'ordered' },
@@ -11,9 +12,9 @@ export const modules = {
         ['link', 'image'],
         [{ script: 'sub' }, { script: 'super' }],
         [{ indent: '-1' }, { indent: '+1' }],
-        [{ font: [] }],
         ['clean'],
         [{ align: [] }],
+        [{ 'color': [] }, { 'background': [] }],
     ],
 
     history: {
@@ -27,6 +28,7 @@ export const modules = {
 
 export const formats = [
     'header',
+    'font',
     'bold',
     'italic',
     'underline',
@@ -37,4 +39,6 @@ export const formats = [
     'indent',
     'link',
     'image',
+    'color',
+    'background',
 ];
