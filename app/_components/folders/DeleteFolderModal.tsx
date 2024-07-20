@@ -21,9 +21,9 @@ interface IDeleteFolderProps {
     folderId: string;
 }
 
-const deleteDocument = async(documentId: string) => {
-    if (!documentId) return;
-    return await axios.delete(`/api/docs/${documentId}`);
+const deleteFolder = async(folderId: string) => {
+    if (!folderId) return;
+    return await axios.delete(`/api/folders/${folderId}`);
 }
 
 const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }: IDeleteFolderProps) => {
@@ -31,21 +31,20 @@ const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }: IDeleteFolderProps) 
     const { handleSubmit } = useForm();
     
     const deleteDocMut = useMutation({
-        mutationKey: ["deleteDocument", folderId],
-        mutationFn: () => deleteDocument(folderId),
+        mutationKey: ["deleteFolder", folderId],
+        mutationFn: () => deleteFolder(folderId),
         onSuccess: () => {
-            toast.success("Document was deleted");
+            toast.success("Folder was deleted");
             queryClient.invalidateQueries({
-                queryKey: ["myPaginatedDocuments"]
+                queryKey: ["myPaginatedFolders"]
             })
         },
         onError: () => {
-            toast.error("Failed to delete document");
+            toast.error("Failed to delete folder");
         }
     });
 
     const onSubmit = () => {
-        console.log("Zbhenem")
         deleteDocMut.mutate();
     };
 
