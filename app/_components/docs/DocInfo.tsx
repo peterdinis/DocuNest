@@ -47,6 +47,10 @@ const DocInfo: FC = () => {
         mutationFn: (folderId: string) => updateDocumentFolder(id, folderId),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['docDetail', id] });
+            toast.success('Document added to folder');
+        },
+        onError: () => {
+            toast.error('Failed to add document to folder');
         },
     });
 
@@ -97,7 +101,6 @@ const DocInfo: FC = () => {
         const blob = new Blob([description], { type: 'text/plain;charset=utf-8' });
         saveAs(blob, `${title}.txt`);
     };
-
 
     return (
         <div>
