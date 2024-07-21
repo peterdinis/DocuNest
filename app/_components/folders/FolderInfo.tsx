@@ -13,7 +13,7 @@ const FolderInfo: FC = () => {
     const [isEditMode, setIsEditMode] = useState(false);
     const [name, setName] = useState('');
 
-    const {data, isLoading, isError} = useFolderDetail({id, isEditMode});
+    const { data, isLoading, isError } = useFolderDetail({ id, isEditMode });
 
     useEffect(() => {
         if (data) {

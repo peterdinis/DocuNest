@@ -1,8 +1,11 @@
-"use client"
+'use client';
 
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { createNewDocument, ICreateDocumentData } from '@/app/_store/mutations/documentMutations';
+import {
+    createNewDocument,
+    ICreateDocumentData,
+} from '@/app/_store/mutations/documentMutations';
 
 const useCreateDocument = () => {
     return useMutation({

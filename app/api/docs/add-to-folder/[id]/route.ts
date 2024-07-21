@@ -68,12 +68,9 @@ export async function PUT(request: NextRequest) {
 
         console.log('UpdatedDocument', updatedDocument);
 
-        return NextResponse.json("OFOFOFOF", { status: 200 });
+        return NextResponse.json('OFOFOFOF', { status: 200 });
     } catch (error) {
         console.error('Error updating document:', error);
-        return NextResponse.json(
-            { error, },
-            { status: 500 },
-        );
+        return NextResponse.json({ error }, { status: 500 });
     }
 }

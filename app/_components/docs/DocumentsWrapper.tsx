@@ -3,7 +3,7 @@
 import { FC, useState, useEffect, ChangeEvent } from 'react';
 import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
-import { Ghost, Loader2, Search} from 'lucide-react';
+import { Ghost, Loader2, Search } from 'lucide-react';
 import AppPagination from '../shared/AppPagination';
 import { Document } from '@prisma/client';
 import { Button, Card } from '@nextui-org/react';

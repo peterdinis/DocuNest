@@ -20,7 +20,12 @@ const CreateDocumentForm: FC = () => {
         [],
     );
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm();
 
     const { mutate: createDocumentMut, isPending } = useCreateDocument();
 

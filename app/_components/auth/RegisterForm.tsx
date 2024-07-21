@@ -18,7 +18,12 @@ import useRegisterUser from '@/app/_hooks/useRegisterUser';
 
 const RegisterForm: FC = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm({
         resolver: zodResolver(registerSchema),
     });
 

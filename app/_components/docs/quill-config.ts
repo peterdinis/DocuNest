@@ -14,7 +14,7 @@ export const modules = {
         [{ indent: '-1' }, { indent: '+1' }],
         ['clean'],
         [{ align: [] }],
-        [{ 'color': [] }, { 'background': [] }],
+        [{ color: [] }, { background: [] }],
     ],
 
     history: {

@@ -1,10 +1,13 @@
-"use client"
+'use client';
 
 import { useMutation } from '@tanstack/react-query';
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 import { queryClient } from '@/app/_store/queryClient';
 import { useRouter } from 'next/navigation';
-import { updateFolder, UpdateFolderData } from '@/app/_store/mutations/folderMutations';
+import {
+    updateFolder,
+    UpdateFolderData,
+} from '@/app/_store/mutations/folderMutations';
 
 interface UseUpdateFolderOptions {
     id: string;
@@ -12,7 +15,11 @@ interface UseUpdateFolderOptions {
     setName: (name: string) => void;
 }
 
-const useUpdateFolder = ({ id, setIsEditMode, setName }: UseUpdateFolderOptions) => {
+const useUpdateFolder = ({
+    id,
+    setIsEditMode,
+    setName,
+}: UseUpdateFolderOptions) => {
     const router = useRouter();
 
     return useMutation({
