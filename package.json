@@ -9,7 +9,7 @@
         "lint": "next lint",
         "format": "prettier --check --ignore-path .gitignore .",
         "format:fix": "prettier --write --ignore-path .gitignore .",
-        "studio": "bun run prisma studio",
+        "studio": "pnpm run prisma studio",
         "test": "cypress open",
         "cypress": "cypress install"
     },
