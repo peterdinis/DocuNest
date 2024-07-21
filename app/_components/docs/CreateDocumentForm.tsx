@@ -1,19 +1,19 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { FC, ReactNode, useMemo, useState } from 'react';
+import { FC, ReactNode, useMemo, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import 'react-quill/dist/quill.snow.css';
 import CustomDrawer from '../shared/Drawer';
 import { Button } from '@nextui-org/react';
 import AIDoc from './AIDoc';
 import { formats, modules } from './quill-config';
-import { useForm, FieldValues } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import useCreateDocument from '@/app/_hooks/useCreateDocument';
-import { ICreateDocumentData } from '@/app/_store/mutations/documentMutations';
 
 const CreateDocumentForm: FC = () => {
     const [description, setDescription] = useState('');
+    const [drawerInputText, setDrawerInputText] = useState('');
 
     const ReactQuill = useMemo(
         () => dynamic(() => import('react-quill'), { ssr: false }),
@@ -39,6 +39,10 @@ const CreateDocumentForm: FC = () => {
         setIsDrawerOpen(true);
     };
 
+    const handleDrawerClose = () => {
+        setIsDrawerOpen(false);
+    };
+
     const router = useRouter();
 
     const onSubmit = (formData: any) => {
@@ -46,6 +50,13 @@ const CreateDocumentForm: FC = () => {
         createDocumentMut(formData);
         reset();
     };
+
+    // Update ReactQuill editor content when AI content changes
+    useEffect(() => {
+        if (drawerInputText) {
+            setDescription((prevDescription) => `${prevDescription}\n${drawerInputText}`);
+        }
+    }, [drawerInputText]);
 
     return (
         <div>
@@ -73,7 +84,12 @@ const CreateDocumentForm: FC = () => {
                 </Button>
             </div>
 
-            <CustomDrawer isOpen={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+            <CustomDrawer
+                isOpen={isDrawerOpen}
+                onOpenChange={setIsDrawerOpen}
+                inputText={drawerInputText}
+                onInputChange={setDrawerInputText}
+            >
                 <AIDoc />
             </CustomDrawer>
 
