@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllPaginatedDocuments } from '@/app/_store/queries/documentQueries';
@@ -8,7 +8,10 @@ interface UsePaginatedDocumentsOptions {
     page: number;
 }
 
-const usePaginatedDocuments = ({ query, page }: UsePaginatedDocumentsOptions) => {
+const usePaginatedDocuments = ({
+    query,
+    page,
+}: UsePaginatedDocumentsOptions) => {
     return useQuery({
         queryKey: ['myPaginatedDocuments', query, page],
         queryFn: () => fetchAllPaginatedDocuments({ query, page }),

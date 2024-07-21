@@ -10,14 +10,22 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { formats, modules } from './quill-config';
 import FolderSelect from './FolderSelect';
-import { updateDocument, UpdateDocumentData, updateDocumentFolder } from '@/app/_store/mutations/documentMutations';
+import {
+    updateDocument,
+    UpdateDocumentData,
+    updateDocumentFolder,
+} from '@/app/_store/mutations/documentMutations';
 import { queryClient } from '@/app/_store/queryClient';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import useDocumentDetail from '@/app/_hooks/useDocumentDetail';
+import { saveAs } from 'file-saver';
 
 const DocInfo: FC = () => {
-    const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), []);
+    const ReactQuill = useMemo(
+        () => dynamic(() => import('react-quill'), { ssr: false }),
+        [],
+    );
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
     const [title, setTitle] = useState<string>('');
@@ -62,7 +70,7 @@ const DocInfo: FC = () => {
         (folderId: string) => {
             addToFolderMut.mutate(folderId);
         },
-        [id]
+        [id],
     );
 
     if (isLoading) {
@@ -85,6 +93,12 @@ const DocInfo: FC = () => {
         updateDocumentMut.mutate({ title, description });
     };
 
+    const handleDownload = () => {
+        const blob = new Blob([description], { type: 'text/plain;charset=utf-8' });
+        saveAs(blob, `${title}.txt`);
+    };
+
+
     return (
         <div>
             <h2 className='prose-h2: prose mt-5 flex justify-center align-top text-3xl'>
@@ -106,6 +120,13 @@ const DocInfo: FC = () => {
                 <div className='ml-8'>
                     <FolderSelect onSelectFolder={handleFolderSelect} />
                 </div>
+                <Button
+                    onClick={handleDownload}
+                    variant='solid'
+                    color='success'
+                >
+                    Download
+                </Button>
             </ButtonGroup>
 
             <div className='ml-4 mt-6'>

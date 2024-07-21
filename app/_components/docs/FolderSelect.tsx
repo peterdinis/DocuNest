@@ -11,7 +11,7 @@ interface FolderSelectProps {
 }
 
 const FolderSelect: FC<FolderSelectProps> = ({ onSelectFolder }) => {
-    const {data, isLoading, isError} = useFolders();
+    const { data, isLoading, isError } = useFolders();
 
     const selectItems = useMemo(() => {
         return data
