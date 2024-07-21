@@ -29,6 +29,10 @@ const UploadDoc: FC = () => {
                             <ModalBody>
                                 <form>
                                     <Input type='file' />
+                                    <Button className='mt-5' color="success">
+                                        Upload Document
+                                    </Button>
+                                </form>
                             </ModalBody>
                             <ModalFooter>
                                 <Button
@@ -38,11 +42,7 @@ const UploadDoc: FC = () => {
                                 >
                                     Close
                                 </Button>
-                                <Button color='primary' onPress={onClose}>
-                                    Upload
-                                </Button>
                             </ModalFooter>
-                            </form>
                         </>
                     )}
                 </ModalContent>
