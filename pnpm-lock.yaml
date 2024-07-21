@@ -38,9 +38,15 @@ dependencies:
   date-fns:
     specifier: ^3.6.0
     version: 3.6.0
+<<<<<<< HEAD
   formidable:
     specifier: ^3.5.1
     version: 3.5.1
+=======
+  file-saver:
+    specifier: ^2.0.5
+    version: 2.0.5
+>>>>>>> main
   framer-motion:
     specifier: ^11.3.2
     version: 11.3.8(react-dom@18.3.1)(react@18.3.1)
@@ -95,7 +101,7 @@ devDependencies:
     specifier: ^3.4.5
     version: 3.4.5
   '@types/node':
-    specifier: ^20
+    specifier: ^20.14.11
     version: 20.14.11
   '@types/react':
     specifier: ^18
@@ -4513,6 +4519,10 @@ packages:
     dependencies:
       flat-cache: 3.2.0
     dev: true
+
+  /file-saver@2.0.5:
+    resolution: {integrity: sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==}
+    dev: false
 
   /fill-range@7.1.1:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
