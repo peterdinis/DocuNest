@@ -1,21 +1,38 @@
-'use client';
+"use client"
 
-import { FC } from 'react';
-import Header from '../shared/Header';
-import { Button } from '@nextui-org/react';
+import { FC, useState } from 'react';
+import { Button, Input } from '@nextui-org/react';
+import useOpenAI from '@/app/_hooks/useAI';
 
-const AIDoc: FC = () => {
+interface AIDocProps {
+    onContentGenerated: (content: string) => void;
+}
+
+const AIDoc: React.FC<AIDocProps> = ({ onContentGenerated }) => {
+    const [prompt, setPrompt] = useState('');
+    const { generateContent, isLoading, error } = useOpenAI();
+
+    const handleGenerate = async () => {
+        if (!prompt) return;
+
+        const content = await generateContent(prompt);
+        onContentGenerated(content);
+    };
+
     return (
-        <>
-            <Header text='Ask AI' />
-            <div className='ml-5 mt-5'>
-                TODO: Later
-                <br />
-                <Button className='mt-10' variant='solid' color='success'>
-                    Generate
-                </Button>
-            </div>
-        </>
+        <div>
+            <Input
+                type="text"
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                placeholder="Enter your prompt"
+                fullWidth
+            />
+            <Button onClick={handleGenerate} disabled={isLoading}>
+                {isLoading ? 'Generating...' : 'Generate Content'}
+            </Button>
+            {error && <p className="text-red-500">{error}</p>}
+        </div>
     );
 };
 

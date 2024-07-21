@@ -43,6 +43,10 @@ const CreateDocumentForm: FC = () => {
         setIsDrawerOpen(false);
     };
 
+    const handleContentGenerated = (content: string) => {
+        setDrawerInputText(content);
+    };
+
     const router = useRouter();
 
     const onSubmit = (formData: any) => {
@@ -90,7 +94,7 @@ const CreateDocumentForm: FC = () => {
                 inputText={drawerInputText}
                 onInputChange={setDrawerInputText}
             >
-                <AIDoc />
+                <AIDoc onContentGenerated={handleContentGenerated} />
             </CustomDrawer>
 
             <form
