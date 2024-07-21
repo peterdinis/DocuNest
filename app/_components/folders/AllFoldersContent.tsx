@@ -18,10 +18,10 @@ const AllFoldersContent: FC = () => {
 
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
-    const {data, isLoading, isError, refetch} = usePaginatedFolders({
+    const { data, isLoading, isError, refetch } = usePaginatedFolders({
         query: debouncedSearchQuery,
-        page: currentPage
-    })
+        page: currentPage,
+    });
 
     useEffect(() => {
         refetch();
@@ -72,7 +72,7 @@ const AllFoldersContent: FC = () => {
                                         </Button>
                                     </div>
 
-                                    <div className="mt-6">
+                                    <div className='mt-6'>
                                         <DeleteFolder folderId={item.id} />
                                     </div>
                                 </Card>

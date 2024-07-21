@@ -11,40 +11,42 @@ import {
     useDisclosure,
 } from '@nextui-org/react';
 import { X } from 'lucide-react';
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 import { useMutation } from '@tanstack/react-query';
-import axios from "axios";
+import axios from 'axios';
 import { queryClient } from '@/app/_store/queryClient';
 
 interface IDeleteDocModalProps {
     docId: string;
 }
 
-const deleteDocument = async(documentId: string) => {
+const deleteDocument = async (documentId: string) => {
     if (!documentId) return;
     return await axios.delete(`/api/docs/${documentId}`);
-}
+};
 
-const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }: IDeleteDocModalProps) => {
+const DeleteDocModal: FC<IDeleteDocModalProps> = ({
+    docId,
+}: IDeleteDocModalProps) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { handleSubmit } = useForm();
-    
+
     const deleteDocMut = useMutation({
-        mutationKey: ["deleteDocument", docId],
+        mutationKey: ['deleteDocument', docId],
         mutationFn: () => deleteDocument(docId),
         onSuccess: () => {
-            toast.success("Document was deleted");
+            toast.success('Document was deleted');
             queryClient.invalidateQueries({
-                queryKey: ["myPaginatedDocuments"]
-            })
+                queryKey: ['myPaginatedDocuments'],
+            });
         },
         onError: () => {
-            toast.error("Failed to delete document");
-        }
+            toast.error('Failed to delete document');
+        },
     });
 
     const onSubmit = () => {
-        console.log("Zbhenem")
+        console.log('Zbhenem');
         deleteDocMut.mutate();
     };
 
