@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Edit3, Mic, FolderOpen, Users } from 'lucide-react';
+import { Edit3, Mic, FolderOpen} from 'lucide-react';
 import ServiceCard from './ServiceCard';
 
 const HeroServices: FC = () => {
@@ -32,12 +32,6 @@ const HeroServices: FC = () => {
                         iconHeaderText='Smart Organization'
                         iconHeaderDesc='Organize your notes intelligently based on
                                 context and relevance using AI categorization'
-                    />
-                    <ServiceCard
-                        icon={<Users />}
-                        iconHeaderText='Collaborative Notes'
-                        iconHeaderDesc='Work together with classmates in real-time to
-                                create and edit notes seamlessly.'
                     />
                 </div>
             </div>
