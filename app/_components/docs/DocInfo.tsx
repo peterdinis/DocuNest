@@ -123,7 +123,7 @@ const DocInfo: FC = () => {
                 <Button
                     onClick={handleDownload}
                     variant='solid'
-                    color='primary'
+                    color='success'
                 >
                     Download
                 </Button>
