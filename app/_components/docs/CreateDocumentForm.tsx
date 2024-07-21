@@ -39,10 +39,6 @@ const CreateDocumentForm: FC = () => {
         setIsDrawerOpen(true);
     };
 
-    const handleDrawerClose = () => {
-        setIsDrawerOpen(false);
-    };
-
     const handleContentGenerated = (content: string) => {
         setDrawerInputText(content);
     };
@@ -54,8 +50,6 @@ const CreateDocumentForm: FC = () => {
         createDocumentMut(formData);
         reset();
     };
-
-    // Update ReactQuill editor content when AI content changes
     useEffect(() => {
         if (drawerInputText) {
             setDescription((prevDescription) => `${prevDescription}\n${drawerInputText}`);
