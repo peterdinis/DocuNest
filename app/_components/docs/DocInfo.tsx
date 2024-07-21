@@ -106,6 +106,10 @@ const DocInfo: FC = () => {
                 <div className='ml-8'>
                     <FolderSelect onSelectFolder={handleFolderSelect} />
                 </div>
+
+                <a download  className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full'>
+                    Download 
+                </a>
             </ButtonGroup>
 
             <div className='ml-4 mt-6'>
