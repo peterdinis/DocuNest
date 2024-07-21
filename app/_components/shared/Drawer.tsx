@@ -45,13 +45,6 @@ const CustomDrawer: React.FC<Props> = ({ inputText, onInputChange, ...props }) =
             <ModalContent>
                 {(onClose) => (
                     <>
-                        <input
-                            type="text"
-                            value={inputText}
-                            onChange={(e) => onInputChange(e.target.value)}
-                            placeholder="Enter text"
-                            className="p-2 border border-gray-300 rounded"
-                        />
                         {props.children}
                     </>
                 )}

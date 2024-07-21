@@ -16,6 +16,8 @@ const AIDoc: React.FC<AIDocProps> = ({ onContentGenerated }) => {
         if (!prompt) return;
 
         const content = await generateContent(prompt);
+
+        console.log("C", content);
         onContentGenerated(content);
     };
 
