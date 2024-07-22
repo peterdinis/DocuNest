@@ -1,13 +1,19 @@
 import { initEdgeStore } from '@edgestore/server';
 import { createEdgeStoreNextHandler } from '@edgestore/server/adapters/next/app';
+import { getServerSession } from 'next-auth';
+import authOptions from '../../auth/authOptions';
 
-const es = initEdgeStore.create();
+type Context = {
+  userId: string;
+  userRole: 'admin' | 'user';
+};
 
-/**
- * This is the main router for the Edge Store buckets.
- */
+const es = initEdgeStore.context<Context>().create();
+
 const edgeStoreRouter = es.router({
-  publicFiles: es.fileBucket(),
+  publicFiles: es.fileBucket({
+    maxSize: 1024 * 1024 * 10, // 10MB
+  }),
 });
 
 const handler = createEdgeStoreNextHandler({
@@ -16,7 +22,4 @@ const handler = createEdgeStoreNextHandler({
 
 export { handler as GET, handler as POST };
 
-/**
- * This type is used to create the type-safe client for the frontend.
- */
 export type EdgeStoreRouter = typeof edgeStoreRouter;
