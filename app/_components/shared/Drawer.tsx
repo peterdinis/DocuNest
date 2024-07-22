@@ -4,9 +4,11 @@ import { Modal, ModalContent } from '@nextui-org/react';
 interface Props extends React.HTMLProps<HTMLDivElement> {
     isOpen: boolean;
     onOpenChange: (open: boolean) => void;
+    inputText: string;
+    onInputChange: (text: string) => void;
 }
 
-const CustomDrawer: React.FC<Props> = ({ ...props }) => {
+const CustomDrawer: React.FC<Props> = ({ inputText, onInputChange, ...props }) => {
     return (
         <Modal
             scrollBehavior='inside'
@@ -40,7 +42,13 @@ const CustomDrawer: React.FC<Props> = ({ ...props }) => {
             }}
             className='h-screen max-h-screen w-full max-w-sm rounded-md'
         >
-            <ModalContent>{(onClose) => <>{props.children}</>}</ModalContent>
+            <ModalContent>
+                {(onClose) => (
+                    <>
+                        {props.children}
+                    </>
+                )}
+            </ModalContent>
         </Modal>
     );
 };

@@ -46,7 +46,6 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({
     });
 
     const onSubmit = () => {
-        console.log('Zbhenem');
         deleteDocMut.mutate();
     };
 

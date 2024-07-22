@@ -12,6 +12,7 @@ import { format } from 'date-fns';
 import { useDebounce } from '@/app/_hooks/useDebounce';
 import DeleteDocModal from './DeleteDocModal';
 import usePaginatedDocuments from '@/app/_hooks/usePaginatedDocuments';
+import UploadDoc from './UploadDoc';
 
 const DocumentsWrapper: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -57,6 +58,7 @@ const DocumentsWrapper: FC = () => {
                 onChange={handleSearchInputChange}
             />
             <br />
+            <UploadDoc />
             <div className='mt-5 flex flex-wrap justify-start'>
                 {data?.documents.length === 0 ? (
                     <p className='text-xl font-bold text-gray-700'>
