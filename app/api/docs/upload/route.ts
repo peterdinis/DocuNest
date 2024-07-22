@@ -1,43 +1,30 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import formidable from 'formidable';
-import fs from 'fs';
 import { db } from '@/app/_utils/database';
+import { NextRequest, NextResponse } from 'next/server';
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+export async function POST(request: NextRequest) {
+  const body = await request.json();
+  const { userId, title, url, thumbnailUrl, contentSize } = body;
 
-const upload = async (req: NextApiRequest, res: NextApiResponse) => {
-  const form = new formidable.IncomingForm();
-  form.uploadDir = './uploads';
-  form.keepExtensions = true;
+  if (!userId || !title || !url) {
+    return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+  }
 
-  form.parse(req, async (err, fields, files) => {
-    if (err) {
-      res.status(500).json({ error: 'File upload failed' });
-      return;
-    }
+  if (typeof contentSize !== 'number' || contentSize < 0) {
+    return NextResponse.json({ error: 'Invalid content size' }, { status: 400 });
+  }
 
-    const file = files.file as formidable.File;
-    const userId = fields.userId as string;
-
-    // Calculate file size in bytes
-    const fileSize = fs.statSync(file.path).size;
-
-    // Create or update document record in the database
+  try {
     const document = await db.document.create({
       data: {
         userId,
-        title: file.originalFilename,
-        contentSize: fileSize,
-        // Add other fields as necessary
+        title,
+        description: '',
       },
     });
 
-    res.status(200).json({ document });
-  });
-};
-
-export default upload;
+    return NextResponse.json(document);
+  } catch (error) {
+    console.error('Database error:', error);
+    return NextResponse.json({ error: 'Failed to save document' }, { status: 500 });
+  }
+}
