@@ -1,10 +1,13 @@
 import { FC } from "react";
+import Sidebar from "../shared/Sidebar";
+import SettingsContent from "./SettingsContent";
 
 const SettingsWrapper: FC = () => {
     return (
-        <>
-            SETTINGS
-        </>
+        <div className='dark:bg-dark dark:text-light flex bg-gray-100 text-gray-900'>
+            <Sidebar />
+            <SettingsContent />
+        </div>
     )
 }
 
