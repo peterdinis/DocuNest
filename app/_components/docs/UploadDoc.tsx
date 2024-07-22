@@ -40,7 +40,7 @@ const UploadDoc: FC = () => {
 
                 const { url, thumbnailUrl } = uploadResponse.data;
 
-                await axios.post('/api/documents', {
+                await axios.post('/api/docs/new', {
                     userId: session.user.id,
                     title: file.name,
                     url,
@@ -51,7 +51,7 @@ const UploadDoc: FC = () => {
                 setFile(null);
                 onOpenChange();
             } catch (error) {
-                console.error('Error uploading document:', error);
+                throw new Error("Something went wrong");
             }
         }
     };
