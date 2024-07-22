@@ -10,6 +10,7 @@ import {
     Files,
     Folder,
     FolderCheck,
+    Settings,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -21,8 +22,6 @@ import CreateFolderModal from '../folders/CreateFolderModal';
 
 const Sidebar: FC = () => {
     const [collapsed, setSidebarCollapsed] = useState(false);
-    const [totalFunctions, setTotalFunctions] = useState(15); // Total number of AI functions
-    const [usedFunctions, setUsedFunctions] = useState(10); // Number of AI functions used
     const router = useRouter();
 
     const logoutUser = () => {
@@ -106,9 +105,12 @@ const Sidebar: FC = () => {
                                     </Button>
                                 </div>
                                 <div className='ml-4 mt-8'>
-                                    <span className='text-sm'>
-                                        {`Used AI Functions: ${usedFunctions} / ${totalFunctions}`}
-                                    </span>
+                                    <Button variant={'ghost'} value='sm'>
+                                        <Settings />
+                                        <Link href='/settings'>
+                                            Settings
+                                        </Link>
+                                    </Button>
                                 </div>
                             </div>
                         </>
@@ -174,9 +176,16 @@ const Sidebar: FC = () => {
                                     </Tooltip>
                                 </div>
                                 <div className='ml-4 mt-8'>
-                                    <span className='text-sm'>
-                                        {`Used AI Functions: ${usedFunctions} / ${totalFunctions}`}
-                                    </span>
+                                    <Tooltip
+                                        showArrow={true}
+                                        content='Settings page'
+                                    >
+                                        <Button variant={'ghost'} size={'sm'}>
+                                            <Link href='/settings'>
+                                                <Settings />
+                                            </Link>
+                                        </Button>
+                                    </Tooltip>
                                 </div>
                             </div>
                         </div>
