@@ -1,14 +1,13 @@
 "use client";
 
 import { FC } from "react";
+import Header from "../shared/Header";
 
 const SettingsContent: FC = () => {
     return (
-        <div className="flex flex-col min-h-screen bg-gray-100">
-            <header className="sticky top-0 z-10 bg-white border-b px-6 py-4 flex items-center gap-4">
-                <h1 className="text-2xl font-semibold">Settings</h1>
-            </header>
-            <main className="flex-1 max-w-5xl mx-auto p-6 sm:p-8 lg:p-10">
+        <div className="flex flex-col h-screen w-full">
+            <Header text="Settings" />
+            <main className="flex-1 w-full p-6 sm:p-8 lg:p-10 overflow-auto">
                 <section>
                     <h2 className="text-lg font-semibold mb-6">General</h2>
                     <div className="bg-white p-6 shadow rounded-lg">
