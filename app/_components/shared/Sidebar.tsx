@@ -10,6 +10,7 @@ import {
     Files,
     Folder,
     FolderCheck,
+    Settings,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -103,6 +104,14 @@ const Sidebar: FC = () => {
                                         </Link>
                                     </Button>
                                 </div>
+                                <div className='ml-4 mt-8'>
+                                    <Button variant={'ghost'} value='sm'>
+                                        <Settings />
+                                        <Link href='/settings'>
+                                            Settings
+                                        </Link>
+                                    </Button>
+                                </div>
                             </div>
                         </>
                     ) : (
@@ -162,6 +171,18 @@ const Sidebar: FC = () => {
                                         <Button variant={'ghost'} size={'sm'}>
                                             <Link href='/dashboard'>
                                                 <Files />
+                                            </Link>
+                                        </Button>
+                                    </Tooltip>
+                                </div>
+                                <div className='ml-4 mt-8'>
+                                    <Tooltip
+                                        showArrow={true}
+                                        content='Settings page'
+                                    >
+                                        <Button variant={'ghost'} size={'sm'}>
+                                            <Link href='/settings'>
+                                                <Settings />
                                             </Link>
                                         </Button>
                                     </Tooltip>
