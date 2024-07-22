@@ -1,7 +1,7 @@
 import { initEdgeStore } from '@edgestore/server';
 import { createEdgeStoreNextHandler } from '@edgestore/server/adapters/next/app';
 
-const es = initEdgeStore.create();
+const es = initEdgeStore.context<Context>().create();
 
 const edgeStoreRouter = es.router({
   publicFiles: es.fileBucket({
