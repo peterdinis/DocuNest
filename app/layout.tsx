@@ -12,6 +12,7 @@ import QueryProvider from './_components/shared/providers/QueryProvider';
 import SessionAppProvider from './_components/shared/providers/SessionProvider';
 import { Suspense } from 'react';
 import PreLoader from './_components/shared/PreLoader';
+import { EdgeStoreProvider } from './_utils/edgestore';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,10 +34,12 @@ export default function RootLayout({
                         <ThemeProvider>
                             <QueryProvider>
                                 <SessionAppProvider>
-                                    <Navigation />
-                                    {children}
-                                    <ToastContainer />
-                                    <ScrollToTop />
+                                    <EdgeStoreProvider>
+                                        <Navigation />
+                                        {children}
+                                        <ToastContainer />
+                                        <ScrollToTop />
+                                    </EdgeStoreProvider>
                                 </SessionAppProvider>
                             </QueryProvider>
                         </ThemeProvider>
