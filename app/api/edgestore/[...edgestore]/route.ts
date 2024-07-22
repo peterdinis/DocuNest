@@ -1,5 +1,12 @@
 import { initEdgeStore } from '@edgestore/server';
 import { createEdgeStoreNextHandler } from '@edgestore/server/adapters/next/app';
+import { getServerSession } from 'next-auth';
+import authOptions from '../../auth/authOptions';
+
+type Context = {
+  userId: string;
+  userRole: 'admin' | 'user';
+};
 
 const es = initEdgeStore.context<Context>().create();
 
