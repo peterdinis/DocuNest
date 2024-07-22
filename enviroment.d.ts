@@ -5,6 +5,8 @@ declare global {
             NODE_ENV: 'development' | 'production';
             NEXTAUTH_SECRET: string;
             NEXT_PUBLIC_OPENAI_API_KEY: string;
+            NEXT_PUBLIC_EDGE_STORE_ACCESS_KEY: string;
+            NEXT_PUBLIC_EDGE_STORE_SECRET_KEY: string;
         }
     }
 }
