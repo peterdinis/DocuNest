@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState, ChangeEvent } from 'react';
+import { FC, useState } from 'react';
 import {
     Modal,
     ModalContent,
@@ -12,12 +12,10 @@ import {
     Input,
 } from '@nextui-org/react';
 import { Plus } from 'lucide-react';
-import { useSession } from 'next-auth/react';
 import { useEdgeStore } from '@/app/_utils/edgestore';
 
 const UploadDoc: FC = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const { data: session } = useSession();
     const [file, setFile] = useState<any>(null);
     const { edgestore } = useEdgeStore();
 
@@ -41,7 +39,7 @@ const UploadDoc: FC = () => {
                                             setFile(e.target.files?.[0]);
                                         }}
                                     />
-                                    <Button variant='solid' color='success'
+                                    <Button variant='solid' color='success' className='mt-5'
                                         onClick={async () => {
                                             if (file) {
                                                 const res =
