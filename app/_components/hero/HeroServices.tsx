@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Edit3, Mic, FolderOpen } from 'lucide-react';
+import { Edit3, FolderOpen } from 'lucide-react';
 import ServiceCard from './ServiceCard';
 
 const HeroServices: FC = () => {
@@ -13,18 +13,13 @@ const HeroServices: FC = () => {
                         with AI-Powered Tools
                     </h2>
                 </div>
-                <div className='mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3'>
+                <div className='mt-16 grid gap-8 sm:grid-cols-1 lg:grid-cols-2'>
                     <ServiceCard
                         icon={<Edit3 />}
                         iconHeaderText={'Intelligent Summarization'}
                         iconHeaderDesc={
                             'Automatically generate concise summaries of your notes using advanced AI algorithms.'
                         }
-                    />
-                    <ServiceCard
-                        icon={<Mic />}
-                        iconHeaderText='Voice to Text'
-                        iconHeaderDesc='Convert your spoken words into text, making note-taking faster and more efficient.'
                     />
                     <ServiceCard
                         icon={<FolderOpen />}
