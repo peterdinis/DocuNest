@@ -21,6 +21,8 @@ import CreateFolderModal from '../folders/CreateFolderModal';
 
 const Sidebar: FC = () => {
     const [collapsed, setSidebarCollapsed] = useState(false);
+    const [totalFunctions, setTotalFunctions] = useState(15); // Total number of AI functions
+    const [usedFunctions, setUsedFunctions] = useState(10); // Number of AI functions used
     const router = useRouter();
 
     const logoutUser = () => {
@@ -103,6 +105,11 @@ const Sidebar: FC = () => {
                                         </Link>
                                     </Button>
                                 </div>
+                                <div className='ml-4 mt-8'>
+                                    <span className='text-sm'>
+                                        {`Used AI Functions: ${usedFunctions} / ${totalFunctions}`}
+                                    </span>
+                                </div>
                             </div>
                         </>
                     ) : (
@@ -165,6 +172,11 @@ const Sidebar: FC = () => {
                                             </Link>
                                         </Button>
                                     </Tooltip>
+                                </div>
+                                <div className='ml-4 mt-8'>
+                                    <span className='text-sm'>
+                                        {`Used AI Functions: ${usedFunctions} / ${totalFunctions}`}
+                                    </span>
                                 </div>
                             </div>
                         </div>
