@@ -39,6 +39,16 @@ const SettingsContent: FC = () => {
                             <div className='grid gap-4'>
                                 Name: {session?.user?.name}
                             </div>
+
+                            <div className='grid gap-4'>
+                                <label
+                                    htmlFor='font-size'
+                                    className='block text-sm font-medium text-gray-700'
+                                >
+                                   Subscription type
+                                </label>
+                                TODO: LATER ADD
+                            </div>
                         </CardBody>
                     </Card>
                 </section>
