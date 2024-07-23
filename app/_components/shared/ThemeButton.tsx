@@ -24,6 +24,7 @@ const ThemeButton: FC = () => {
 
     return (
         <div
+            data-cy="theme-button"
             onClick={toggleTheme}
             className={`relative flex h-8 w-16 cursor-pointer items-center rounded-full bg-teal-500 p-1 dark:bg-gray-700`}
         >
