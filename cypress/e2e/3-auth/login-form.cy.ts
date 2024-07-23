@@ -29,7 +29,7 @@ describe('Login Form', () => {
         cy.get('button[type="submit"]').click();
 
         cy.wait('@loginUser').its('response.statusCode').should('eq', 200);
-        cy.url().should('not.include', '/login'); // Assuming a successful login redirects away from /login
+        cy.url().should('not.include', '/login');
         cy.contains('Login successful').should('exist');
     });
 
