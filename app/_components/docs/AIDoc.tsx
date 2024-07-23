@@ -1,9 +1,8 @@
-"use client"
-
 import { FC, useState } from 'react';
 import { Button, Input } from '@nextui-org/react';
 import useOpenAI from '@/app/_hooks/useAI';
 import Header from '../shared/Header';
+import { useUserStore } from '@/app/_zustand/aiCounterStore';
 
 interface AIDocProps {
     onContentGenerated: (content: string) => void;
@@ -12,12 +11,14 @@ interface AIDocProps {
 const AIDoc: FC<AIDocProps> = ({ onContentGenerated }) => {
     const [prompt, setPrompt] = useState('');
     const { generateContent, isLoading, error } = useOpenAI();
+    const decrementAICount = useUserStore((state) => state.decrementAICount);
 
     const handleGenerate = async () => {
         if (!prompt) return;
 
         const content = await generateContent(prompt);
         onContentGenerated(content);
+        decrementAICount();
     };
 
     return (
