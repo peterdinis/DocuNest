@@ -4,9 +4,25 @@ import { FC } from 'react';
 import Header from '../shared/Header';
 import { Card, CardBody, CardHeader } from '@nextui-org/react';
 import { useSession } from 'next-auth/react';
+import useUserDetail from '@/app/_hooks/useUserDetail';
+import { Loader2 } from 'lucide-react';
 
 const SettingsContent: FC = () => {
     const { data: session } = useSession();
+
+    const {data, isLoading, isError} = useUserDetail({
+        id: session?.user.id
+    });
+
+    if(isLoading) {
+        return <Loader2 className='animate-spin w-8 h-8' />
+    }
+
+    if(isError) {
+        return <p className='text-xl font-bold text-red-800'>Something went wrong</p>
+    }
+
+    console.log("D", data);
     return (
         <div className='flex h-screen w-full flex-col'>
             <Header text='Settings' />
@@ -38,6 +54,16 @@ const SettingsContent: FC = () => {
 
                             <div className='grid gap-4'>
                                 Name: {session?.user?.name}
+                            </div>
+
+                            <div className='grid gap-4'>
+                                <label
+                                    htmlFor='font-size'
+                                    className='block text-sm font-medium text-gray-700'
+                                >
+                                   Subscription type
+                                </label>
+                                TODO: LATER ADD
                             </div>
 
                             <div className='grid gap-4'>
