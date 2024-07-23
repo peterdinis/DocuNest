@@ -1,6 +1,6 @@
 {
     "name": "docunest",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "private": true,
     "scripts": {
         "dev": "next dev --turbo",
@@ -45,7 +45,8 @@
         "stripe": "^16.2.0",
         "tailwind-merge": "^2.4.0",
         "tailwindcss-animate": "^1.0.7",
-        "zod": "^3.23.8"
+        "zod": "^3.23.8",
+        "zustand": "^4.5.4"
     },
     "devDependencies": {
         "@tailwindcss/typography": "^0.5.13",
