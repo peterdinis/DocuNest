@@ -100,8 +100,14 @@ const Navigation: FC = () => {
 
             {!loggedUser ? (
                 <NavbarContent justify='end'>
-                    <NavbarItem className='hidden lg:flex'>
-                        <Link href='/login'>Login</Link>
+                    <NavbarItem>
+                        <Button
+                            as={Link}
+                            color="primary"
+                            href='/login'
+                        >
+                            Login
+                        </Button>
                     </NavbarItem>
                     <NavbarItem>
                         <Button
