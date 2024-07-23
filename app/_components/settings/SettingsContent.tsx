@@ -22,8 +22,7 @@ const SettingsContent: FC = () => {
     if(isError) {
         return <p className='text-xl font-bold text-red-800'>Something went wrong</p>
     }
-
-    console.log("D", data);
+    
     return (
         <div className='flex h-screen w-full flex-col'>
             <Header text='Settings' />
@@ -75,6 +74,26 @@ const SettingsContent: FC = () => {
                                    Created Account
                                 </label>
                                 {format(data.createdAt, 'yyyy-MM-dd')}
+                            </div>
+
+                            <div className='grid gap-4'>
+                                <label
+                                    htmlFor='font-size'
+                                    className='block text-sm font-bold text-gray-700'
+                                >
+                                   Documents
+                                </label>
+                                {data.documents.length}
+                            </div>
+
+                            <div className='grid gap-4'>
+                                <label
+                                    htmlFor='font-size'
+                                    className='block text-sm font-bold text-gray-700'
+                                >
+                                   Folders
+                                </label>
+                                {data.folders.length}
                             </div>
                         </CardBody>
                     </Card>
