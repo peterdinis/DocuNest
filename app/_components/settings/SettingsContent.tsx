@@ -2,6 +2,8 @@
 
 import { FC } from "react";
 import Header from "../shared/Header";
+import { Card, CardBody } from "@nextui-org/react";
+import { useSession } from "next-auth/react";
 
 const SettingsContent: FC = () => {
     return (
@@ -10,28 +12,15 @@ const SettingsContent: FC = () => {
             <main className="flex-1 w-full p-6 sm:p-8 lg:p-10 overflow-auto">
                 <section>
                     <h2 className="text-lg font-semibold mb-6">General</h2>
-                    <div className="bg-white p-6 shadow rounded-lg">
-                        <div className="grid gap-8">
+                    <Card className="bg-white p-6 shadow rounded-lg">
+                        <CardBody className="grid gap-8">
                             <div className="grid gap-4">
-                                <label htmlFor="theme" className="block text-sm font-medium text-gray-700">Theme</label>
-                                <select id="theme" className="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                    <option value="light">Light</option>
-                                    <option value="dark">Dark</option>
-                                    <option value="system">System</option>
-                                </select>
+                                <label htmlFor="theme" className="block text-sm font-medium text-gray-700">Used AI Functions</label>
+                                15 / 100
                             </div>
                             <div className="grid gap-4">
-                                <label htmlFor="font-size" className="block text-sm font-medium text-gray-700">Font Size</label>
-                                <input
-                                    id="font-size"
-                                    type="range"
-                                    min="12"
-                                    max="20"
-                                    step="2"
-                                    defaultValue="16"
-                                    className="w-full mt-1"
-                                    aria-label="Font size"
-                                />
+                                <label htmlFor="font-size" className="block text-sm font-medium text-gray-700">Profile Informations</label>
+                                Name: 
                             </div>
                             <div className="grid gap-4">
                                 <label htmlFor="sort-notes" className="block text-sm font-medium text-gray-700">Sort Notes By</label>
@@ -41,8 +30,8 @@ const SettingsContent: FC = () => {
                                     <option value="modified">Last Modified</option>
                                 </select>
                             </div>
-                        </div>
-                    </div>
+                        </CardBody>
+                    </Card>
                 </section>
                 <section>
                     <h2 className="text-lg font-semibold mb-6">Account</h2>
