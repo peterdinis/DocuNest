@@ -11,14 +11,26 @@ interface AIDocProps {
 const AIDoc: FC<AIDocProps> = ({ onContentGenerated }) => {
     const [prompt, setPrompt] = useState('');
     const { generateContent, isLoading, error } = useOpenAI();
-    const decrementAICount = useUserStore((state) => state.decrementAICount);
+    const { decrementAICount, updateAICountOnServer } = useUserStore(state => ({
+        decrementAICount: state.decrementAICount,
+        updateAICountOnServer: state.updateAICountOnServer,
+    }));
 
     const handleGenerate = async () => {
         if (!prompt) return;
 
-        const content = await generateContent(prompt);
-        onContentGenerated(content);
-        decrementAICount();
+        try {
+            const content = await generateContent(prompt);
+            onContentGenerated(content);
+
+            // Znížiť aiCount v store
+            decrementAICount();
+
+            // Volanie API na zmenu aiCount na serveri
+            await updateAICountOnServer();
+        } catch (error) {
+            console.error('Error generating content:', error);
+        }
     };
 
     return (
