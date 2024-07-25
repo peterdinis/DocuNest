@@ -10,7 +10,6 @@ import AIDoc from './AIDoc';
 import { formats, modules } from './quill-config';
 import { useForm } from 'react-hook-form';
 import useCreateDocument from '@/app/_hooks/useCreateDocument';
-import {toast} from "react-toastify";
 
 const CreateDocumentForm: FC = () => {
     const [description, setDescription] = useState('');
@@ -65,7 +64,6 @@ const CreateDocumentForm: FC = () => {
         const handleBeforeUnload = (event: BeforeUnloadEvent) => {
             if (isDirty) {
                 event.preventDefault();
-                toast.info("You have unsaved changes");
             }
         };
 
