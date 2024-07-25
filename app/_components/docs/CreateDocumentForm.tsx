@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { FC, ReactNode, useMemo, useState, useEffect } from 'react';
+import { FC, ReactNode, useMemo, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import 'react-quill/dist/quill.snow.css';
 import CustomDrawer from '../shared/Drawer';
@@ -10,6 +10,7 @@ import AIDoc from './AIDoc';
 import { formats, modules } from './quill-config';
 import { useForm } from 'react-hook-form';
 import useCreateDocument from '@/app/_hooks/useCreateDocument';
+import {toast} from "react-toastify";
 
 const CreateDocumentForm: FC = () => {
     const [description, setDescription] = useState('');
@@ -23,14 +24,16 @@ const CreateDocumentForm: FC = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isDirty },
         reset,
+        setValue,
     } = useForm();
 
     const { mutate: createDocumentMut, isPending } = useCreateDocument();
 
     const handleDescriptionChange = (content: string) => {
         setDescription(content);
+        setValue('description', content, { shouldDirty: true }); // Mark form as dirty
     };
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -50,11 +53,28 @@ const CreateDocumentForm: FC = () => {
         createDocumentMut(formData);
         reset();
     };
+
     useEffect(() => {
         if (drawerInputText) {
-            setDescription((prevDescription) => `${prevDescription}\n${drawerInputText}`);
+            setDescription((prevDescription: string) => `${prevDescription}\n${drawerInputText}`);
+            setValue('description', `${description}\n${drawerInputText}`, { shouldDirty: true });
         }
-    }, [drawerInputText]);
+    }, [drawerInputText, setValue, description]);
+
+    useEffect(() => {
+        const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+            if (isDirty) {
+                event.preventDefault();
+                toast.info("You have unsaved changes");
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [isDirty]);
 
     return (
         <div>
@@ -75,7 +95,9 @@ const CreateDocumentForm: FC = () => {
                     color='primary'
                     className='ml-5'
                     onClick={() => {
-                        router.push('/dashboard');
+                        if (!isDirty || confirm('You have unsaved changes. Are you sure you want to leave?')) {
+                            router.push('/dashboard');
+                        }
                     }}
                 >
                     Go back
