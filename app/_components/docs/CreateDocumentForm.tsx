@@ -8,7 +8,7 @@ import CustomDrawer from '../shared/Drawer';
 import { Button } from '@nextui-org/react';
 import AIDoc from './AIDoc';
 import { formats, modules } from './quill-config';
-import { useForm } from 'react-hook-form';
+import { useForm, FieldValues } from 'react-hook-form';
 import useCreateDocument from '@/app/_hooks/useCreateDocument';
 
 const CreateDocumentForm: FC = () => {
@@ -26,6 +26,7 @@ const CreateDocumentForm: FC = () => {
         formState: { errors, isDirty },
         reset,
         setValue,
+        watch,
     } = useForm();
 
     const { mutate: createDocumentMut, isPending } = useCreateDocument();
@@ -56,14 +57,16 @@ const CreateDocumentForm: FC = () => {
     useEffect(() => {
         if (drawerInputText) {
             setDescription((prevDescription: string) => `${prevDescription}\n${drawerInputText}`);
-            setValue('description', `${description}\n${drawerInputText}`, { shouldDirty: true });
+            setValue('description', `${description ?? ''}\n${drawerInputText}`, { shouldDirty: true });
         }
     }, [drawerInputText, setValue, description]);
 
     useEffect(() => {
         const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-            if (isDirty) {
+            const title = watch('title');
+            if (isDirty || (description.trim().length > 0) || title) {
                 event.preventDefault();
+                event.returnValue = ''; // Show confirmation dialog
             }
         };
 
@@ -72,7 +75,16 @@ const CreateDocumentForm: FC = () => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [isDirty]);
+    }, [isDirty, description, watch]);
+
+    const handleGoBack = () => {
+        const title = watch('title');
+        if (!isDirty && description.trim().length === 0 && !title) {
+            router.push('/dashboard');
+        } else if (confirm('You have unsaved changes. Are you sure you want to leave?')) {
+            router.push('/dashboard');
+        }
+    };
 
     return (
         <div>
@@ -92,11 +104,7 @@ const CreateDocumentForm: FC = () => {
                     variant='flat'
                     color='primary'
                     className='ml-5'
-                    onClick={() => {
-                        if (!isDirty || confirm('You have unsaved changes. Are you sure you want to leave?')) {
-                            router.push('/dashboard');
-                        }
-                    }}
+                    onClick={handleGoBack}
                 >
                     Go back
                 </Button>
