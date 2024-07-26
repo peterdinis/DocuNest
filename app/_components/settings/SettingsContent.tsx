@@ -28,15 +28,15 @@ const SettingsContent: FC = () => {
             <Header text='Settings' />
             <main className='w-full flex-1 overflow-auto p-6 sm:p-8 lg:p-10'>
                 <section>
-                    <Card className='rounded-lg bg-white p-6 shadow'>
-                        <CardHeader className='mb-6 text-lg font-semibold'>
+                    <Card className='rounded-lg bg-white dark:bg-zinc-800 p-6 shadow'>
+                        <CardHeader className='mb-6 text-xl font-semibold'>
                             General
                         </CardHeader>
                         <CardBody className='grid gap-8'>
                             <div className='grid gap-4'>
                                 <label
                                     htmlFor='theme'
-                                    className='block text-sm font-bold text-gray-700'
+                                    className='block text-sm font-bold text-gray-700 dark:text-white'
                                 >
                                     Used AI Functions
                                 </label>
@@ -45,7 +45,7 @@ const SettingsContent: FC = () => {
                             <div className='grid gap-4'>
                                 <label
                                     htmlFor='font-size'
-                                    className='block text-sm font-bold text-gray-700'
+                                    className='block text-sm font-bold text-gray-700 dark:text-white'
                                 >
                                     Profile Informations
                                 </label>
@@ -59,7 +59,7 @@ const SettingsContent: FC = () => {
                             <div className='grid gap-4'>
                                 <label
                                     htmlFor='font-size'
-                                    className='block text-sm font-bold text-gray-700'
+                                    className='block text-sm font-bold text-gray-700 dark:text-white'
                                 >
                                    Subscription type
                                 </label>
@@ -69,7 +69,7 @@ const SettingsContent: FC = () => {
                             <div className='grid gap-4'>
                                 <label
                                     htmlFor='font-size'
-                                    className='block text-sm font-bold text-gray-700'
+                                    className='block text-sm font-bold text-gray-700 dark:text-white'
                                 >
                                    Created Account
                                 </label>
@@ -79,9 +79,9 @@ const SettingsContent: FC = () => {
                             <div className='grid gap-4'>
                                 <label
                                     htmlFor='font-size'
-                                    className='block text-sm font-bold text-gray-700'
+                                    className='block text-sm font-bold text-gray-700 dark:text-white'
                                 >
-                                   Documents
+                                   Created documents
                                 </label>
                                 {data.documents.length}
                             </div>
@@ -89,9 +89,9 @@ const SettingsContent: FC = () => {
                             <div className='grid gap-4'>
                                 <label
                                     htmlFor='font-size'
-                                    className='block text-sm font-bold text-gray-700'
+                                    className='block text-sm font-bold text-gray-700 dark:text-white'
                                 >
-                                   Folders
+                                   Created folders
                                 </label>
                                 {data.folders.length}
                             </div>

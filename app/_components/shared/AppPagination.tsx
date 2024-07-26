@@ -2,12 +2,7 @@
 
 import { FC } from 'react';
 import { Pagination } from '@nextui-org/react';
-
-interface IAppPaginationProps {
-    total: number;
-    initialPage: number;
-    onPageChange: (page: number) => void;
-}
+import { IAppPaginationProps } from '@/app/_types/globalTypes';
 
 const AppPagination: FC<IAppPaginationProps> = ({
     total,
@@ -18,6 +13,7 @@ const AppPagination: FC<IAppPaginationProps> = ({
         <Pagination
             loop
             showControls
+            isCompact
             total={total}
             initialPage={initialPage}
             onChange={(page) => onPageChange(page)}

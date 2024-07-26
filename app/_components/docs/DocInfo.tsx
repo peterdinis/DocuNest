@@ -104,7 +104,7 @@ const DocInfo: FC = () => {
 
     return (
         <div>
-            <h2 className='prose-h2: prose mt-5 flex justify-center align-top text-3xl'>
+            <h2 className='prose-h2: prose mt-5 flex dark:text-white justify-center align-top text-3xl'>
                 Document Info
             </h2>
 

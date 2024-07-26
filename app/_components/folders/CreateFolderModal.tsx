@@ -12,7 +12,7 @@ import {
     useDisclosure,
 } from '@nextui-org/react';
 import { useMutation } from '@tanstack/react-query';
-import { FC } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { FolderData, schema } from './schemas';
@@ -32,7 +32,7 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isDirty },
         reset,
     } = useForm<FolderData>({
         resolver: zodResolver(schema),
@@ -43,7 +43,6 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
         mutationFn: async (data: ICreateFolder) => {
             await createNewFolder(data);
         },
-
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['myFolders'],
@@ -61,13 +60,34 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
         createFolderMut.mutate(data);
     };
 
+    useEffect(() => {
+        const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+            if (isDirty) {
+                event.preventDefault();
+                event.returnValue = ''; // Show confirmation dialog
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [isDirty]);
+
+    const handleModalClose = () => {
+        if (!isDirty || confirm('You have unsaved changes. Are you sure you want to leave?')) {
+            onClose();
+        }
+    };
+
     return (
         <div className='flex flex-wrap gap-3'>
             <div onClick={onOpen}>{btnName}</div>
-            <Modal backdrop={'blur'} isOpen={isOpen} onClose={onClose}>
+            <Modal backdrop={'blur'} isOpen={isOpen} onClose={handleModalClose}>
                 <ModalContent>
                     <>
-                        <ModalHeader className='prose-h2: prose flex flex-col gap-1 text-xl'>
+                        <ModalHeader className='prose-h2: prose flex flex-col dark:text-white gap-1 text-xl'>
                             Create new folder
                         </ModalHeader>
                         <form onSubmit={handleSubmit(handleCreateFolder)}>
@@ -76,14 +96,18 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
                                     placeholder='Folder Name'
                                     {...register('name')}
                                 />
+                                {errors.name && (
+                                    <span className='text-red-500'>
+                                        {errors.name.message as unknown as ReactNode}
+                                    </span>
+                                )}
                             </ModalBody>
                             <ModalFooter>
                                 <Button
                                     color='danger'
-                                    variant='light'
-                                    onPress={onClose}
+                                    onPress={handleModalClose}
                                 >
-                                    Close
+                                    Close Modal
                                 </Button>
                                 <Button
                                     color='primary'

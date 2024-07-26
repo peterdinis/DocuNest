@@ -8,3 +8,9 @@ export interface IGlobalErrorProps {
 }
 
 export interface DisplayFolder extends Folder {}
+
+export interface IAppPaginationProps {
+    total: number;
+    initialPage: number;
+    onPageChange: (page: number) => void;
+}
