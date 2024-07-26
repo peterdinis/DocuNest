@@ -2,13 +2,23 @@
 
 import { FC, useState } from 'react';
 import classNames from 'classnames';
-import { XCircle, Menu, LogOut, Upload, Files, Folder, FolderCheck } from 'lucide-react';
+import {
+    XCircle,
+    Menu,
+    LogOut,
+    Upload,
+    Files,
+    Folder,
+    FolderCheck,
+    Settings,
+} from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
-import { signOut} from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import { Button, Tooltip } from '@nextui-org/react';
 import { motion } from 'framer-motion';
+import CreateFolderModal from '../folders/CreateFolderModal';
 
 const Sidebar: FC = () => {
     const [collapsed, setSidebarCollapsed] = useState(false);
@@ -65,7 +75,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
                                         <Upload />
-                                        <Link href='/document/new'>
+                                        <Link href='/documents/new'>
                                             Create new document
                                         </Link>
                                     </Button>
@@ -73,9 +83,9 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
                                         <Folder />
-                                        <Link href='/folders/new'>
-                                            Create new folder
-                                        </Link>
+                                        <CreateFolderModal
+                                            btnName={'Create new folder'}
+                                        />
                                     </Button>
                                 </div>
                                 <div className='ml-4 mt-8'>
@@ -89,7 +99,17 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
                                         <Files />
-                                        <Link href='/files/all'>All my documents</Link>
+                                        <Link href='/dashboard'>
+                                            All my documents
+                                        </Link>
+                                    </Button>
+                                </div>
+                                <div className='ml-4 mt-8'>
+                                    <Button variant={'ghost'} value='sm'>
+                                        <Settings />
+                                        <Link href='/settings'>
+                                            Settings
+                                        </Link>
                                     </Button>
                                 </div>
                             </div>
@@ -114,9 +134,8 @@ const Sidebar: FC = () => {
                                         content='Create new folder'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
-                                            <Link href='/folders/new'>
-                                                <Folder />
-                                            </Link>
+                                            <Folder />
+                                            <CreateFolderModal btnName='' />
                                         </Button>
                                     </Tooltip>
                                 </div>
@@ -150,8 +169,20 @@ const Sidebar: FC = () => {
                                         content='All my documents'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
-                                            <Link href='/files/all'>
+                                            <Link href='/dashboard'>
                                                 <Files />
+                                            </Link>
+                                        </Button>
+                                    </Tooltip>
+                                </div>
+                                <div className='ml-4 mt-8'>
+                                    <Tooltip
+                                        showArrow={true}
+                                        content='Settings page'
+                                    >
+                                        <Button variant={'ghost'} size={'sm'}>
+                                            <Link href='/settings'>
+                                                <Settings />
                                             </Link>
                                         </Button>
                                     </Tooltip>

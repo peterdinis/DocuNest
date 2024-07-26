@@ -9,6 +9,22 @@
     text-wrap: balance;
 }
 
+.ql-editor {
+    font-family: 'Roboto', sans-serif;
+}
+
+.ql-font-roboto {
+    font-family: 'Roboto', sans-serif;
+}
+
+.ql-font-opensans {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.ql-font-lobster {
+    font-family: 'Lobster', cursive;
+}
+
 html::-webkit-scrollbar {
     width: 16px;
     height: 16px;
@@ -56,6 +72,47 @@ html::-webkit-scrollbar-thumb {
     background: #fff;
     color: #0d0047;
     border: 2px solid #16003e;
+}
+
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 500px;
+    max-height: 100%;
+    border-radius: 0;
+    margin: 0;
+}
+
+.drawer-animated {
+    transform: translateX(100%);
+}
+
+.drawer-animated-slide-in {
+    animation: slide-in 0.3s forwards;
+}
+
+.drawer-animated-slide-out {
+    animation: slide-out 0.2s forwards;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(100%);
+    }
 }
 
 @keyframes movebtn {

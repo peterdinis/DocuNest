@@ -4,8 +4,9 @@ declare global {
             DATABASE_URL: string;
             NODE_ENV: 'development' | 'production';
             NEXTAUTH_SECRET: string;
-            CUSTOM_PASSWORD: string;
             NEXT_PUBLIC_OPENAI_API_KEY: string;
+            EDGE_STORE_ACCESS_KEY: string;
+            EDGE_STORE_SECRET_KEY: string;
         }
     }
 }

@@ -3,7 +3,6 @@ import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 import authOptions from '../../auth/authOptions';
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
 
 export async function GET(request: NextRequest) {
     const url = new URL(request.url);
@@ -77,7 +76,6 @@ export async function PUT(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
     const url = new URL(request.url);
     const id = url.pathname.split('/').pop();
-
     if (!id) {
         return NextResponse.json(
             { error: 'Missing id parameter' },

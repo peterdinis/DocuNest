@@ -10,6 +10,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-quill/dist/quill.snow.css';
 import QueryProvider from './_components/shared/providers/QueryProvider';
 import SessionAppProvider from './_components/shared/providers/SessionProvider';
+import { Suspense } from 'react';
+import { EdgeStoreProvider } from './_utils/edgestore';
+import { Loader2 } from 'lucide-react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,16 +30,20 @@ export default function RootLayout({
         <html lang='en'>
             <body className={inter.className}>
                 <NextUiProvider>
-                    <ThemeProvider>
-                        <QueryProvider>
-                            <SessionAppProvider>
-                                <Navigation />
-                                {children}
-                                <ToastContainer />
-                                <ScrollToTop />
-                            </SessionAppProvider>
-                        </QueryProvider>
-                    </ThemeProvider>
+                    <Suspense fallback={<Loader2 className='animate-bounce w-8 h-8' />}>
+                        <ThemeProvider>
+                            <QueryProvider>
+                                <SessionAppProvider>
+                                    <EdgeStoreProvider>
+                                        <Navigation />
+                                        {children}
+                                        <ToastContainer />
+                                        <ScrollToTop />
+                                    </EdgeStoreProvider>
+                                </SessionAppProvider>
+                            </QueryProvider>
+                        </ThemeProvider>
+                    </Suspense>
                 </NextUiProvider>
             </body>
         </html>

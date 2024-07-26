@@ -1,10 +1,21 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const HeroWrapper: FC = () => {
+    const router = useRouter();
+    const { data: session } = useSession();
+
+    useEffect(() => {
+        if (session) {
+            router.push('/dashboard');
+        }
+    }, [session, router]);
+
     return (
         <>
             <div className='bg-gray-100 dark:bg-gray-950'>
@@ -14,7 +25,7 @@ const HeroWrapper: FC = () => {
                             Docu
                             <span className='text-indigo-700'>Nest</span>
                         </h1>
-                        <p className='prose-p: prose mt-5 text-center text-sm text-gray-600 font-bold sm:mt-10 sm:text-lg lg:w-10/12'>
+                        <p className='prose-p: prose mt-5 text-center text-sm font-bold text-gray-600 sm:mt-10 sm:text-lg lg:w-10/12'>
                             Lorem ipsum dolor sit amet consectetur adipisicing
                             elit. Temporibus corrupti esse officia in nemo
                             voluptates distinctio iure blanditiis aspernatur

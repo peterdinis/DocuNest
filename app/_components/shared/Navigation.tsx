@@ -48,7 +48,7 @@ const Navigation: FC = () => {
 
     const logoutUser = () => {
         signOut({
-            redirect: false
+            redirect: false,
         });
         toast.success('Successful logout');
         router.push('/login');
@@ -69,16 +69,18 @@ const Navigation: FC = () => {
             <NavbarContent className='pr-3 sm:hidden' justify='center'>
                 <NavbarBrand>
                     <FileText />{' '}
-                    <span className='ml-4 font-bold'>
-                        <Link href='/'>Docu Nest</Link>
-                    </span>
+                    <Link className='ml-4 font-bold' href='/'>
+                        Docu Nest
+                    </Link>
                 </NavbarBrand>
             </NavbarContent>
 
             <NavbarContent className='hidden gap-4 sm:flex' justify='center'>
                 <NavbarBrand>
                     <FileText />{' '}
-                    <span className='ml-4 font-bold'>Docu Nest</span>
+                    <Link className='ml-4 font-bold' href='/'>
+                        Docu Nest
+                    </Link>
                 </NavbarBrand>
                 {!loggedUser && (
                     <>
@@ -98,11 +100,18 @@ const Navigation: FC = () => {
 
             {!loggedUser ? (
                 <NavbarContent justify='end'>
-                    <NavbarItem className='hidden lg:flex'>
-                        <Link href='/login'>Login</Link>
+                    <NavbarItem>
+                        <Button
+                            as={Link}
+                            color="primary"
+                            href='/login'
+                        >
+                            Login
+                        </Button>
                     </NavbarItem>
                     <NavbarItem>
                         <Button
+                            id='registerBtn'
                             as={Link}
                             color='warning'
                             href='/register'
@@ -128,6 +137,10 @@ const Navigation: FC = () => {
                             </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
+
+                    <NavbarItem>
+                        <ThemeButton />
+                    </NavbarItem>
                 </NavbarContent>
             )}
 
