@@ -51,7 +51,7 @@ const DocumentsWrapper: FC = () => {
                 <Header text='My Documents' />
             </div>
             <Input
-                startContent={<Search />}
+                startContent={<Search className='dark:text-white' />}
                 className='mt-5'
                 placeholder='Search...'
                 value={searchQuery}
@@ -76,7 +76,7 @@ const DocumentsWrapper: FC = () => {
                                     <h1 className='break-all font-bold'>
                                         {item.title}
                                     </h1>
-                                    <p className='text-sm font-bold text-gray-600'>
+                                    <p className='text-sm font-bold text-gray-600 dark:text-white'>
                                         {format(
                                             new Date(item.createAt),
                                             'yyyy-MM-dd',
