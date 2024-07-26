@@ -32,7 +32,7 @@ const CreateDocumentForm: FC = () => {
 
     const handleDescriptionChange = (content: string) => {
         setDescription(content);
-        setValue('description', content, { shouldDirty: true }); // Mark form as dirty
+        setValue('description', content, { shouldDirty: true });
     };
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);

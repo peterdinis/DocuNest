@@ -81,7 +81,7 @@ const SettingsContent: FC = () => {
                                     htmlFor='font-size'
                                     className='block text-sm font-bold text-gray-700'
                                 >
-                                   Documents
+                                   Created documents
                                 </label>
                                 {data.documents.length}
                             </div>
@@ -91,7 +91,7 @@ const SettingsContent: FC = () => {
                                     htmlFor='font-size'
                                     className='block text-sm font-bold text-gray-700'
                                 >
-                                   Folders
+                                   Created folders
                                 </label>
                                 {data.folders.length}
                             </div>
