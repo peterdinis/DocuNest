@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC} from 'react';
 import {
     Modal,
     ModalContent,
@@ -15,7 +15,6 @@ import { Plus } from 'lucide-react';
 
 const UploadDoc: FC = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const [file, setFile] = useState<any>(null);
 
     return (
         <>
@@ -33,9 +32,6 @@ const UploadDoc: FC = () => {
                                 <form>
                                     <Input
                                         type='file'
-                                        onChange={(e) => {
-                                            setFile(e.target.files?.[0]);
-                                        }}
                                     />
                                     <Button variant='solid' color='success' className='mt-5'
                                         
