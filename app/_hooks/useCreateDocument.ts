@@ -6,6 +6,7 @@ import {
     createNewDocument,
     ICreateDocumentData,
 } from '@/app/_store/mutations/documentMutations';
+import { queryClient } from '../_store/queryClient';
 
 const useCreateDocument = () => {
     return useMutation({
@@ -15,6 +16,9 @@ const useCreateDocument = () => {
         },
         onSuccess: () => {
             toast.success('New document was created');
+            queryClient.invalidateQueries({
+                queryKey: ["myPaginatedDocuments"]
+            })
         },
         onError: () => {
             toast.error('Failed to create document');
