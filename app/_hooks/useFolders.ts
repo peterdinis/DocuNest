@@ -8,6 +8,8 @@ const useFolders = () => {
         queryKey: ['folders'],
         queryFn: fetchAllFolders,
         staleTime: Infinity,
+        refetchOnMount: true,
+        refetchIntervalInBackground: true
     });
 };
 
