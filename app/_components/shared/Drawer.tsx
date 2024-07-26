@@ -9,19 +9,23 @@ interface Props extends React.HTMLProps<HTMLDivElement> {
     onInputChange: (text: string) => void;
 }
 
-const CustomDrawer: React.FC<Props> = ({ inputText, onInputChange, ...props }) => {
+const CustomDrawer: React.FC<Props> = ({
+    inputText,
+    onInputChange,
+    ...props
+}) => {
     return (
         <Modal
-            scrollBehavior="inside"
+            scrollBehavior='inside'
             isOpen={props.isOpen}
             onOpenChange={props.onOpenChange}
-            placement="center"
-            backdrop="opaque"
-            size="full"
+            placement='center'
+            backdrop='opaque'
+            size='full'
             classNames={{
                 wrapper: 'flex justify-end',
             }}
-            className="h-screen max-h-screen w-full max-w-sm rounded-md"
+            className='h-screen max-h-screen w-full max-w-sm rounded-md'
         >
             <ModalContent>
                 {(onClose) => (

@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import {
     Modal,
     ModalContent,
@@ -9,15 +9,13 @@ import {
     ModalFooter,
     Button,
     useDisclosure,
-    Input,
 } from '@nextui-org/react';
 import { Plus } from 'lucide-react';
-import { useEdgeStore } from '@/app/_utils/edgestore';
+import { UploadButton } from '@/app/_utils/uploadthing';
+import {toast} from "react-toastify";
 
 const UploadDoc: FC = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const [file, setFile] = useState<any>(null);
-    const { edgestore } = useEdgeStore();
 
     return (
         <>
@@ -28,40 +26,19 @@ const UploadDoc: FC = () => {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className='prose-h2: prose mt-5 flex flex-col gap-1 text-xl font-bold'>
+                            <ModalHeader className='prose-h2: prose mt-5 dark:text-white flex flex-col gap-1 text-xl font-bold'>
                                 Upload Document
                             </ModalHeader>
                             <ModalBody>
-                                <form>
-                                    <Input
-                                        type='file'
-                                        onChange={(e) => {
-                                            setFile(e.target.files?.[0]);
-                                        }}
-                                    />
-                                    <Button variant='solid' color='success' className='mt-5'
-                                        onClick={async () => {
-                                            if (file) {
-                                                const res =
-                                                    await edgestore.publicFiles.upload(
-                                                        {
-                                                            file,
-                                                            onProgressChange: (
-                                                                progress,
-                                                            ) => {
-                                                                // you can use this to show a progress bar
-                                                                console.log(
-                                                                    progress,
-                                                                );
-                                                            },
-                                                        },
-                                                    );
-                                            }
-                                        }}
-                                    >
-                                        Upload
-                                    </Button>
-                                </form>
+                                <UploadButton
+                                    endpoint='fileUploader'
+                                    onClientUploadComplete={(res) => {
+                                        toast.success("Document was uploaded");
+                                    }}
+                                    onUploadError={(error: Error) => {
+                                        toast.error(`ERROR! ${error.message}`);
+                                    }}
+                                />
                             </ModalBody>
                             <ModalFooter>
                                 <Button

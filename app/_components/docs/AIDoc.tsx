@@ -11,10 +11,12 @@ interface AIDocProps {
 const AIDoc: FC<AIDocProps> = ({ onContentGenerated }) => {
     const [prompt, setPrompt] = useState('');
     const { generateContent, isLoading, error } = useOpenAI();
-    const { decrementAICount, updateAICountOnServer } = useUserStore(state => ({
-        decrementAICount: state.decrementAICount,
-        updateAICountOnServer: state.updateAICountOnServer,
-    }));
+    const { decrementAICount, updateAICountOnServer } = useUserStore(
+        (state) => ({
+            decrementAICount: state.decrementAICount,
+            updateAICountOnServer: state.updateAICountOnServer,
+        }),
+    );
 
     const handleGenerate = async () => {
         if (!prompt) return;
@@ -37,17 +39,22 @@ const AIDoc: FC<AIDocProps> = ({ onContentGenerated }) => {
         <div>
             <Header text='Create prompt here' />
             <Input
-                className='mt-5 ml-3 mr-3'
-                type="text"
+                className='ml-3 mr-3 mt-5'
+                type='text'
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
-                placeholder="Enter your prompt"
+                placeholder='Enter your prompt'
                 fullWidth
             />
-            <Button className='mt-5 ml-3 mr-3' color='primary' onClick={handleGenerate} disabled={isLoading}>
+            <Button
+                className='ml-3 mr-3 mt-5'
+                color='primary'
+                onClick={handleGenerate}
+                disabled={isLoading}
+            >
                 {isLoading ? 'Generating...' : 'Generate Content'}
             </Button>
-            {error && <p className="text-red-500">{error}</p>}
+            {error && <p className='text-red-500'>{error}</p>}
         </div>
     );
 };

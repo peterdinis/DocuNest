@@ -7,7 +7,7 @@ interface UseUserDetailProps {
     id: string;
 }
 
-const useUserDetail = ({ id}: UseUserDetailProps) => {
+const useUserDetail = ({ id }: UseUserDetailProps) => {
     return useQuery({
         queryKey: ['userDetail', id],
         queryFn: () => fetchUserDetail(id),

@@ -41,9 +41,7 @@ const FolderSelect: FC<FolderSelectProps> = ({ onSelectFolder }) => {
         );
     }
 
-    const handleSelectChange = (
-        event: ChangeEvent<HTMLSelectElement>
-    ) => {
+    const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const folderId = event.target.value;
         if (onSelectFolder) {
             onSelectFolder(folderId);

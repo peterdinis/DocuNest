@@ -28,7 +28,7 @@ const FolderInfo: FC = () => {
     };
 
     if (isLoading) {
-        return <Loading />
+        return <Loading />;
     }
 
     if (isError) {
@@ -45,7 +45,7 @@ const FolderInfo: FC = () => {
 
     return (
         <div>
-            <h2 className='prose-h2: prose mt-5 dark:text-white flex justify-center align-top text-3xl'>
+            <h2 className='prose-h2: prose mt-5 flex justify-center align-top text-3xl dark:text-white'>
                 Folder Info
             </h2>
             <ButtonGroup className='ml-4 mt-6'>

@@ -101,11 +101,7 @@ const Navigation: FC = () => {
             {!loggedUser ? (
                 <NavbarContent justify='end'>
                     <NavbarItem>
-                        <Button
-                            as={Link}
-                            color="primary"
-                            href='/login'
-                        >
+                        <Button as={Link} color='primary' href='/login'>
                             Login
                         </Button>
                     </NavbarItem>
