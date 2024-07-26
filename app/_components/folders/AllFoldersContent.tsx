@@ -49,7 +49,7 @@ const AllFoldersContent: FC = () => {
                 <Header text='My Folders' />
             </div>
             <Input
-                startContent={<Search />}
+                startContent={<Search className='dark:text-white' />}
                 className='mt-5'
                 placeholder='Search...'
                 value={searchQuery}
