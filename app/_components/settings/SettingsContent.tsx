@@ -28,7 +28,7 @@ const SettingsContent: FC = () => {
             <Header text='Settings' />
             <main className='w-full flex-1 overflow-auto p-6 sm:p-8 lg:p-10'>
                 <section>
-                    <Card className='rounded-lg bg-white p-6 shadow'>
+                    <Card className='rounded-lg bg-white dark:bg-zinc-800 p-6 shadow'>
                         <CardHeader className='mb-6 text-lg font-semibold'>
                             General
                         </CardHeader>
