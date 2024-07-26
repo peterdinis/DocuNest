@@ -3,7 +3,7 @@
 import { FC, useState, useEffect, ChangeEvent } from 'react';
 import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
-import { Folder, Loader2, Search } from 'lucide-react';
+import { Folder, Search } from 'lucide-react';
 import AppPagination from '../shared/AppPagination';
 import { Card, Button } from '@nextui-org/react';
 import { Folder as DisplayFolder } from '@prisma/client';
@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { useDebounce } from '@/app/_hooks/useDebounce';
 import usePaginatedFolders from '@/app/_hooks/usePaginatedFolders';
 import DeleteFolder from './DeleteFolderModal';
+import Loading from '../shared/Loading';
 
 const AllFoldersContent: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -32,7 +33,7 @@ const AllFoldersContent: FC = () => {
     };
 
     if (isLoading) {
-        return <Loader2 className='h-8 w-8 animate-spin' />;
+        return <Loading />
     }
 
     if (isError) {

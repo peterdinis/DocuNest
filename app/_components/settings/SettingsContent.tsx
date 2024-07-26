@@ -5,8 +5,8 @@ import Header from '../shared/Header';
 import { Card, CardBody, CardHeader } from '@nextui-org/react';
 import { useSession } from 'next-auth/react';
 import useUserDetail from '@/app/_hooks/useUserDetail';
-import { Loader2 } from 'lucide-react';
 import { format } from 'date-fns';
+import Loading from '../shared/Loading';
 
 const SettingsContent: FC = () => {
     const { data: session } = useSession();
@@ -16,7 +16,7 @@ const SettingsContent: FC = () => {
     });
 
     if(isLoading) {
-        return <Loader2 className='animate-spin w-8 h-8' />
+        return <Loading />
     }
 
     if(isError) {

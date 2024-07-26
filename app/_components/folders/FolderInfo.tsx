@@ -1,12 +1,12 @@
 'use client';
 
-import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button, ButtonGroup, Input } from '@nextui-org/react';
 import useFolderDetail from '@/app/_hooks/useFolderDetail';
 import useUpdateFolder from '@/app/_hooks/useUpdateFolder';
+import Loading from '../shared/Loading';
 
 const FolderInfo: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -28,7 +28,7 @@ const FolderInfo: FC = () => {
     };
 
     if (isLoading) {
-        return <Loader2 className='h-8 w-8 animate-spin' />;
+        return <Loading />
     }
 
     if (isError) {
