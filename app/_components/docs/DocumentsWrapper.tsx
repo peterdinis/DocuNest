@@ -76,7 +76,7 @@ const DocumentsWrapper: FC = () => {
                                     <h1 className='break-all font-bold'>
                                         {item.title}
                                     </h1>
-                                    <p className='text-sm font-bold text-gray-600'>
+                                    <p className='text-sm font-bold text-gray-600 dark:text-white'>
                                         {format(
                                             new Date(item.createAt),
                                             'yyyy-MM-dd',
