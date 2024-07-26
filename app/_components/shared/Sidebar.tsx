@@ -40,11 +40,11 @@ const Sidebar: FC = () => {
                     true,
             })}
         >
-            <div className='bg-white dark:bg-zinc-800 text-black'>
+            <div className='bg-white dark:bg-zinc-800 text-black dark:text-white'>
                 <button onClick={() => setSidebarCollapsed((prev) => !prev)}>
                     {collapsed === true ? (
                         <Menu className='h-7 w-7' />
-                    ) : (
+                ) : (
                         <XCircle className='h-7 w-7' />
                     )}
                 </button>
