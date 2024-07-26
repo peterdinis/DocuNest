@@ -87,7 +87,7 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
             <Modal backdrop={'blur'} isOpen={isOpen} onClose={handleModalClose}>
                 <ModalContent>
                     <>
-                        <ModalHeader className='prose-h2: prose flex flex-col gap-1 text-xl'>
+                        <ModalHeader className='prose-h2: prose flex flex-col dark:text-white gap-1 text-xl'>
                             Create new folder
                         </ModalHeader>
                         <form onSubmit={handleSubmit(handleCreateFolder)}>
@@ -105,10 +105,9 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
                             <ModalFooter>
                                 <Button
                                     color='danger'
-                                    variant='light'
                                     onPress={handleModalClose}
                                 >
-                                    Close
+                                    Close Modal
                                 </Button>
                                 <Button
                                     color='primary'

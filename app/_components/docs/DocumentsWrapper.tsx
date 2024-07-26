@@ -47,7 +47,7 @@ const DocumentsWrapper: FC = () => {
 
     return (
         <>
-            <div className='flex justify-center align-top'>
+            <div className='flex justify-center align-top '>
                 <Header text='My Documents' />
             </div>
             <Input
