@@ -12,6 +12,7 @@ import {
 } from '@nextui-org/react';
 import { Plus } from 'lucide-react';
 import { UploadButton } from '@/app/_utils/uploadthing';
+import {toast} from "react-toastify";
 
 const UploadDoc: FC = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -25,7 +26,7 @@ const UploadDoc: FC = () => {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className='prose-h2: prose mt-5 flex flex-col gap-1 text-xl font-bold'>
+                            <ModalHeader className='prose-h2: prose mt-5 dark:text-white flex flex-col gap-1 text-xl font-bold'>
                                 Upload Document
                             </ModalHeader>
                             <ModalBody>
@@ -34,11 +35,11 @@ const UploadDoc: FC = () => {
                                     onClientUploadComplete={(res) => {
                                         // Do something with the response
                                         console.log('Files: ', res);
-                                        alert('Upload Completed');
+                                        toast.success("Document was uploaded");
                                     }}
                                     onUploadError={(error: Error) => {
                                         // Do something with the error.
-                                        alert(`ERROR! ${error.message}`);
+                                        toast.error(`ERROR! ${error.message}`);
                                     }}
                                 />
                             </ModalBody>
