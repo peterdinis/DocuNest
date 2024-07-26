@@ -10,7 +10,7 @@ const useFolders = () => {
         staleTime: Infinity,
         refetchIntervalInBackground: true,
         refetchOnWindowFocus: true,
-        refetchOnMount: true
+        refetchOnMount: true,
     });
 };
 

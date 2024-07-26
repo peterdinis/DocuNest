@@ -1,7 +1,7 @@
 'use client';
 
 import { Select, SelectItem } from '@nextui-org/react';
-import { FC, useMemo } from 'react';
+import { FC, useMemo, ChangeEvent } from 'react';
 import { Loader2 } from 'lucide-react';
 import { Folder } from '@prisma/client';
 import useFolders from '@/app/_hooks/useFolders';
@@ -42,7 +42,7 @@ const FolderSelect: FC<FolderSelectProps> = ({ onSelectFolder }) => {
     }
 
     const handleSelectChange = (
-        event: React.ChangeEvent<HTMLSelectElement>,
+        event: ChangeEvent<HTMLSelectElement>
     ) => {
         const folderId = event.target.value;
         if (onSelectFolder) {
