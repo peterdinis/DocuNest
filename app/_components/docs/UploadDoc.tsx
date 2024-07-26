@@ -12,6 +12,7 @@ import {
     Input,
 } from '@nextui-org/react';
 import { Plus } from 'lucide-react';
+import { UploadButton } from '@/app/_utils/uploadthing';
 
 const UploadDoc: FC = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -29,16 +30,18 @@ const UploadDoc: FC = () => {
                                 Upload Document
                             </ModalHeader>
                             <ModalBody>
-                                <form>
-                                    <Input
-                                        type='file'
-                                    />
-                                    <Button variant='solid' color='success' className='mt-5'
-                                        
-                                    >
-                                        Upload
-                                    </Button>
-                                </form>
+                            <UploadButton
+        endpoint="imageUploader"
+        onClientUploadComplete={(res) => {
+          // Do something with the response
+          console.log("Files: ", res);
+          alert("Upload Completed");
+        }}
+        onUploadError={(error: Error) => {
+          // Do something with the error.
+          alert(`ERROR! ${error.message}`);
+        }}
+      />
                             </ModalBody>
                             <ModalFooter>
                                 <Button
