@@ -34,6 +34,7 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
         handleSubmit,
         formState: { errors, isDirty },
         reset,
+        watch,
     } = useForm<FolderData>({
         resolver: zodResolver(schema),
     });
@@ -60,9 +61,11 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
         createFolderMut.mutate(data);
     };
 
+    const folderName = watch('name');
+
     useEffect(() => {
         const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-            if (isDirty) {
+            if (isDirty && (folderName ?? '').trim().length > 0) {
                 event.preventDefault();
                 event.returnValue = ''; // Show confirmation dialog
             }
@@ -73,10 +76,10 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, [isDirty]);
+    }, [isDirty, folderName]);
 
     const handleModalClose = () => {
-        if (!isDirty || confirm('You have unsaved changes. Are you sure you want to leave?')) {
+        if (!isDirty || (folderName ?? '').trim().length === 0 || confirm('You have unsaved changes. Are you sure you want to leave?')) {
             onClose();
         }
     };
