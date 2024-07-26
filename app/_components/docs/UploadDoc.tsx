@@ -33,12 +33,9 @@ const UploadDoc: FC = () => {
                                 <UploadButton
                                     endpoint='fileUploader'
                                     onClientUploadComplete={(res) => {
-                                        // Do something with the response
-                                        console.log('Files: ', res);
                                         toast.success("Document was uploaded");
                                     }}
                                     onUploadError={(error: Error) => {
-                                        // Do something with the error.
                                         toast.error(`ERROR! ${error.message}`);
                                     }}
                                 />
