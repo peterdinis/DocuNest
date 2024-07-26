@@ -56,7 +56,7 @@ const CreateDocumentForm: FC = () => {
     useEffect(() => {
         if (drawerInputText) {
             setDescription((prevDescription: string) => `${prevDescription}\n${drawerInputText}`);
-            setValue('description', `${description}\n${drawerInputText}`, { shouldDirty: true });
+            setValue('description', `${description ?? ''}\n${drawerInputText}`, { shouldDirty: true });
         }
     }, [drawerInputText, setValue, description]);
 
@@ -64,6 +64,7 @@ const CreateDocumentForm: FC = () => {
         const handleBeforeUnload = (event: BeforeUnloadEvent) => {
             if (isDirty) {
                 event.preventDefault();
+                event.returnValue = ''; // Show confirmation dialog
             }
         };
 
