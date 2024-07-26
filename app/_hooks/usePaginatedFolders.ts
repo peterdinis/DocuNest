@@ -13,6 +13,9 @@ const usePaginatedFolders = ({ query, page }: UsePaginatedFoldersOptions) => {
         queryKey: ['myPaginatedFolders', query, page],
         queryFn: () => fetchAllPaginatedFolders({ query, page }),
         staleTime: Infinity,
+        refetchIntervalInBackground: true,
+        refetchOnWindowFocus: true,
+        refetchOnMount: true
     });
 };
 

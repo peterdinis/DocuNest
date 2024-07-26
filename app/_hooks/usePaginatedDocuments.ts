@@ -16,6 +16,9 @@ const usePaginatedDocuments = ({
         queryKey: ['myPaginatedDocuments', query, page],
         queryFn: () => fetchAllPaginatedDocuments({ query, page }),
         staleTime: Infinity,
+        refetchIntervalInBackground: true,
+        refetchOnWindowFocus: true,
+        refetchOnMount: true
     });
 };
 
