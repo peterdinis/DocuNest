@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, ModalContent } from '@nextui-org/react';
+import { motion } from 'framer-motion';
 
 interface Props extends React.HTMLProps<HTMLDivElement> {
     isOpen: boolean;
@@ -11,42 +12,30 @@ interface Props extends React.HTMLProps<HTMLDivElement> {
 const CustomDrawer: React.FC<Props> = ({ inputText, onInputChange, ...props }) => {
     return (
         <Modal
-            scrollBehavior='inside'
+            scrollBehavior="inside"
             isOpen={props.isOpen}
             onOpenChange={props.onOpenChange}
-            placement='center'
-            backdrop='opaque'
-            size='full'
+            placement="center"
+            backdrop="opaque"
+            size="full"
             classNames={{
                 wrapper: 'flex justify-end',
             }}
-            motionProps={{
-                variants: {
-                    enter: {
-                        x: 0,
-                        opacity: 1,
-                        transition: {
-                            duration: 0.3,
-                            ease: 'easeOut',
-                        },
-                    },
-                    exit: {
-                        x: 50,
-                        opacity: 0,
-                        transition: {
-                            duration: 0.2,
-                            ease: 'easeIn',
-                        },
-                    },
-                },
-            }}
-            className='h-screen max-h-screen w-full max-w-sm rounded-md'
+            className="h-screen max-h-screen w-full max-w-sm rounded-md"
         >
             <ModalContent>
                 {(onClose) => (
-                    <>
+                    <motion.div
+                        initial={{ x: 50, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        exit={{ x: 50, opacity: 0 }}
+                        transition={{
+                            x: { type: 'spring', stiffness: 300, damping: 30 },
+                            opacity: { duration: 0.2 },
+                        }}
+                    >
                         {props.children}
-                    </>
+                    </motion.div>
                 )}
             </ModalContent>
         </Modal>
