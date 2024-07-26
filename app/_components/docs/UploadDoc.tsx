@@ -9,7 +9,6 @@ import {
     ModalFooter,
     Button,
     useDisclosure,
-    Input,
 } from '@nextui-org/react';
 import { Plus } from 'lucide-react';
 import { UploadButton } from '@/app/_utils/uploadthing';
