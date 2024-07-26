@@ -56,15 +56,22 @@ const CreateDocumentForm: FC = () => {
 
     useEffect(() => {
         if (drawerInputText) {
-            setDescription((prevDescription: string) => `${prevDescription}\n${drawerInputText}`);
-            setValue('description', `${description ?? ''}\n${drawerInputText}`, { shouldDirty: true });
+            setDescription(
+                (prevDescription: string) =>
+                    `${prevDescription}\n${drawerInputText}`,
+            );
+            setValue(
+                'description',
+                `${description ?? ''}\n${drawerInputText}`,
+                { shouldDirty: true },
+            );
         }
     }, [drawerInputText, setValue, description]);
 
     useEffect(() => {
         const handleBeforeUnload = (event: BeforeUnloadEvent) => {
             const title = watch('title');
-            if (isDirty || (description.trim().length > 0) || title) {
+            if (isDirty || description.trim().length > 0 || title) {
                 event.preventDefault();
                 event.returnValue = ''; // Show confirmation dialog
             }
@@ -81,7 +88,9 @@ const CreateDocumentForm: FC = () => {
         const title = watch('title');
         if (!isDirty && description.trim().length === 0 && !title) {
             router.push('/dashboard');
-        } else if (confirm('You have unsaved changes. Are you sure you want to leave?')) {
+        } else if (
+            confirm('You have unsaved changes. Are you sure you want to leave?')
+        ) {
             router.push('/dashboard');
         }
     };

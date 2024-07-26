@@ -1,6 +1,6 @@
 'use client';
 
-import { FC} from 'react';
+import { FC } from 'react';
 import {
     Modal,
     ModalContent,
@@ -30,18 +30,18 @@ const UploadDoc: FC = () => {
                                 Upload Document
                             </ModalHeader>
                             <ModalBody>
-                            <UploadButton
-        endpoint="imageUploader"
-        onClientUploadComplete={(res) => {
-          // Do something with the response
-          console.log("Files: ", res);
-          alert("Upload Completed");
-        }}
-        onUploadError={(error: Error) => {
-          // Do something with the error.
-          alert(`ERROR! ${error.message}`);
-        }}
-      />
+                                <UploadButton
+                                    endpoint='fileUploader'
+                                    onClientUploadComplete={(res) => {
+                                        // Do something with the response
+                                        console.log('Files: ', res);
+                                        alert('Upload Completed');
+                                    }}
+                                    onUploadError={(error: Error) => {
+                                        // Do something with the error.
+                                        alert(`ERROR! ${error.message}`);
+                                    }}
+                                />
                             </ModalBody>
                             <ModalFooter>
                                 <Button

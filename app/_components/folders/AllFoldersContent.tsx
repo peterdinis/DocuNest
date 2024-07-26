@@ -33,7 +33,7 @@ const AllFoldersContent: FC = () => {
     };
 
     if (isLoading) {
-        return <Loading />
+        return <Loading />;
     }
 
     if (isError) {

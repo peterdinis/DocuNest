@@ -94,14 +94,15 @@ const DocInfo: FC = () => {
     };
 
     const handleDownload = () => {
-        const blob = new Blob([description], { type: 'text/plain;charset=utf-8' });
+        const blob = new Blob([description], {
+            type: 'text/plain;charset=utf-8',
+        });
         saveAs(blob, `${title}.txt`);
     };
 
-
     return (
         <div>
-            <h2 className='prose-h2: prose mt-5 flex dark:text-white justify-center align-top text-3xl'>
+            <h2 className='prose-h2: prose mt-5 flex justify-center align-top text-3xl dark:text-white'>
                 Document Info
             </h2>
 

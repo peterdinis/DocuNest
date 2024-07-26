@@ -15,7 +15,7 @@ const usePaginatedFolders = ({ query, page }: UsePaginatedFoldersOptions) => {
         staleTime: Infinity,
         refetchIntervalInBackground: true,
         refetchOnWindowFocus: true,
-        refetchOnMount: true
+        refetchOnMount: true,
     });
 };
 

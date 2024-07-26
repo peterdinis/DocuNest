@@ -11,24 +11,28 @@ import Loading from '../shared/Loading';
 const SettingsContent: FC = () => {
     const { data: session } = useSession();
 
-    const {data, isLoading, isError} = useUserDetail({
-        id: session?.user.id
+    const { data, isLoading, isError } = useUserDetail({
+        id: session?.user.id,
     });
 
-    if(isLoading) {
-        return <Loading />
+    if (isLoading) {
+        return <Loading />;
     }
 
-    if(isError) {
-        return <p className='text-xl font-bold text-red-800'>Something went wrong</p>
+    if (isError) {
+        return (
+            <p className='text-xl font-bold text-red-800'>
+                Something went wrong
+            </p>
+        );
     }
-    
+
     return (
         <div className='flex h-screen w-full flex-col'>
             <Header text='Settings' />
             <main className='w-full flex-1 overflow-auto p-6 sm:p-8 lg:p-10'>
                 <section>
-                    <Card className='rounded-lg bg-white dark:bg-zinc-800 p-6 shadow'>
+                    <Card className='rounded-lg bg-white p-6 shadow dark:bg-zinc-800'>
                         <CardHeader className='mb-6 text-xl font-semibold'>
                             General
                         </CardHeader>
@@ -61,7 +65,7 @@ const SettingsContent: FC = () => {
                                     htmlFor='font-size'
                                     className='block text-sm font-bold text-gray-700 dark:text-white'
                                 >
-                                   Subscription type
+                                    Subscription type
                                 </label>
                                 TODO: LATER ADD
                             </div>
@@ -71,7 +75,7 @@ const SettingsContent: FC = () => {
                                     htmlFor='font-size'
                                     className='block text-sm font-bold text-gray-700 dark:text-white'
                                 >
-                                   Created Account
+                                    Created Account
                                 </label>
                                 {format(data.createdAt, 'yyyy-MM-dd')}
                             </div>
@@ -81,7 +85,7 @@ const SettingsContent: FC = () => {
                                     htmlFor='font-size'
                                     className='block text-sm font-bold text-gray-700 dark:text-white'
                                 >
-                                   Created documents
+                                    Created documents
                                 </label>
                                 {data.documents.length}
                             </div>
@@ -91,7 +95,7 @@ const SettingsContent: FC = () => {
                                     htmlFor='font-size'
                                     className='block text-sm font-bold text-gray-700 dark:text-white'
                                 >
-                                   Created folders
+                                    Created folders
                                 </label>
                                 {data.folders.length}
                             </div>

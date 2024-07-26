@@ -40,11 +40,11 @@ const Sidebar: FC = () => {
                     true,
             })}
         >
-            <div className='bg-white dark:bg-zinc-800 text-black dark:text-white'>
+            <div className='bg-white text-black dark:bg-zinc-800 dark:text-white'>
                 <button onClick={() => setSidebarCollapsed((prev) => !prev)}>
                     {collapsed === true ? (
                         <Menu className='h-7 w-7' />
-                ) : (
+                    ) : (
                         <XCircle className='h-7 w-7' />
                     )}
                 </button>
@@ -57,7 +57,7 @@ const Sidebar: FC = () => {
                     {collapsed === false ? (
                         <>
                             <div>
-                                <span className='prose-span: prose dark:text-white ml-5 mt-4 p-2 text-xl font-bold'>
+                                <span className='prose-span: prose ml-5 mt-4 p-2 text-xl font-bold dark:text-white'>
                                     Docu Nest
                                 </span>
                                 <div className='mt-8'>
@@ -107,9 +107,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
                                         <Settings />
-                                        <Link href='/settings'>
-                                            Settings
-                                        </Link>
+                                        <Link href='/settings'>Settings</Link>
                                     </Button>
                                 </div>
                             </div>

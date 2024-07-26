@@ -33,10 +33,10 @@ export default function RootLayout({
                         <ThemeProvider>
                             <QueryProvider>
                                 <SessionAppProvider>
-                                        <Navigation />
-                                        {children}
-                                        <ToastContainer />
-                                        <ScrollToTop />
+                                    <Navigation />
+                                    {children}
+                                    <ToastContainer />
+                                    <ScrollToTop />
                                 </SessionAppProvider>
                             </QueryProvider>
                         </ThemeProvider>

@@ -1,8 +1,8 @@
-import { Loader2 } from "lucide-react";
-import { FC } from "react";
+import { Loader2 } from 'lucide-react';
+import { FC } from 'react';
 
 const Loading: FC = () => {
-    return <Loader2 className="animate-spin w-8 h-8 dark:text-white" />
-}
+    return <Loader2 className='h-8 w-8 animate-spin dark:text-white' />;
+};
 
 export default Loading;
