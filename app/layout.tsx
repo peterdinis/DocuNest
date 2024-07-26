@@ -11,7 +11,6 @@ import 'react-quill/dist/quill.snow.css';
 import QueryProvider from './_components/shared/providers/QueryProvider';
 import SessionAppProvider from './_components/shared/providers/SessionProvider';
 import { Suspense } from 'react';
-import { EdgeStoreProvider } from './_utils/edgestore';
 import Loading from './_components/shared/Loading';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -34,12 +33,10 @@ export default function RootLayout({
                         <ThemeProvider>
                             <QueryProvider>
                                 <SessionAppProvider>
-                                    <EdgeStoreProvider>
                                         <Navigation />
                                         {children}
                                         <ToastContainer />
                                         <ScrollToTop />
-                                    </EdgeStoreProvider>
                                 </SessionAppProvider>
                             </QueryProvider>
                         </ThemeProvider>

@@ -12,12 +12,10 @@ import {
     Input,
 } from '@nextui-org/react';
 import { Plus } from 'lucide-react';
-import { useEdgeStore } from '@/app/_utils/edgestore';
 
 const UploadDoc: FC = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [file, setFile] = useState<any>(null);
-    const { edgestore } = useEdgeStore();
 
     return (
         <>
@@ -40,24 +38,7 @@ const UploadDoc: FC = () => {
                                         }}
                                     />
                                     <Button variant='solid' color='success' className='mt-5'
-                                        onClick={async () => {
-                                            if (file) {
-                                                const res =
-                                                    await edgestore.publicFiles.upload(
-                                                        {
-                                                            file,
-                                                            onProgressChange: (
-                                                                progress,
-                                                            ) => {
-                                                                // you can use this to show a progress bar
-                                                                console.log(
-                                                                    progress,
-                                                                );
-                                                            },
-                                                        },
-                                                    );
-                                            }
-                                        }}
+                                        
                                     >
                                         Upload
                                     </Button>
