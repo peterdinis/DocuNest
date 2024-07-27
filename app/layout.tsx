@@ -12,6 +12,7 @@ import QueryProvider from './_components/shared/providers/QueryProvider';
 import SessionAppProvider from './_components/shared/providers/SessionProvider';
 import { Suspense } from 'react';
 import Loading from './_components/shared/Loading';
+import SessionCheckHelper from './_components/auth/SessionCheckHelper';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,10 +34,12 @@ export default function RootLayout({
                         <ThemeProvider>
                             <QueryProvider>
                                 <SessionAppProvider>
+                                    <SessionCheckHelper>
                                     <Navigation />
                                     {children}
                                     <ToastContainer />
                                     <ScrollToTop />
+                                    </SessionCheckHelper>
                                 </SessionAppProvider>
                             </QueryProvider>
                         </ThemeProvider>
