@@ -17,8 +17,8 @@ const useCreateDocument = () => {
         onSuccess: () => {
             toast.success('New document was created');
             queryClient.invalidateQueries({
-                queryKey: ["myPaginatedDocuments"]
-            })
+                queryKey: ['myPaginatedDocuments'],
+            });
         },
         onError: () => {
             toast.error('Failed to create document');

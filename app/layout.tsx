@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 import './globals.css';
 import NextUiProvider from './_components/shared/providers/NextUiProvider';
 import Navigation from './_components/shared/Navigation';
@@ -11,10 +11,12 @@ import 'react-quill/dist/quill.snow.css';
 import QueryProvider from './_components/shared/providers/QueryProvider';
 import SessionAppProvider from './_components/shared/providers/SessionProvider';
 import { Suspense } from 'react';
-import { EdgeStoreProvider } from './_utils/edgestore';
-import { Loader2 } from 'lucide-react';
+import Loading from './_components/shared/Loading';
+import SessionCheckHelper from './_components/auth/SessionCheckHelper';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Roboto({
+    weight: "500"
+});
 
 export const metadata: Metadata = {
     title: 'DocuNest',
@@ -30,16 +32,16 @@ export default function RootLayout({
         <html lang='en'>
             <body className={inter.className}>
                 <NextUiProvider>
-                    <Suspense fallback={<Loader2 className='animate-bounce w-8 h-8' />}>
+                    <Suspense fallback={<Loading />}>
                         <ThemeProvider>
                             <QueryProvider>
                                 <SessionAppProvider>
-                                    <EdgeStoreProvider>
+                                    <SessionCheckHelper>
                                         <Navigation />
                                         {children}
-                                        <ToastContainer />
+                                        <ToastContainer closeOnClick pauseOnHover draggable />
                                         <ScrollToTop />
-                                    </EdgeStoreProvider>
+                                    </SessionCheckHelper>
                                 </SessionAppProvider>
                             </QueryProvider>
                         </ThemeProvider>

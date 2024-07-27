@@ -79,7 +79,11 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
     }, [isDirty, folderName]);
 
     const handleModalClose = () => {
-        if (!isDirty || (folderName ?? '').trim().length === 0 || confirm('You have unsaved changes. Are you sure you want to leave?')) {
+        if (
+            !isDirty ||
+            (folderName ?? '').trim().length === 0 ||
+            confirm('You have unsaved changes. Are you sure you want to leave?')
+        ) {
             onClose();
         }
     };
@@ -90,7 +94,7 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
             <Modal backdrop={'blur'} isOpen={isOpen} onClose={handleModalClose}>
                 <ModalContent>
                     <>
-                        <ModalHeader className='prose-h2: prose flex flex-col dark:text-white gap-1 text-xl'>
+                        <ModalHeader className='prose-h2: prose flex flex-col gap-1 text-xl dark:text-white'>
                             Create new folder
                         </ModalHeader>
                         <form onSubmit={handleSubmit(handleCreateFolder)}>
@@ -101,7 +105,10 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
                                 />
                                 {errors.name && (
                                     <span className='text-red-500'>
-                                        {errors.name.message as unknown as ReactNode}
+                                        {
+                                            errors.name
+                                                .message as unknown as ReactNode
+                                        }
                                     </span>
                                 )}
                             </ModalBody>

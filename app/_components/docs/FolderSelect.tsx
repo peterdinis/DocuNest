@@ -2,9 +2,9 @@
 
 import { Select, SelectItem } from '@nextui-org/react';
 import { FC, useMemo, ChangeEvent } from 'react';
-import { Loader2 } from 'lucide-react';
 import { Folder } from '@prisma/client';
 import useFolders from '@/app/_hooks/useFolders';
+import Loading from '../shared/Loading';
 
 interface FolderSelectProps {
     onSelectFolder?: (folderId: string) => void;
@@ -26,7 +26,7 @@ const FolderSelect: FC<FolderSelectProps> = ({ onSelectFolder }) => {
     if (isLoading) {
         return (
             <div className='flex h-full w-full items-center justify-center'>
-                <Loader2 className='h-8 w-8 animate-spin' />
+                <Loading />
             </div>
         );
     }
@@ -41,9 +41,7 @@ const FolderSelect: FC<FolderSelectProps> = ({ onSelectFolder }) => {
         );
     }
 
-    const handleSelectChange = (
-        event: ChangeEvent<HTMLSelectElement>
-    ) => {
+    const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const folderId = event.target.value;
         if (onSelectFolder) {
             onSelectFolder(folderId);

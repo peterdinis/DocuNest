@@ -18,7 +18,7 @@ const usePaginatedDocuments = ({
         staleTime: Infinity,
         refetchIntervalInBackground: true,
         refetchOnWindowFocus: true,
-        refetchOnMount: true
+        refetchOnMount: true,
     });
 };
 

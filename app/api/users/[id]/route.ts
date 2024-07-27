@@ -1,5 +1,5 @@
-import { db } from "@/app/_utils/database";
-import { NextRequest, NextResponse } from "next/server";
+import { db } from '@/app/_utils/database';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
     const url = new URL(request.url);
@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
             where: { id },
             include: {
                 documents: true,
-                folders: true
+                folders: true,
             },
         });
 

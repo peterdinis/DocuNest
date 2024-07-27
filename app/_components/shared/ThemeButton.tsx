@@ -24,13 +24,13 @@ const ThemeButton: FC = () => {
 
     return (
         <div
-            data-cy="theme-button"
+            data-cy='theme-button'
             onClick={toggleTheme}
             className={`relative flex h-8 w-16 cursor-pointer items-center rounded-full bg-teal-500 p-1 dark:bg-gray-700`}
         >
             <Moon className='h-[17px] w-[17px] fill-white'></Moon>
             <div
-                data-cy="toggle-btn-theme"
+                data-cy='toggle-btn-theme'
                 className={`shadow-customShadow-md absolute h-6 w-6 rounded-full bg-white ${
                     isActive
                         ? 'translate-x-0 transition-transform'

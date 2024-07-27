@@ -1,7 +1,6 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
-import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { FC, useMemo, useState, useEffect, useCallback } from 'react';
 import { Button, ButtonGroup, Input } from '@nextui-org/react';
@@ -20,6 +19,7 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import useDocumentDetail from '@/app/_hooks/useDocumentDetail';
 import { saveAs } from 'file-saver';
+import Loading from '../shared/Loading';
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(
@@ -78,7 +78,7 @@ const DocInfo: FC = () => {
     );
 
     if (isLoading) {
-        return <Loader2 className='h-8 w-8 animate-spin' />;
+        return <Loading />;
     }
 
     if (isError) {
@@ -98,13 +98,15 @@ const DocInfo: FC = () => {
     };
 
     const handleDownload = () => {
-        const blob = new Blob([description], { type: 'text/plain;charset=utf-8' });
+        const blob = new Blob([description], {
+            type: 'text/plain;charset=utf-8',
+        });
         saveAs(blob, `${title}.txt`);
     };
 
     return (
         <div>
-            <h2 className='prose-h2: prose mt-5 flex dark:text-white justify-center align-top text-3xl'>
+            <h2 className='prose-h2: prose mt-5 flex justify-center align-top text-3xl dark:text-white'>
                 Document Info
             </h2>
 

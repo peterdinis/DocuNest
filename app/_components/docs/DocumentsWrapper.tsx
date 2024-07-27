@@ -3,7 +3,7 @@
 import { FC, useState, useEffect, ChangeEvent } from 'react';
 import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
-import { Ghost, Loader2, Search } from 'lucide-react';
+import { Ghost, Search } from 'lucide-react';
 import AppPagination from '../shared/AppPagination';
 import { Document } from '@prisma/client';
 import { Button, Card } from '@nextui-org/react';
@@ -13,6 +13,7 @@ import { useDebounce } from '@/app/_hooks/useDebounce';
 import DeleteDocModal from './DeleteDocModal';
 import usePaginatedDocuments from '@/app/_hooks/usePaginatedDocuments';
 import UploadDoc from './UploadDoc';
+import Loading from '../shared/Loading';
 
 const DocumentsWrapper: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -34,7 +35,7 @@ const DocumentsWrapper: FC = () => {
     };
 
     if (isLoading) {
-        return <Loader2 className='h-8 w-8 animate-spin' />;
+        return <Loading />;
     }
 
     if (isError) {
@@ -47,7 +48,7 @@ const DocumentsWrapper: FC = () => {
 
     return (
         <>
-            <div className='flex justify-center align-top '>
+            <div className='flex justify-center align-top'>
                 <Header text='My Documents' />
             </div>
             <Input
