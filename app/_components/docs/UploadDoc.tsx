@@ -31,7 +31,6 @@ const UploadDoc: FC = () => {
                             </ModalHeader>
                             <ModalBody>
                                 <UploadDropzone
-                                    className='text-black'
                                     endpoint='fileUploader'
                                     onClientUploadComplete={(res) => {
                                         toast.success("Document was uploaded");
