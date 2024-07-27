@@ -35,10 +35,10 @@ export default function RootLayout({
                             <QueryProvider>
                                 <SessionAppProvider>
                                     <SessionCheckHelper>
-                                    <Navigation />
-                                    {children}
-                                    <ToastContainer />
-                                    <ScrollToTop />
+                                        <Navigation />
+                                        {children}
+                                        <ToastContainer closeOnClick pauseOnHover draggable />
+                                        <ScrollToTop />
                                     </SessionCheckHelper>
                                 </SessionAppProvider>
                             </QueryProvider>
