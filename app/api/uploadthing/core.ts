@@ -2,6 +2,7 @@ import { getServerSession } from 'next-auth';
 import { createUploadthing, type FileRouter } from 'uploadthing/next';
 import { UploadThingError } from 'uploadthing/server';
 import authOptions from '../auth/authOptions';
+import { db } from '@/app/_utils/database';
 
 const f = createUploadthing();
 
@@ -16,10 +17,14 @@ export const uploadRouter = {
             return { userId: session.user.id };
         })
         .onUploadComplete(async ({ metadata, file }) => {
-            // This code RUNS ON YOUR SERVER after upload
-            console.log('Upload complete for userId:', metadata.userId);
-            console.log('file url', file.url);
-            /* TODO: Create new document in prisma for specific user */
+            await db.document.create({
+                data: {
+                    id: file.customId as unknown as string,
+                    title: file.name,
+                    description: file.name, // TODO: Update somehow later
+                    user: metadata.userId
+                }
+            });
             return { uploadedBy: metadata.userId };
         }),
 } satisfies FileRouter;
