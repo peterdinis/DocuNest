@@ -13,6 +13,7 @@ import SessionAppProvider from './_components/shared/providers/SessionProvider';
 import { Suspense } from 'react';
 import Loading from './_components/shared/Loading';
 import SessionCheckHelper from './_components/auth/SessionCheckHelper';
+import "@uploadthing/react/styles.css";
 
 const inter = Roboto({
     weight: "500"

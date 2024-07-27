@@ -31,6 +31,7 @@ const UploadDoc: FC = () => {
                             </ModalHeader>
                             <ModalBody>
                                 <UploadButton
+                                    className='text-black'
                                     endpoint='fileUploader'
                                     onClientUploadComplete={(res) => {
                                         toast.success("Document was uploaded");
