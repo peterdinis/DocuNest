@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 import './globals.css';
 import NextUiProvider from './_components/shared/providers/NextUiProvider';
 import Navigation from './_components/shared/Navigation';
@@ -14,7 +14,9 @@ import { Suspense } from 'react';
 import Loading from './_components/shared/Loading';
 import SessionCheckHelper from './_components/auth/SessionCheckHelper';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Roboto({
+    weight: "500"
+});
 
 export const metadata: Metadata = {
     title: 'DocuNest',
