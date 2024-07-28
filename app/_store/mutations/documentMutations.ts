@@ -20,6 +20,6 @@ export const updateDocument = async (
 };
 
 export const updateDocumentFolder = async (documentId: string, folderId: string) => {
-    const response = await axios.put(`/api/documents/${documentId}/folder`, { folderId });
+    const response = await axios.put(`/api/docs/add-to-folder/${documentId}`, { folderId });
     return response.data;
   };
