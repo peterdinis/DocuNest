@@ -3,11 +3,12 @@ import { createUploadthing, type FileRouter } from 'uploadthing/next';
 import { UploadThingError } from 'uploadthing/server';
 import authOptions from '../auth/authOptions';
 import { db } from '@/app/_utils/database';
+import { v4 as uuidv4 } from 'uuid';
 
 const f = createUploadthing();
 
 export const uploadRouter = {
-    fileUploader: f({ image: { maxFileSize: '8MB' } })
+    fileUploader: f(["application/pdf", "text/plain"])
         .middleware(async ({ req }) => {
             const session = await getServerSession(authOptions);
 
@@ -17,12 +18,17 @@ export const uploadRouter = {
             return { userId: session.user.id };
         })
         .onUploadComplete(async ({ metadata, file }) => {
+            const session = await getServerSession(authOptions);
+
+            if (!session || !session.user) {
+                throw new UploadThingError('Unauthorized');
+            }
             await db.document.create({
                 data: {
-                    id: file.customId! as unknown as string,
+                    id: uuidv4(),
                     title: file.name,
                     description: file.name, // TODO: Update somehow later
-                    user: metadata.userId
+                    user: session.user,
                 }
             });
             return { uploadedBy: metadata.userId };
