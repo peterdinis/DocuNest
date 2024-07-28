@@ -59,7 +59,7 @@ export async function PUT(request: NextRequest) {
             data: { folderId },
         });
 
-        return NextResponse.json('OFOFOFOF', { status: 200 });
+        return NextResponse.json('Document updated successfully', { status: 200 });
     } catch (error) {
         console.error('Error updating document:', error);
         return NextResponse.json({ error }, { status: 500 });
