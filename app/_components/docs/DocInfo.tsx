@@ -1,6 +1,5 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import { FC, useMemo, useState, useEffect, useCallback } from 'react';
 import { Button, ButtonGroup, Input } from '@nextui-org/react';
@@ -9,17 +8,11 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { formats, modules } from './quill-config';
 import FolderSelect from './FolderSelect';
-import {
-    updateDocument,
-    UpdateDocumentData,
-    updateDocumentFolder,
-} from '@/app/_store/mutations/documentMutations';
-import { queryClient } from '@/app/_store/queryClient';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
-import useDocumentDetail from '@/app/_hooks/useDocumentDetail';
 import { saveAs } from 'file-saver';
 import Loading from '../shared/Loading';
+import useDocumentDetail from '@/app/_hooks/useDocumentDetail';
+import { useAddToFolder } from '@/app/_hooks/useAddToFolder';
+import { useUpdateDocument } from '@/app/_hooks/useUpdateDocument';
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(
@@ -32,8 +25,8 @@ const DocInfo: FC = () => {
     const [description, setDescription] = useState<string>('');
 
     const { data, isLoading, isError } = useDocumentDetail({ id, isEditMode });
-
-    const router = useRouter();
+    const addToFolderMut = useAddToFolder(id);
+    const updateDocumentMut = useUpdateDocument(id);
 
     useEffect(() => {
         if (data) {
@@ -42,52 +35,12 @@ const DocInfo: FC = () => {
         }
     }, [data]);
 
-    const addToFolderMut = useMutation({
-        mutationKey: ['addToFolder'],
-        mutationFn: (folderId: string) => updateDocumentFolder(id, folderId),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['docDetail', id] });
-            toast.success('Document added to folder');
-        },
-        onError: () => {
-            toast.error('Failed to add document to folder');
-        },
-    });
-
-    const updateDocumentMut = useMutation({
-        mutationKey: ['updateDocument'],
-        mutationFn: (data: UpdateDocumentData) => updateDocument(id, data),
-        onSuccess: (updatedData) => {
-            setIsEditMode(false);
-            setTitle(updatedData.title);
-            setDescription(updatedData.description);
-            toast.success('Document was edited');
-            queryClient.invalidateQueries({ queryKey: ['docDetail', id] });
-            router.push('/dashboard');
-        },
-        onError: () => {
-            toast.error('Document was not edited');
-        },
-    });
-
     const handleFolderSelect = useCallback(
         (folderId: string) => {
             addToFolderMut.mutate(folderId);
         },
-        [id],
+        [addToFolderMut],
     );
-
-    if (isLoading) {
-        return <Loading />;
-    }
-
-    if (isError) {
-        return (
-            <p className='text-xl font-bold text-red-700'>
-                Something went wrong
-            </p>
-        );
-    }
 
     const handleEditToggle = () => {
         setIsEditMode(!isEditMode);
@@ -103,6 +56,18 @@ const DocInfo: FC = () => {
         });
         saveAs(blob, `${title}.txt`);
     };
+
+    if (isLoading) {
+        return <Loading />;
+    }
+
+    if (isError) {
+        return (
+            <p className='text-xl font-bold text-red-700'>
+                Something went wrong
+            </p>
+        );
+    }
 
     return (
         <div>
