@@ -22,16 +22,16 @@ import {
 import { DeleteIcon, EditIcon, EyeIcon, Trash } from 'lucide-react';
 import { columns, users } from './data';
 
-const statusColorMap = {
+const statusColorMap: Record<string, 'success' | 'danger' | 'warning'> = {
     active: 'success',
     paused: 'danger',
     vacation: 'warning',
-} as any;
+};
 
 const TrashModal: FC = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-    const renderCell = useCallback((user: any, columnKey: any) => {
+    const renderCell = useCallback((user: any, columnKey: string | number) => {
         const cellValue = user[columnKey];
 
         switch (columnKey) {
@@ -98,7 +98,7 @@ const TrashModal: FC = () => {
                 onClick={onOpen}
                 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
             >
-                <Trash /> <span>Open Trash</span>
+                <Trash /> Open Trash
             </button>
             <Modal size='3xl' backdrop='blur' isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
