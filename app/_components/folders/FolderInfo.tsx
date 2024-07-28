@@ -3,21 +3,37 @@
 import { useParams } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Button, ButtonGroup, Input } from '@nextui-org/react';
+import {
+    Button,
+    ButtonGroup,
+    Input,
+    Table,
+    TableHeader,
+    TableColumn,
+    TableBody,
+    TableRow,
+    TableCell,
+    Pagination,
+    Spinner,
+} from '@nextui-org/react';
 import useFolderDetail from '@/app/_hooks/useFolderDetail';
 import useUpdateFolder from '@/app/_hooks/useUpdateFolder';
 import Loading from '../shared/Loading';
+import { DocumentTableType } from '@/app/_types/documentTypes';
 
 const FolderInfo: FC = () => {
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
     const [name, setName] = useState('');
+    const [page, setPage] = useState(1);
+    const [pages, setPages] = useState(1);
 
     const { data, isLoading, isError } = useFolderDetail({ id, isEditMode });
 
     useEffect(() => {
         if (data) {
             setName(data.name);
+            setPages(Math.ceil((data.documents?.length ?? 0) / 10)); // Assuming 10 items per page
         }
     }, [data]);
 
@@ -83,7 +99,48 @@ const FolderInfo: FC = () => {
                     )}
                 </form>
             </div>
-            TODO: Display documents later
+            <div className='mt-5'>
+                <Table
+                    aria-label='Example table with client async pagination'
+                    bottomContent={
+                        pages > 0 ? (
+                            <div className='flex w-full justify-center'>
+                                <Pagination
+                                    isCompact
+                                    showControls
+                                    showShadow
+                                    color='primary'
+                                    page={page}
+                                    total={pages}
+                                    onChange={(page) => setPage(page)}
+                                />
+                            </div>
+                        ) : null
+                    }
+                >
+                    <TableHeader>
+                        <TableColumn key='title'>Title</TableColumn>
+                        <TableColumn key='description'>Description</TableColumn>
+                        <TableColumn key='createAt'>Create At</TableColumn>
+                        <TableColumn key='updateAt'>Update At</TableColumn>
+                        <TableColumn key='userId'>User Id</TableColumn>
+                    </TableHeader>
+                    <TableBody
+                        items={data?.documents ?? []}
+                        loadingContent={<Spinner />}
+                    >
+                        {(item: DocumentTableType) => (
+                            <TableRow key={item?.id}>
+                                <TableCell>{item.title}</TableCell>
+                                <TableCell>{item.description}</TableCell>
+                                <TableCell>{item.createAt}</TableCell>
+                                <TableCell>{item.updateAt}</TableCell>
+                                <TableCell>{item.userId}</TableCell>
+                            </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
+            </div>
         </div>
     );
 };
