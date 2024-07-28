@@ -44,13 +44,12 @@ const FolderSelect: FC<FolderSelectProps> = ({ onSelectFolder }) => {
     return (
         <div className='mx-auto w-full max-w-md px-4 sm:px-6 lg:px-8'>
             <Select
-                className='w-full'
+                 className="max-w-xs" 
                 scrollShadowProps={{
                     isEnabled: true,
                 }}
                 size='lg'
-                label='Select folder'
-                placeholder='Choose the folder where you will put this document'
+                placeholder='Select folder for document'
                 onChange={(event) => {
                     if (onSelectFolder) {
                         onSelectFolder(event.target.value);

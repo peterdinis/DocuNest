@@ -1,6 +1,5 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import { FC, useMemo, useState, useEffect, useCallback } from 'react';
 import { Button, ButtonGroup, Input } from '@nextui-org/react';
@@ -9,17 +8,13 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { formats, modules } from './quill-config';
 import FolderSelect from './FolderSelect';
-import {
-    updateDocument,
-    UpdateDocumentData,
-    updateDocumentFolder,
-} from '@/app/_store/mutations/documentMutations';
-import { queryClient } from '@/app/_store/queryClient';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
-import useDocumentDetail from '@/app/_hooks/useDocumentDetail';
 import { saveAs } from 'file-saver';
 import Loading from '../shared/Loading';
+import useDocumentDetail from '@/app/_hooks/useDocumentDetail';
+import { useAddToFolder } from '@/app/_hooks/useAddToFolder';
+import { useUpdateDocument } from '@/app/_hooks/useUpdateDocument';
+import useFolderDetail from '@/app/_hooks/useFolderDetail';
+import { Folder } from 'lucide-react';
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(
@@ -32,8 +27,10 @@ const DocInfo: FC = () => {
     const [description, setDescription] = useState<string>('');
 
     const { data, isLoading, isError } = useDocumentDetail({ id, isEditMode });
+    const addToFolderMut = useAddToFolder(id);
+    const updateDocumentMut = useUpdateDocument(id);
 
-    const router = useRouter();
+    const { data: editData, isLoading: editLoading, isError: editError } = useFolderDetail({ id: data?.folderId, isEditMode });
 
     useEffect(() => {
         if (data) {
@@ -42,52 +39,12 @@ const DocInfo: FC = () => {
         }
     }, [data]);
 
-    const addToFolderMut = useMutation({
-        mutationKey: ['addToFolder'],
-        mutationFn: (folderId: string) => updateDocumentFolder(id, folderId),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['docDetail', id] });
-            toast.success('Document added to folder');
-        },
-        onError: () => {
-            toast.error('Failed to add document to folder');
-        },
-    });
-
-    const updateDocumentMut = useMutation({
-        mutationKey: ['updateDocument'],
-        mutationFn: (data: UpdateDocumentData) => updateDocument(id, data),
-        onSuccess: (updatedData) => {
-            setIsEditMode(false);
-            setTitle(updatedData.title);
-            setDescription(updatedData.description);
-            toast.success('Document was edited');
-            queryClient.invalidateQueries({ queryKey: ['docDetail', id] });
-            router.push('/dashboard');
-        },
-        onError: () => {
-            toast.error('Document was not edited');
-        },
-    });
-
     const handleFolderSelect = useCallback(
         (folderId: string) => {
             addToFolderMut.mutate(folderId);
         },
-        [id],
+        [addToFolderMut],
     );
-
-    if (isLoading) {
-        return <Loading />;
-    }
-
-    if (isError) {
-        return (
-            <p className='text-xl font-bold text-red-700'>
-                Something went wrong
-            </p>
-        );
-    }
 
     const handleEditToggle = () => {
         setIsEditMode(!isEditMode);
@@ -103,6 +60,31 @@ const DocInfo: FC = () => {
         });
         saveAs(blob, `${title}.txt`);
     };
+
+    if (isLoading || editLoading) {
+        return <Loading />;
+    }
+
+    if (isError || editError) {
+        return (
+            <p className='text-xl font-bold text-red-700'>
+                Something went wrong
+            </p>
+        );
+    }
+
+    const folderSelectOrName = useMemo(() => {
+        if (isEditMode) {
+            return <FolderSelect onSelectFolder={handleFolderSelect} />;
+        } else if (data.folderId !== null) {
+            return (
+                <p className='break-all'>
+                    <span><Folder /> {editData?.name}</span>
+                </p>
+            );
+        }
+        return null;
+    }, [isEditMode, data.folderId, editData?.name, handleFolderSelect]);
 
     return (
         <div>
@@ -123,12 +105,13 @@ const DocInfo: FC = () => {
                     {isEditMode ? 'Cancel Edit' : 'Enable Edit'}
                 </Button>
                 <div className='ml-8'>
-                    <FolderSelect onSelectFolder={handleFolderSelect} />
+                    {folderSelectOrName}
                 </div>
                 <Button
                     onClick={handleDownload}
                     variant='solid'
                     color='success'
+                    className='ml-5'
                 >
                     Download
                 </Button>
