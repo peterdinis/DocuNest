@@ -1,15 +1,17 @@
-"use client";
+'use client';
 
-import { useSession } from "next-auth/react";
-import { useRouter, usePathname } from "next/navigation";
-import { FC, ReactNode, useEffect } from "react";
-import Loading from "../shared/Loading";
+import { useSession } from 'next-auth/react';
+import { useRouter, usePathname } from 'next/navigation';
+import { FC, ReactNode, useEffect } from 'react';
+import Loading from '../shared/Loading';
 
 interface ISessionCheckHelperProps {
     children?: ReactNode;
 }
 
-const SessionCheckHelper: FC<ISessionCheckHelperProps> = ({ children }: ISessionCheckHelperProps) => {
+const SessionCheckHelper: FC<ISessionCheckHelperProps> = ({
+    children,
+}: ISessionCheckHelperProps) => {
     const { data: session, status } = useSession();
     const router = useRouter();
     const pathname = usePathname();
@@ -29,7 +31,7 @@ const SessionCheckHelper: FC<ISessionCheckHelperProps> = ({ children }: ISession
         return <>{children}</>;
     }
 
-    return children
-}
+    return children;
+};
 
 export default SessionCheckHelper;

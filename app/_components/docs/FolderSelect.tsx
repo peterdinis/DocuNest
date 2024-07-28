@@ -44,7 +44,7 @@ const FolderSelect: FC<FolderSelectProps> = ({ onSelectFolder }) => {
     return (
         <div className='mx-auto w-full max-w-md px-4 sm:px-6 lg:px-8'>
             <Select
-                 className="max-w-xs" 
+                className='max-w-xs'
                 scrollShadowProps={{
                     isEnabled: true,
                 }}

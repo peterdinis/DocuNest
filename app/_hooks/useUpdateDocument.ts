@@ -1,5 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import { updateDocument, UpdateDocumentData } from '@/app/_store/mutations/documentMutations';
+import {
+    updateDocument,
+    UpdateDocumentData,
+} from '@/app/_store/mutations/documentMutations';
 import { queryClient } from '@/app/_store/queryClient';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';

@@ -26,7 +26,11 @@ const HeroWrapper: FC = () => {
                             <span className='text-indigo-700'>Nest</span>
                         </h1>
                         <p className='prose-p: prose mt-5 text-center text-xl font-bold text-gray-600 dark:text-white sm:mt-10 sm:text-lg lg:w-10/12'>
-                        Welcome to DocuNest, your ultimate platform for managing and organizing documents with the power of AI. Streamline your workflow, enhance productivity, and keep all your important files in one secure place.
+                            Welcome to DocuNest, your ultimate platform for
+                            managing and organizing documents with the power of
+                            AI. Streamline your workflow, enhance productivity,
+                            and keep all your important files in one secure
+                            place.
                         </p>
                     </div>
                     <div className='flex items-center justify-center'>

@@ -5,4 +5,4 @@ export type DocumentTableType = {
     createAt: string | Date;
     updateAt: string | Date;
     userId: string;
-}
+};
