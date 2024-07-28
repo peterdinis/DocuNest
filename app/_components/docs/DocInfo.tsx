@@ -13,6 +13,8 @@ import Loading from '../shared/Loading';
 import useDocumentDetail from '@/app/_hooks/useDocumentDetail';
 import { useAddToFolder } from '@/app/_hooks/useAddToFolder';
 import { useUpdateDocument } from '@/app/_hooks/useUpdateDocument';
+import useFolderDetail from '@/app/_hooks/useFolderDetail';
+import { Folder } from 'lucide-react';
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(
@@ -26,7 +28,10 @@ const DocInfo: FC = () => {
 
     const { data, isLoading, isError } = useDocumentDetail({ id, isEditMode });
     const addToFolderMut = useAddToFolder(id);
+    console.log("D", data);
     const updateDocumentMut = useUpdateDocument(id);
+
+    const { data: editData, isLoading: editLoading, isError: editError } = useFolderDetail({ id: data && data.folderId, isEditMode });
 
     useEffect(() => {
         if (data) {
@@ -57,11 +62,11 @@ const DocInfo: FC = () => {
         saveAs(blob, `${title}.txt`);
     };
 
-    if (isLoading) {
+    if (isLoading ||editLoading) {
         return <Loading />;
     }
 
-    if (isError) {
+    if (isError || editError) {
         return (
             <p className='text-xl font-bold text-red-700'>
                 Something went wrong
@@ -88,12 +93,19 @@ const DocInfo: FC = () => {
                     {isEditMode ? 'Cancel Edit' : 'Enable Edit'}
                 </Button>
                 <div className='ml-8'>
-                    <FolderSelect onSelectFolder={handleFolderSelect} />
+                    {data.folderId === null ? (
+                        <FolderSelect onSelectFolder={handleFolderSelect} /> 
+                    ): (
+                        <p className='break-all'>
+                            <span><Folder /> {editData.name}</span>
+                        </p>
+                    )}
                 </div>
                 <Button
                     onClick={handleDownload}
                     variant='solid'
                     color='success'
+                    className='ml-5'
                 >
                     Download
                 </Button>
