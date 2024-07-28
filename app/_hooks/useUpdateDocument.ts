@@ -10,7 +10,7 @@ export const useUpdateDocument = (id: string) => {
     return useMutation({
         mutationKey: ['updateDocument', id],
         mutationFn: (data: UpdateDocumentData) => updateDocument(id, data),
-        onSuccess: (updatedData) => {
+        onSuccess: () => {
             toast.success('Document was edited');
             queryClient.invalidateQueries({ queryKey: ['docDetail', id] });
             router.push('/dashboard');
