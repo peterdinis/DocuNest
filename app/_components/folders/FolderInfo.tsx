@@ -21,6 +21,7 @@ import useUpdateFolder from '@/app/_hooks/useUpdateFolder';
 import Loading from '../shared/Loading';
 import { DocumentTableType } from '@/app/_types/documentTypes';
 import {format} from "date-fns"
+import Header from '../shared/Header';
 
 const FolderInfo: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -101,7 +102,9 @@ const FolderInfo: FC = () => {
                 </form>
             </div>
             <div className='mt-5'>
+                <Header text='All Documents in Folder' />
                 <Table
+                    className='mt-5'
                     aria-label='Example table with client async pagination'
                     bottomContent={
                         pages > 0 ? (
@@ -121,10 +124,10 @@ const FolderInfo: FC = () => {
                 >
                     <TableHeader>
                         <TableColumn key='title'>Title</TableColumn>
-                        <TableColumn key='description'>Description</TableColumn>
                         <TableColumn key='createAt'>Created At</TableColumn>
                         <TableColumn key='updateAt'>Updated At</TableColumn>
                         <TableColumn key='userId'>User Id</TableColumn>
+                        <TableColumn key="detail">Detail</TableColumn>
                     </TableHeader>
                     <TableBody
                         items={data?.documents ?? []}
@@ -133,10 +136,10 @@ const FolderInfo: FC = () => {
                         {(item: DocumentTableType) => (
                             <TableRow key={item?.id}>
                                 <TableCell>{item.title}</TableCell>
-                                <TableCell>{item.description}</TableCell>
                                 <TableCell>{format(item.createAt, 'yyyy-MM-dd')}</TableCell>
                                 <TableCell>{format(item.updateAt, 'yyyy-MM-dd')}</TableCell>
                                 <TableCell>{item.userId}</TableCell>
+                                <TableCell><Link href={`/documents/${item.id}`}>Detail</Link></TableCell>
                             </TableRow>
                         )}
                     </TableBody>
