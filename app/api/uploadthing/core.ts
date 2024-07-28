@@ -19,7 +19,7 @@ export const uploadRouter = {
         .onUploadComplete(async ({ metadata, file }) => {
             await db.document.create({
                 data: {
-                    id: file.customId as unknown as string,
+                    id: file.customId! as unknown as string,
                     title: file.name,
                     description: file.name, // TODO: Update somehow later
                     user: metadata.userId
