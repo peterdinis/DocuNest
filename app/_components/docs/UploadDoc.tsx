@@ -11,7 +11,7 @@ import {
     useDisclosure,
 } from '@nextui-org/react';
 import { Plus } from 'lucide-react';
-import { UploadButton, UploadDropzone } from '@/app/_utils/uploadthing';
+import { UploadDropzone } from '@/app/_utils/uploadthing';
 import {toast} from "react-toastify";
 
 const UploadDoc: FC = () => {
