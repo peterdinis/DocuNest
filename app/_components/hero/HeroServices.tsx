@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Edit3, FolderOpen } from 'lucide-react';
+import { Edit3, FolderOpen, Upload } from 'lucide-react';
 import ServiceCard from './ServiceCard';
 
 const HeroServices: FC = () => {
@@ -13,7 +13,7 @@ const HeroServices: FC = () => {
                         with AI-Powered Tools
                     </h2>
                 </div>
-                <div className='mt-16 grid gap-8 sm:grid-cols-1 lg:grid-cols-2'>
+                <div className='mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3'>
                     <ServiceCard
                         icon={<Edit3 />}
                         iconHeaderText={'Intelligent Summarization'}
@@ -25,6 +25,11 @@ const HeroServices: FC = () => {
                         icon={<FolderOpen />}
                         iconHeaderText='Smart Organization'
                         iconHeaderDesc='Organize your notes intelligently based on context and relevance using AI categorization'
+                    />
+                    <ServiceCard
+                        icon={<Upload />}
+                        iconHeaderText='Upload custom documents'
+                        iconHeaderDesc='Seamlessly upload and integrate your documents for enhanced accessibility and analysis.'
                     />
                 </div>
             </div>

@@ -11,7 +11,7 @@ import {
     useDisclosure,
 } from '@nextui-org/react';
 import { Plus } from 'lucide-react';
-import { UploadButton } from '@/app/_utils/uploadthing';
+import { UploadDropzone } from '@/app/_utils/uploadthing';
 import {toast} from "react-toastify";
 
 const UploadDoc: FC = () => {
@@ -30,7 +30,7 @@ const UploadDoc: FC = () => {
                                 Upload Document
                             </ModalHeader>
                             <ModalBody>
-                                <UploadButton
+                                <UploadDropzone
                                     endpoint='fileUploader'
                                     onClientUploadComplete={(res) => {
                                         toast.success("Document was uploaded");
