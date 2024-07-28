@@ -28,10 +28,9 @@ const DocInfo: FC = () => {
 
     const { data, isLoading, isError } = useDocumentDetail({ id, isEditMode });
     const addToFolderMut = useAddToFolder(id);
-    console.log("D", data);
     const updateDocumentMut = useUpdateDocument(id);
 
-    const { data: editData, isLoading: editLoading, isError: editError } = useFolderDetail({ id: data && data.folderId, isEditMode });
+    const { data: editData, isLoading: editLoading, isError: editError } = useFolderDetail({ id: data?.folderId, isEditMode });
 
     useEffect(() => {
         if (data) {
@@ -62,7 +61,7 @@ const DocInfo: FC = () => {
         saveAs(blob, `${title}.txt`);
     };
 
-    if (isLoading ||editLoading) {
+    if (isLoading || editLoading) {
         return <Loading />;
     }
 
@@ -73,6 +72,19 @@ const DocInfo: FC = () => {
             </p>
         );
     }
+
+    const folderSelectOrName = useMemo(() => {
+        if (isEditMode) {
+            return <FolderSelect onSelectFolder={handleFolderSelect} />;
+        } else if (data.folderId !== null) {
+            return (
+                <p className='break-all'>
+                    <span><Folder /> {editData?.name}</span>
+                </p>
+            );
+        }
+        return null;
+    }, [isEditMode, data.folderId, editData?.name, handleFolderSelect]);
 
     return (
         <div>
@@ -93,13 +105,7 @@ const DocInfo: FC = () => {
                     {isEditMode ? 'Cancel Edit' : 'Enable Edit'}
                 </Button>
                 <div className='ml-8'>
-                    {data.folderId === null ? (
-                        <FolderSelect onSelectFolder={handleFolderSelect} /> 
-                    ): (
-                        <p className='break-all'>
-                            <span><Folder /> {editData.name}</span>
-                        </p>
-                    )}
+                    {folderSelectOrName}
                 </div>
                 <Button
                     onClick={handleDownload}
