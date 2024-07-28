@@ -142,13 +142,13 @@ const Navigation: FC = () => {
 
             <NavbarMenu>
                 <NavbarMenuItem>
-                    <Link href='/login' className='w-full'>
+                    <Link href='/login' className='w-full font-bold text-lg p-3'>
                         Login
                     </Link>
                 </NavbarMenuItem>
 
                 <NavbarMenuItem>
-                    <Link href='/register' className='w-full'>
+                    <Link href='/register' className='w-full font-bold text-lg p-3'>
                         Register
                     </Link>
                 </NavbarMenuItem>
