@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 const f = createUploadthing();
 
 export const uploadRouter = {
-    fileUploader: f(["application/pdf", "text/plain"])
+    fileUploader: f(["application/pdf", "text/plain", "application/msword"])
         .middleware(async ({ req }) => {
             const session = await getServerSession(authOptions);
 
