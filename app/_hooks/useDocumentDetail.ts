@@ -2,11 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { fetchDocumentDetail } from '@/app/_store/queries/documentQueries';
-
-interface UseDocumentDetailOptions {
-    id: string;
-    isEditMode: boolean;
-}
+import { UseDocumentDetailOptions } from '../_types/hookTypes';
 
 const useDocumentDetail = ({ id, isEditMode }: UseDocumentDetailOptions) => {
     return useQuery({

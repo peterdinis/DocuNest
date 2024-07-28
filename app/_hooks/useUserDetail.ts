@@ -2,10 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { fetchUserDetail } from '../_store/queries/userQueries';
-
-interface UseUserDetailProps {
-    id: string;
-}
+import { UseUserDetailProps } from '../_types/hookTypes';
 
 const useUserDetail = ({ id }: UseUserDetailProps) => {
     return useQuery({

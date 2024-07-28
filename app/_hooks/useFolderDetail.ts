@@ -2,11 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { fetchFolderDetail } from '../_store/queries/folderQueries';
-
-interface UseFolderDetailOptions {
-    id: string;
-    isEditMode: boolean;
-}
+import { UseFolderDetailOptions } from '../_types/hookTypes';
 
 const useFolderDetail = ({ id, isEditMode }: UseFolderDetailOptions) => {
     return useQuery({
