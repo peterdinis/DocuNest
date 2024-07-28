@@ -6,3 +6,18 @@ export interface UseCreateFolderOptions {
     reset: () => void;
     onClose: () => void;
 }
+
+export interface UseDocumentDetailOptions {
+    id: string;
+    isEditMode: boolean;
+}
+
+export interface UseFolderDetailOptions {
+    id: string;
+    isEditMode: boolean;
+}
+
+export interface UsePaginatedDocumentsOptions {
+    query: string;
+    page: number;
+}
