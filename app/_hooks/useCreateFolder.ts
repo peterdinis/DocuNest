@@ -7,11 +7,8 @@ import {
     ICreateFolder,
 } from '../_store/mutations/folderMutations';
 import { queryClient } from '../_store/queryClient';
+import { UseCreateFolderOptions } from '../_types/hookTypes';
 
-interface UseCreateFolderOptions {
-    reset: () => void;
-    onClose: () => void;
-}
 
 const useCreateFolder = ({ reset, onClose }: UseCreateFolderOptions) => {
     return useMutation({

@@ -2,11 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllPaginatedFolders } from '@/app/_store/queries/folderQueries';
-
-interface UsePaginatedFoldersOptions {
-    query: string;
-    page: number;
-}
+import { UsePaginatedFoldersOptions } from '../_types/hookTypes';
 
 const usePaginatedFolders = ({ query, page }: UsePaginatedFoldersOptions) => {
     return useQuery({

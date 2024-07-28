@@ -8,12 +8,7 @@ import {
     updateFolder,
     UpdateFolderData,
 } from '@/app/_store/mutations/folderMutations';
-
-interface UseUpdateFolderOptions {
-    id: string;
-    setIsEditMode: (isEditMode: boolean) => void;
-    setName: (name: string) => void;
-}
+import { UseUpdateFolderOptions } from '../_types/hookTypes';
 
 const useUpdateFolder = ({
     id,

@@ -2,10 +2,8 @@
 
 import { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
+import { CopiedValue, CopyFn } from '../_types/hookTypes';
 
-type CopiedValue = string | null;
-
-type CopyFn = (text: string) => Promise<boolean>;
 
 export function useCopyToClipboard(): [CopiedValue, CopyFn] {
     const [copiedText, setCopiedText] = useState<CopiedValue>(null);
