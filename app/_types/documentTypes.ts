@@ -1,10 +1,8 @@
-import { ReactNode } from "react";
-
 export type DocumentTableType = {
     id: string;
     title: string;
     description: string;
-    createAt: ReactNode;
-    updateAt: ReactNode;
+    createAt: string | Date;
+    updateAt: string | Date;
     userId: string;
 }

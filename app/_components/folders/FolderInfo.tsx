@@ -20,6 +20,7 @@ import useFolderDetail from '@/app/_hooks/useFolderDetail';
 import useUpdateFolder from '@/app/_hooks/useUpdateFolder';
 import Loading from '../shared/Loading';
 import { DocumentTableType } from '@/app/_types/documentTypes';
+import {format} from "date-fns"
 
 const FolderInfo: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -33,7 +34,7 @@ const FolderInfo: FC = () => {
     useEffect(() => {
         if (data) {
             setName(data.name);
-            setPages(Math.ceil((data.documents?.length ?? 0) / 10)); // Assuming 10 items per page
+            setPages(Math.ceil((data.documents?.length ?? 0) / 10));
         }
     }, [data]);
 
@@ -121,8 +122,8 @@ const FolderInfo: FC = () => {
                     <TableHeader>
                         <TableColumn key='title'>Title</TableColumn>
                         <TableColumn key='description'>Description</TableColumn>
-                        <TableColumn key='createAt'>Create At</TableColumn>
-                        <TableColumn key='updateAt'>Update At</TableColumn>
+                        <TableColumn key='createAt'>Created At</TableColumn>
+                        <TableColumn key='updateAt'>Updated At</TableColumn>
                         <TableColumn key='userId'>User Id</TableColumn>
                     </TableHeader>
                     <TableBody
@@ -133,8 +134,8 @@ const FolderInfo: FC = () => {
                             <TableRow key={item?.id}>
                                 <TableCell>{item.title}</TableCell>
                                 <TableCell>{item.description}</TableCell>
-                                <TableCell>{item.createAt}</TableCell>
-                                <TableCell>{item.updateAt}</TableCell>
+                                <TableCell>{format(item.createAt, 'yyyy-MM-dd')}</TableCell>
+                                <TableCell>{format(item.updateAt, 'yyyy-MM-dd')}</TableCell>
                                 <TableCell>{item.userId}</TableCell>
                             </TableRow>
                         )}
