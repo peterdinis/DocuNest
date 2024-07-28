@@ -1,7 +1,7 @@
 'use client';
 
 import { Select, SelectItem } from '@nextui-org/react';
-import { FC, useMemo, ChangeEvent } from 'react';
+import { FC, useMemo } from 'react';
 import { Folder } from '@prisma/client';
 import useFolders from '@/app/_hooks/useFolders';
 import Loading from '../shared/Loading';
@@ -41,13 +41,6 @@ const FolderSelect: FC<FolderSelectProps> = ({ onSelectFolder }) => {
         );
     }
 
-    const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        const folderId = event.target.value;
-        if (onSelectFolder) {
-            onSelectFolder(folderId);
-        }
-    };
-
     return (
         <div className='mx-auto w-full max-w-md px-4 sm:px-6 lg:px-8'>
             <Select
@@ -58,7 +51,11 @@ const FolderSelect: FC<FolderSelectProps> = ({ onSelectFolder }) => {
                 size='lg'
                 label='Select folder'
                 placeholder='Choose the folder where you will put this document'
-                onChange={handleSelectChange}
+                onChange={(event) => {
+                    if (onSelectFolder) {
+                        onSelectFolder(event.target.value);
+                    }
+                }}
             >
                 {selectItems}
             </Select>
