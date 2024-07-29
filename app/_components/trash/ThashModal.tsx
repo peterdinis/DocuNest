@@ -98,7 +98,7 @@ const TrashModal: FC = () => {
                 onClick={onOpen}
                 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
             >
-                <Trash /> Open Trash
+                <Trash />
             </button>
             <Modal size='3xl' backdrop='blur' isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>

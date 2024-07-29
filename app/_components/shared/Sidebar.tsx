@@ -190,6 +190,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
+                                        placement='right'
                                         content='Settings page'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
