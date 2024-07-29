@@ -12,10 +12,12 @@ import { useDebounce } from '@/app/_hooks/useDebounce';
 import usePaginatedFolders from '@/app/_hooks/usePaginatedFolders';
 import DeleteFolder from './DeleteFolderModal';
 import Loading from '../shared/Loading';
+import { ReactSortable } from "react-sortablejs";
 
 const AllFoldersContent: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
+    const [folders, setFolders] = useState<DisplayFolder[]>([]);
 
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
@@ -23,6 +25,12 @@ const AllFoldersContent: FC = () => {
         query: debouncedSearchQuery,
         page: currentPage,
     });
+
+    useEffect(() => {
+        if (data?.folders) {
+            setFolders(data.folders);
+        }
+    }, [data]);
 
     useEffect(() => {
         refetch();
@@ -56,31 +64,30 @@ const AllFoldersContent: FC = () => {
                 value={searchQuery}
                 onChange={handleSearchInputChange}
             />
-            <div className='mt-5 flex flex-wrap gap-5'>
-                {data?.folders &&
-                    data?.folders.map((item: DisplayFolder) => {
-                        return (
-                            <div key={item.id} className='w-[200px]'>
-                                <Card className='space-y-5 p-4' radius='lg'>
-                                    <div className='flex justify-center rounded-lg align-top'>
-                                        <Folder size={50} />
-                                    </div>
-                                    <div className='flex justify-center'>
-                                        <Button color='primary'>
-                                            <Link href={`/folders/${item.id}`}>
-                                                {item.name}
-                                            </Link>
-                                        </Button>
-                                    </div>
+            <ReactSortable swap animation={200} list={folders} setList={setFolders} className='mt-5 flex flex-wrap gap-5'>
+                {folders.map((item: DisplayFolder) => {
+                    return (
+                        <div key={item.id} className='w-[200px]'>
+                            <Card className='space-y-5 p-4' radius='lg'>
+                                <div className='flex justify-center rounded-lg align-top'>
+                                    <Folder size={50} />
+                                </div>
+                                <div className='flex justify-center'>
+                                    <Button color='primary'>
+                                        <Link href={`/folders/${item.id}`}>
+                                            {item.name}
+                                        </Link>
+                                    </Button>
+                                </div>
 
-                                    <div className='mt-6'>
-                                        <DeleteFolder folderId={item.id} />
-                                    </div>
-                                </Card>
-                            </div>
-                        );
-                    })}
-            </div>
+                                <div className='mt-6'>
+                                    <DeleteFolder folderId={item.id} />
+                                </div>
+                            </Card>
+                        </div>
+                    );
+                })}
+            </ReactSortable>
             <div className='mt-40 flex justify-center align-top'>
                 <AppPagination
                     total={data.totalPages}
