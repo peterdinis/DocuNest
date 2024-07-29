@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { useMutation } from '@tanstack/react-query';
 import { updateDocumentFolder } from '@/app/_store/mutations/documentMutations';

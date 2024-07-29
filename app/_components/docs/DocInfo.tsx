@@ -30,7 +30,11 @@ const DocInfo: FC = () => {
     const addToFolderMut = useAddToFolder(id);
     const updateDocumentMut = useUpdateDocument(id);
 
-    const { data: editData, isLoading: editLoading, isError: editError } = useFolderDetail({ id: data?.folderId, isEditMode });
+    const {
+        data: editData,
+        isLoading: editLoading,
+        isError: editError,
+    } = useFolderDetail({ id: data?.folderId, isEditMode });
 
     useEffect(() => {
         if (data) {
@@ -79,7 +83,9 @@ const DocInfo: FC = () => {
         } else if (data.folderId !== null) {
             return (
                 <p className='break-all'>
-                    <span><Folder /> {editData?.name}</span>
+                    <span>
+                        <Folder /> {editData?.name}
+                    </span>
                 </p>
             );
         }
@@ -104,9 +110,7 @@ const DocInfo: FC = () => {
                 >
                     {isEditMode ? 'Cancel Edit' : 'Enable Edit'}
                 </Button>
-                <div className='ml-8'>
-                    {folderSelectOrName}
-                </div>
+                <div className='ml-8'>{folderSelectOrName}</div>
                 <Button
                     onClick={handleDownload}
                     variant='solid'

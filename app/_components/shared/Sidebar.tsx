@@ -116,7 +116,11 @@ const Sidebar: FC = () => {
                         <div>
                             <div className='mt-8'>
                                 <div className='ml-4 mt-8'>
-                                    <Tooltip showArrow={true} placement='right' content='Logout'>
+                                    <Tooltip
+                                        showArrow={true}
+                                        placement='right'
+                                        content='Logout'
+                                    >
                                         <Button
                                             onClick={logoutUser}
                                             variant={'ghost'}
@@ -129,7 +133,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
-                                        placement='right' 
+                                        placement='right'
                                         content='Create new folder'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
@@ -141,7 +145,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
-                                        placement='right' 
+                                        placement='right'
                                         content='Create new document'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
@@ -154,7 +158,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
-                                        placement='right' 
+                                        placement='right'
                                         content='All my folders'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
@@ -167,7 +171,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
-                                        placement='right' 
+                                        placement='right'
                                         content='All my documents'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
