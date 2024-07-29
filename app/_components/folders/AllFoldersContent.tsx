@@ -64,7 +64,7 @@ const AllFoldersContent: FC = () => {
                 value={searchQuery}
                 onChange={handleSearchInputChange}
             />
-            <ReactSortable list={folders} setList={setFolders} className='mt-5 flex flex-wrap gap-5'>
+            <ReactSortable swap animation={200} list={folders} setList={setFolders} className='mt-5 flex flex-wrap gap-5'>
                 {folders.map((item: DisplayFolder) => {
                     return (
                         <div key={item.id} className='w-[200px]'>

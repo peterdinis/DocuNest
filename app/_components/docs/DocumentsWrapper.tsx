@@ -68,7 +68,7 @@ const DocumentsWrapper: FC = () => {
             />
             <br />
             <UploadDoc />
-            <ReactSortable list={documents} setList={setDocuments} className='mt-5 flex flex-wrap justify-start'>
+            <ReactSortable swap animation={200} list={documents} setList={setDocuments} className='mt-5 flex flex-wrap justify-start'>
                 {documents.length === 0 ? (
                     <p className='text-xl font-bold text-gray-700'>
                         <Ghost className='h-8 w-8 animate-bounce' />
