@@ -1,12 +1,7 @@
 'use client';
 
+import { IServiceCardProps } from '@/app/_types/globalTypes';
 import { FC, ReactNode } from 'react';
-
-interface IServiceCardProps {
-    icon: ReactNode;
-    iconHeaderText: string;
-    iconHeaderDesc: string;
-}
 
 const ServiceCard: FC<IServiceCardProps> = ({
     icon,
