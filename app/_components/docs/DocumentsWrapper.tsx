@@ -14,10 +14,12 @@ import DeleteDocModal from './DeleteDocModal';
 import usePaginatedDocuments from '@/app/_hooks/usePaginatedDocuments';
 import UploadDoc from './UploadDoc';
 import Loading from '../shared/Loading';
+import { ReactSortable } from "react-sortablejs";
 
 const DocumentsWrapper: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
+    const [documents, setDocuments] = useState<Document[]>([]);
 
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
@@ -25,6 +27,12 @@ const DocumentsWrapper: FC = () => {
         query: debouncedSearchQuery,
         page: currentPage,
     });
+
+    useEffect(() => {
+        if (data?.documents) {
+            setDocuments(data.documents);
+        }
+    }, [data]);
 
     useEffect(() => {
         refetch();
@@ -60,14 +68,14 @@ const DocumentsWrapper: FC = () => {
             />
             <br />
             <UploadDoc />
-            <div className='mt-5 flex flex-wrap justify-start'>
-                {data?.documents.length === 0 ? (
+            <ReactSortable list={documents} setList={setDocuments} className='mt-5 flex flex-wrap justify-start'>
+                {documents.length === 0 ? (
                     <p className='text-xl font-bold text-gray-700'>
                         <Ghost className='h-8 w-8 animate-bounce' />
                         No documents found
                     </p>
                 ) : (
-                    data.documents.map((item: Document) => (
+                    documents.map((item: Document) => (
                         <div key={item.id} className='mb-4 mr-4 flex flex-col'>
                             <Card
                                 className='w-[250px] space-y-5 p-4'
@@ -96,7 +104,7 @@ const DocumentsWrapper: FC = () => {
                         </div>
                     ))
                 )}
-            </div>
+            </ReactSortable>
             <div className='mt-40 flex justify-center align-top'>
                 <AppPagination
                     total={data.totalPages}
