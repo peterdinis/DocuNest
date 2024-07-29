@@ -1,5 +1,3 @@
-'use client';
-
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import {
@@ -11,39 +9,16 @@ import {
     useDisclosure,
 } from '@nextui-org/react';
 import { X } from 'lucide-react';
-import { toast } from 'react-toastify';
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
-import { queryClient } from '@/app/_store/queryClient';
+import { useDeleteDocument } from '@/app/_hooks/useDeleteDoc';
 
 interface IDeleteDocModalProps {
     docId: string;
 }
 
-const deleteDocument = async (documentId: string) => {
-    if (!documentId) return;
-    return await axios.delete(`/api/docs/${documentId}`);
-};
-
-const DeleteDocModal: FC<IDeleteDocModalProps> = ({
-    docId,
-}: IDeleteDocModalProps) => {
+const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { handleSubmit } = useForm();
-
-    const deleteDocMut = useMutation({
-        mutationKey: ['deleteDocument', docId],
-        mutationFn: () => deleteDocument(docId),
-        onSuccess: () => {
-            toast.success('Document was deleted');
-            queryClient.invalidateQueries({
-                queryKey: ['myPaginatedDocuments'],
-            });
-        },
-        onError: () => {
-            toast.error('Failed to delete document');
-        },
-    });
+    const deleteDocMut = useDeleteDocument(docId);
 
     const onSubmit = () => {
         deleteDocMut.mutate();

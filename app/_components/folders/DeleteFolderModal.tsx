@@ -1,5 +1,3 @@
-'use client';
-
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import {
@@ -12,39 +10,16 @@ import {
     ButtonGroup,
 } from '@nextui-org/react';
 import { X } from 'lucide-react';
-import { toast } from 'react-toastify';
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
-import { queryClient } from '@/app/_store/queryClient';
+import { useDeleteFolder } from '@/app/_hooks/useDeleteFolder';
 
 interface IDeleteFolderProps {
     folderId: string;
 }
 
-const deleteFolder = async (folderId: string) => {
-    if (!folderId) return;
-    return await axios.delete(`/api/folders/${folderId}`);
-};
-
-const DeleteFolder: FC<IDeleteFolderProps> = ({
-    folderId,
-}: IDeleteFolderProps) => {
+const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { handleSubmit } = useForm();
-
-    const deleteDocMut = useMutation({
-        mutationKey: ['deleteFolder', folderId],
-        mutationFn: () => deleteFolder(folderId),
-        onSuccess: () => {
-            toast.success('Folder was deleted');
-            queryClient.invalidateQueries({
-                queryKey: ['myPaginatedFolders'],
-            });
-        },
-        onError: () => {
-            toast.error('Failed to delete folder');
-        },
-    });
+    const deleteDocMut = useDeleteFolder(folderId);
 
     const onSubmit = () => {
         deleteDocMut.mutate();
