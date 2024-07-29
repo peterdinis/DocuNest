@@ -9,7 +9,6 @@ import {
 import { queryClient } from '../_store/queryClient';
 import { UseCreateFolderOptions } from '../_types/hookTypes';
 
-
 const useCreateFolder = ({ reset, onClose }: UseCreateFolderOptions) => {
     return useMutation({
         mutationKey: ['createFolder'],
