@@ -21,8 +21,30 @@ export const modules = {
         delay: 2000,
     },
 
+    magicUrl: {
+        // Regex used to check URLs during typing
+        urlRegularExpression: /(https?:\/\/[\S]+)|(www.[\S]+)|(tel:[\S]+)/g,
+        // Regex used to check URLs on paste
+        globalRegularExpression: /(https?:\/\/|www\.|tel:)[\S]+/g,
+      },
+
     clipboard: {
         matchVisual: true,
+        allowed: {
+            tags: ['a', 'b', 'strong', 'u', 's', 'i', 'p', 'br', 'ul', 'ol', 'li', 'span'],
+            attributes: ['href', 'rel', 'target', 'class']
+        },
+        customButtons: [
+            {
+                module: 'quillEmbeds',
+                allowedTags: ['embed'],
+                allowedAttr: ['width', 'height'],
+            }
+        ],
+        keepSelection: true,
+        substituteBlockElements: true,
+        magicPasteLinks: true,
+        removeConsecutiveSubstitutionTags: true
     },
 };
 
