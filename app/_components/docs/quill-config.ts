@@ -30,6 +30,21 @@ export const modules = {
 
     clipboard: {
         matchVisual: true,
+        allowed: {
+            tags: ['a', 'b', 'strong', 'u', 's', 'i', 'p', 'br', 'ul', 'ol', 'li', 'span'],
+            attributes: ['href', 'rel', 'target', 'class']
+        },
+        customButtons: [
+            {
+                module: 'quillEmbeds',
+                allowedTags: ['embed'],
+                allowedAttr: ['width', 'height'],
+            }
+        ],
+        keepSelection: true,
+        substituteBlockElements: true,
+        magicPasteLinks: true,
+        removeConsecutiveSubstitutionTags: true
     },
 };
 

@@ -17,6 +17,7 @@ import useFolderDetail from '@/app/_hooks/useFolderDetail';
 import { Folder } from 'lucide-react';
 import { Quill } from 'react-quill';
 import MagicUrl from 'quill-magic-url'
+import 'quill-paste-smart';
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false, loading: () => <Loading /> }), []);
