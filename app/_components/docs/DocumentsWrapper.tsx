@@ -14,7 +14,7 @@ import DeleteDocModal from './DeleteDocModal';
 import usePaginatedDocuments from '@/app/_hooks/usePaginatedDocuments';
 import UploadDoc from './UploadDoc';
 import Loading from '../shared/Loading';
-import { ReactSortable } from "react-sortablejs";
+import { ReactSortable } from 'react-sortablejs';
 
 const DocumentsWrapper: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -68,7 +68,13 @@ const DocumentsWrapper: FC = () => {
             />
             <br />
             <UploadDoc />
-            <ReactSortable swap animation={200} list={documents} setList={setDocuments} className='mt-5 flex flex-wrap justify-start'>
+            <ReactSortable
+                swap
+                animation={200}
+                list={documents}
+                setList={setDocuments}
+                className='mt-5 flex flex-wrap justify-start'
+            >
                 {documents.length === 0 ? (
                     <p className='text-xl font-bold text-gray-700'>
                         <Ghost className='h-8 w-8 animate-bounce' />

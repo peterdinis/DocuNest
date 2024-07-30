@@ -113,7 +113,7 @@ const Navigation: FC = () => {
                             href='/register'
                             variant='flat'
                         >
-                            Sign Up
+                            Register
                         </Button>
                     </NavbarItem>
                     <NavbarItem>

@@ -15,12 +15,13 @@ import { useAddToFolder } from '@/app/_hooks/useAddToFolder';
 import { useUpdateDocument } from '@/app/_hooks/useUpdateDocument';
 import useFolderDetail from '@/app/_hooks/useFolderDetail';
 import { Folder } from 'lucide-react';
+import { Quill } from 'react-quill';
+import MagicUrl from 'quill-magic-url'
+import 'quill-paste-smart';
 
 const DocInfo: FC = () => {
-    const ReactQuill = useMemo(
-        () => dynamic(() => import('react-quill'), { ssr: false }),
-        [],
-    );
+    const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false, loading: () => <Loading /> }), []);
+    Quill.register('modules/magicUrl', MagicUrl)
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
     const [title, setTitle] = useState<string>('');
@@ -65,6 +66,21 @@ const DocInfo: FC = () => {
         saveAs(blob, `${title}.txt`);
     };
 
+    const folderSelectOrName = useMemo(() => {
+        if (isEditMode) {
+            return <FolderSelect onSelectFolder={handleFolderSelect} />;
+        } else if (data?.folderId) {
+            return (
+                <p className='break-all'>
+                    <span>
+                        <Folder /> {editData?.name}
+                    </span>
+                </p>
+            );
+        }
+        return null;
+    }, [isEditMode, data?.folderId, editData?.name, handleFolderSelect]);
+
     if (isLoading || editLoading) {
         return <Loading />;
     }
@@ -76,21 +92,6 @@ const DocInfo: FC = () => {
             </p>
         );
     }
-
-    const folderSelectOrName = useMemo(() => {
-        if (isEditMode) {
-            return <FolderSelect onSelectFolder={handleFolderSelect} />;
-        } else if (data.folderId !== null) {
-            return (
-                <p className='break-all'>
-                    <span>
-                        <Folder /> {editData?.name}
-                    </span>
-                </p>
-            );
-        }
-        return null;
-    }, [isEditMode, data.folderId, editData?.name, handleFolderSelect]);
 
     return (
         <div>
