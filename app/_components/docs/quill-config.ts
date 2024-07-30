@@ -9,7 +9,7 @@ export const modules = {
             { indent: '-1' },
             { indent: '+1' },
         ],
-        ['link', 'image'],
+        ['link', 'image', 'video'],
         [{ script: 'sub' }, { script: 'super' }],
         [{ indent: '-1' }, { indent: '+1' }],
         ['clean'],
@@ -40,5 +40,6 @@ export const formats = [
     'link',
     'image',
     'color',
+    'video',
     'background',
 ];

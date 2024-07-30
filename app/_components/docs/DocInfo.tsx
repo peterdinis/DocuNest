@@ -17,7 +17,7 @@ import useFolderDetail from '@/app/_hooks/useFolderDetail';
 import { Folder } from 'lucide-react';
 
 const DocInfo: FC = () => {
-    const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), []);
+    const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false, loading: () => <Loading /> }), []);
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
     const [title, setTitle] = useState<string>('');
