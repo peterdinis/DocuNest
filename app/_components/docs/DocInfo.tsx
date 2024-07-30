@@ -17,10 +17,7 @@ import useFolderDetail from '@/app/_hooks/useFolderDetail';
 import { Folder } from 'lucide-react';
 
 const DocInfo: FC = () => {
-    const ReactQuill = useMemo(
-        () => dynamic(() => import('react-quill'), { ssr: false }),
-        [],
-    );
+    const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), []);
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
     const [title, setTitle] = useState<string>('');
@@ -68,7 +65,7 @@ const DocInfo: FC = () => {
     const folderSelectOrName = useMemo(() => {
         if (isEditMode) {
             return <FolderSelect onSelectFolder={handleFolderSelect} />;
-        } else if (data && data.folderId !== null) {
+        } else if (data?.folderId) {
             return (
                 <p className='break-all'>
                     <span>
@@ -78,7 +75,7 @@ const DocInfo: FC = () => {
             );
         }
         return null;
-    }, [isEditMode, data.folderId, editData?.name, handleFolderSelect]);
+    }, [isEditMode, data?.folderId, editData?.name, handleFolderSelect]);
 
     if (isLoading || editLoading) {
         return <Loading />;
