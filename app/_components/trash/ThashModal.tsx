@@ -100,7 +100,12 @@ const TrashModal: FC = () => {
             >
                 <Trash />
             </button>
-            <Modal size='3xl' backdrop='blur' isOpen={isOpen} onOpenChange={onOpenChange}>
+            <Modal
+                size='3xl'
+                backdrop='blur'
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+            >
                 <ModalContent>
                     {(onClose) => (
                         <>
