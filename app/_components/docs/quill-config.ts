@@ -21,6 +21,13 @@ export const modules = {
         delay: 2000,
     },
 
+    magicUrl: {
+        // Regex used to check URLs during typing
+        urlRegularExpression: /(https?:\/\/[\S]+)|(www.[\S]+)|(tel:[\S]+)/g,
+        // Regex used to check URLs on paste
+        globalRegularExpression: /(https?:\/\/|www\.|tel:)[\S]+/g,
+      },
+
     clipboard: {
         matchVisual: true,
     },

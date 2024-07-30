@@ -15,9 +15,12 @@ import { useAddToFolder } from '@/app/_hooks/useAddToFolder';
 import { useUpdateDocument } from '@/app/_hooks/useUpdateDocument';
 import useFolderDetail from '@/app/_hooks/useFolderDetail';
 import { Folder } from 'lucide-react';
+import { Quill } from 'react-quill';
+import MagicUrl from 'quill-magic-url'
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false, loading: () => <Loading /> }), []);
+    Quill.register('modules/magicUrl', MagicUrl)
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
     const [title, setTitle] = useState<string>('');
