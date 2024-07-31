@@ -1,7 +1,8 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { FC, useState, useEffect, useCallback, useMemo } from 'react';
+import { FC, useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import ReactQuill from 'react-quill';
 import { Button, Input } from '@nextui-org/react';
 import { saveAs } from 'file-saver';
 import { Folder } from 'lucide-react';
@@ -13,13 +14,17 @@ import useDocumentDetail from '@/app/_hooks/documents/useDocumentDetail';
 import useFolderDetail from '@/app/_hooks/folders/useFolderDetail';
 import QuillEditor from './editor/QuillEditor';
 import DocToolbar from './DocToolbar';
+import htmlToPdfmake from 'html-to-pdfmake';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const DocInfo: FC = () => {
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
-
     const { data, isLoading, isError } = useDocumentDetail({ id, isEditMode });
     const addToFolderMut = useAddToFolder(id);
     const updateDocumentMut = useUpdateDocument(id);
@@ -59,6 +64,14 @@ const DocInfo: FC = () => {
         saveAs(blob, `${title}.txt`);
     };
 
+    const handleExportPDF = () => {
+        if (description) {
+          const pdfContent = htmlToPdfmake(description);
+          const documentDefinition = { content: pdfContent };
+          pdfMake.createPdf(documentDefinition).download(`${title}.pdf`);
+        }
+      };
+
     const folderSelectOrName = useMemo(() => {
         if (isEditMode) {
             return <FolderSelect onSelectFolder={handleFolderSelect} />;
@@ -97,6 +110,7 @@ const DocInfo: FC = () => {
                 handleEditToggle={handleEditToggle}
                 handleDownload={handleDownload}
                 folderSelectOrName={folderSelectOrName}
+                handleExportPDF={handleExportPDF}
             />
 
             <div className='ml-4 mt-6'>

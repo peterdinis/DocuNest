@@ -13,6 +13,7 @@ interface DocToolbarProps {
     isEditMode: boolean;
     handleEditToggle: () => void;
     handleDownload: () => void;
+    handleExportPDF: () => void;
     folderSelectOrName: React.ReactNode;
 }
 
@@ -21,6 +22,7 @@ const DocToolbar: React.FC<DocToolbarProps> = ({
     handleEditToggle,
     handleDownload,
     folderSelectOrName,
+    handleExportPDF
 }) => {
     return (
         <ButtonGroup className='ml-8 mt-6'>
@@ -44,7 +46,7 @@ const DocToolbar: React.FC<DocToolbarProps> = ({
                     <DropdownItem key='new' onClick={handleDownload}>
                         Text File
                     </DropdownItem>
-                    <DropdownItem key='copy'>Pdf File</DropdownItem>
+                    <DropdownItem key='copy' onClick={handleExportPDF}>Pdf File</DropdownItem>
                     <DropdownItem key='edit'>Edit file</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
