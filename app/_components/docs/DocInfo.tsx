@@ -6,7 +6,7 @@ import { Button, ButtonGroup, Input } from '@nextui-org/react';
 import Link from 'next/link';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
-import { formats, modules } from './quill-config';
+import { formats, modules } from './editor/quill-config';
 import FolderSelect from './FolderSelect';
 import { saveAs } from 'file-saver';
 import Loading from '../shared/Loading';
