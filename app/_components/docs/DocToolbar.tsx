@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import {
     Button,
@@ -8,6 +10,9 @@ import {
     DropdownItem,
 } from '@nextui-org/react';
 import Link from 'next/link';
+import { Text } from 'lucide-react';
+import { FaRegFilePdf } from 'react-icons/fa6';
+import { FaFileWord } from 'react-icons/fa';
 
 interface DocToolbarProps {
     isEditMode: boolean;
@@ -15,6 +20,7 @@ interface DocToolbarProps {
     handleDownload: () => void;
     handleExportPDF: () => void;
     folderSelectOrName: React.ReactNode;
+    handleDocxDownload: () => void;
 }
 
 const DocToolbar: React.FC<DocToolbarProps> = ({
@@ -22,7 +28,8 @@ const DocToolbar: React.FC<DocToolbarProps> = ({
     handleEditToggle,
     handleDownload,
     folderSelectOrName,
-    handleExportPDF
+    handleExportPDF,
+    handleDocxDownload,
 }) => {
     return (
         <ButtonGroup className='ml-8 mt-6'>
@@ -40,14 +47,20 @@ const DocToolbar: React.FC<DocToolbarProps> = ({
             <div className='ml-8'>{folderSelectOrName}</div>&nbsp;
             <Dropdown className='ml-5'>
                 <DropdownTrigger>
-                    <Button variant='bordered'>Download as</Button>
+                    <Button className='ml-5' variant='bordered'>
+                        Download as
+                    </Button>
                 </DropdownTrigger>
-                <DropdownMenu aria-label='Static Actions'>
+                <DropdownMenu variant={'solid'} aria-label='Static Actions'>
                     <DropdownItem key='new' onClick={handleDownload}>
-                        Text File
+                        <Text /> Text File
                     </DropdownItem>
-                    <DropdownItem key='copy' onClick={handleExportPDF}>Pdf File</DropdownItem>
-                    <DropdownItem key='edit'>Edit file</DropdownItem>
+                    <DropdownItem key='copy' onClick={handleExportPDF}>
+                        <FaRegFilePdf /> Pdf File
+                    </DropdownItem>
+                    <DropdownItem key='edit' onClick={handleDocxDownload}>
+                        <FaFileWord /> Word file{' '}
+                    </DropdownItem>
                 </DropdownMenu>
             </Dropdown>
         </ButtonGroup>

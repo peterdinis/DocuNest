@@ -1,8 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { FC, useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import ReactQuill from 'react-quill';
+import { FC, useState, useEffect, useCallback, useMemo} from 'react';
 import { Button, Input } from '@nextui-org/react';
 import { saveAs } from 'file-saver';
 import { Folder } from 'lucide-react';
@@ -17,6 +16,7 @@ import DocToolbar from './DocToolbar';
 import htmlToPdfmake from 'html-to-pdfmake';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import htmlDocx from 'html-docx-js/dist/html-docx';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -72,6 +72,13 @@ const DocInfo: FC = () => {
         }
       };
 
+    
+    const handleDocxDownload = () => {
+        const editorContent = description;
+        const converted = htmlDocx.asBlob(editorContent);
+        saveAs(converted, `${title}.docx`);
+    }
+
     const folderSelectOrName = useMemo(() => {
         if (isEditMode) {
             return <FolderSelect onSelectFolder={handleFolderSelect} />;
@@ -111,6 +118,7 @@ const DocInfo: FC = () => {
                 handleDownload={handleDownload}
                 folderSelectOrName={folderSelectOrName}
                 handleExportPDF={handleExportPDF}
+                handleDocxDownload={handleDocxDownload}
             />
 
             <div className='ml-4 mt-6'>
