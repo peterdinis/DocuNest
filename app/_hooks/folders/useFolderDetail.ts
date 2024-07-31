@@ -1,8 +1,8 @@
 'use client';
 
+import { fetchFolderDetail } from '@/app/_store/queries/folderQueries';
+import { UseFolderDetailOptions } from '@/app/_types/hookTypes';
 import { useQuery } from '@tanstack/react-query';
-import { fetchFolderDetail } from '../_store/queries/folderQueries';
-import { UseFolderDetailOptions } from '../_types/hookTypes';
 
 const useFolderDetail = ({ id, isEditMode }: UseFolderDetailOptions) => {
     return useQuery({

@@ -1,7 +1,7 @@
 'use client';
 
+import { fetchAllFolders } from '@/app/_store/queries/folderQueries';
 import { useQuery } from '@tanstack/react-query';
-import { fetchAllFolders } from '../_store/queries/folderQueries';
 
 const useFolders = () => {
     return useQuery({

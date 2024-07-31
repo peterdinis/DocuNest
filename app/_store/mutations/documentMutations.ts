@@ -30,10 +30,16 @@ export const updateDocumentFolder = async (
     return response.data;
 };
 
-export const moveDocumentToTrash = async(documentId: string, data:IMoveToTrash) => {
-    return await axios.put(`/api/docs/${documentId}/trash`, data)
-}
+export const moveDocumentToTrash = async (
+    documentId: string,
+    data: IMoveToTrash,
+) => {
+    return await axios.put(`/api/docs/${documentId}/trash`, data);
+};
 
-export const removeDocumentFromTrash = async(documentId: string, data: IMoveToTrash) => {
-    return await axios.put(`/api/docs/${documentId}/trash/remove`, data)
-}
+export const removeDocumentFromTrash = async (
+    documentId: string,
+    data: IMoveToTrash,
+) => {
+    return await axios.put(`/api/docs/${documentId}/trash/remove`, data);
+};

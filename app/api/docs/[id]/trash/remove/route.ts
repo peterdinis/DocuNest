@@ -1,7 +1,7 @@
-import { db } from "@/app/_utils/database";
-import authOptions from "@/app/api/auth/authOptions";
-import { getServerSession } from "next-auth";
-import { NextRequest, NextResponse } from "next/server";
+import { db } from '@/app/_utils/database';
+import authOptions from '@/app/api/auth/authOptions';
+import { getServerSession } from 'next-auth';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function PUT(request: NextRequest) {
     const url = new URL(request.url);
@@ -29,7 +29,7 @@ export async function PUT(request: NextRequest) {
             userId: session.user.id,
         },
         data: {
-            inTrash: false
+            inTrash: false,
         },
     });
 
