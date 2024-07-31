@@ -10,14 +10,14 @@ import { formats, modules } from './quill-config';
 import FolderSelect from './FolderSelect';
 import { saveAs } from 'file-saver';
 import Loading from '../shared/Loading';
-import useDocumentDetail from '@/app/_hooks/useDocumentDetail';
 import { useAddToFolder } from '@/app/_hooks/folders/useAddToFolder';
-import { useUpdateDocument } from '@/app/_hooks/useUpdateDocument';
-import useFolderDetail from '@/app/_hooks/useFolderDetail';
+import { useUpdateDocument } from '@/app/_hooks/documents/useUpdateDocument';
 import { Folder } from 'lucide-react';
 import { Quill } from 'react-quill';
 import MagicUrl from 'quill-magic-url'
 import 'quill-paste-smart';
+import useDocumentDetail from '@/app/_hooks/documents/useDocumentDetail';
+import useFolderDetail from '@/app/_hooks/folders/useFolderDetail';
 
 const DocInfo: FC = () => {
     const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false, loading: () => <Loading /> }), []);
