@@ -2,11 +2,12 @@
 
 import { FC } from 'react';
 import Header from '../shared/Header';
-import { Card, CardBody, CardHeader } from '@nextui-org/react';
+import { Card, CardBody, CardHeader, Checkbox } from '@nextui-org/react';
 import { useSession } from 'next-auth/react';
 import useUserDetail from '@/app/_hooks/useUserDetail';
 import { format } from 'date-fns';
 import Loading from '../shared/Loading';
+import { Check } from 'lucide-react';
 
 const SettingsContent: FC = () => {
     const { data: session } = useSession();
@@ -65,9 +66,9 @@ const SettingsContent: FC = () => {
                                     htmlFor='font-size'
                                     className='block text-sm font-bold text-gray-700 dark:text-white'
                                 >
-                                    Subscription type
+                                    Has Subscription
                                 </label>
-                                TODO: LATER ADD
+                                <Checkbox defaultSelected icon={<Check />} />
                             </div>
 
                             <div className='grid gap-4'>

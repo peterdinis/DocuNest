@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { IMoveToTrash } from './folderMutations';
 
 export interface ICreateDocumentData {
     title: string;
@@ -19,7 +20,26 @@ export const updateDocument = async (
     return response.data;
 };
 
-export const updateDocumentFolder = async (documentId: string, folderId: string) => {
-    const response = await axios.put(`/api/docs/add-to-folder/${documentId}`, { folderId });
+export const updateDocumentFolder = async (
+    documentId: string,
+    folderId: string,
+) => {
+    const response = await axios.put(`/api/docs/add-to-folder/${documentId}`, {
+        folderId,
+    });
     return response.data;
-  };
+};
+
+export const moveDocumentToTrash = async (
+    documentId: string,
+    data: IMoveToTrash,
+) => {
+    return await axios.put(`/api/docs/${documentId}/trash`, data);
+};
+
+export const removeDocumentFromTrash = async (
+    documentId: string,
+    data: IMoveToTrash,
+) => {
+    return await axios.put(`/api/docs/${documentId}/trash/remove`, data);
+};

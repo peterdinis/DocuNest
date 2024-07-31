@@ -6,7 +6,7 @@ import authOptions from '../auth/authOptions';
 const f = createUploadthing();
 
 export const uploadRouter = {
-    fileUploader: f(["application/pdf", "text/plain", "application/msword"])
+    fileUploader: f(['application/pdf', 'text/plain', 'application/msword'])
         .middleware(async ({ req }) => {
             const session = await getServerSession(authOptions);
             if (!session || !session.user) {

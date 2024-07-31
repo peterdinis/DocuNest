@@ -19,6 +19,7 @@ import { signOut } from 'next-auth/react';
 import { Button, Tooltip } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 import CreateFolderModal from '../folders/CreateFolderModal';
+import TrashModal from '../trash/ThashModal';
 
 const Sidebar: FC = () => {
     const [collapsed, setSidebarCollapsed] = useState(false);
@@ -110,13 +111,22 @@ const Sidebar: FC = () => {
                                         <Link href='/settings'>Settings</Link>
                                     </Button>
                                 </div>
+                                <div className='ml-4 mt-8'>
+                                    <Button variant={'ghost'} value='sm'>
+                                        <TrashModal />
+                                    </Button>
+                                </div>
                             </div>
                         </>
                     ) : (
                         <div>
                             <div className='mt-8'>
                                 <div className='ml-4 mt-8'>
-                                    <Tooltip showArrow={true} placement='right' content='Logout'>
+                                    <Tooltip
+                                        showArrow={true}
+                                        placement='right'
+                                        content='Logout'
+                                    >
                                         <Button
                                             onClick={logoutUser}
                                             variant={'ghost'}
@@ -129,7 +139,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
-                                        placement='right' 
+                                        placement='right'
                                         content='Create new folder'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
@@ -141,7 +151,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
-                                        placement='right' 
+                                        placement='right'
                                         content='Create new document'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
@@ -154,7 +164,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
-                                        placement='right' 
+                                        placement='right'
                                         content='All my folders'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
@@ -167,7 +177,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
-                                        placement='right' 
+                                        placement='right'
                                         content='All my documents'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
@@ -180,12 +190,24 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
+                                        placement='right'
                                         content='Settings page'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
                                             <Link href='/settings'>
                                                 <Settings />
                                             </Link>
+                                        </Button>
+                                    </Tooltip>
+                                </div>
+
+                                <div className='ml-4 mt-8'>
+                                    <Tooltip
+                                        showArrow={true}
+                                        content='Open Trash'
+                                    >
+                                        <Button variant={'ghost'} size={'sm'}>
+                                            <TrashModal />
                                         </Button>
                                     </Tooltip>
                                 </div>

@@ -13,10 +13,10 @@ import SessionAppProvider from './_components/shared/providers/SessionProvider';
 import { Suspense } from 'react';
 import Loading from './_components/shared/Loading';
 import SessionCheckHelper from './_components/auth/SessionCheckHelper';
-import "@uploadthing/react/styles.css";
+import '@uploadthing/react/styles.css';
 
 const inter = Roboto({
-    weight: "500"
+    weight: '500',
 });
 
 export const metadata: Metadata = {
@@ -40,7 +40,11 @@ export default function RootLayout({
                                     <SessionCheckHelper>
                                         <Navigation />
                                         {children}
-                                        <ToastContainer closeOnClick pauseOnHover draggable />
+                                        <ToastContainer
+                                            closeOnClick
+                                            pauseOnHover
+                                            draggable
+                                        />
                                         <ScrollToTop />
                                     </SessionCheckHelper>
                                 </SessionAppProvider>
