@@ -2,8 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { FC, useState, useEffect, useCallback, useMemo } from 'react';
-import { Button, ButtonGroup, Input } from '@nextui-org/react';
-import Link from 'next/link';
+import { Button, Input } from '@nextui-org/react';
 import { saveAs } from 'file-saver';
 import { Folder } from 'lucide-react';
 import FolderSelect from './FolderSelect';
@@ -13,6 +12,7 @@ import { useUpdateDocument } from '@/app/_hooks/documents/useUpdateDocument';
 import useDocumentDetail from '@/app/_hooks/documents/useDocumentDetail';
 import useFolderDetail from '@/app/_hooks/folders/useFolderDetail';
 import QuillEditor from './editor/QuillEditor';
+import DocToolbar from './DocToolbar';
 
 const DocInfo: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -92,28 +92,12 @@ const DocInfo: FC = () => {
                 Document Info
             </h2>
 
-            <ButtonGroup className='ml-4 mt-6'>
-                <Button variant='solid' color='primary'>
-                    <Link href='/dashboard'>Go Back</Link>
-                </Button>
-                <Button
-                    variant='solid'
-                    color='secondary'
-                    onClick={handleEditToggle}
-                    className='ml-4'
-                >
-                    {isEditMode ? 'Cancel Edit' : 'Enable Edit'}
-                </Button>
-                <div className='ml-8'>{folderSelectOrName}</div>
-                <Button
-                    onClick={handleDownload}
-                    variant='solid'
-                    color='success'
-                    className='ml-5'
-                >
-                    Download
-                </Button>
-            </ButtonGroup>
+            <DocToolbar
+                isEditMode={isEditMode}
+                handleEditToggle={handleEditToggle}
+                handleDownload={handleDownload}
+                folderSelectOrName={folderSelectOrName}
+            />
 
             <div className='ml-4 mt-6'>
                 <form>
