@@ -1,27 +1,20 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { FC, useMemo, useState, useEffect, useCallback } from 'react';
+import { FC, useState, useEffect, useCallback, useMemo } from 'react';
 import { Button, ButtonGroup, Input } from '@nextui-org/react';
 import Link from 'next/link';
-import 'react-quill/dist/quill.snow.css';
-import dynamic from 'next/dynamic';
-import { formats, modules } from './editor/quill-config';
-import FolderSelect from './FolderSelect';
 import { saveAs } from 'file-saver';
+import { Folder } from 'lucide-react';
+import FolderSelect from './FolderSelect';
 import Loading from '../shared/Loading';
 import { useAddToFolder } from '@/app/_hooks/folders/useAddToFolder';
 import { useUpdateDocument } from '@/app/_hooks/documents/useUpdateDocument';
-import { Folder } from 'lucide-react';
-import { Quill } from 'react-quill';
-import MagicUrl from 'quill-magic-url'
-import 'quill-paste-smart';
 import useDocumentDetail from '@/app/_hooks/documents/useDocumentDetail';
 import useFolderDetail from '@/app/_hooks/folders/useFolderDetail';
+import QuillEditor from './editor/QuillEditor';
 
 const DocInfo: FC = () => {
-    const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false, loading: () => <Loading /> }), []);
-    Quill.register('modules/magicUrl', MagicUrl)
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
     const [title, setTitle] = useState<string>('');
@@ -139,11 +132,7 @@ const DocInfo: FC = () => {
                             Save document
                         </Button>
                     )}
-                    <ReactQuill
-                        theme='snow'
-                        className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${!isEditMode ? 'ql-disabled' : ''}`}
-                        modules={modules}
-                        formats={formats}
+                    <QuillEditor
                         value={description}
                         readOnly={!isEditMode}
                         onChange={setDescription}
