@@ -46,7 +46,6 @@ const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }) => {
                                 <ButtonGroup className='mt-5'>
                                     <Button
                                         color='danger'
-                                        variant='light'
                                         onPress={onClose}
                                     >
                                         Close
