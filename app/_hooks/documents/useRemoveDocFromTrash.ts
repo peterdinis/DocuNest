@@ -2,17 +2,18 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { IMoveToTrash, removeFromTrashFolder } from '@/app/_store/mutations/folderMutations';
+import { IMoveToTrash } from '@/app/_store/mutations/folderMutations';
+import { removeDocumentFromTrash } from '@/app/_store/mutations/documentMutations';
 
-export const useRemoveFolderFromTrash = (id: string) => {
+export const useRemoveDocumentFromTrash = (id: string) => {
     return useMutation({
-        mutationKey: ['rem', id],
-        mutationFn: (data: IMoveToTrash) => removeFromTrashFolder(id, data),
+        mutationKey: ['removeDocFromTrash', id],
+        mutationFn: (data: IMoveToTrash) => removeDocumentFromTrash(id, data),
         onSuccess: () => {
-            toast.success('Folder was removed from trash');
+            toast.success('Document was removed from trash');
         },
         onError: () => {
-            toast.error('Folder was not removed from trash');
+            toast.error('Document was not removed from trash');
         },
     });
 };

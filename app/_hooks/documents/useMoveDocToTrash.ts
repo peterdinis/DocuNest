@@ -14,7 +14,8 @@ export const useMoveDocumentToTrash = (id: string) => {
         onSuccess: () => {
             toast.success('Document was added to trash');
         },
-        onError: () => {
+        onError: (error) => {
+            console.log("E", error);
             toast.error('Document was not added to trash');
         },
     });

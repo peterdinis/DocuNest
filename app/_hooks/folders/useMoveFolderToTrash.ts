@@ -11,7 +11,8 @@ export const useMoveFolderToTrash = (id: string) => {
         onSuccess: () => {
             toast.success('Folder was added to trash');
         },
-        onError: () => {
+        onError: (error) => {
+            console.log(error);
             toast.error('Folder was not added to trash');
         },
     });

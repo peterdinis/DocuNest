@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import {
@@ -10,6 +12,7 @@ import {
 } from '@nextui-org/react';
 import { X } from 'lucide-react';
 import { useDeleteDocument } from '@/app/_hooks/documents/useDeleteDoc';
+import { useMoveDocumentToTrash } from '@/app/_hooks/documents/useMoveDocToTrash';
 
 interface IDeleteDocModalProps {
     docId: string;
@@ -19,9 +22,16 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { handleSubmit } = useForm();
     const deleteDocMut = useDeleteDocument(docId);
+    const moveToTrashMut = useMoveDocumentToTrash(docId);
 
-    const onSubmit = () => {
+    const onDelete = () => {
         deleteDocMut.mutate();
+    };
+
+    const onMoveToTrash = () => {
+        moveToTrashMut.mutate({
+            inTrash: true
+        });
     };
 
     return (
@@ -32,7 +42,7 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }) => {
             <Modal backdrop='blur' isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
-                        <form onSubmit={handleSubmit(onSubmit)}>
+                        <form onSubmit={handleSubmit(onMoveToTrash)}>
                             <ModalHeader className='flex flex-col gap-1'>
                                 Do you want to delete document?
                             </ModalHeader>
@@ -40,10 +50,10 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }) => {
                                 <Button color='danger' onPress={onClose}>
                                     Close
                                 </Button>
-                                <Button color='secondary' type='submit'>
+                                <Button color='secondary' onClick={onMoveToTrash}>
                                     Move to trash
                                 </Button>
-                                <Button color='primary' type='submit'>
+                                <Button color='primary' type='button' onClick={onDelete}>
                                     Delete Document
                                 </Button>
                             </ModalFooter>
