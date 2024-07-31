@@ -1,4 +1,4 @@
-import {FC, HTMLProps} from 'react';
+import { FC, HTMLProps } from 'react';
 import { Modal, ModalContent } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 

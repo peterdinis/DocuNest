@@ -7,15 +7,27 @@ import 'quill-paste-smart';
 import Loading from '../../shared/Loading';
 import { modules, formats } from './quill-config';
 import QuillCursors from 'quill-cursors';
-import * as QuillTableUI from 'quill-table-ui'
+import * as QuillTableUI from 'quill-table-ui';
+import ImageCompress from 'quill-image-compress';
 
-Quill.register({
-  'modules/tableUI': QuillTableUI.default
-}, true)
+Quill.register('modules/imageCompress', ImageCompress);
+Quill.register(
+    {
+        'modules/tableUI': QuillTableUI.default,
+    },
+    true,
+);
 Quill.register('modules/magicUrl', MagicUrl);
 Quill.register('modules/cursors', QuillCursors);
 
-const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false, loading: () => <Loading /> }), []);
+const ReactQuill = useMemo(
+    () =>
+        dynamic(() => import('react-quill'), {
+            ssr: false,
+            loading: () => <Loading />,
+        }),
+    [],
+);
 
 interface QuillEditorProps {
     value: string;
@@ -26,7 +38,7 @@ interface QuillEditorProps {
 const QuillEditor: FC<QuillEditorProps> = ({ value, readOnly, onChange }) => {
     return (
         <ReactQuill
-            theme="snow"
+            theme='snow'
             className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${readOnly ? 'ql-disabled' : ''}`}
             modules={modules}
             formats={formats}

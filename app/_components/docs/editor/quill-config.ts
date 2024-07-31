@@ -26,20 +26,33 @@ export const modules = {
         urlRegularExpression: /(https?:\/\/[\S]+)|(www.[\S]+)|(tel:[\S]+)/g,
         // Regex used to check URLs on paste
         globalRegularExpression: /(https?:\/\/|www\.|tel:)[\S]+/g,
-      },
+    },
 
     clipboard: {
         matchVisual: true,
         allowed: {
-            tags: ['a', 'b', 'strong', 'u', 's', 'i', 'p', 'br', 'ul', 'ol', 'li', 'span'],
-            attributes: ['href', 'rel', 'target', 'class']
+            tags: [
+                'a',
+                'b',
+                'strong',
+                'u',
+                's',
+                'i',
+                'p',
+                'br',
+                'ul',
+                'ol',
+                'li',
+                'span',
+            ],
+            attributes: ['href', 'rel', 'target', 'class'],
         },
         customButtons: [
             {
                 module: 'quillEmbeds',
                 allowedTags: ['embed'],
                 allowedAttr: ['width', 'height'],
-            }
+            },
         ],
         keepSelection: true,
         substituteBlockElements: true,
@@ -48,6 +61,17 @@ export const modules = {
         cursors: true,
         table: true,
         tableUI: true,
+
+        imageCompress: {
+            quality: 0.7, // default
+            maxWidth: 1000, // default
+            maxHeight: 1000, // default
+            imageType: 'image/jpeg', // default
+            debug: true, // default
+            suppressErrorLogging: false, // default
+            handleOnPaste: true, //default
+            insertIntoEditor: undefined, // default
+        },
     },
 };
 
