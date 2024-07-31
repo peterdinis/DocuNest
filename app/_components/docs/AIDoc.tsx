@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { Button, Input } from '@nextui-org/react';
-import useOpenAI from '@/app/_hooks/useAI';
+import useOpenAI from '@/app/_hooks/shared/useAI';
 import Header from '../shared/Header';
 import { useUserStore } from '@/app/_zustand/aiCounterStore';
 

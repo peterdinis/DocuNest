@@ -10,7 +10,7 @@ import {
     ButtonGroup,
 } from '@nextui-org/react';
 import { X } from 'lucide-react';
-import { useDeleteFolder } from '@/app/_hooks/useDeleteFolder';
+import { useDeleteFolder } from '@/app/_hooks/folders/useDeleteFolder';
 
 interface IDeleteFolderProps {
     folderId: string;
