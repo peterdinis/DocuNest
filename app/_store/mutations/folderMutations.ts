@@ -22,11 +22,16 @@ export const updateFolder = async (
     return await axios.put(`/api/folders/${folderId}`, data);
 };
 
+export const moveToTrashFolder = async (
+    folderId: string,
+    data: IMoveToTrash,
+) => {
+    return await axios.put(`/api/folders/${folderId}/trash`, data);
+};
 
-export const moveToTrashFolder = async(folderId: string, data:IMoveToTrash) => {
-    return await axios.put(`/api/folders/${folderId}/trash`, data)
-}
-
-export const removeFromTrashFolder = async(folderId: string, data: IMoveToTrash) => {
-    return await axios.put(`/api/folders/${folderId}/trash/remove`, data)
-}
+export const removeFromTrashFolder = async (
+    folderId: string,
+    data: IMoveToTrash,
+) => {
+    return await axios.put(`/api/folders/${folderId}/trash/remove`, data);
+};

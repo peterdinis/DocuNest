@@ -10,7 +10,7 @@ import {
     ButtonGroup,
 } from '@nextui-org/react';
 import { X } from 'lucide-react';
-import { useDeleteFolder } from '@/app/_hooks/useDeleteFolder';
+import { useDeleteFolder } from '@/app/_hooks/folders/useDeleteFolder';
 
 interface IDeleteFolderProps {
     folderId: string;
@@ -44,10 +44,7 @@ const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }) => {
                             </p>
                             <ModalFooter>
                                 <ButtonGroup className='mt-5'>
-                                    <Button
-                                        color='danger'
-                                        onPress={onClose}
-                                    >
+                                    <Button color='danger' onPress={onClose}>
                                         Close
                                     </Button>
                                     <Button

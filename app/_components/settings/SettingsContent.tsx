@@ -68,7 +68,7 @@ const SettingsContent: FC = () => {
                                 >
                                     Has Subscription
                                 </label>
-                                <Checkbox defaultSelected icon={<Check/>} />
+                                <Checkbox defaultSelected icon={<Check />} />
                             </div>
 
                             <div className='grid gap-4'>

@@ -7,7 +7,7 @@ import 'react-quill/dist/quill.snow.css';
 import CustomDrawer from '../shared/Drawer';
 import { Button } from '@nextui-org/react';
 import AIDoc from './AIDoc';
-import { formats, modules } from './quill-config';
+import { formats, modules } from './editor/quill-config';
 import { useForm, FieldValues } from 'react-hook-form';
 import useCreateDocument from '@/app/_hooks/useCreateDocument';
 

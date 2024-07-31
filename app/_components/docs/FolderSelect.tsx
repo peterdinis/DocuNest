@@ -3,8 +3,8 @@
 import { Select, SelectItem } from '@nextui-org/react';
 import { FC, useMemo } from 'react';
 import { Folder } from '@prisma/client';
-import useFolders from '@/app/_hooks/useFolders';
 import Loading from '../shared/Loading';
+import useFolders from '@/app/_hooks/folders/useFolders';
 
 interface FolderSelectProps {
     onSelectFolder?: (folderId: string) => void;
