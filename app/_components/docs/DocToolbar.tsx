@@ -53,13 +53,19 @@ const DocToolbar: React.FC<DocToolbarProps> = ({
                 </DropdownTrigger>
                 <DropdownMenu variant={'solid'} aria-label='Static Actions'>
                     <DropdownItem key='new' onClick={handleDownload}>
-                        <Text /> Text File
+                        <div className='flex items-center'>
+                            <Text className='mr-2' /> Text File
+                        </div>
                     </DropdownItem>
                     <DropdownItem key='copy' onClick={handleExportPDF}>
-                        <FaRegFilePdf /> Pdf File
+                        <div className='flex items-center'>
+                            <FaRegFilePdf className='mr-2' /> Pdf File
+                        </div>
                     </DropdownItem>
                     <DropdownItem key='edit' onClick={handleDocxDownload}>
-                        <FaFileWord /> Word file{' '}
+                        <div className='flex items-center'>
+                            <FaFileWord className='mr-2' /> Word file
+                        </div>
                     </DropdownItem>
                 </DropdownMenu>
             </Dropdown>
