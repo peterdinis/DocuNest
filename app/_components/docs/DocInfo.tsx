@@ -11,7 +11,7 @@ import FolderSelect from './FolderSelect';
 import { saveAs } from 'file-saver';
 import Loading from '../shared/Loading';
 import useDocumentDetail from '@/app/_hooks/useDocumentDetail';
-import { useAddToFolder } from '@/app/_hooks/useAddToFolder';
+import { useAddToFolder } from '@/app/_hooks/folders/useAddToFolder';
 import { useUpdateDocument } from '@/app/_hooks/useUpdateDocument';
 import useFolderDetail from '@/app/_hooks/useFolderDetail';
 import { Folder } from 'lucide-react';
