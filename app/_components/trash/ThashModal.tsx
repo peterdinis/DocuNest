@@ -22,6 +22,9 @@ import {
 } from '@nextui-org/react';
 import { DeleteIcon, EditIcon, EyeIcon, Trash } from 'lucide-react';
 import { columns, users } from './data';
+import useAllTrashFolders from '@/app/_hooks/folders/useAllTrashFolders';
+import useAllTrashDocuments from '@/app/_hooks/documents/useAllTrashDocuments';
+import Loading from '../shared/Loading';
 
 const statusColorMap: Record<string, 'success' | 'danger' | 'warning'> = {
     active: 'success',
@@ -31,6 +34,16 @@ const statusColorMap: Record<string, 'success' | 'danger' | 'warning'> = {
 
 const TrashModal: FC = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const {data: trashData, isLoading: trashLoading, isError: trashError} = useAllTrashFolders();
+    const {data: docData, isLoading: docLoading, isError: docError} = useAllTrashDocuments();
+
+    if(trashLoading || docLoading) {
+        return <Loading />
+    }
+
+    if(trashError || docError) {
+        return <p className='text-red-700 text-xl font-bold'>Something went wrong</p>
+    }
 
     const renderCell = useCallback((user: any, columnKey: string | number) => {
         const cellValue = user[columnKey];
