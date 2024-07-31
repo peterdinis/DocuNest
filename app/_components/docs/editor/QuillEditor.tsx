@@ -37,6 +37,7 @@ const QuillEditor: FC<QuillEditorProps> = ({ value, readOnly, onChange }) => {
             formats={formats}
             value={value}
             readOnly={readOnly}
+            preserveWhitespace={true}
             onChange={onChange}
         />
     );

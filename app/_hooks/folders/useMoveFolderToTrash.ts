@@ -1,22 +1,18 @@
-'use client';
+"use client"
 
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { queryClient } from '@/app/_store/queryClient';
-import { useRouter } from 'next/navigation';
-import {
-    updateFolder,
-    UpdateFolderData,
-} from '@/app/_store/mutations/folderMutations';
-import { UseUserDetailProps } from '../_types/hookTypes';
+import { IMoveToTrash, moveToTrashFolder } from '@/app/_store/mutations/folderMutations';
 
-const useMoveFolderToTrash = ({id}: UseUserDetailProps) => {
-    const router = useRouter();
-
+export const useMoveFolderToTrash = (id: string) => {
     return useMutation({
-        mutationKey: ["moveFolderToTrash"],
-        mutationFn: (data: UpdateFolderData) => null;
-    })
-}
-
-export default useMoveFolderToTrash;
+        mutationKey: ['moveFolderToTrash', id],
+        mutationFn: (data: IMoveToTrash) => moveToTrashFolder(id, data),
+        onSuccess: () => {
+            toast.success('Folder was added to trash');
+        },
+        onError: () => {
+            toast.error('Folder was not added to trash');
+        },
+    });
+};
