@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export interface ICreateFolder {
+    id?: string;
     name: string;
 }
 
@@ -24,4 +25,8 @@ export const updateFolder = async (
 
 export const moveToTrashFolder = async(folderId: string, data:IMoveToTrash) => {
     return await axios.put(`/api/folders/${folderId}/trash`, data)
+}
+
+export const removeFromTrashFolder = async(folderId: string, data: IMoveToTrash) => {
+    return await axios.put(`/api/folders/${folderId}/trash/remove`, data)
 }
