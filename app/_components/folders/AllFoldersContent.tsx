@@ -9,10 +9,10 @@ import { Card, Button } from '@nextui-org/react';
 import { Folder as DisplayFolder } from '@prisma/client';
 import Link from 'next/link';
 import { useDebounce } from '@/app/_hooks/shared/useDebounce';
-import usePaginatedFolders from '@/app/_hooks/usePaginatedFolders';
 import DeleteFolder from './DeleteFolderModal';
 import Loading from '../shared/Loading';
 import { ReactSortable } from 'react-sortablejs';
+import usePaginatedFolders from '@/app/_hooks/folders/usePaginatedFolders';
 
 const AllFoldersContent: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');

@@ -11,10 +11,10 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 import { useDebounce } from '@/app/_hooks/shared/useDebounce';
 import DeleteDocModal from './DeleteDocModal';
-import usePaginatedDocuments from '@/app/_hooks/usePaginatedDocuments';
 import UploadDoc from './UploadDoc';
 import Loading from '../shared/Loading';
 import { ReactSortable } from 'react-sortablejs';
+import usePaginatedDocuments from '@/app/_hooks/documents/usePaginatedDocuments';
 
 const DocumentsWrapper: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
