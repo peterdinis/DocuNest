@@ -7,7 +7,11 @@ import 'quill-paste-smart';
 import Loading from '../../shared/Loading';
 import { modules, formats } from './quill-config';
 import QuillCursors from 'quill-cursors';
+import * as QuillTableUI from 'quill-table-ui'
 
+Quill.register({
+  'modules/tableUI': QuillTableUI.default
+}, true)
 Quill.register('modules/magicUrl', MagicUrl);
 Quill.register('modules/cursors', QuillCursors);
 

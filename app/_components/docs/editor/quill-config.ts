@@ -45,7 +45,9 @@ export const modules = {
         substituteBlockElements: true,
         magicPasteLinks: true,
         removeConsecutiveSubstitutionTags: true,
-        cursors: true
+        cursors: true,
+        table: true,
+        tableUI: true,
     },
 };
 
