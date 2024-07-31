@@ -9,7 +9,7 @@ import {
     useDisclosure,
 } from '@nextui-org/react';
 import { X } from 'lucide-react';
-import { useDeleteDocument } from '@/app/_hooks/useDeleteDoc';
+import { useDeleteDocument } from '@/app/_hooks/documents/useDeleteDoc';
 
 interface IDeleteDocModalProps {
     docId: string;
