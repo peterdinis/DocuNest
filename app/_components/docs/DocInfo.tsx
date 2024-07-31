@@ -1,9 +1,8 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { FC, useState, useEffect, useCallback, useMemo } from 'react';
-import { Button, ButtonGroup, Input } from '@nextui-org/react';
-import Link from 'next/link';
+import { FC, useState, useEffect, useCallback, useMemo} from 'react';
+import { Button, Input } from '@nextui-org/react';
 import { saveAs } from 'file-saver';
 import { Folder } from 'lucide-react';
 import FolderSelect from './FolderSelect';
@@ -13,13 +12,19 @@ import { useUpdateDocument } from '@/app/_hooks/documents/useUpdateDocument';
 import useDocumentDetail from '@/app/_hooks/documents/useDocumentDetail';
 import useFolderDetail from '@/app/_hooks/folders/useFolderDetail';
 import QuillEditor from './editor/QuillEditor';
+import DocToolbar from './DocToolbar';
+import htmlToPdfmake from 'html-to-pdfmake';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import htmlDocx from 'html-docx-js/dist/html-docx';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const DocInfo: FC = () => {
     const { id } = useParams<{ id: string }>();
     const [isEditMode, setIsEditMode] = useState(false);
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
-
     const { data, isLoading, isError } = useDocumentDetail({ id, isEditMode });
     const addToFolderMut = useAddToFolder(id);
     const updateDocumentMut = useUpdateDocument(id);
@@ -59,6 +64,21 @@ const DocInfo: FC = () => {
         saveAs(blob, `${title}.txt`);
     };
 
+    const handleExportPDF = () => {
+        if (description) {
+          const pdfContent = htmlToPdfmake(description);
+          const documentDefinition = { content: pdfContent };
+          pdfMake.createPdf(documentDefinition).download(`${title}.pdf`);
+        }
+      };
+
+    
+    const handleDocxDownload = () => {
+        const editorContent = description;
+        const converted = htmlDocx.asBlob(editorContent);
+        saveAs(converted, `${title}.docx`);
+    }
+
     const folderSelectOrName = useMemo(() => {
         if (isEditMode) {
             return <FolderSelect onSelectFolder={handleFolderSelect} />;
@@ -92,28 +112,14 @@ const DocInfo: FC = () => {
                 Document Info
             </h2>
 
-            <ButtonGroup className='ml-4 mt-6'>
-                <Button variant='solid' color='primary'>
-                    <Link href='/dashboard'>Go Back</Link>
-                </Button>
-                <Button
-                    variant='solid'
-                    color='secondary'
-                    onClick={handleEditToggle}
-                    className='ml-4'
-                >
-                    {isEditMode ? 'Cancel Edit' : 'Enable Edit'}
-                </Button>
-                <div className='ml-8'>{folderSelectOrName}</div>
-                <Button
-                    onClick={handleDownload}
-                    variant='solid'
-                    color='success'
-                    className='ml-5'
-                >
-                    Download
-                </Button>
-            </ButtonGroup>
+            <DocToolbar
+                isEditMode={isEditMode}
+                handleEditToggle={handleEditToggle}
+                handleDownload={handleDownload}
+                folderSelectOrName={folderSelectOrName}
+                handleExportPDF={handleExportPDF}
+                handleDocxDownload={handleDocxDownload}
+            />
 
             <div className='ml-4 mt-6'>
                 <form>
