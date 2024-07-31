@@ -18,6 +18,7 @@ import {
     TableColumn,
     TableCell,
     TableRow,
+    Pagination,
 } from '@nextui-org/react';
 import { DeleteIcon, EditIcon, EyeIcon, Trash } from 'lucide-react';
 import { columns, users } from './data';
@@ -144,6 +145,16 @@ const TrashModal: FC = () => {
                                         )}
                                     </TableBody>
                                 </Table>
+                                <div className='mt-5 flex justify-center align-top'>
+                                    <Pagination
+                                        loop
+                                        showControls
+                                        isCompact
+                                        color='success'
+                                        total={5}
+                                        initialPage={1}
+                                    />
+                                </div>
                             </ModalBody>
                             <ModalFooter>
                                 <Button

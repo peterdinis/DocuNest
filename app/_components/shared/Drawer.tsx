@@ -1,15 +1,15 @@
-import React from 'react';
+import {FC, HTMLProps} from 'react';
 import { Modal, ModalContent } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 
-interface Props extends React.HTMLProps<HTMLDivElement> {
+interface CustomDrawerProps extends HTMLProps<HTMLDivElement> {
     isOpen: boolean;
     onOpenChange: (open: boolean) => void;
     inputText: string;
     onInputChange: (text: string) => void;
 }
 
-const CustomDrawer: React.FC<Props> = ({
+const CustomDrawer: FC<CustomDrawerProps> = ({
     inputText,
     onInputChange,
     ...props

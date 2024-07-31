@@ -39,10 +39,12 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }) => {
                             <ModalFooter>
                                 <Button
                                     color='danger'
-                                    variant='light'
                                     onPress={onClose}
                                 >
                                     Close
+                                </Button>
+                                <Button color='secondary' type='submit'>
+                                    Move to trash
                                 </Button>
                                 <Button color='primary' type='submit'>
                                     Delete Document
