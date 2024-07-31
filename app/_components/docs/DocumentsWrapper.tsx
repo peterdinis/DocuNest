@@ -9,7 +9,7 @@ import { Document } from '@prisma/client';
 import { Button, Card } from '@nextui-org/react';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import { useDebounce } from '@/app/_hooks/useDebounce';
+import { useDebounce } from '@/app/_hooks/shared/useDebounce';
 import DeleteDocModal from './DeleteDocModal';
 import usePaginatedDocuments from '@/app/_hooks/usePaginatedDocuments';
 import UploadDoc from './UploadDoc';

@@ -14,7 +14,7 @@ import { useForm, FieldValues } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema } from './schemas';
 import { Eye, EyeOff } from 'lucide-react';
-import useRegisterUser from '@/app/_hooks/useRegisterUser';
+import useRegisterUser from '@/app/_hooks/users/useRegisterUser';
 
 const RegisterForm: FC = () => {
     const [isVisible, setIsVisible] = useState(false);

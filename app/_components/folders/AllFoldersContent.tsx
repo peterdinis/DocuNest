@@ -8,7 +8,7 @@ import AppPagination from '../shared/AppPagination';
 import { Card, Button } from '@nextui-org/react';
 import { Folder as DisplayFolder } from '@prisma/client';
 import Link from 'next/link';
-import { useDebounce } from '@/app/_hooks/useDebounce';
+import { useDebounce } from '@/app/_hooks/shared/useDebounce';
 import usePaginatedFolders from '@/app/_hooks/usePaginatedFolders';
 import DeleteFolder from './DeleteFolderModal';
 import Loading from '../shared/Loading';
