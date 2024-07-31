@@ -6,9 +6,10 @@ import 'react-quill/dist/quill.snow.css';
 import 'quill-paste-smart';
 import Loading from '../../shared/Loading';
 import { modules, formats } from './quill-config';
+import QuillCursors from 'quill-cursors';
 
-// Register MagicUrl module with Quill
 Quill.register('modules/magicUrl', MagicUrl);
+Quill.register('modules/cursors', QuillCursors);
 
 const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false, loading: () => <Loading /> }), []);
 

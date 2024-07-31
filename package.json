@@ -35,6 +35,7 @@
         "next-auth": "^4.24.7",
         "next-themes": "^0.3.0",
         "openai": "^4.52.7",
+        "quill-cursors": "^4.0.3",
         "quill-paste-smart": "^2.0.0",
         "react": "^18",
         "react-dom": "^18",

@@ -68,6 +68,9 @@ dependencies:
   openai:
     specifier: ^4.52.7
     version: 4.52.7
+  quill-cursors:
+    specifier: ^4.0.3
+    version: 4.0.3
   quill-paste-smart:
     specifier: ^2.0.0
     version: 2.0.0(quill@2.0.2)
@@ -6329,6 +6332,10 @@ packages:
 
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
+
+  /quill-cursors@4.0.3:
+    resolution: {integrity: sha512-CXJ0eCCiZVwUWWASI9paXFTeVdVVBXdd/S+MC2j9lMIQB9V8dhWq4mPU2M5THSg1gSEM6R1z9YFiNMuu4zOq0A==}
+    dev: false
 
   /quill-delta@3.6.3:
     resolution: {integrity: sha512-wdIGBlcX13tCHOXGMVnnTVFtGRLoP0imqxM696fIPwIf5ODIYUHIvHbZcyvGlZFiFhK5XzDC2lpjbxRhnM05Tg==}
