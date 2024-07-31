@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 const useFolderDetail = ({ id, isEditMode }: UseFolderDetailOptions) => {
     return useQuery({
         queryKey: ['folderDetail', id],
-    queryFn: async () => {
+        queryFn: async () => {
             return await fetchFolderDetail(id);
         },
         refetchOnWindowFocus: true,

@@ -72,6 +72,19 @@ export const modules = {
             handleOnPaste: true, //default
             insertIntoEditor: undefined, // default
         },
+
+        form: {
+            htmlField: 'html', // Input name string, HTMLElement or false
+            deltaField: 'delta', // Input name string, HTMLElement or false
+            textField: 'text', // Input name string, HTMLElement or false
+            submitKey: {
+                // Keyboard key binding object or false
+                key: 'S',
+                shortKey: true,
+            },
+            updateOnBlur: true, // Updates the fields on blur
+            updateOnChange: false, // Updates the fields on every change
+        },
     },
 };
 
