@@ -11,6 +11,7 @@ import {
     Folder,
     FolderCheck,
     Settings,
+    Search,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -116,6 +117,11 @@ const Sidebar: FC = () => {
                                         <TrashModal />
                                     </Button>
                                 </div>
+                                <div className='ml-4 mt-8'>
+                                    <Button variant={'ghost'} value='sm'>
+                                        <Search /> SEARCH
+                                    </Button>
+                                </div>
                             </div>
                         </>
                     ) : (
@@ -208,6 +214,17 @@ const Sidebar: FC = () => {
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
                                             <TrashModal />
+                                        </Button>
+                                    </Tooltip>
+                                </div>
+
+                                <div className='ml-4 mt-8'>
+                                    <Tooltip
+                                        showArrow={true}
+                                        content='Open Trash'
+                                    >
+                                        <Button variant={'ghost'} size={'sm'}>
+                                            <Search />
                                         </Button>
                                     </Tooltip>
                                 </div>
