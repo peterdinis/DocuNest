@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { FC, useMemo } from 'react';
-import { Quill } from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 import MagicUrl from 'quill-magic-url';
 import QuillCursors from 'quill-cursors';
 import 'react-quill/dist/quill.snow.css';
@@ -19,7 +19,7 @@ interface QuillEditorProps {
     onChange: (content: string) => void;
 }
 
-const QuillEditor: FC<QuillEditorProps> = ({ value, readOnly, onChange }) => {
+const QuillEditor: FC<QuillEditorProps> = ({ value, readOnly, onChange}) => {
     const ReactQuill = useMemo(
         () =>
             dynamic(() => import('react-quill'), {
@@ -31,6 +31,7 @@ const QuillEditor: FC<QuillEditorProps> = ({ value, readOnly, onChange }) => {
 
     return (
         <ReactQuill
+
             theme='snow'
             className={`mb-6 mt-10 h-[100vh] whitespace-pre-wrap ${readOnly ? 'ql-disabled' : ''}`}
             modules={modules}
