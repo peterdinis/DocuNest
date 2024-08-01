@@ -9,7 +9,7 @@ import { Card, Button } from '@nextui-org/react';
 import { Folder as DisplayFolder } from '@prisma/client';
 import Link from 'next/link';
 import { useDebounce } from '@/app/_hooks/shared/useDebounce';
-import DeleteFolder from './DeleteFolderModal';
+import DeleteFolderModal from './DeleteFolderModal';
 import Loading from '../shared/Loading';
 import { ReactSortable } from 'react-sortablejs';
 import { motion } from 'framer-motion';
@@ -72,8 +72,13 @@ const AllFoldersContent: FC = () => {
                 setList={setFolders}
                 className='mt-5 flex flex-wrap gap-5'
             >
-                {folders.map((item: DisplayFolder) => {
-                    return (
+                {folders.length === 0 ? (
+                    <p className='text-xl font-bold text-gray-700'>
+                        <Ghost className='h-8 w-8 animate-bounce' />
+                        No folders found
+                    </p>
+                ) : (
+                    folders.map((item: DisplayFolder) => (
                         <motion.div
                             whileHover={{ scale: 1.1 }}
                             key={item.id}
@@ -90,14 +95,13 @@ const AllFoldersContent: FC = () => {
                                         </Link>
                                     </Button>
                                 </div>
-
                                 <div className='mt-6'>
-                                    <DeleteFolder folderId={item.id} />
+                                    <DeleteFolderModal folderId={item.id} />
                                 </div>
                             </Card>
                         </motion.div>
-                    ));
-                )};
+                    ))
+                )}
             </ReactSortable>
             <div className='mt-40 flex justify-center align-top'>
                 <AppPagination
