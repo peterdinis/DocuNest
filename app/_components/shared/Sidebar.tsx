@@ -20,6 +20,7 @@ import { Button, Tooltip } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 import CreateFolderModal from '../folders/CreateFolderModal';
 import TrashModal from '../trash/ThashModal';
+import GlobalSearch from './GlobalSearch';
 
 const Sidebar: FC = () => {
     const [collapsed, setSidebarCollapsed] = useState(false);
@@ -116,6 +117,11 @@ const Sidebar: FC = () => {
                                         <TrashModal />
                                     </Button>
                                 </div>
+                                <div className='ml-4 mt-8'>
+                                    <Button variant={'ghost'} value='sm'>
+                                        <GlobalSearch btnName="Search" />
+                                    </Button>
+                                </div>
                             </div>
                         </>
                     ) : (
@@ -204,10 +210,23 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
+                                        placement='right'
                                         content='Open Trash'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
                                             <TrashModal />
+                                        </Button>
+                                    </Tooltip>
+                                </div>
+
+                                <div className='ml-4 mt-8'>
+                                    <Tooltip
+                                        showArrow={true}
+                                        placement='right'
+                                        content='Search'
+                                    >
+                                        <Button variant={'ghost'} size={'sm'}>
+                                            <GlobalSearch />
                                         </Button>
                                     </Tooltip>
                                 </div>
