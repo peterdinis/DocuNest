@@ -16,7 +16,6 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // Calculate pagination offsets
     const skip = (page - 1) * limit;
     
     const documents = await db.document.findMany({

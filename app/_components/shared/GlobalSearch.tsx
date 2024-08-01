@@ -67,7 +67,7 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                         </ModalHeader>
                         <hr />
                         <p className='mt-5 p-3 prose prose-p: dark:text-white'>
-                            Search for document or folder here
+                            Search for document or folder here, that are not <span className='prose prose-p: text-red-800 ml-1 font-bold'>in trash</span>
                         </p>
                         <ModalBody>
                             <form onSubmit={handleSearch}>
