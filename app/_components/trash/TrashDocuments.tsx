@@ -8,13 +8,18 @@ import {
     TableBody,
     TableRow,
     TableCell,
+    Pagination,
 } from '@nextui-org/react';
 
 const TrashDocuments: FC = () => {
     return (
         <div className='mt-3'>
             DOCUMENTS
-            <Table isStriped aria-label='Example static collection table'>
+            <Table
+                className='mt-5'
+                isStriped
+                aria-label='Example static collection table'
+            >
                 <TableHeader>
                     <TableColumn>NAME</TableColumn>
                     <TableColumn>ROLE</TableColumn>
@@ -43,6 +48,16 @@ const TrashDocuments: FC = () => {
                     </TableRow>
                 </TableBody>
             </Table>
+            <div className='mt-5 flex justify-center align-top'>
+                <Pagination
+                    loop
+                    showControls
+                    isCompact
+                    color='success'
+                    total={5}
+                    initialPage={1}
+                />
+            </div>
         </div>
     );
 };

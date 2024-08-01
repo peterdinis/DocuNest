@@ -8,13 +8,14 @@ import {
     TableBody,
     TableRow,
     TableCell,
+    Pagination,
 } from '@nextui-org/react';
 
 const TrashFolders: FC = () => {
     return (
         <div className='mt-3'>
             FOLDERS
-            <Table isStriped aria-label='Example static collection table'>
+            <Table className='mt-5' isStriped aria-label='Example static collection table'>
                 <TableHeader>
                     <TableColumn>NAME</TableColumn>
                     <TableColumn>ROLE</TableColumn>
@@ -43,6 +44,16 @@ const TrashFolders: FC = () => {
                     </TableRow>
                 </TableBody>
             </Table>
+            <div className='mt-5 flex justify-center align-top'>
+                <Pagination
+                    loop
+                    showControls
+                    isCompact
+                    color='success'
+                    total={5}
+                    initialPage={1}
+                />
+            </div>
         </div>
     );
 };

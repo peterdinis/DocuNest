@@ -9,7 +9,6 @@ import {
     ModalFooter,
     Button,
     useDisclosure,
-    Pagination,
 } from '@nextui-org/react';
 import { Trash } from 'lucide-react';
 import useAllTrashFolders from '@/app/_hooks/folders/useAllTrashFolders';
@@ -30,9 +29,6 @@ const TrashModal: FC = () => {
         isLoading: docLoading,
         isError: docError,
     } = useAllTrashDocuments();
-
-    console.log('Trash', trashData);
-    console.log('DOC', docData);
 
     if (trashLoading || docLoading) {
         return <Loading />;
@@ -73,16 +69,6 @@ const TrashModal: FC = () => {
                                 <hr />
                                 <TrashFolders />
                                 <hr />
-                                <div className='mt-5 flex justify-center align-top'>
-                                    <Pagination
-                                        loop
-                                        showControls
-                                        isCompact
-                                        color='success'
-                                        total={5}
-                                        initialPage={1}
-                                    />
-                                </div>
                             </ModalBody>
                             <ModalFooter>
                                 <Button
