@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginSchema } from './schemas';
+import { loginSchema } from './authSchemas';
 import { toast } from 'react-toastify';
 import { Eye, EyeOff } from 'lucide-react';
 
