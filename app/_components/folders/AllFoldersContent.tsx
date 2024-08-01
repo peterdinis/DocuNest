@@ -3,7 +3,7 @@
 import { FC, useState, useEffect, ChangeEvent } from 'react';
 import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
-import { Folder, Search } from 'lucide-react';
+import { Folder, Ghost, Search } from 'lucide-react';
 import AppPagination from '../shared/AppPagination';
 import { Card, Button } from '@nextui-org/react';
 import { Folder as DisplayFolder } from '@prisma/client';
@@ -12,7 +12,7 @@ import { useDebounce } from '@/app/_hooks/shared/useDebounce';
 import DeleteFolder from './DeleteFolderModal';
 import Loading from '../shared/Loading';
 import { ReactSortable } from 'react-sortablejs';
-import {motion} from "framer-motion";
+import { motion } from 'framer-motion';
 import usePaginatedFolders from '@/app/_hooks/folders/usePaginatedFolders';
 
 const AllFoldersContent: FC = () => {
@@ -72,8 +72,13 @@ const AllFoldersContent: FC = () => {
                 setList={setFolders}
                 className='mt-5 flex flex-wrap gap-5'
             >
-                {folders.map((item: DisplayFolder) => {
-                    return (
+                {folders.length === 0 ? (
+                    <p className='text-xl font-bold text-gray-700 dark:text-white'>
+                        <Ghost className='h-8 w-8 animate-bounce' />
+                        No folders found
+                    </p>
+                ) : (
+                    folders.map((item: DisplayFolder) => (
                         <motion.div whileHover={{ scale: 1.1 }} key={item.id} className='w-[200px]'>
                             <Card className='space-y-5 p-4' radius='lg'>
                                 <div className='flex justify-center rounded-lg align-top'>
@@ -92,8 +97,8 @@ const AllFoldersContent: FC = () => {
                                 </div>
                             </Card>
                         </motion.div>
-                    );
-                })}
+                    ))
+                )}
             </ReactSortable>
             <div className='mt-40 flex justify-center align-top'>
                 <AppPagination

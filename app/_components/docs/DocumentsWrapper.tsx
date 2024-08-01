@@ -78,7 +78,7 @@ const DocumentsWrapper: FC = () => {
                 className='mt-5 flex flex-wrap justify-start'
             >
                 {documents.length === 0 ? (
-                    <p className='text-xl font-bold text-gray-700'>
+                    <p className='text-xl font-bold text-gray-700 dark:text-white'>
                         <Ghost className='h-8 w-8 animate-bounce' />
                         No documents found
                     </p>
