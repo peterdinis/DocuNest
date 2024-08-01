@@ -21,13 +21,28 @@ interface IGlobalSearchProps {
 
 const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
     const [searchQuery, setSearchQuery] = useState('');
-    const { data, error, isLoading, refetch } = useSearch(searchQuery);
+    const [page, setPage] = useState(1); // Track the current page
+    const limit = 10; // Number of results per page
+    const { data, error, isLoading, refetch } = useSearch(searchQuery, page, limit);
     const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
     const handleSearch = (e: FormEvent) => {
         e.preventDefault();
         if (searchQuery.trim() === '') return;
+        setPage(1); // Reset to page 1 when performing a new search
         refetch();
+    };
+
+    const handleNextPage = () => {
+        setPage(prevPage => prevPage + 1);
+        refetch();
+    };
+
+    const handlePreviousPage = () => {
+        if (page > 1) {
+            setPage(prevPage => prevPage - 1);
+            refetch();
+        }
     };
 
     return (
@@ -112,6 +127,19 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                                                 </div>
                                             ),
                                         )}
+                                    </div>
+                                    <div className='flex justify-between mt-4'>
+                                        <Button
+                                            disabled={page <= 1}
+                                            onClick={handlePreviousPage}
+                                        >
+                                            Previous
+                                        </Button>
+                                        <Button
+                                            onClick={handleNextPage}
+                                        >
+                                            Next
+                                        </Button>
                                     </div>
                                 </div>
                             )}
