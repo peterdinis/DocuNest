@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import authOptions from '../auth/authOptions';
 import { db } from '@/app/_utils/database';
 
-export async function GET() {
+export async function PUT() {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.user) {
