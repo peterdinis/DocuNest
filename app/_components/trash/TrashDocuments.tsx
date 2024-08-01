@@ -10,8 +10,28 @@ import {
     TableCell,
     Pagination,
 } from '@nextui-org/react';
+import useAllTrashDocuments from '@/app/_hooks/documents/useAllTrashDocuments';
+import Loading from '../shared/Loading';
 
 const TrashDocuments: FC = () => {
+    const {
+        data: docData,
+        isLoading: docLoading,
+        isError: docError,
+    } = useAllTrashDocuments();
+    
+    if (docLoading) {
+        return <Loading />;
+    }
+
+    if (docError) {
+        return (
+            <p className='text-xl font-bold text-red-700'>
+                Something went wrong
+            </p>
+        );
+    }
+
     return (
         <div className='mt-3'>
             DOCUMENTS
