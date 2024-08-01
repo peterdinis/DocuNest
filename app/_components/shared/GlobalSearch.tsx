@@ -48,6 +48,8 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                         <ModalHeader className='flex flex-col gap-1'>
                             {btnName || 'Search'}
                         </ModalHeader>
+                        <hr />
+                        <p className='mt-5 p-3 prose prose-p: dark:text-white'>Search for document or folder here</p>
                         <ModalBody>
                             <form onSubmit={handleSearch}>
                                 <Input
@@ -75,11 +77,10 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                                             (doc: {
                                                 id: Key;
                                                 title: string;
-                                                description: string;
                                             }) => (
                                                 <div key={doc.id}>
                                                     <h4>{doc.title}</h4>
-                                                    <p>{doc.description}</p>
+                                                    <span className='float-right mb-2'>Detail</span>
                                                 </div>
                                             ),
                                         )}
@@ -93,6 +94,7 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                                             }) => (
                                                 <div key={folder.id}>
                                                     <h4>{folder.name}</h4>
+                                                    <span className='float-right mb-2'>Detail</span>
                                                 </div>
                                             ),
                                         )}

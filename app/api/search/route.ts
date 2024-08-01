@@ -14,7 +14,6 @@ export async function GET(request: NextRequest) {
       where: {
         OR: [
           { title: { contains: query, mode: 'insensitive' } },
-          { description: { contains: query, mode: 'insensitive' } }
         ],
         inTrash: false,
       },
@@ -29,7 +28,6 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ documents, folders }, { status: 200 });
   } catch (error) {
-    console.error(error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
