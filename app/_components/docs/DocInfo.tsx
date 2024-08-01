@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { FC, useState, useEffect, useCallback, useMemo} from 'react';
+import { FC, useState, useEffect, useCallback, useMemo } from 'react';
 import { Button, Input } from '@nextui-org/react';
 import { saveAs } from 'file-saver';
 import { Folder } from 'lucide-react';
@@ -66,18 +66,17 @@ const DocInfo: FC = () => {
 
     const handleExportPDF = () => {
         if (description) {
-          const pdfContent = htmlToPdfmake(description);
-          const documentDefinition = { content: pdfContent };
-          pdfMake.createPdf(documentDefinition).download(`${title}.pdf`);
+            const pdfContent = htmlToPdfmake(description);
+            const documentDefinition = { content: pdfContent };
+            pdfMake.createPdf(documentDefinition).download(`${title}.pdf`);
         }
-      };
+    };
 
-    
     const handleDocxDownload = () => {
         const editorContent = description;
         const converted = htmlDocx.asBlob(editorContent);
         saveAs(converted, `${title}.docx`);
-    }
+    };
 
     const folderSelectOrName = useMemo(() => {
         if (isEditMode) {

@@ -72,14 +72,13 @@ const AllFoldersContent: FC = () => {
                 setList={setFolders}
                 className='mt-5 flex flex-wrap gap-5'
             >
-                {folders.length === 0 ? (
-                    <p className='text-xl font-bold text-gray-700 dark:text-white'>
-                        <Ghost className='h-8 w-8 animate-bounce' />
-                        No folders found
-                    </p>
-                ) : (
-                    folders.map((item: DisplayFolder) => (
-                        <motion.div whileHover={{ scale: 1.1 }} key={item.id} className='w-[200px]'>
+                {folders.map((item: DisplayFolder) => {
+                    return (
+                        <motion.div
+                            whileHover={{ scale: 1.1 }}
+                            key={item.id}
+                            className='w-[200px]'
+                        >
                             <Card className='space-y-5 p-4' radius='lg'>
                                 <div className='flex justify-center rounded-lg align-top'>
                                     <Folder size={50} />
@@ -97,8 +96,8 @@ const AllFoldersContent: FC = () => {
                                 </div>
                             </Card>
                         </motion.div>
-                    ))
-                )}
+                    ));
+                )};
             </ReactSortable>
             <div className='mt-40 flex justify-center align-top'>
                 <AppPagination
