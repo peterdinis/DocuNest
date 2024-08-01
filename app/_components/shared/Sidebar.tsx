@@ -210,6 +210,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
+                                        placement='right'
                                         content='Open Trash'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
@@ -221,6 +222,7 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
+                                        placement='right'
                                         content='Search'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
