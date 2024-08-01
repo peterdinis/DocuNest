@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, Key, useState } from 'react';
+import { FC, Key, useState, FormEvent } from 'react';
 import {
     Modal,
     ModalContent,
@@ -23,7 +23,9 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const { data, error, isLoading, refetch } = useSearch(searchQuery);
     const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-    const handleSearch = () => {
+
+    const handleSearch = (e: FormEvent) => {
+        e.preventDefault();
         if (searchQuery.trim() === '') return;
         refetch();
     };
@@ -49,7 +51,9 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                             {btnName || 'Search'}
                         </ModalHeader>
                         <hr />
-                        <p className='mt-5 p-3 prose prose-p: dark:text-white'>Search for document or folder here</p>
+                        <p className='mt-5 p-3 prose prose-p: dark:text-white'>
+                            Search for document or folder here
+                        </p>
                         <ModalBody>
                             <form onSubmit={handleSearch}>
                                 <Input
@@ -70,36 +74,46 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                                 </div>
                             )}
                             {data && (
-                                <>
+                                <div className='flex flex-col gap-4 mt-4'>
                                     <div>
-                                        <h3>Documents</h3>
+                                        <h3 className='text-lg font-semibold'>Documents</h3>
                                         {data.documents.map(
                                             (doc: {
                                                 id: Key;
                                                 title: string;
                                             }) => (
-                                                <div key={doc.id}>
-                                                    <h4>{doc.title}</h4>
-                                                    <span className='float-right mb-2'>Detail</span>
+                                                <div key={doc.id} className='flex justify-between items-center p-2 border-b'>
+                                                    <h4 className='text-md'>{doc.title}</h4>
+                                                    <Button
+                                                        color='primary'
+                                                        size='sm'
+                                                    >
+                                                        Detail
+                                                    </Button>
                                                 </div>
                                             ),
                                         )}
                                     </div>
                                     <div>
-                                        <h3>Folders</h3>
+                                        <h3 className='text-lg font-semibold'>Folders</h3>
                                         {data.folders.map(
                                             (folder: {
                                                 id: Key;
                                                 name: string;
                                             }) => (
-                                                <div key={folder.id}>
-                                                    <h4>{folder.name}</h4>
-                                                    <span className='float-right mb-2'>Detail</span>
+                                                <div key={folder.id} className='flex justify-between items-center p-2 border-b'>
+                                                    <h4 className='text-md'>{folder.name}</h4>
+                                                    <Button
+                                                        color='primary'
+                                                        size='sm'
+                                                    >
+                                                        Detail
+                                                    </Button>
                                                 </div>
                                             ),
                                         )}
                                     </div>
-                                </>
+                                </div>
                             )}
                         </ModalBody>
                         <ModalFooter>
