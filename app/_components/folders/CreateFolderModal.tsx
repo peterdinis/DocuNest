@@ -15,7 +15,7 @@ import { useMutation } from '@tanstack/react-query';
 import { FC, ReactNode, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { FolderData, schema } from './schemas';
+import { FolderData, schema } from './folderSchema';
 import {
     createNewFolder,
     ICreateFolder,
