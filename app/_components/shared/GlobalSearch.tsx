@@ -49,14 +49,18 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                             {btnName || 'Search'}
                         </ModalHeader>
                         <ModalBody>
-                            <Input
-                                type='text'
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder='Search...'
-                                className='w-full rounded border p-2'
-                            />
-                            <Button onPress={handleSearch}>Search</Button>
+                            <form onSubmit={handleSearch}>
+                                <Input
+                                    type='text'
+                                    value={searchQuery}
+                                    startContent={<Search />}
+                                    onChange={(e) =>
+                                        setSearchQuery(e.target.value)
+                                    }
+                                    placeholder='Search...'
+                                    className='w-full rounded p-2'
+                                />
+                            </form>
                             {isLoading && <Loading />}
                             {error && (
                                 <div className='text-xl font-bold text-red-800'>
