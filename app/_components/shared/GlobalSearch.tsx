@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, Key, useState } from 'react';
+import { FC, Key, useState, FormEvent } from 'react';
 import {
     Modal,
     ModalContent,
@@ -21,11 +21,28 @@ interface IGlobalSearchProps {
 
 const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
     const [searchQuery, setSearchQuery] = useState('');
-    const { data, error, isLoading, refetch } = useSearch(searchQuery);
+    const [page, setPage] = useState(1); // Track the current page
+    const limit = 10; // Number of results per page
+    const { data, error, isLoading, refetch } = useSearch(searchQuery, page, limit);
     const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-    const handleSearch = () => {
+
+    const handleSearch = (e: FormEvent) => {
+        e.preventDefault();
         if (searchQuery.trim() === '') return;
+        setPage(1); // Reset to page 1 when performing a new search
         refetch();
+    };
+
+    const handleNextPage = () => {
+        setPage(prevPage => prevPage + 1);
+        refetch();
+    };
+
+    const handlePreviousPage = () => {
+        if (page > 1) {
+            setPage(prevPage => prevPage - 1);
+            refetch();
+        }
     };
 
     return (
@@ -48,15 +65,23 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                         <ModalHeader className='flex flex-col gap-1'>
                             {btnName || 'Search'}
                         </ModalHeader>
+                        <hr />
+                        <p className='mt-5 p-3 prose prose-p: dark:text-white'>
+                            Search for document or folder here, that are not <span className='prose prose-p: text-red-800 ml-1 font-bold'>in trash</span>
+                        </p>
                         <ModalBody>
-                            <Input
-                                type='text'
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder='Search...'
-                                className='w-full rounded border p-2'
-                            />
-                            <Button onPress={handleSearch}>Search</Button>
+                            <form onSubmit={handleSearch}>
+                                <Input
+                                    type='text'
+                                    value={searchQuery}
+                                    startContent={<Search />}
+                                    onChange={(e) =>
+                                        setSearchQuery(e.target.value)
+                                    }
+                                    placeholder='Search...'
+                                    className='w-full rounded p-2'
+                                />
+                            </form>
                             {isLoading && <Loading />}
                             {error && (
                                 <div className='text-xl font-bold text-red-800'>
@@ -64,36 +89,59 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                                 </div>
                             )}
                             {data && (
-                                <>
+                                <div className='flex flex-col gap-4 mt-4'>
                                     <div>
-                                        <h3>Documents</h3>
+                                        <h3 className='text-lg font-semibold'>Documents</h3>
                                         {data.documents.map(
                                             (doc: {
                                                 id: Key;
                                                 title: string;
-                                                description: string;
                                             }) => (
-                                                <div key={doc.id}>
-                                                    <h4>{doc.title}</h4>
-                                                    <p>{doc.description}</p>
+                                                <div key={doc.id} className='flex justify-between items-center p-2 border-b'>
+                                                    <h4 className='text-md'>{doc.title}</h4>
+                                                    <Button
+                                                        color='primary'
+                                                        size='sm'
+                                                    >
+                                                        Detail
+                                                    </Button>
                                                 </div>
                                             ),
                                         )}
                                     </div>
                                     <div>
-                                        <h3>Folders</h3>
+                                        <h3 className='text-lg font-semibold'>Folders</h3>
                                         {data.folders.map(
                                             (folder: {
                                                 id: Key;
                                                 name: string;
                                             }) => (
-                                                <div key={folder.id}>
-                                                    <h4>{folder.name}</h4>
+                                                <div key={folder.id} className='flex justify-between items-center p-2 border-b'>
+                                                    <h4 className='text-md'>{folder.name}</h4>
+                                                    <Button
+                                                        color='primary'
+                                                        size='sm'
+                                                    >
+                                                        Detail
+                                                    </Button>
                                                 </div>
                                             ),
                                         )}
                                     </div>
-                                </>
+                                    <div className='flex justify-between mt-4'>
+                                        <Button
+                                            disabled={page <= 1}
+                                            onClick={handlePreviousPage}
+                                        >
+                                            Previous
+                                        </Button>
+                                        <Button
+                                            onClick={handleNextPage}
+                                        >
+                                            Next
+                                        </Button>
+                                    </div>
+                                </div>
                             )}
                         </ModalBody>
                         <ModalFooter>
