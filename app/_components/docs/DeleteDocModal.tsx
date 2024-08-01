@@ -30,7 +30,7 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }) => {
 
     const onMoveToTrash = () => {
         moveToTrashMut.mutate({
-            inTrash: true
+            inTrash: true,
         });
     };
 
@@ -50,10 +50,17 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }) => {
                                 <Button color='danger' onPress={onClose}>
                                     Close
                                 </Button>
-                                <Button color='secondary' onClick={onMoveToTrash}>
+                                <Button
+                                    color='secondary'
+                                    onClick={onMoveToTrash}
+                                >
                                     Move to trash
                                 </Button>
-                                <Button color='primary' type='button' onClick={onDelete}>
+                                <Button
+                                    color='primary'
+                                    type='button'
+                                    onClick={onDelete}
+                                >
                                     Delete Document
                                 </Button>
                             </ModalFooter>

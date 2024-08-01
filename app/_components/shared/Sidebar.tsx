@@ -119,7 +119,7 @@ const Sidebar: FC = () => {
                                 </div>
                                 <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
-                                        <GlobalSearch btnName="Search" />
+                                        <GlobalSearch btnName='Search' />
                                     </Button>
                                 </div>
                             </div>

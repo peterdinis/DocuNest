@@ -13,8 +13,7 @@ export const fetchAllPaginatedDocuments = async ({ query = '', page = 1 }) => {
 export const fetchAllTrashDocuments = async () => {
     const response = await axios.get('/api/docs/trash');
     return response.data;
-}
-
+};
 
 export const fetchAllDocuments = async () => {
     const response = await axios.get('/api/docs');

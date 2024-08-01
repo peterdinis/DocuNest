@@ -31,7 +31,7 @@ const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }) => {
 
     const onMoveToTrash = () => {
         moveToTrashMut.mutate({
-            inTrash: true
+            inTrash: true,
         });
     };
 

@@ -15,7 +15,7 @@ export async function GET() {
     const allUsersFolders = await db.folder.findMany({
         where: {
             userId: session.user.id,
-            inTrash: true
+            inTrash: true,
         },
     });
 

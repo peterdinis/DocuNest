@@ -1,8 +1,11 @@
-"use client"
+'use client';
 
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { IMoveToTrash, moveToTrashFolder } from '@/app/_store/mutations/folderMutations';
+import {
+    IMoveToTrash,
+    moveToTrashFolder,
+} from '@/app/_store/mutations/folderMutations';
 
 export const useMoveFolderToTrash = (id: string) => {
     return useMutation({

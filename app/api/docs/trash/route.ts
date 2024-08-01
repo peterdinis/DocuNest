@@ -15,7 +15,7 @@ export async function GET() {
     const allUsersDocuments = await db.document.findMany({
         where: {
             userId: session.user.id,
-            inTrash: true
+            inTrash: true,
         },
     });
 

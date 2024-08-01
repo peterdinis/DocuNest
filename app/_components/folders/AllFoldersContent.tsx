@@ -12,7 +12,7 @@ import { useDebounce } from '@/app/_hooks/shared/useDebounce';
 import DeleteFolder from './DeleteFolderModal';
 import Loading from '../shared/Loading';
 import { ReactSortable } from 'react-sortablejs';
-import {motion} from "framer-motion";
+import { motion } from 'framer-motion';
 import usePaginatedFolders from '@/app/_hooks/folders/usePaginatedFolders';
 
 const AllFoldersContent: FC = () => {
@@ -74,7 +74,11 @@ const AllFoldersContent: FC = () => {
             >
                 {folders.map((item: DisplayFolder) => {
                     return (
-                        <motion.div whileHover={{ scale: 1.1 }} key={item.id} className='w-[200px]'>
+                        <motion.div
+                            whileHover={{ scale: 1.1 }}
+                            key={item.id}
+                            className='w-[200px]'
+                        >
                             <Card className='space-y-5 p-4' radius='lg'>
                                 <div className='flex justify-center rounded-lg align-top'>
                                     <Folder size={50} />
