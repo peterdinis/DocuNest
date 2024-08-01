@@ -13,6 +13,7 @@ import { useDebounce } from '@/app/_hooks/shared/useDebounce';
 import DeleteDocModal from './DeleteDocModal';
 import UploadDoc from './UploadDoc';
 import Loading from '../shared/Loading';
+import { motion } from 'framer-motion';
 import { ReactSortable } from 'react-sortablejs';
 import usePaginatedDocuments from '@/app/_hooks/documents/usePaginatedDocuments';
 
@@ -55,7 +56,8 @@ const DocumentsWrapper: FC = () => {
     }
 
     return (
-        <>
+        <
+        >
             <div className='flex justify-center align-top'>
                 <Header text='My Documents' />
             </div>
@@ -82,7 +84,7 @@ const DocumentsWrapper: FC = () => {
                     </p>
                 ) : (
                     documents.map((item: Document) => (
-                        <div key={item.id} className='mb-4 mr-4 flex flex-col'>
+                        <motion.div whileHover={{ scale: 1.1 }} key={item.id} className='mb-4 mr-4 flex flex-col'>
                             <Card
                                 className='w-[250px] space-y-5 p-4'
                                 radius='lg'
@@ -107,7 +109,7 @@ const DocumentsWrapper: FC = () => {
                                     </Button>
                                 </div>
                             </Card>
-                        </div>
+                        </motion.div>
                     ))
                 )}
             </ReactSortable>
