@@ -56,8 +56,7 @@ const DocumentsWrapper: FC = () => {
     }
 
     return (
-        <
-        >
+        <>
             <div className='flex justify-center align-top'>
                 <Header text='My Documents' />
             </div>
@@ -84,7 +83,11 @@ const DocumentsWrapper: FC = () => {
                     </p>
                 ) : (
                     documents.map((item: Document) => (
-                        <motion.div whileHover={{ scale: 1.1 }} key={item.id} className='mb-4 mr-4 flex flex-col'>
+                        <motion.div
+                            whileHover={{ scale: 1.1 }}
+                            key={item.id}
+                            className='mb-4 mr-4 flex flex-col'
+                        >
                             <Card
                                 className='w-[250px] space-y-5 p-4'
                                 radius='lg'

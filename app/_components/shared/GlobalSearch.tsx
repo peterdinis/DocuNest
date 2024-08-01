@@ -23,7 +23,11 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [page, setPage] = useState(1); // Track the current page
     const limit = 10; // Number of results per page
-    const { data, error, isLoading, refetch } = useSearch(searchQuery, page, limit);
+    const { data, error, isLoading, refetch } = useSearch(
+        searchQuery,
+        page,
+        limit,
+    );
     const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
     const handleSearch = (e: FormEvent) => {
@@ -34,13 +38,13 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
     };
 
     const handleNextPage = () => {
-        setPage(prevPage => prevPage + 1);
+        setPage((prevPage) => prevPage + 1);
         refetch();
     };
 
     const handlePreviousPage = () => {
         if (page > 1) {
-            setPage(prevPage => prevPage - 1);
+            setPage((prevPage) => prevPage - 1);
             refetch();
         }
     };
@@ -66,8 +70,11 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                             {btnName || 'Search'}
                         </ModalHeader>
                         <hr />
-                        <p className='mt-5 p-3 prose prose-p: dark:text-white'>
-                            Search for document or folder here, that are not <span className='prose prose-p: text-red-800 ml-1 font-bold'>in trash</span>
+                        <p className='prose-p: prose mt-5 p-3 dark:text-white'>
+                            Search for document or folder here, that are not{' '}
+                            <span className='prose-p: prose ml-1 font-bold text-red-800'>
+                                in trash
+                            </span>
                         </p>
                         <ModalBody>
                             <form onSubmit={handleSearch}>
@@ -89,16 +96,23 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                                 </div>
                             )}
                             {data && (
-                                <div className='flex flex-col gap-4 mt-4'>
+                                <div className='mt-4 flex flex-col gap-4'>
                                     <div>
-                                        <h3 className='text-lg font-semibold'>Documents</h3>
+                                        <h3 className='text-lg font-semibold'>
+                                            Documents
+                                        </h3>
                                         {data.documents.map(
                                             (doc: {
                                                 id: Key;
                                                 title: string;
                                             }) => (
-                                                <div key={doc.id} className='flex justify-between items-center p-2 border-b'>
-                                                    <h4 className='text-md'>{doc.title}</h4>
+                                                <div
+                                                    key={doc.id}
+                                                    className='flex items-center justify-between border-b p-2'
+                                                >
+                                                    <h4 className='text-md'>
+                                                        {doc.title}
+                                                    </h4>
                                                     <Button
                                                         color='primary'
                                                         size='sm'
@@ -110,14 +124,21 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                                         )}
                                     </div>
                                     <div>
-                                        <h3 className='text-lg font-semibold'>Folders</h3>
+                                        <h3 className='text-lg font-semibold'>
+                                            Folders
+                                        </h3>
                                         {data.folders.map(
                                             (folder: {
                                                 id: Key;
                                                 name: string;
                                             }) => (
-                                                <div key={folder.id} className='flex justify-between items-center p-2 border-b'>
-                                                    <h4 className='text-md'>{folder.name}</h4>
+                                                <div
+                                                    key={folder.id}
+                                                    className='flex items-center justify-between border-b p-2'
+                                                >
+                                                    <h4 className='text-md'>
+                                                        {folder.name}
+                                                    </h4>
                                                     <Button
                                                         color='primary'
                                                         size='sm'
@@ -128,16 +149,14 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                                             ),
                                         )}
                                     </div>
-                                    <div className='flex justify-between mt-4'>
+                                    <div className='mt-4 flex justify-between'>
                                         <Button
                                             disabled={page <= 1}
                                             onClick={handlePreviousPage}
                                         >
                                             Previous
                                         </Button>
-                                        <Button
-                                            onClick={handleNextPage}
-                                        >
+                                        <Button onClick={handleNextPage}>
                                             Next
                                         </Button>
                                     </div>
