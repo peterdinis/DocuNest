@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllPaginatedDocuments } from '@/app/_store/queries/documentQueries';
-import { UsePaginatedDocumentsOptions } from '../_types/hookTypes';
+import { UsePaginatedDocumentsOptions } from '@/app/_types/hookTypes';
 
 const usePaginatedDocuments = ({
     query,
