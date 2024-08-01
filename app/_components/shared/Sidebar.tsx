@@ -11,7 +11,6 @@ import {
     Folder,
     FolderCheck,
     Settings,
-    Search,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -21,6 +20,7 @@ import { Button, Tooltip } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 import CreateFolderModal from '../folders/CreateFolderModal';
 import TrashModal from '../trash/ThashModal';
+import GlobalSearch from './GlobalSearch';
 
 const Sidebar: FC = () => {
     const [collapsed, setSidebarCollapsed] = useState(false);
@@ -119,7 +119,7 @@ const Sidebar: FC = () => {
                                 </div>
                                 <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
-                                        <Search /> SEARCH
+                                        <GlobalSearch btnName="Search" />
                                     </Button>
                                 </div>
                             </div>
@@ -221,10 +221,10 @@ const Sidebar: FC = () => {
                                 <div className='ml-4 mt-8'>
                                     <Tooltip
                                         showArrow={true}
-                                        content='Open Trash'
+                                        content='Search'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
-                                            <Search />
+                                            <GlobalSearch />
                                         </Button>
                                     </Tooltip>
                                 </div>
