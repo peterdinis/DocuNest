@@ -15,6 +15,8 @@ import {Trash } from 'lucide-react';
 import useAllTrashFolders from '@/app/_hooks/folders/useAllTrashFolders';
 import useAllTrashDocuments from '@/app/_hooks/documents/useAllTrashDocuments';
 import Loading from '../shared/Loading';
+import TrashDocuments from './TrashDocuments';
+import TrashFolders from './TrashFolders';
 
 const TrashModal: FC = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -54,6 +56,11 @@ const TrashModal: FC = () => {
                             </ModalHeader>
                             <ModalBody>
                                 Your items in Trash
+                                <br />
+                                <TrashDocuments />
+                                <hr />
+                                <TrashFolders />
+                                <hr />
                                 <div className='mt-5 flex justify-center align-top'>
                                     <Pagination
                                         loop
