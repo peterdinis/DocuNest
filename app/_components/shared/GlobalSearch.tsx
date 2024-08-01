@@ -46,7 +46,7 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                 <ModalContent>
                     <>
                         <ModalHeader className='flex flex-col gap-1'>
-                            {btnName}
+                            {btnName || 'Search'}
                         </ModalHeader>
                         <ModalBody>
                             <Input
