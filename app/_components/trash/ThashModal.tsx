@@ -37,14 +37,6 @@ const TrashModal: FC = () => {
     const {data: trashData, isLoading: trashLoading, isError: trashError} = useAllTrashFolders();
     const {data: docData, isLoading: docLoading, isError: docError} = useAllTrashDocuments();
 
-    if(trashLoading || docLoading) {
-        return <Loading />
-    }
-
-    if(trashError || docError) {
-        return <p className='text-red-700 text-xl font-bold'>Something went wrong</p>
-    }
-
     const renderCell = useCallback((user: any, columnKey: string | number) => {
         const cellValue = user[columnKey];
 
@@ -105,6 +97,14 @@ const TrashModal: FC = () => {
                 return cellValue;
         }
     }, []);
+
+    if(trashLoading || docLoading) {
+        return <Loading />
+    }
+
+    if(trashError || docError) {
+        return <p className='text-red-700 text-xl font-bold'>Something went wrong</p>
+    }
 
     return (
         <>
