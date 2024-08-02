@@ -8,6 +8,7 @@ export interface ICreateFolder {
 export type UpdateFolderData = Partial<ICreateFolder>;
 
 export interface IMoveToTrash {
+    documentId?: string;
     inTrash: boolean;
 }
 

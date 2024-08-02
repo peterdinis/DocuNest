@@ -4,22 +4,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import authOptions from '../../auth/authOptions';
 
 export async function GET(request: NextRequest) {
-    const url = new URL(request.url);
-    const id = url.pathname.split('/').pop();
-
-    if (!id) {
-        return NextResponse.json(
-            { error: 'Missing id parameter' },
-            { status: 400 },
-        );
-    }
-
     try {
-        const folderDetail = await db.folder.findFirst({
-            where: { id },
-            include: {
-                documents: true,
-            },
+        const folderDetail = await db.folder.findMany({
+            where: {
+                inTrash: true
+            }
         });
 
         if (!folderDetail) {

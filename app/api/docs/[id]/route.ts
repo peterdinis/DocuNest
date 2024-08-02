@@ -5,19 +5,11 @@ import authOptions from '../../auth/authOptions';
 import { revalidatePath } from 'next/cache';
 
 export async function GET(request: NextRequest) {
-    const url = new URL(request.url);
-    const id = url.pathname.split('/').pop();
-
-    if (!id) {
-        return NextResponse.json(
-            { error: 'Missing id parameter' },
-            { status: 400 },
-        );
-    }
-
     try {
-        const documentDetail = await db.document.findFirst({
-            where: { id },
+        const documentDetail = await db.document.findMany({
+            where: { 
+                inTrash: true
+             },
         });
 
         if (!documentDetail) {

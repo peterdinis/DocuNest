@@ -17,8 +17,10 @@ const TrashDocuments: FC = () => {
     const {
         data: docData,
         isLoading: docLoading,
-        isError: docError,
+    isError: docError,
     } = useAllTrashDocuments();
+
+    console.log(docData);
     
     if (docLoading) {
         return <Loading />;

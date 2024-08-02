@@ -22,7 +22,7 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { handleSubmit } = useForm();
     const deleteDocMut = useDeleteDocument(docId);
-    const moveToTrashMut = useMoveDocumentToTrash(docId);
+    const moveToTrashMut = useMoveDocumentToTrash();
 
     const onDelete = () => {
         deleteDocMut.mutate();
@@ -30,6 +30,7 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }) => {
 
     const onMoveToTrash = () => {
         moveToTrashMut.mutate({
+            documentId: docId,
             inTrash: true,
         });
     };
