@@ -8,6 +8,7 @@ export interface ICreateFolder {
 export type UpdateFolderData = Partial<ICreateFolder>;
 
 export interface IMoveToTrash {
+    folderId?: string;
     documentId?: string;
     inTrash: boolean;
 }
@@ -24,15 +25,13 @@ export const updateFolder = async (
 };
 
 export const moveToTrashFolder = async (
-    folderId: string,
     data: IMoveToTrash,
 ) => {
-    return await axios.put(`/api/folders/${folderId}/trash`, data);
+    return await axios.put(`/api/folders/${data.folderId}/trash`, data);
 };
 
 export const removeFromTrashFolder = async (
-    folderId: string,
     data: IMoveToTrash,
 ) => {
-    return await axios.put(`/api/folders/${folderId}/trash/remove`, data);
+    return await axios.put(`/api/folders/${data.folderId}/trash/remove`, data);
 };

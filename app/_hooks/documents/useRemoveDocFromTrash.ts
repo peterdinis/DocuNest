@@ -5,10 +5,10 @@ import { toast } from 'react-toastify';
 import { IMoveToTrash } from '@/app/_store/mutations/folderMutations';
 import { removeDocumentFromTrash } from '@/app/_store/mutations/documentMutations';
 
-export const useRemoveDocumentFromTrash = (id: string) => {
+export const useRemoveDocumentFromTrash = () => {
     return useMutation({
-        mutationKey: ['removeDocFromTrash', id],
-        mutationFn: (data: IMoveToTrash) => removeDocumentFromTrash(id, data),
+        mutationKey: ['removeDocFromTrash'],
+        mutationFn: (data: IMoveToTrash) => removeDocumentFromTrash(data),
         onSuccess: () => {
             toast.success('Document was removed from trash');
         },

@@ -37,8 +37,7 @@ export const moveDocumentToTrash = async (
 };
 
 export const removeDocumentFromTrash = async (
-    documentId: string,
     data: IMoveToTrash,
 ) => {
-    return await axios.put(`/api/docs/${documentId}/trash/remove`, data);
+    return await axios.put(`/api/docs/${data.documentId}/trash/remove`, data);
 };
