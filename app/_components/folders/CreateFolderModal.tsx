@@ -46,7 +46,7 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ['myFolders'],
+                queryKey: ['myPaginatedFolders'],
             });
             toast.success('Folder was created');
             reset();
