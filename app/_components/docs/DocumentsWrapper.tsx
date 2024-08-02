@@ -3,7 +3,7 @@
 import { FC, useState, useEffect, ChangeEvent } from 'react';
 import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
-import { Ghost, Search } from 'lucide-react';
+import { FileText, Search } from 'lucide-react';
 import AppPagination from '../shared/AppPagination';
 import { Document } from '@prisma/client';
 import { Button, Card } from '@nextui-org/react';
@@ -69,20 +69,22 @@ const DocumentsWrapper: FC = () => {
             />
             <br />
             <UploadDoc />
-            <ReactSortable
-                swap
-                animation={200}
-                list={documents}
-                setList={setDocuments}
-                className='mt-5 flex flex-wrap justify-start'
-            >
-                {documents.length === 0 ? (
-                    <p className='text-xl font-bold text-gray-700'>
-                        <Ghost className='h-8 w-8 animate-bounce' />
+            {documents.length === 0 ? (
+                <div className='flex flex-col items-center mt-10'>
+                    <FileText className='h-16 w-16 animate-bounce dark:text-white' />
+                    <p className='text-xl font-bold text-gray-700 dark:text-white mt-4'>
                         No documents found
                     </p>
-                ) : (
-                    documents.map((item: Document) => (
+                </div>
+            ) : (
+                <ReactSortable
+                    swap
+                    animation={200}
+                    list={documents}
+                    setList={setDocuments}
+                    className='mt-5 flex flex-wrap justify-start'
+                >
+                    {documents.map((item: Document) => (
                         <motion.div
                             whileHover={{ scale: 1.1 }}
                             key={item.id}
@@ -113,9 +115,9 @@ const DocumentsWrapper: FC = () => {
                                 </div>
                             </Card>
                         </motion.div>
-                    ))
-                )}
-            </ReactSortable>
+                    ))}
+                </ReactSortable>
+            )}
             <div className='mt-40 flex justify-center align-top'>
                 <AppPagination
                     total={data.totalPages}
