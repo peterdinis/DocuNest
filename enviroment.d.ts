@@ -5,8 +5,8 @@ declare global {
             NODE_ENV: 'development' | 'production';
             NEXTAUTH_SECRET: string;
             NEXT_PUBLIC_OPENAI_API_KEY: string;
-            EDGE_STORE_ACCESS_KEY: string;
-            EDGE_STORE_SECRET_KEY: string;
+            UPLOADTHING_SECRET: string;
+            UPLOADTHING_APP_ID: string;
         }
     }
 }

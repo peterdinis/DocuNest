@@ -6,3 +6,5 @@ export type DocumentTableType = {
     updateAt: string | Date;
     userId: string;
 };
+
+export type TrashDocument = Partial<DocumentTableType>;

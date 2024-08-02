@@ -9,15 +9,18 @@ import {
     TableRow,
     TableCell,
     Pagination,
+    Button,
 } from '@nextui-org/react';
 import useAllTrashDocuments from '@/app/_hooks/documents/useAllTrashDocuments';
 import Loading from '../shared/Loading';
+import {format} from "date-fns"
+import { TrashDocument } from '@/app/_types/documentTypes';
 
 const TrashDocuments: FC = () => {
     const {
         data: docData,
         isLoading: docLoading,
-        isError: docError,
+    isError: docError,
     } = useAllTrashDocuments();
     
     if (docLoading) {
@@ -41,31 +44,26 @@ const TrashDocuments: FC = () => {
                 aria-label='Example static collection table'
             >
                 <TableHeader>
-                    <TableColumn>NAME</TableColumn>
-                    <TableColumn>ROLE</TableColumn>
-                    <TableColumn>STATUS</TableColumn>
+                    <TableColumn>Title</TableColumn>
+                    <TableColumn>Created At</TableColumn>
+                    <TableColumn>Remove from trash</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    <TableRow key='1'>
-                        <TableCell>Tony Reichert</TableCell>
-                        <TableCell>CEO</TableCell>
-                        <TableCell>Active</TableCell>
-                    </TableRow>
-                    <TableRow key='2'>
-                        <TableCell>Zoey Lang</TableCell>
-                        <TableCell>Technical Lead</TableCell>
-                        <TableCell>Paused</TableCell>
-                    </TableRow>
-                    <TableRow key='3'>
-                        <TableCell>Jane Fisher</TableCell>
-                        <TableCell>Senior Developer</TableCell>
-                        <TableCell>Active</TableCell>
-                    </TableRow>
-                    <TableRow key='4'>
-                        <TableCell>William Howard</TableCell>
-                        <TableCell>Community Manager</TableCell>
-                        <TableCell>Vacation</TableCell>
-                    </TableRow>
+                    {docData && docData.map((item: TrashDocument) => {
+                        return (
+                            <TableRow>
+                                <TableCell>
+                                    {item.title}
+                                </TableCell>
+                                <TableCell>
+                                    {format(item.createAt!, 'yyyy-MM-dd')}
+                                </TableCell>
+                                <TableCell>
+                                    <Button radius="full" size='sm'>Delete</Button>
+                                </TableCell>
+                            </TableRow>
+                        )
+                    })}
                 </TableBody>
             </Table>
             <div className='mt-5 flex justify-center align-top'>

@@ -21,9 +21,8 @@ interface IDeleteFolderProps {
 
 const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const { handleSubmit } = useForm();
     const deleteFolderMut = useDeleteFolder(folderId);
-    const moveToTrashMut = useMoveFolderToTrash(folderId);
+    const moveToTrashMut = useMoveFolderToTrash();
 
     const onDelete = () => {
         deleteFolderMut.mutate();
@@ -31,6 +30,7 @@ const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }) => {
 
     const onMoveToTrash = () => {
         moveToTrashMut.mutate({
+            folderId,
             inTrash: true,
         });
     };
@@ -65,7 +65,7 @@ const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }) => {
                                         Move to Trash
                                     </Button>
                                     <Button
-                                        color='primary'
+                                        color='success'
                                         className='ml-2'
                                         onClick={onDelete}
                                     >
