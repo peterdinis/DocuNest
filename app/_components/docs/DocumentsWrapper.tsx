@@ -98,7 +98,7 @@ const DocumentsWrapper: FC = () => {
                                     </h1>
                                     <p className='text-sm font-bold text-gray-600 dark:text-white'>
                                         {format(
-                                            new Date(item.createAt),
+                                            new Date(item.createdAt),
                                             'yyyy-MM-dd',
                                         )}
                                     </p>
