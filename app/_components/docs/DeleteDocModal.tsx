@@ -57,7 +57,7 @@ const DeleteDocModal: FC<IDeleteDocModalProps> = ({ docId }) => {
                                     Move to trash
                                 </Button>
                                 <Button
-                                    color='primary'
+                                    color='success'
                                     type='button'
                                     onClick={onDelete}
                                 >
