@@ -166,7 +166,6 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                         <ModalFooter>
                             <Button
                                 color='danger'
-                                variant='light'
                                 onPress={onClose}
                             >
                                 Close
