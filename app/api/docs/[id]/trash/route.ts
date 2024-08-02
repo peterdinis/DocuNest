@@ -23,9 +23,15 @@ export async function PUT(request: NextRequest) {
         );
     }
 
+    const findOneDocument = await db.document.findFirst({
+        where: {
+            id
+        }
+    })
+
     await db.document.update({
         where: {
-            id,
+            id: findOneDocument!.id,
             userId: session.user.id,
         },
         data: {
