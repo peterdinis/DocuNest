@@ -3,7 +3,7 @@
 import { FC, useState, useEffect, ChangeEvent } from 'react';
 import Header from '../shared/Header';
 import { Input } from '@nextui-org/input';
-import { Ghost, Search } from 'lucide-react';
+import { FileText, Search } from 'lucide-react';
 import AppPagination from '../shared/AppPagination';
 import { Document } from '@prisma/client';
 import { Button, Card } from '@nextui-org/react';
@@ -71,8 +71,8 @@ const DocumentsWrapper: FC = () => {
             <UploadDoc />
             {documents.length === 0 ? (
                 <div className='flex flex-col items-center mt-10'>
-                    <Ghost className='h-16 w-16 animate-bounce' />
-                    <p className='text-xl font-bold text-gray-700 mt-4'>
+                    <FileText className='h-16 w-16 animate-bounce dark:text-white' />
+                    <p className='text-xl font-bold text-gray-700 dark:text-white mt-4'>
                         No documents found
                     </p>
                 </div>

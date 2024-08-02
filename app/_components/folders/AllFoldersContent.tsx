@@ -67,8 +67,8 @@ const AllFoldersContent: FC = () => {
             />
             {folders.length === 0 ? (
                 <div className='flex flex-col items-center mt-10'>
-                    <Folder size={50} className='h-16 w-16 animate-bounce' />
-                    <p className='text-xl font-bold text-gray-700 mt-4'>
+                    <Folder size={50} className='h-16 w-16 animate-bounce dark:text-white' />
+                    <p className='text-xl font-bold text-gray-700 dark:text-white mt-4'>
                         No folders found
                     </p>
                 </div>
