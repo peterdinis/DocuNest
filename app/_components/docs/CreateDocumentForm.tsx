@@ -8,8 +8,9 @@ import CustomDrawer from '../shared/Drawer';
 import { Button } from '@nextui-org/react';
 import AIDoc from './AIDoc';
 import { formats, modules } from './editor/quill-config';
-import { useForm, FieldValues } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import useCreateDocument from '@/app/_hooks/documents/useCreateDocument';
+import QuillEditor from './editor/QuillEditor';
 
 const CreateDocumentForm: FC = () => {
     const [description, setDescription] = useState('');
@@ -152,13 +153,10 @@ const CreateDocumentForm: FC = () => {
                 >
                     {isPending ? 'Creating...' : 'Create Document'}
                 </Button>
-                <ReactQuill
-                    theme='snow'
-                    className='mb-6 mt-10 h-[100vh] whitespace-pre-wrap'
-                    modules={modules}
-                    formats={formats}
-                    onChange={handleDescriptionChange}
+                <QuillEditor 
                     value={description}
+                    readOnly={false}
+                    onChange={handleDescriptionChange}
                 />
                 {errors.description && (
                     <span className='text-red-500'>
