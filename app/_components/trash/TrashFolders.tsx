@@ -9,9 +9,12 @@ import {
     TableRow,
     TableCell,
     Pagination,
+    Button,
 } from '@nextui-org/react';
 import useAllTrashFolders from '@/app/_hooks/folders/useAllTrashFolders';
 import Loading from '../shared/Loading';
+import { TrashFolder } from '@/app/_types/folderTypes';
+import { format } from 'date-fns';
 
 const TrashFolders: FC = () => {
     const {
@@ -19,7 +22,7 @@ const TrashFolders: FC = () => {
         isLoading: trashLoading,
         isError: trashError,
     } = useAllTrashFolders();
-    
+
     if (trashLoading) {
         return <Loading />;
     }
@@ -35,33 +38,37 @@ const TrashFolders: FC = () => {
     return (
         <div className='mt-3'>
             FOLDERS
-            <Table className='mt-5' isStriped aria-label='Example static collection table'>
+            <Table
+                className='mt-5'
+                isStriped
+                aria-label='Example static collection table'
+            >
                 <TableHeader>
-                    <TableColumn>NAME</TableColumn>
-                    <TableColumn>ROLE</TableColumn>
-                    <TableColumn>STATUS</TableColumn>
+                    <TableColumn>Title</TableColumn>
+                    <TableColumn>Created At</TableColumn>
+                    <TableColumn>Remove from trash</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    <TableRow key='1'>
-                        <TableCell>Tony Reichert</TableCell>
-                        <TableCell>CEO</TableCell>
-                        <TableCell>Active</TableCell>
-                    </TableRow>
-                    <TableRow key='2'>
-                        <TableCell>Zoey Lang</TableCell>
-                        <TableCell>Technical Lead</TableCell>
-                        <TableCell>Paused</TableCell>
-                    </TableRow>
-                    <TableRow key='3'>
-                        <TableCell>Jane Fisher</TableCell>
-                        <TableCell>Senior Developer</TableCell>
-                        <TableCell>Active</TableCell>
-                    </TableRow>
-                    <TableRow key='4'>
-                        <TableCell>William Howard</TableCell>
-                        <TableCell>Community Manager</TableCell>
-                        <TableCell>Vacation</TableCell>
-                    </TableRow>
+                    {trashData &&
+                        trashData.map((item: TrashFolder) => {
+                            return (
+                                <TableRow>
+                                    <TableCell>{item.name}</TableCell>
+                                    <TableCell>
+                                        {format(item.createAt!, 'yyyy-MM-dd')}
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button
+                                            color='danger'
+                                            radius='full'
+                                            size='sm'
+                                        >
+                                            Delete
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })}
                 </TableBody>
             </Table>
             <div className='mt-5 flex justify-center align-top'>

@@ -59,7 +59,7 @@ const TrashDocuments: FC = () => {
                                     {format(item.createAt!, 'yyyy-MM-dd')}
                                 </TableCell>
                                 <TableCell>
-                                    <Button radius="full" size='sm'>Delete</Button>
+                                    <Button color='danger' radius="full" size='sm'>Delete</Button>
                                 </TableCell>
                             </TableRow>
                         )
