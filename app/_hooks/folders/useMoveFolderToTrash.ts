@@ -7,10 +7,10 @@ import {
     moveToTrashFolder,
 } from '@/app/_store/mutations/folderMutations';
 
-export const useMoveFolderToTrash = (id: string) => {
+export const useMoveFolderToTrash = () => {
     return useMutation({
-        mutationKey: ['moveFolderToTrash', id],
-        mutationFn: (data: IMoveToTrash) => moveToTrashFolder(id, data),
+        mutationKey: ['moveFolderToTrash'],
+        mutationFn: (data: IMoveToTrash) => moveToTrashFolder(data),
         onSuccess: () => {
             toast.success('Folder was added to trash');
         },

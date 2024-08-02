@@ -22,7 +22,7 @@ interface IDeleteFolderProps {
 const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const deleteFolderMut = useDeleteFolder(folderId);
-    const moveToTrashMut = useMoveFolderToTrash(folderId);
+    const moveToTrashMut = useMoveFolderToTrash();
 
     const onDelete = () => {
         deleteFolderMut.mutate();
