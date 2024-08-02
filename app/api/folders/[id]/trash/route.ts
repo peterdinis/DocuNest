@@ -19,6 +19,7 @@ export async function PUT(request: NextRequest) {
         where: { id: folderId }
     });
 
+
     if (!findOneFolder) {
         console.log(`Folder with ID ${folderId} not found`);
         return NextResponse.json(
@@ -26,6 +27,16 @@ export async function PUT(request: NextRequest) {
             { status: 404 }
         );
     }
+
+    await db.folder.update({
+        where: {
+            id: findOneFolder!.id,
+            userId: session.user.id
+        },
+        data: {
+            inTrash: true
+        }
+    })
 
     return new NextResponse('Move to trash', { status: 200 });
 }
