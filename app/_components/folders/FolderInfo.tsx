@@ -137,10 +137,10 @@ const FolderInfo: FC = () => {
                             <TableRow key={item?.id}>
                                 <TableCell>{item.title}</TableCell>
                                 <TableCell>
-                                    {format(item.createAt, 'yyyy-MM-dd')}
+                                    {format(item.createdAt, 'yyyy-MM-dd')}
                                 </TableCell>
                                 <TableCell>
-                                    {format(item.updateAt, 'yyyy-MM-dd')}
+                                    {format(item.updatedAt, 'yyyy-MM-dd')}
                                 </TableCell>
                                 <TableCell>{item.userId}</TableCell>
                                 <TableCell>
