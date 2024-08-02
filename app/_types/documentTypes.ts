@@ -2,8 +2,8 @@ export type DocumentTableType = {
     id: string;
     title: string;
     description: string;
-    createAt: string | Date;
-    updateAt: string | Date;
+    createdAt: string | Date;
+    updatedAt: string | Date;
     userId: string;
 };
 

@@ -55,7 +55,7 @@ const TrashFolders: FC = () => {
                                 <TableRow>
                                     <TableCell>{item.name}</TableCell>
                                     <TableCell>
-                                        {format(item.createAt!, 'yyyy-MM-dd')}
+                                        {format(item.createdAt!, 'yyyy-MM-dd')}
                                     </TableCell>
                                     <TableCell>
                                         <Button

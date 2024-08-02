@@ -16,12 +16,12 @@ import {
     Pagination,
     Spinner,
 } from '@nextui-org/react';
-import useFolderDetail from '@/app/_hooks/useFolderDetail';
-import useUpdateFolder from '@/app/_hooks/useUpdateFolder';
 import Loading from '../shared/Loading';
 import { DocumentTableType } from '@/app/_types/documentTypes';
 import { format } from 'date-fns';
 import Header from '../shared/Header';
+import useFolderDetail from '@/app/_hooks/folders/useFolderDetail';
+import useUpdateFolder from '@/app/_hooks/folders/useUpdateFolder';
 
 const FolderInfo: FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -124,7 +124,7 @@ const FolderInfo: FC = () => {
                 >
                     <TableHeader>
                         <TableColumn key='title'>Title</TableColumn>
-                        <TableColumn key='createAt'>Created At</TableColumn>
+                        <TableColumn key='createdAt'>Created At</TableColumn>
                         <TableColumn key='updateAt'>Updated At</TableColumn>
                         <TableColumn key='userId'>User Id</TableColumn>
                         <TableColumn key='detail'>Detail</TableColumn>
@@ -137,10 +137,10 @@ const FolderInfo: FC = () => {
                             <TableRow key={item?.id}>
                                 <TableCell>{item.title}</TableCell>
                                 <TableCell>
-                                    {format(item.createAt, 'yyyy-MM-dd')}
+                                    {format(item.createdAt, 'yyyy-MM-dd')}
                                 </TableCell>
                                 <TableCell>
-                                    {format(item.updateAt, 'yyyy-MM-dd')}
+                                    {format(item.updatedAt, 'yyyy-MM-dd')}
                                 </TableCell>
                                 <TableCell>{item.userId}</TableCell>
                                 <TableCell>
