@@ -6,7 +6,7 @@ import {
     createNewDocument,
     ICreateDocumentData,
 } from '@/app/_store/mutations/documentMutations';
-import { queryClient } from '../_store/queryClient';
+import { queryClient } from '@/app/_store/queryClient';
 
 const useCreateDocument = () => {
     return useMutation({

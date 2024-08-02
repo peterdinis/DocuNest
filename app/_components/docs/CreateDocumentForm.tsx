@@ -8,8 +8,9 @@ import CustomDrawer from '../shared/Drawer';
 import { Button } from '@nextui-org/react';
 import AIDoc from './AIDoc';
 import { formats, modules } from './editor/quill-config';
-import { useForm, FieldValues } from 'react-hook-form';
-import useCreateDocument from '@/app/_hooks/useCreateDocument';
+import { useForm } from 'react-hook-form';
+import useCreateDocument from '@/app/_hooks/documents/useCreateDocument';
+import QuillEditor from './editor/QuillEditor';
 
 const CreateDocumentForm: FC = () => {
     const [description, setDescription] = useState('');
@@ -51,7 +52,7 @@ const CreateDocumentForm: FC = () => {
     const onSubmit = (formData: any) => {
         formData.description = description;
         createDocumentMut(formData);
-        reset();
+        router.push("/dashboard");
     };
 
     useEffect(() => {
@@ -71,7 +72,8 @@ const CreateDocumentForm: FC = () => {
     useEffect(() => {
         const handleBeforeUnload = (event: BeforeUnloadEvent) => {
             const title = watch('title');
-            if (isDirty || description.trim().length > 0 || title) {
+            const description = watch("description");
+            if (isDirty || description || title) {
                 event.preventDefault();
                 event.returnValue = ''; // Show confirmation dialog
             }
@@ -86,7 +88,8 @@ const CreateDocumentForm: FC = () => {
 
     const handleGoBack = () => {
         const title = watch('title');
-        if (!isDirty && description.trim().length === 0 && !title) {
+        const description = watch("description");
+        if (!isDirty && description || !title) {
             router.push('/dashboard');
         } else if (
             confirm('You have unsaved changes. Are you sure you want to leave?')
@@ -152,13 +155,10 @@ const CreateDocumentForm: FC = () => {
                 >
                     {isPending ? 'Creating...' : 'Create Document'}
                 </Button>
-                <ReactQuill
-                    theme='snow'
-                    className='mb-6 mt-10 h-[100vh] whitespace-pre-wrap'
-                    modules={modules}
-                    formats={formats}
-                    onChange={handleDescriptionChange}
+                <QuillEditor 
                     value={description}
+                    readOnly={false}
+                    onChange={handleDescriptionChange}
                 />
                 {errors.description && (
                     <span className='text-red-500'>
