@@ -48,7 +48,6 @@ const TrashModal: FC = () => {
                             <ModalFooter>
                                 <Button
                                     color='danger'
-                                    variant='flat'
                                     onPress={onClose}
                                 >
                                     Close
