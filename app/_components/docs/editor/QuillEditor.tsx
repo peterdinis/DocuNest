@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { FC, useMemo } from 'react';
-import ReactQuill, { Quill } from 'react-quill';
+import { Quill } from 'react-quill';
 import MagicUrl from 'quill-magic-url';
 import QuillCursors from 'quill-cursors';
 import 'react-quill/dist/quill.snow.css';
