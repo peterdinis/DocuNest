@@ -16,8 +16,6 @@ export async function PUT(request: NextRequest) {
             );
         }
 
-        console.log(`User ID: ${session.user.id}`);
-
         const findOneDocument = await db.document.findFirst({
             where: { id: documentId }
         });

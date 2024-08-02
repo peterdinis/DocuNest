@@ -7,9 +7,9 @@ import { revalidatePath } from 'next/cache';
 export async function GET(request: NextRequest) {
     try {
         const documentDetail = await db.document.findMany({
-            where: { 
+            where: {
                 inTrash: true
-             },
+            }
         });
 
         if (!documentDetail) {
