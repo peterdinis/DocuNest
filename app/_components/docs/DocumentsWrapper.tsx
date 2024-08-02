@@ -69,20 +69,22 @@ const DocumentsWrapper: FC = () => {
             />
             <br />
             <UploadDoc />
-            <ReactSortable
-                swap
-                animation={200}
-                list={documents}
-                setList={setDocuments}
-                className='mt-5 flex flex-wrap justify-start'
-            >
-                {documents.length === 0 ? (
-                    <p className='text-xl font-bold text-gray-700'>
-                        <Ghost className='h-8 w-8 animate-bounce' />
+            {documents.length === 0 ? (
+                <div className='flex flex-col items-center mt-10'>
+                    <Ghost className='h-16 w-16 animate-bounce' />
+                    <p className='text-xl font-bold text-gray-700 mt-4'>
                         No documents found
                     </p>
-                ) : (
-                    documents.map((item: Document) => (
+                </div>
+            ) : (
+                <ReactSortable
+                    swap
+                    animation={200}
+                    list={documents}
+                    setList={setDocuments}
+                    className='mt-5 flex flex-wrap justify-start'
+                >
+                    {documents.map((item: Document) => (
                         <motion.div
                             whileHover={{ scale: 1.1 }}
                             key={item.id}
@@ -113,9 +115,9 @@ const DocumentsWrapper: FC = () => {
                                 </div>
                             </Card>
                         </motion.div>
-                    ))
-                )}
-            </ReactSortable>
+                    ))}
+                </ReactSortable>
+            )}
             <div className='mt-40 flex justify-center align-top'>
                 <AppPagination
                     total={data.totalPages}

@@ -65,40 +65,49 @@ const AllFoldersContent: FC = () => {
                 value={searchQuery}
                 onChange={handleSearchInputChange}
             />
-            <ReactSortable
-                swap
-                animation={200}
-                list={folders}
-                setList={setFolders}
-                className='mt-5 flex flex-wrap gap-5'
-            >
-                {folders.map((item: DisplayFolder) => {
-                    return (
-                        <motion.div
-                            whileHover={{ scale: 1.1 }}
-                            key={item.id}
-                            className='w-[200px]'
-                        >
-                            <Card className='space-y-5 p-4' radius='lg'>
-                                <div className='flex justify-center rounded-lg align-top'>
-                                    <Folder size={50} />
-                                </div>
-                                <div className='flex justify-center'>
-                                    <Button color='primary'>
-                                        <Link href={`/folders/${item.id}`}>
-                                            {item.name}
-                                        </Link>
-                                    </Button>
-                                </div>
+            {folders.length === 0 ? (
+                <div className='flex flex-col items-center mt-10'>
+                    <Folder size={50} className='h-16 w-16 animate-bounce' />
+                    <p className='text-xl font-bold text-gray-700 mt-4'>
+                        No folders found
+                    </p>
+                </div>
+            ) : (
+                <ReactSortable
+                    swap
+                    animation={200}
+                    list={folders}
+                    setList={setFolders}
+                    className='mt-5 flex flex-wrap gap-5'
+                >
+                    {folders.map((item: DisplayFolder) => {
+                        return (
+                            <motion.div
+                                whileHover={{ scale: 1.1 }}
+                                key={item.id}
+                                className='w-[200px]'
+                            >
+                                <Card className='space-y-5 p-4' radius='lg'>
+                                    <div className='flex justify-center rounded-lg align-top'>
+                                        <Folder size={50} />
+                                    </div>
+                                    <div className='flex justify-center'>
+                                        <Button color='primary'>
+                                            <Link href={`/folders/${item.id}`}>
+                                                {item.name}
+                                            </Link>
+                                        </Button>
+                                    </div>
 
-                                <div className='mt-6'>
-                                    <DeleteFolder folderId={item.id} />
-                                </div>
-                            </Card>
-                        </motion.div>
-                    );
-                })}
-            </ReactSortable>
+                                    <div className='mt-6'>
+                                        <DeleteFolder folderId={item.id} />
+                                    </div>
+                                </Card>
+                            </motion.div>
+                        );
+                    })}
+                </ReactSortable>
+            )}
             <div className='mt-40 flex justify-center align-top'>
                 <AppPagination
                     total={data.totalPages}
