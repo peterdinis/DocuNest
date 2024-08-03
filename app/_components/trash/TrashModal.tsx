@@ -14,11 +14,11 @@ import {
 import { Trash } from 'lucide-react';
 import TrashDocuments from './TrashDocuments';
 import TrashFolders from './TrashFolders';
-import useCleanTrash from '@/app/_hooks/useCleanTrash'; // Adjust the import path as needed
+import useCleanTrash from '@/app/_hooks/trash/useCleanTrash';
 
 const TrashModal: FC = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const { mutate: cleanTrash, isLoading, isError } = useCleanTrash();
+    const { mutate: cleanTrash, isPending} = useCleanTrash();
 
     const handleDeleteAll = () => {
         cleanTrash();
@@ -64,7 +64,7 @@ const TrashModal: FC = () => {
                                         color='default'
                                         startContent={<Trash />}
                                         onPress={handleDeleteAll}
-                                        isLoading={isLoading} // Optional: Show loading state
+                                        isLoading={isPending}
                                     >
                                         Delete all trash
                                     </Button>
