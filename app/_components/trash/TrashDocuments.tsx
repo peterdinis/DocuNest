@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import {
     Table,
     TableHeader,
@@ -18,12 +18,17 @@ import { TrashDocument } from '@/app/_types/documentTypes';
 import { useRemoveDocumentFromTrash } from '@/app/_hooks/documents/useRemoveDocFromTrash';
 
 const TrashDocuments: FC = () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const limit = 10;
+
     const {
         data: docData,
         isLoading: docLoading,
         isError: docError,
         refetch,
-    } = useAllTrashDocuments();
+    } = useAllTrashDocuments(currentPage, limit);
+
+    console.log("DocData");
     
     const { mutate: removeDocument, isPending: isRemoving } = useRemoveDocumentFromTrash();
 
@@ -45,16 +50,19 @@ const TrashDocuments: FC = () => {
             return;
         }
 
-        console.log("D", documentId);
-
         removeDocument({
             documentId,
             inTrash: false,
         }, {
             onSuccess: () => {
-                refetch();
+                refetch(); // Refetch to update the table after deletion
             }
         });
+    };
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        refetch(); // Refetch data for the selected page
     };
 
     return (
@@ -71,14 +79,7 @@ const TrashDocuments: FC = () => {
                     <TableColumn>Remove from trash</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    {docData && docData.length > 0 ? (
-                        docData.map((item: TrashDocument) => {
-                            console.log(item.id);
-                            if (!item.id) {
-                                console.error('Item ID is missing', item);
-                                return null;
-                            }
-
+                        {docData.items && docData.items.map((item: TrashDocument) => {
                             return (
                                 <TableRow key={item.id}>
                                     <TableCell>
@@ -100,12 +101,7 @@ const TrashDocuments: FC = () => {
                                     </TableCell>
                                 </TableRow>
                             );
-                        })
-                    ) : (
-                        <TableRow>
-                            <TableCell colSpan={3}>No documents found</TableCell>
-                        </TableRow>
-                    )}
+                        })}
                 </TableBody>
             </Table>
             <div className='mt-5 flex justify-center align-top'>
@@ -114,8 +110,9 @@ const TrashDocuments: FC = () => {
                     showControls
                     isCompact
                     color='success'
-                    total={5}
-                    initialPage={1}
+                    total={docData?.totalPages || 1}
+                    initialPage={currentPage}
+                    onChange={handlePageChange}
                 />
             </div>
         </div>
