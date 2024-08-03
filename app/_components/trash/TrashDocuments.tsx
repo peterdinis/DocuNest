@@ -27,8 +27,6 @@ const TrashDocuments: FC = () => {
         isError: docError,
         refetch,
     } = useAllTrashDocuments(currentPage, limit);
-
-    console.log("DocData");
     
     const { mutate: removeDocument, isPending: isRemoving } = useRemoveDocumentFromTrash();
 
@@ -55,14 +53,14 @@ const TrashDocuments: FC = () => {
             inTrash: false,
         }, {
             onSuccess: () => {
-                refetch(); // Refetch to update the table after deletion
+                refetch();
             }
         });
     };
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
-        refetch(); // Refetch data for the selected page
+        refetch();
     };
 
     return (
@@ -79,7 +77,7 @@ const TrashDocuments: FC = () => {
                     <TableColumn>Remove from trash</TableColumn>
                 </TableHeader>
                 <TableBody>
-                        {docData.items && docData.items.map((item: TrashDocument) => {
+                        {docData && docData.map((item: TrashDocument) => {
                             return (
                                 <TableRow key={item.id}>
                                     <TableCell>

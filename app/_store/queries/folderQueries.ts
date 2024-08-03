@@ -10,8 +10,10 @@ export const fetchAllPaginatedFolders = async ({ query = '', page = 1 }) => {
     return response.data;
 };
 
-export const fetchAllTrashFolders = async () => {
-    const response = await axios.get('/api/folders/trash');
+export const fetchAllTrashFolders = async (page: number, perPage: number) => {
+    const response = await axios.get('/api/folders/trash', {
+        params: { page, perPage },
+    });
     return response.data;
 };
 
