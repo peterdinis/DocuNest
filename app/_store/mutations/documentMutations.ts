@@ -39,8 +39,5 @@ export const moveDocumentToTrash = async (
 export const removeDocumentFromTrash = async (
     data: IMoveToTrash,
 ) => {
-    if (!data.documentId) {
-        throw new Error('Document ID is required');
-    }
     return await axios.put(`/api/docs/${data.documentId}/trash/remove`, data);
 };

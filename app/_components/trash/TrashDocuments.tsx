@@ -40,6 +40,13 @@ const TrashDocuments: FC = () => {
     }
 
     const handleDelete = (documentId: string) => {
+        if (!documentId) {
+            console.error('Document ID is missing');
+            return;
+        }
+
+        console.log("D", documentId);
+
         removeDocument({
             documentId,
             inTrash: false,
@@ -64,29 +71,41 @@ const TrashDocuments: FC = () => {
                     <TableColumn>Remove from trash</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    {docData && docData.map((item: TrashDocument) => {
-                        return (
-                            <TableRow key={item.id}>
-                                <TableCell>
-                                    {item.title}
-                                </TableCell>
-                                <TableCell>
-                                    {format(item.createdAt!, 'yyyy-MM-dd')}
-                                </TableCell>
-                                <TableCell>
-                                    <Button 
-                                        color='danger' 
-                                        radius="full" 
-                                        size='sm'
-                                        isLoading={isRemoving}
-                                        onClick={() => handleDelete(item.id!)} 
-                                    >
-                                        Delete
-                                    </Button>
-                                </TableCell>
-                            </TableRow>
-                        )
-                    })}
+                    {docData && docData.length > 0 ? (
+                        docData.map((item: TrashDocument) => {
+                            console.log(item.id);
+                            if (!item.id) {
+                                console.error('Item ID is missing', item);
+                                return null;
+                            }
+
+                            return (
+                                <TableRow key={item.id}>
+                                    <TableCell>
+                                        {item.title}
+                                    </TableCell>
+                                    <TableCell>
+                                        {format(item.createdAt!, 'yyyy-MM-dd')}
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button 
+                                            color='danger' 
+                                            radius="full" 
+                                            size='sm'
+                                            isLoading={isRemoving}
+                                            onClick={() => handleDelete(item.id as unknown as string)} 
+                                        >
+                                            Delete
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })
+                    ) : (
+                        <TableRow>
+                            <TableCell colSpan={3}>No documents found</TableCell>
+                        </TableRow>
+                    )}
                 </TableBody>
             </Table>
             <div className='mt-5 flex justify-center align-top'>

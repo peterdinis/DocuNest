@@ -9,20 +9,16 @@ import { queryClient } from '@/app/_store/queryClient';
 export const useRemoveDocumentFromTrash = () => {
     return useMutation({
         mutationKey: ['removeDocFromTrash'],
-        mutationFn: (data: IMoveToTrash) => {
-            if (!data.documentId) {
-                throw new Error('Document ID is required');
-            }
-            return removeDocumentFromTrash(data);
-        },
+        mutationFn: (data: IMoveToTrash) => removeDocumentFromTrash(data),
         onSuccess: () => {
-            toast.success('Document was removed from trash');
+            toast.success('Document was added to trash');
             queryClient.invalidateQueries({
-                queryKey: ['trashDocuments'],
-            });
+                queryKey: ["trashDocuments"]
+            })
         },
-        onError: (error: any) => {
-            toast.error(`Document was not removed from trash: ${error.message}`);
+        onError: (error) => {
+            console.log('E', error);
+            toast.error('Document was not added to trash');
         },
     });
 };
