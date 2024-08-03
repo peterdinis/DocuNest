@@ -38,7 +38,6 @@ const TrashModal: FC = () => {
                                 Trash
                             </ModalHeader>
                             <ModalBody>
-                                Your items in Trash
                                 <br />
                                 <TrashDocuments />
                                 <hr />

@@ -19,7 +19,7 @@ import { signOut } from 'next-auth/react';
 import { Button, Tooltip } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 import CreateFolderModal from '../folders/CreateFolderModal';
-import TrashModal from '../trash/ThashModal';
+import TrashModal from '../trash/TrashModal';
 import GlobalSearch from './GlobalSearch';
 
 const Sidebar: FC = () => {
