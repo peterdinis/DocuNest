@@ -15,16 +15,16 @@ import useAllTrashFolders from '@/app/_hooks/folders/useAllTrashFolders';
 import Loading from '../shared/Loading';
 import { TrashFolder } from '@/app/_types/folderTypes';
 import { format } from 'date-fns';
+import { limit } from '@/app/_constants/applicationConstants';
 
 const TrashFolders: FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10; // Adjust as needed
 
     const {
         data: trashData,
         isLoading: trashLoading,
         isError: trashError,
-    } = useAllTrashFolders(currentPage, itemsPerPage);
+    } = useAllTrashFolders(currentPage, limit);
 
     if (trashLoading) {
         return <Loading />;

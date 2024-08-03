@@ -16,10 +16,10 @@ import Loading from '../shared/Loading';
 import { format } from 'date-fns';
 import { TrashDocument } from '@/app/_types/documentTypes';
 import { useRemoveDocumentFromTrash } from '@/app/_hooks/documents/useRemoveDocFromTrash';
+import { limit } from '@/app/_constants/applicationConstants';
 
 const TrashDocuments: FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const limit = 10;
 
     const {
         data: docData,
@@ -43,10 +43,6 @@ const TrashDocuments: FC = () => {
     }
 
     const handleDelete = (documentId: string) => {
-        if (!documentId) {
-            console.error('Document ID is missing');
-            return;
-        }
 
         removeDocument({
             documentId,
