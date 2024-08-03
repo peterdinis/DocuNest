@@ -12,40 +12,42 @@ export async function PUT(request: NextRequest) {
         if (!session || !session.user) {
             return NextResponse.json(
                 { error: 'Not authenticated' },
-                { status: 401 }
+                { status: 401 },
             );
         }
 
         const findOneDocument = await db.document.findFirst({
-            where: { id: documentId }
+            where: { id: documentId },
         });
 
         if (!findOneDocument) {
             console.log(`Document with ID ${documentId} not found`);
             return NextResponse.json(
                 { error: 'Document not found' },
-                { status: 404 }
+                { status: 404 },
             );
         }
 
         if (findOneDocument.userId !== session.user.id) {
             return NextResponse.json(
                 { error: 'Not authorized' },
-                { status: 403 }
+                { status: 403 },
             );
         }
 
         await db.document.update({
             where: { id: findOneDocument.id },
-            data: { inTrash: true }
+            data: { inTrash: true },
         });
 
-        return new NextResponse('Removed from trash and updated', { status: 200 });
+        return new NextResponse('Removed from trash and updated', {
+            status: 200,
+        });
     } catch (error) {
         console.error('Error:', error);
         return NextResponse.json(
             { error: 'Internal server error', details: 'ERROR' },
-            { status: 500 }
+            { status: 500 },
         );
     }
 }

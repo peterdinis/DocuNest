@@ -66,9 +66,12 @@ const AllFoldersContent: FC = () => {
                 onChange={handleSearchInputChange}
             />
             {folders.length === 0 ? (
-                <div className='flex flex-col items-center mt-10'>
-                    <Folder size={50} className='h-16 w-16 animate-bounce dark:text-white' />
-                    <p className='text-xl font-bold text-gray-700 dark:text-white mt-4'>
+                <div className='mt-10 flex flex-col items-center'>
+                    <Folder
+                        size={50}
+                        className='h-16 w-16 animate-bounce dark:text-white'
+                    />
+                    <p className='mt-4 text-xl font-bold text-gray-700 dark:text-white'>
                         No folders found
                     </p>
                 </div>

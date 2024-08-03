@@ -1,13 +1,13 @@
 'use client';
 
+import {
+    ICreateFolder,
+    createNewFolder,
+} from '@/app/_store/mutations/folderMutations';
+import { queryClient } from '@/app/_store/queryClient';
+import { UseCreateFolderOptions } from '@/app/_types/hookTypes';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import {
-    createNewFolder,
-    ICreateFolder,
-} from '../_store/mutations/folderMutations';
-import { queryClient } from '../_store/queryClient';
-import { UseCreateFolderOptions } from '../_types/hookTypes';
 
 const useCreateFolder = ({ reset, onClose }: UseCreateFolderOptions) => {
     return useMutation({

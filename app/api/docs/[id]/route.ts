@@ -8,8 +8,8 @@ export async function GET(request: NextRequest) {
     try {
         const documentDetail = await db.document.findMany({
             where: {
-                inTrash: true
-            }
+                inTrash: true,
+            },
         });
 
         if (!documentDetail) {

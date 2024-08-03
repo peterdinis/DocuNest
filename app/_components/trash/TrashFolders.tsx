@@ -15,16 +15,16 @@ import useAllTrashFolders from '@/app/_hooks/folders/useAllTrashFolders';
 import Loading from '../shared/Loading';
 import { TrashFolder } from '@/app/_types/folderTypes';
 import { format } from 'date-fns';
+import { limit } from '@/app/_constants/applicationConstants';
 
 const TrashFolders: FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10; // Adjust as needed
 
     const {
         data: trashData,
         isLoading: trashLoading,
         isError: trashError,
-    } = useAllTrashFolders(currentPage, itemsPerPage);
+    } = useAllTrashFolders(currentPage, limit);
 
     if (trashLoading) {
         return <Loading />;
@@ -53,25 +53,26 @@ const TrashFolders: FC = () => {
                     <TableColumn>Remove from trash</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    {trashData && trashData?.map((item: TrashFolder) => {
-                        return (
-                            <TableRow key={item.id}>
-                                <TableCell>{item.name}</TableCell>
-                                <TableCell>
-                                    {format(item.createdAt!, 'yyyy-MM-dd')}
-                                </TableCell>
-                                <TableCell>
-                                    <Button
-                                        color='danger'
-                                        radius='full'
-                                        size='sm'
-                                    >
-                                        Delete
-                                    </Button>
-                                </TableCell>
-                            </TableRow>
-                        );
-                    })}
+                    {trashData &&
+                        trashData?.map((item: TrashFolder) => {
+                            return (
+                                <TableRow key={item.id}>
+                                    <TableCell>{item.name}</TableCell>
+                                    <TableCell>
+                                        {format(item.createdAt!, 'yyyy-MM-dd')}
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button
+                                            color='danger'
+                                            radius='full'
+                                            size='sm'
+                                        >
+                                            Delete
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })}
                 </TableBody>
             </Table>
             <div className='mt-5 flex justify-center align-top'>

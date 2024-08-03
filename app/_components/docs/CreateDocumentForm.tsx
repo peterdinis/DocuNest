@@ -52,7 +52,7 @@ const CreateDocumentForm: FC = () => {
     const onSubmit = (formData: any) => {
         formData.description = description;
         createDocumentMut(formData);
-        router.push("/dashboard");
+        router.push('/dashboard');
     };
 
     useEffect(() => {
@@ -72,7 +72,7 @@ const CreateDocumentForm: FC = () => {
     useEffect(() => {
         const handleBeforeUnload = (event: BeforeUnloadEvent) => {
             const title = watch('title');
-            const description = watch("description");
+            const description = watch('description');
             if (isDirty || description || title) {
                 event.preventDefault();
                 event.returnValue = ''; // Show confirmation dialog
@@ -88,8 +88,8 @@ const CreateDocumentForm: FC = () => {
 
     const handleGoBack = () => {
         const title = watch('title');
-        const description = watch("description");
-        if (!isDirty && description || !title) {
+        const description = watch('description');
+        if ((!isDirty && description) || !title) {
             router.push('/dashboard');
         } else if (
             confirm('You have unsaved changes. Are you sure you want to leave?')
@@ -155,7 +155,7 @@ const CreateDocumentForm: FC = () => {
                 >
                     {isPending ? 'Creating...' : 'Create Document'}
                 </Button>
-                <QuillEditor 
+                <QuillEditor
                     value={description}
                     readOnly={false}
                     onChange={handleDescriptionChange}
