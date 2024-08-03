@@ -17,6 +17,14 @@ export const uploadRouter = {
         })
         .onUploadComplete(async ({ metadata, file }) => {
             try {
+                await db.file.create({
+                    data: {
+                        name: file.name,
+                        size: file.size as unknown as string,
+                        userId: metadata.userId,
+                        type: file.type
+                    }
+                })
                 return { uploadedBy: metadata.userId };
             } catch (error) {
                 console.error('Error in onUploadComplete:', error);

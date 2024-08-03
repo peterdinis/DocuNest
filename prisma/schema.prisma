@@ -36,8 +36,8 @@ model Session {
 
 model File {
   id     String  @id @default(uuid())
-  name   String
-  url    String
+  name   String?
+  url    String?
   size   String?
   type   String?
   userId String
