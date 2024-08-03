@@ -13,16 +13,20 @@ import {
 } from '@nextui-org/react';
 import useAllTrashDocuments from '@/app/_hooks/documents/useAllTrashDocuments';
 import Loading from '../shared/Loading';
-import {format} from "date-fns"
+import { format } from 'date-fns';
 import { TrashDocument } from '@/app/_types/documentTypes';
+import { useRemoveDocumentFromTrash } from '@/app/_hooks/documents/useRemoveDocFromTrash';
 
 const TrashDocuments: FC = () => {
     const {
         data: docData,
         isLoading: docLoading,
-    isError: docError,
+        isError: docError,
+        refetch,
     } = useAllTrashDocuments();
     
+    const { mutate: removeDocument, isPending: isRemoving } = useRemoveDocumentFromTrash();
+
     if (docLoading) {
         return <Loading />;
     }
@@ -34,6 +38,17 @@ const TrashDocuments: FC = () => {
             </p>
         );
     }
+
+    const handleDelete = (documentId: string) => {
+        removeDocument({
+            documentId,
+            inTrash: false,
+        }, {
+            onSuccess: () => {
+                refetch();
+            }
+        });
+    };
 
     return (
         <div className='mt-3'>
@@ -51,7 +66,7 @@ const TrashDocuments: FC = () => {
                 <TableBody>
                     {docData && docData.map((item: TrashDocument) => {
                         return (
-                            <TableRow>
+                            <TableRow key={item.id}>
                                 <TableCell>
                                     {item.title}
                                 </TableCell>
@@ -59,7 +74,15 @@ const TrashDocuments: FC = () => {
                                     {format(item.createdAt!, 'yyyy-MM-dd')}
                                 </TableCell>
                                 <TableCell>
-                                    <Button color='danger' radius="full" size='sm'>Delete</Button>
+                                    <Button 
+                                        color='danger' 
+                                        radius="full" 
+                                        size='sm'
+                                        isLoading={isRemoving}
+                                        onClick={() => handleDelete(item.id!)} 
+                                    >
+                                        Delete
+                                    </Button>
                                 </TableCell>
                             </TableRow>
                         )
