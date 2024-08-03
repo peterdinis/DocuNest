@@ -16,16 +16,16 @@ export async function DELETE() {
     await db.folder.deleteMany({
         where: {
             userId: session.user.id,
-        }
+        },
     });
 
     await db.document.deleteMany({
         where: {
             userId: session.user.id,
-        }
+        },
     });
 
     return NextResponse.json({
-        message: "Trash was deleted"
-    })
+        message: 'Trash was deleted',
+    });
 }

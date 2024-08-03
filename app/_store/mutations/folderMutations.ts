@@ -24,14 +24,10 @@ export const updateFolder = async (
     return await axios.put(`/api/folders/${folderId}`, data);
 };
 
-export const moveToTrashFolder = async (
-    data: IMoveToTrash,
-) => {
+export const moveToTrashFolder = async (data: IMoveToTrash) => {
     return await axios.put(`/api/folders/${data.folderId}/trash`, data);
 };
 
-export const removeFromTrashFolder = async (
-    data: IMoveToTrash,
-) => {
+export const removeFromTrashFolder = async (data: IMoveToTrash) => {
     return await axios.put(`/api/folders/${data.folderId}/trash/remove`, data);
 };

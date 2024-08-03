@@ -53,25 +53,26 @@ const TrashFolders: FC = () => {
                     <TableColumn>Remove from trash</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    {trashData && trashData?.map((item: TrashFolder) => {
-                        return (
-                            <TableRow key={item.id}>
-                                <TableCell>{item.name}</TableCell>
-                                <TableCell>
-                                    {format(item.createdAt!, 'yyyy-MM-dd')}
-                                </TableCell>
-                                <TableCell>
-                                    <Button
-                                        color='danger'
-                                        radius='full'
-                                        size='sm'
-                                    >
-                                        Delete
-                                    </Button>
-                                </TableCell>
-                            </TableRow>
-                        );
-                    })}
+                    {trashData &&
+                        trashData?.map((item: TrashFolder) => {
+                            return (
+                                <TableRow key={item.id}>
+                                    <TableCell>{item.name}</TableCell>
+                                    <TableCell>
+                                        {format(item.createdAt!, 'yyyy-MM-dd')}
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button
+                                            color='danger'
+                                            radius='full'
+                                            size='sm'
+                                        >
+                                            Delete
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })}
                 </TableBody>
             </Table>
             <div className='mt-5 flex justify-center align-top'>

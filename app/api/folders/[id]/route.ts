@@ -7,8 +7,8 @@ export async function GET(request: NextRequest) {
     try {
         const folderDetail = await db.folder.findMany({
             where: {
-                inTrash: true
-            }
+                inTrash: true,
+            },
         });
 
         if (!folderDetail) {

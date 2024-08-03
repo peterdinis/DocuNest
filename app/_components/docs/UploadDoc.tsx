@@ -41,10 +41,7 @@ const UploadDoc: FC = () => {
                                 />
                             </ModalBody>
                             <ModalFooter>
-                                <Button
-                                    color='danger'
-                                    onPress={onClose}
-                                >
+                                <Button color='danger' onPress={onClose}>
                                     Close
                                 </Button>
                             </ModalFooter>

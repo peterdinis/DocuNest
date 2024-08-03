@@ -1,6 +1,9 @@
 'use client';
 
-import { ICreateFolder, createNewFolder } from '@/app/_store/mutations/folderMutations';
+import {
+    ICreateFolder,
+    createNewFolder,
+} from '@/app/_store/mutations/folderMutations';
 import { queryClient } from '@/app/_store/queryClient';
 import { UseCreateFolderOptions } from '@/app/_types/hookTypes';
 import { useMutation } from '@tanstack/react-query';

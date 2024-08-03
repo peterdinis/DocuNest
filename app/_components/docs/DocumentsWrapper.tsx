@@ -70,9 +70,9 @@ const DocumentsWrapper: FC = () => {
             <br />
             <UploadDoc />
             {documents.length === 0 ? (
-                <div className='flex flex-col items-center mt-10'>
+                <div className='mt-10 flex flex-col items-center'>
                     <FileText className='h-16 w-16 animate-bounce dark:text-white' />
-                    <p className='text-xl font-bold text-gray-700 dark:text-white mt-4'>
+                    <p className='mt-4 text-xl font-bold text-gray-700 dark:text-white'>
                         No documents found
                     </p>
                 </div>

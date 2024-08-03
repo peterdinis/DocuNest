@@ -25,9 +25,9 @@ export async function PUT(request: NextRequest) {
 
     const findOneDocument = await db.document.findFirst({
         where: {
-            id
-        }
-    })
+            id,
+        },
+    });
 
     await db.document.update({
         where: {

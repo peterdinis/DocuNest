@@ -27,8 +27,9 @@ const TrashDocuments: FC = () => {
         isError: docError,
         refetch,
     } = useAllTrashDocuments(currentPage, limit);
-    
-    const { mutate: removeDocument, isPending: isRemoving } = useRemoveDocumentFromTrash();
+
+    const { mutate: removeDocument, isPending: isRemoving } =
+        useRemoveDocumentFromTrash();
 
     if (docLoading) {
         return <Loading />;
@@ -43,15 +44,17 @@ const TrashDocuments: FC = () => {
     }
 
     const handleDelete = (documentId: string) => {
-
-        removeDocument({
-            documentId,
-            inTrash: false,
-        }, {
-            onSuccess: () => {
-                refetch();
-            }
-        });
+        removeDocument(
+            {
+                documentId,
+                inTrash: false,
+            },
+            {
+                onSuccess: () => {
+                    refetch();
+                },
+            },
+        );
     };
 
     const handlePageChange = (page: number) => {
@@ -73,22 +76,25 @@ const TrashDocuments: FC = () => {
                     <TableColumn>Remove from trash</TableColumn>
                 </TableHeader>
                 <TableBody>
-                        {docData && docData.map((item: TrashDocument) => {
+                    {docData &&
+                        docData.map((item: TrashDocument) => {
                             return (
                                 <TableRow key={item.id}>
-                                    <TableCell>
-                                        {item.title}
-                                    </TableCell>
+                                    <TableCell>{item.title}</TableCell>
                                     <TableCell>
                                         {format(item.createdAt!, 'yyyy-MM-dd')}
                                     </TableCell>
                                     <TableCell>
-                                        <Button 
-                                            color='danger' 
-                                            radius="full" 
+                                        <Button
+                                            color='danger'
+                                            radius='full'
                                             size='sm'
                                             isLoading={isRemoving}
-                                            onClick={() => handleDelete(item.id as unknown as string)} 
+                                            onClick={() =>
+                                                handleDelete(
+                                                    item.id as unknown as string,
+                                                )
+                                            }
                                         >
                                             Delete
                                         </Button>

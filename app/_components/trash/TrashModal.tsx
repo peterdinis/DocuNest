@@ -18,7 +18,7 @@ import useCleanTrash from '@/app/_hooks/trash/useCleanTrash';
 
 const TrashModal: FC = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const { mutate: cleanTrash, isPending} = useCleanTrash();
+    const { mutate: cleanTrash, isPending } = useCleanTrash();
 
     const handleDeleteAll = () => {
         cleanTrash();
@@ -53,10 +53,7 @@ const TrashModal: FC = () => {
                             </ModalBody>
                             <ModalFooter>
                                 <ButtonGroup>
-                                    <Button
-                                        color='danger'
-                                        onPress={onClose}
-                                    >
+                                    <Button color='danger' onPress={onClose}>
                                         Close
                                     </Button>
                                     <Button

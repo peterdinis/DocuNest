@@ -9,8 +9,8 @@ import {
 
 export const useRemoveFolderFromTrash = (id: string) => {
     return useMutation({
-        mutationKey: ['rem', id],
-        mutationFn: (data: IMoveToTrash) => removeFromTrashFolder(id, data),
+        mutationKey: ['removeFolderFromTrash', id],
+        mutationFn: (data: IMoveToTrash) => removeFromTrashFolder(data),
         onSuccess: () => {
             toast.success('Folder was removed from trash');
         },

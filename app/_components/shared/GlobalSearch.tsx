@@ -70,7 +70,7 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                             {btnName || 'Search'}
                         </ModalHeader>
                         <hr />
-                        <p className='prose-p: prose mt-5 ml-4 p-3 dark:text-white font-bold'>
+                        <p className='prose-p: prose ml-4 mt-5 p-3 font-bold dark:text-white'>
                             Search for document or folder here, that are not{' '}
                             <span className='prose-p: prose ml-1 font-bold text-red-800'>
                                 in trash
@@ -164,10 +164,7 @@ const GlobalSearch: FC<IGlobalSearchProps> = ({ btnName }) => {
                             )}
                         </ModalBody>
                         <ModalFooter>
-                            <Button
-                                color='danger'
-                                onPress={onClose}
-                            >
+                            <Button color='danger' onPress={onClose}>
                                 Close
                             </Button>
                         </ModalFooter>

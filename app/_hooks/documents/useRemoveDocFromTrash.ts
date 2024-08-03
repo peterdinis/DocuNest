@@ -13,8 +13,8 @@ export const useRemoveDocumentFromTrash = () => {
         onSuccess: () => {
             toast.success('Document was added to trash');
             queryClient.invalidateQueries({
-                queryKey: ["trashDocuments"]
-            })
+                queryKey: ['trashDocuments'],
+            });
         },
         onError: (error) => {
             console.log('E', error);

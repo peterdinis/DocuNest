@@ -5,24 +5,24 @@ import { toast } from 'react-toastify';
 import { deleteTrash } from '@/app/_store/mutations/storeMutations';
 import { queryClient } from '@/app/_store/queryClient';
 
-const useCleanTrash = () =>{
+const useCleanTrash = () => {
     return useMutation({
-        mutationKey: ["cleanTrash"],
+        mutationKey: ['cleanTrash'],
         mutationFn: () => deleteTrash(),
         onSuccess: () => {
-            toast.success("Trash was cleaned");
+            toast.success('Trash was cleaned');
             queryClient.invalidateQueries({
-                queryKey: ["myPaginatedDocuments"]
+                queryKey: ['myPaginatedDocuments'],
             });
             queryClient.invalidateQueries({
-                queryKey: ["myPaginatedFolders"]
-            })
+                queryKey: ['myPaginatedFolders'],
+            });
         },
 
         onError: () => {
-            toast.error("Trash was not cleaned");
-        }
-    })
-}
+            toast.error('Trash was not cleaned');
+        },
+    });
+};
 
 export default useCleanTrash;

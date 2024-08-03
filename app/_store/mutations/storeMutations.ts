@@ -1,5 +1,5 @@
-import axios from "axios";
+import axios from 'axios';
 
-export const deleteTrash = async() => {
-    return await axios.delete("/api/trash/delete");
-}
+export const deleteTrash = async () => {
+    return await axios.delete('/api/trash/delete');
+};
