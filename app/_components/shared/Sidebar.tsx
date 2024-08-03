@@ -11,6 +11,7 @@ import {
     Folder,
     FolderCheck,
     Settings,
+    ArrowUpFromLine
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -122,6 +123,13 @@ const Sidebar: FC = () => {
                                         <GlobalSearch btnName='Search' />
                                     </Button>
                                 </div>
+
+                                <div className='ml-4 mt-8'>
+                                    <Button variant={'ghost'} value='sm'>
+                                        <ArrowUpFromLine />
+                                        <Link href='/uploaded'>Uploaded</Link>
+                                    </Button>
+                                </div>
                             </div>
                         </>
                     ) : (
@@ -227,6 +235,20 @@ const Sidebar: FC = () => {
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
                                             <GlobalSearch />
+                                        </Button>
+                                    </Tooltip>
+                                </div>
+
+                                <div className='ml-4 mt-8'>
+                                    <Tooltip
+                                        showArrow={true}
+                                        placement='right'
+                                        content='Uploaded Files'
+                                    >
+                                        <Button variant={'ghost'} size={'sm'}>
+                                            <Link href='/uploaded'>
+                                                <ArrowUpFromLine />
+                                            </Link>
                                         </Button>
                                     </Tooltip>
                                 </div>

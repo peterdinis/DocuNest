@@ -38,7 +38,7 @@ model File {
   id     String  @id @default(uuid())
   name   String?
   url    String?
-  size   String?
+  size   Int?
   type   String?
   userId String
   user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)

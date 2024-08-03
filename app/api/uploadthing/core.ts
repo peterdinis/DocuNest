@@ -20,11 +20,12 @@ export const uploadRouter = {
                 await db.file.create({
                     data: {
                         name: file.name,
-                        size: file.size as unknown as string,
+                        size: file.size,
+                        url: file.url,
                         userId: metadata.userId,
-                        type: file.type
-                    }
-                })
+                        type: file.type,
+                    },
+                });
                 return { uploadedBy: metadata.userId };
             } catch (error) {
                 console.error('Error in onUploadComplete:', error);
