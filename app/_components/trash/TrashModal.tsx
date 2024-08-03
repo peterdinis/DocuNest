@@ -9,13 +9,20 @@ import {
     ModalFooter,
     Button,
     useDisclosure,
+    ButtonGroup,
 } from '@nextui-org/react';
 import { Trash } from 'lucide-react';
 import TrashDocuments from './TrashDocuments';
 import TrashFolders from './TrashFolders';
+import useCleanTrash from '@/app/_hooks/useCleanTrash'; // Adjust the import path as needed
 
 const TrashModal: FC = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const { mutate: cleanTrash, isLoading, isError } = useCleanTrash();
+
+    const handleDeleteAll = () => {
+        cleanTrash();
+    };
 
     return (
         <>
@@ -45,12 +52,23 @@ const TrashModal: FC = () => {
                                 <hr />
                             </ModalBody>
                             <ModalFooter>
-                                <Button
-                                    color='danger'
-                                    onPress={onClose}
-                                >
-                                    Close
-                                </Button>
+                                <ButtonGroup>
+                                    <Button
+                                        color='danger'
+                                        onPress={onClose}
+                                    >
+                                        Close
+                                    </Button>
+                                    <Button
+                                        className='ml-5'
+                                        color='default'
+                                        startContent={<Trash />}
+                                        onPress={handleDeleteAll}
+                                        isLoading={isLoading} // Optional: Show loading state
+                                    >
+                                        Delete all trash
+                                    </Button>
+                                </ButtonGroup>
                             </ModalFooter>
                         </>
                     )}
