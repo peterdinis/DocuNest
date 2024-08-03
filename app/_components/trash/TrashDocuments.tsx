@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import {
     Table,
     TableHeader,
@@ -13,16 +13,23 @@ import {
 } from '@nextui-org/react';
 import useAllTrashDocuments from '@/app/_hooks/documents/useAllTrashDocuments';
 import Loading from '../shared/Loading';
-import {format} from "date-fns"
+import { format } from 'date-fns';
 import { TrashDocument } from '@/app/_types/documentTypes';
+import { useRemoveDocumentFromTrash } from '@/app/_hooks/documents/useRemoveDocFromTrash';
 
 const TrashDocuments: FC = () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const limit = 10;
+
     const {
         data: docData,
         isLoading: docLoading,
-    isError: docError,
-    } = useAllTrashDocuments();
+        isError: docError,
+        refetch,
+    } = useAllTrashDocuments(currentPage, limit);
     
+    const { mutate: removeDocument, isPending: isRemoving } = useRemoveDocumentFromTrash();
+
     if (docLoading) {
         return <Loading />;
     }
@@ -34,6 +41,27 @@ const TrashDocuments: FC = () => {
             </p>
         );
     }
+
+    const handleDelete = (documentId: string) => {
+        if (!documentId) {
+            console.error('Document ID is missing');
+            return;
+        }
+
+        removeDocument({
+            documentId,
+            inTrash: false,
+        }, {
+            onSuccess: () => {
+                refetch();
+            }
+        });
+    };
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        refetch();
+    };
 
     return (
         <div className='mt-3'>
@@ -49,21 +77,29 @@ const TrashDocuments: FC = () => {
                     <TableColumn>Remove from trash</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    {docData && docData.map((item: TrashDocument) => {
-                        return (
-                            <TableRow>
-                                <TableCell>
-                                    {item.title}
-                                </TableCell>
-                                <TableCell>
-                                    {format(item.createdAt!, 'yyyy-MM-dd')}
-                                </TableCell>
-                                <TableCell>
-                                    <Button color='danger' radius="full" size='sm'>Delete</Button>
-                                </TableCell>
-                            </TableRow>
-                        )
-                    })}
+                        {docData && docData.map((item: TrashDocument) => {
+                            return (
+                                <TableRow key={item.id}>
+                                    <TableCell>
+                                        {item.title}
+                                    </TableCell>
+                                    <TableCell>
+                                        {format(item.createdAt!, 'yyyy-MM-dd')}
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button 
+                                            color='danger' 
+                                            radius="full" 
+                                            size='sm'
+                                            isLoading={isRemoving}
+                                            onClick={() => handleDelete(item.id as unknown as string)} 
+                                        >
+                                            Delete
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })}
                 </TableBody>
             </Table>
             <div className='mt-5 flex justify-center align-top'>
@@ -72,8 +108,9 @@ const TrashDocuments: FC = () => {
                     showControls
                     isCompact
                     color='success'
-                    total={5}
-                    initialPage={1}
+                    total={docData?.totalPages || 1}
+                    initialPage={currentPage}
+                    onChange={handlePageChange}
                 />
             </div>
         </div>

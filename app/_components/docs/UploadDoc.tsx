@@ -43,7 +43,6 @@ const UploadDoc: FC = () => {
                             <ModalFooter>
                                 <Button
                                     color='danger'
-                                    variant='light'
                                     onPress={onClose}
                                 >
                                     Close

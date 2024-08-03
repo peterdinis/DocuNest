@@ -38,7 +38,6 @@ const TrashModal: FC = () => {
                                 Trash
                             </ModalHeader>
                             <ModalBody>
-                                Your items in Trash
                                 <br />
                                 <TrashDocuments />
                                 <hr />
@@ -48,7 +47,6 @@ const TrashModal: FC = () => {
                             <ModalFooter>
                                 <Button
                                     color='danger'
-                                    variant='flat'
                                     onPress={onClose}
                                 >
                                     Close
