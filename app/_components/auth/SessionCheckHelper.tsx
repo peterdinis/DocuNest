@@ -18,7 +18,9 @@ const SessionCheckHelper: FC<ISessionCheckHelperProps> = ({
 
     useEffect(() => {
         if (status === 'loading') return;
-        if (!session && pathname !== '/') {
+
+        // If session is not available and user is trying to access a protected route, redirect to login
+        if (!session && pathname !== '/' && pathname !== '/register') {
             router.push('/login');
         }
     }, [session, status, router, pathname]);
@@ -27,11 +29,13 @@ const SessionCheckHelper: FC<ISessionCheckHelperProps> = ({
         return <Loading />;
     }
 
-    if (session || pathname === '/') {
+    // Render children if session exists or if accessing public routes
+    if (session || pathname === '/' || pathname === '/register') {
         return <>{children}</>;
     }
 
-    return children;
+    // Optionally, you might return null if none of the above conditions are met
+    return children
 };
 
 export default SessionCheckHelper;
