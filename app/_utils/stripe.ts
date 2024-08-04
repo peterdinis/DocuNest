@@ -25,4 +25,4 @@ export const createStripeSubscription = async (customerId: string, priceId: stri
     });
 
     return subscription;
-}
+};

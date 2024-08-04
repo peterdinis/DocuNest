@@ -1,5 +1,5 @@
 "use client"
-import {FC} from "react";
+import { FC } from "react";
 import { Check } from 'lucide-react';
 import useCreateSubscription from "@/app/_hooks/stripe/useCreateSubscription";
 
@@ -53,7 +53,7 @@ const HeroPricing: FC = () => {
                         </ul>
                         <button
                             className='relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-sky-500 before:bg-sky-50 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-600 dark:before:bg-gray-700'
-                            onClick={() => handleSubscription('price_free')}
+                            onClick={() => handleSubscription('price_free_id')}
                             disabled={loading}
                         >
                             <span className='relative text-base font-semibold text-sky-600 dark:text-white'>
@@ -128,7 +128,7 @@ const HeroPricing: FC = () => {
                         </ul>
                         <button
                             className='relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95'
-                            onClick={() => handleSubscription('price_annual')}
+                            onClick={() => handleSubscription('price_annual_id')}
                             disabled={loading}
                         >
                             <span className='dark:text-dark relative text-base font-semibold text-white'>
@@ -182,7 +182,7 @@ const HeroPricing: FC = () => {
                         </ul>
                         <button
                             className='relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95'
-                            onClick={() => handleSubscription('price_monthly')}
+                            onClick={() => handleSubscription('price_monthly_id')}
                             disabled={loading}
                         >
                             <span className='dark:text-dark relative text-base font-semibold text-white'>
