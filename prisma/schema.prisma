@@ -45,18 +45,21 @@ model File {
 }
 
 model User {
-  id        String     @id @default(uuid())
-  email     String     @unique
-  name      String
-  password  String
-  accounts  Account[]
-  sessions  Session[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  documents Document[]
-  folders   Folder[]
-  aiCount   Int?       @default(100)
-  files     File[]
+  id                String     @id @default(uuid())
+  email             String     @unique
+  name              String
+  password          String
+  accounts          Account[]
+  sessions          Session[]
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  documents         Document[]
+  folders           Folder[]
+  aiCount           Int?       @default(100)
+  hasSubscription   Boolean?   @default(false)
+  files             File[]
+  stripeCustomerId  String?
+  stripeSubscriptionId String?
 }
 
 model VerificationToken {
