@@ -13,7 +13,7 @@ const HeroPricing: FC = () => {
                     Choose the Right Plan for Your Note-Taking Needs
                 </h2>
             </div>
-            <div className='mt-12 grid grid-cols-2 items-center gap-6 md:grid-cols-2 lg:flex lg:space-x-8'>
+            <div className='mt-12 grid grid-cols-1 items-center gap-6 md:grid-cols-2 lg:flex lg:space-x-8 justify-center'>
                 {/* Free Plan */}
                 <div className='group relative md:col-span-1 lg:w-[32%]'>
                     <div
@@ -26,11 +26,8 @@ const HeroPricing: FC = () => {
                         </h3>
                         <div className='relative flex justify-around'>
                             <div className='flex'>
-                                <span className='-ml-2 mt-2 text-3xl font-bold text-primary'>
-                                    $
-                                </span>
                                 <span className='leading-0 text-8xl font-bold text-gray-800 dark:text-white'>
-                                    0
+                                    0€
                                 </span>
                             </div>
                         </div>
@@ -65,7 +62,7 @@ const HeroPricing: FC = () => {
                 </div>
 
                 {/* Pro Plan */}
-                <div className='group relative row-start-1 md:col-span-2 lg:w-[36%]'>
+                <div className='group relative md:col-span-1 lg:w-[36%]'>
                     <div
                         aria-hidden='true'
                         className='absolute top-0 h-full w-full rounded-3xl border border-gray-100 bg-white shadow-2xl shadow-gray-600/10 transition duration-500 group-hover:scale-105 dark:border-gray-700 dark:bg-gray-800 dark:shadow-none lg:group-hover:scale-110'
@@ -77,19 +74,8 @@ const HeroPricing: FC = () => {
                         <div className='overflow-hidden'>
                             <div className='-mr-20 flex items-end justify-center'>
                                 <div className='flex'>
-                                    <span className='-ml-6 mt-2 text-3xl font-bold text-primary'>
-                                        $
-                                    </span>
                                     <span className='leading-0 text-8xl font-bold text-gray-800 dark:text-white'>
-                                        15
-                                    </span>
-                                </div>
-                                <div className='mb-2'>
-                                    <span className='block text-xl font-bold text-gray-500 dark:text-gray-400'>
-                                        .56
-                                    </span>
-                                    <span className='block text-xl font-bold text-primary'>
-                                        / Month
+                                       20€
                                     </span>
                                 </div>
                             </div>
