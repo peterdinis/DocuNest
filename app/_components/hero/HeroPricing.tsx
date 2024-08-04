@@ -37,15 +37,19 @@ const HeroPricing: FC = () => {
                         >
                             <li className='flex items-center space-x-2'>
                                 <Check className='h-4 w-4 text-primary' />
-                                <span>Basic note-taking</span>
+                                <span>5 Folders</span>
                             </li>
                             <li className='flex items-center space-x-2'>
                                 <Check className='h-4 w-4 text-primary' />
-                                <span>Basic AI summarization</span>
+                                <span>30 Documents</span>
                             </li>
                             <li className='flex items-center space-x-2'>
                                 <Check className='h-4 w-4 text-primary' />
-                                <span>Limited cloud storage</span>
+                                <span>5 Uploaded documents</span>
+                            </li>
+                            <li className='flex items-center space-x-2'>
+                                <Check className='h-4 w-4 text-primary' />
+                                <span>30 times to use AI functions</span>
                             </li>
                         </ul>
                         <button
@@ -75,7 +79,7 @@ const HeroPricing: FC = () => {
                             <div className='flex items-end justify-center'>
                                 <div className='flex'>
                                     <span className='leading-0 text-8xl font-bold text-gray-800 dark:text-white'>
-                                       20€
+                                       50€
                                     </span>
                                 </div>
                             </div>
@@ -86,19 +90,19 @@ const HeroPricing: FC = () => {
                         >
                             <li className='flex items-center space-x-2'>
                                 <Check className='h-4 w-4 text-primary' />
-                                <span>All free features</span>
+                                <span>Unlimited folders</span>
                             </li>
                             <li className='flex items-center space-x-2'>
                                 <Check className='h-4 w-4 text-primary' />
-                                <span>Advanced AI summarization</span>
+                                <span>Unlimited documents</span>
                             </li>
                             <li className='flex items-center space-x-2'>
                                 <Check className='h-4 w-4 text-primary' />
-                                <span>Increased cloud storage</span>
+                                <span>Unlimited uploaded documents</span>
                             </li>
                             <li className='flex items-center space-x-2'>
                                 <Check className='h-4 w-4 text-primary' />
-                                <span>Priority support</span>
+                                <span>Unlimited used of AI functions</span>
                             </li>
                         </ul>
                         <button
