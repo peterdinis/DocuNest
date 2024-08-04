@@ -98,7 +98,7 @@ const UploadedDocsContent: FC = () => {
                                         {prettyBytes(item.size!)}
                                     </p>
 
-                                    <p className='mt-4 font-bold text-red-700'>
+                                    <p className='mt-4 prose prose-p: font-bold text-red-700'>
                                         {item.type}
                                     </p>
                                     <div className='space-y-3'>
