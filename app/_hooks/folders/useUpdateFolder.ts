@@ -8,7 +8,7 @@ import {
     updateFolder,
     UpdateFolderData,
 } from '@/app/_store/mutations/folderMutations';
-import { UseUpdateFolderOptions } from '../_types/hookTypes';
+import { UseUpdateFolderOptions } from '@/app/_types/hookTypes';
 
 const useUpdateFolder = ({
     id,

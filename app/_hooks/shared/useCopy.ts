@@ -1,8 +1,9 @@
 'use client';
 
+import { CopiedValue, CopyFn } from '@/app/_types/hookTypes';
 import { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
-import { CopiedValue, CopyFn } from '../_types/hookTypes';
+
 
 export function useCopyToClipboard(): [CopiedValue, CopyFn] {
     const [copiedText, setCopiedText] = useState<CopiedValue>(null);
