@@ -9,7 +9,7 @@ const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
 
 const handleSubscriptMut = async (priceId: string) => {
     const stripe = await stripePromise;
-    const response = await fetch('/api/create-subscription', {
+    const response = await fetch('/api/stripe/subscription', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ priceId }),
