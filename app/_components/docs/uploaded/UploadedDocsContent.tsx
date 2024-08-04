@@ -97,6 +97,10 @@ const UploadedDocsContent: FC = () => {
                                     <p className='mt-4 font-bold'>
                                         {prettyBytes(item.size!)}
                                     </p>
+
+                                    <p className='mt-4 prose prose-p: font-bold text-red-700'>
+                                        {item.type}
+                                    </p>
                                     <div className='space-y-3'>
                                         <Link
                                             href={item.name!}

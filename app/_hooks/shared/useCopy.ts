@@ -4,7 +4,6 @@ import { CopiedValue, CopyFn } from '@/app/_types/hookTypes';
 import { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
 
-
 export function useCopyToClipboard(): [CopiedValue, CopyFn] {
     const [copiedText, setCopiedText] = useState<CopiedValue>(null);
     const copy: CopyFn = useCallback(
@@ -25,7 +24,7 @@ export function useCopyToClipboard(): [CopiedValue, CopyFn] {
                 return false;
             }
         },
-        [toast],
+        [],
     );
 
     return [copiedText, copy];

@@ -118,7 +118,7 @@ const LoginForm: FC = () => {
                 </form>
             </Card>
             <div className='mt-4'>
-                <span className='text-sm'>Don't have an account? </span>
+                <span className='text-sm'>Do not have an account? </span>
                 <Link
                     href='/register'
                     className='ml-4 text-sm text-blue-500'

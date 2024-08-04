@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 
 const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
 
-
 const handleSubscriptMut = async (priceId: string) => {
     const stripe = await stripePromise;
     const response = await fetch('/api/stripe/subscription', {
@@ -36,8 +35,8 @@ const useCreateSubscription = () => {
         onSuccess: () => {
             toast.success('New subscription was created');
         },
-        onError: () => {
-            toast.error('New subscription was not created');
+        onError: (error) => {
+            toast.error(`New subscription was not created: ${error.message}`);
         },
     });
 };
