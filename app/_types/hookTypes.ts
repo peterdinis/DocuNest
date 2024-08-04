@@ -7,32 +7,20 @@ export interface UseCreateFolderOptions {
     onClose: () => void;
 }
 
-export interface UseDocumentDetailOptions {
+export interface DetailOptions {
     id: string;
     isEditMode: boolean;
 }
 
-export interface UseFolderDetailOptions {
-    id: string;
-    isEditMode: boolean;
-}
-
-export interface UsePaginatedDocumentsOptions {
+export interface IPagination {
     query: string;
     page: number;
 }
 
-export interface UsePaginatedFoldersOptions {
-    query: string;
-    page: number;
-}
+export type UserDetailProps = Pick<DetailOptions, 'id'>;
 
 export interface UseUpdateFolderOptions {
     id: string;
     setIsEditMode: (isEditMode: boolean) => void;
     setName: (name: string) => void;
-}
-
-export interface UseUserDetailProps {
-    id: string;
 }

@@ -2,12 +2,12 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllPaginatedDocuments } from '@/app/_store/queries/documentQueries';
-import { UsePaginatedDocumentsOptions } from '@/app/_types/hookTypes';
+import { IPagination } from '@/app/_types/hookTypes';
 
 const usePaginatedDocuments = ({
     query,
     page,
-}: UsePaginatedDocumentsOptions) => {
+}: IPagination) => {
     return useQuery({
         queryKey: ['myPaginatedDocuments', query, page],
         queryFn: () => fetchAllPaginatedDocuments({ query, page }),
