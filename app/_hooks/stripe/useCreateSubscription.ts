@@ -4,7 +4,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
-const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
+const stripePromise = loadStripe("pk_test_rKmmUZ4mYv571AdtLChl0C1V00xWJUYrWu");
 
 
 const handleSubscriptMut = async (priceId: string) => {
