@@ -72,7 +72,7 @@ const HeroPricing: FC = () => {
                             Pro Plan
                         </h3>
                         <div className='overflow-hidden'>
-                            <div className='-mr-20 flex items-end justify-center'>
+                            <div className='flex items-end justify-center'>
                                 <div className='flex'>
                                     <span className='leading-0 text-8xl font-bold text-gray-800 dark:text-white'>
                                        20€
