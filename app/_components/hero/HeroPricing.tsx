@@ -13,7 +13,7 @@ const HeroPricing: FC = () => {
                     Choose the Right Plan for Your Note-Taking Needs
                 </h2>
             </div>
-            <div className='mt-12 grid items-center gap-6 md:grid-cols-2 lg:flex lg:space-x-8'>
+            <div className='mt-12 grid grid-cols-2 items-center gap-6 md:grid-cols-2 lg:flex lg:space-x-8'>
                 {/* Free Plan */}
                 <div className='group relative md:col-span-1 lg:w-[32%]'>
                     <div
@@ -64,7 +64,7 @@ const HeroPricing: FC = () => {
                     </div>
                 </div>
 
-                {/* Annual Plan */}
+                {/* Pro Plan */}
                 <div className='group relative row-start-1 md:col-span-2 lg:w-[36%]'>
                     <div
                         aria-hidden='true'
@@ -72,7 +72,7 @@ const HeroPricing: FC = () => {
                     ></div>
                     <div className='relative space-y-8 p-8'>
                         <h3 className='text-center text-3xl font-semibold text-gray-700 dark:text-white'>
-                            Annual
+                            Pro Plan
                         </h3>
                         <div className='overflow-hidden'>
                             <div className='-mr-20 flex items-end justify-center'>
@@ -93,17 +93,6 @@ const HeroPricing: FC = () => {
                                     </span>
                                 </div>
                             </div>
-                            <div className='text-center text-2xl font-medium'>
-                                <span className='text-gray-400 line-through'>
-                                    $234
-                                </span>
-                                <span className='font-semibold text-gray-700 dark:text-white'>
-                                    $190
-                                </span>
-                            </div>
-                            <span className='block text-center text-xs uppercase text-primary'>
-                                BILLED YEARLY
-                            </span>
                         </div>
                         <ul
                             role='list'
@@ -129,60 +118,6 @@ const HeroPricing: FC = () => {
                         <button
                             className='relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95'
                             onClick={() => handleSubscription('price_annual_id')}
-                            disabled={loading}
-                        >
-                            <span className='dark:text-dark relative text-base font-semibold text-white'>
-                                Start plan
-                            </span>
-                        </button>
-                        {error && <p className="text-red-500">{error.message}</p>}
-                    </div>
-                </div>
-
-                {/* Monthly Plan */}
-                <div className='group relative md:col-span-1 lg:w-[32%]'>
-                    <div
-                        aria-hidden='true'
-                        className='absolute top-0 h-full w-full rounded-3xl border border-gray-100 bg-white shadow-2xl shadow-gray-600/10 transition duration-500 group-hover:scale-105 dark:border-gray-700 dark:bg-gray-800 dark:shadow-none lg:group-hover:scale-110'
-                    ></div>
-                    <div className='relative space-y-8 p-8'>
-                        <h3 className='text-center text-3xl font-semibold text-gray-700 dark:text-white'>
-                            Monthly
-                        </h3>
-                        <div className='relative flex justify-around'>
-                            <div className='flex'>
-                                <span className='-ml-2 mt-2 text-3xl font-bold text-primary'>
-                                    $
-                                </span>
-                                <span className='leading-0 text-8xl font-bold text-gray-800 dark:text-white'>
-                                    20
-                                </span>
-                            </div>
-                        </div>
-                        <ul
-                            role='list'
-                            className='m-auto w-max space-y-4 pb-6 text-gray-600 dark:text-gray-300'
-                        >
-                            <li className='flex items-center space-x-2'>
-                                <Check className='h-4 w-4 text-primary' />
-                                <span>All free features</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                                <Check className='h-4 w-4 text-primary' />
-                                <span>Advanced AI summarization</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                                <Check className='h-4 w-4 text-primary' />
-                                <span>Increased cloud storage</span>
-                            </li>
-                            <li className='flex items-center space-x-2'>
-                                <Check className='h-4 w-4 text-primary' />
-                                <span>Priority support</span>
-                            </li>
-                        </ul>
-                        <button
-                            className='relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95'
-                            onClick={() => handleSubscription('price_monthly_id')}
                             disabled={loading}
                         >
                             <span className='dark:text-dark relative text-base font-semibold text-white'>
