@@ -1,22 +1,15 @@
+"use client"
+
 import { FC, useState } from 'react';
 import { Button, Input } from '@nextui-org/react';
 import useOpenAI from '@/app/_hooks/shared/useAI';
 import Header from '../shared/Header';
-import { useUserStore } from '@/app/_zustand/aiCounterStore';
+import { AIDocProps } from '@/app/_types/documentTypes';
 
-interface AIDocProps {
-    onContentGenerated: (content: string) => void;
-}
 
 const AIDoc: FC<AIDocProps> = ({ onContentGenerated }) => {
     const [prompt, setPrompt] = useState('');
     const { generateContent, isLoading, error } = useOpenAI();
-    const { decrementAICount, updateAICountOnServer } = useUserStore(
-        (state) => ({
-            decrementAICount: state.decrementAICount,
-            updateAICountOnServer: state.updateAICountOnServer,
-        }),
-    );
 
     const handleGenerate = async () => {
         if (!prompt) return;
@@ -24,12 +17,6 @@ const AIDoc: FC<AIDocProps> = ({ onContentGenerated }) => {
         try {
             const content = await generateContent(prompt);
             onContentGenerated(content);
-
-            // Znížiť aiCount v store
-            decrementAICount();
-
-            // Volanie API na zmenu aiCount na serveri
-            await updateAICountOnServer();
         } catch (error) {
             console.error('Error generating content:', error);
         }
