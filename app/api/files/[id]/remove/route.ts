@@ -28,10 +28,14 @@ export async function DELETE(request: NextRequest) {
             where: { id },
         });
 
-        if (!file) {
+        console.log
+        console.log("F", file);
+        console.log("FUI", file?.userId);
+
+        if (!file || file.userId !== session.user.id) {
             return NextResponse.json(
                 { message: 'File not found or access denied' },
-                { status: 401 },
+                { status: 404 },
             );
         }
 
