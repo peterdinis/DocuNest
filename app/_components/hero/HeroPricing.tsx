@@ -22,7 +22,10 @@ const HeroPricing: FC = () => {
         );
     }
 
-    console.log("Pricing Plans:", data);
+    // Function to capitalize the first letter of each word
+    const capitalizeWords = (text: string) => {
+        return text.replace(/\b\w/g, char => char.toUpperCase());
+    };
 
     return (
         <div id='pricing' className='m-auto px-6 py-20 xl:container md:px-12 lg:px-20'>
@@ -56,7 +59,7 @@ const HeroPricing: FC = () => {
                                 {plan.description.split(' ').map((item: string, index: number) => (
                                     <li key={index} className='flex items-center space-x-2'>
                                         <Check className='h-4 w-4 text-primary' />
-                                        <span>{item}</span>
+                                        <span>{capitalizeWords(item)}</span>
                                     </li>
                                 ))}
                             </ul>
