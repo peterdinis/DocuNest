@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { FC, ReactNode, useMemo, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import 'react-quill/dist/quill.snow.css';
 import CustomDrawer from '../shared/Drawer';
@@ -52,15 +52,9 @@ const CreateDocumentForm: FC = () => {
 
     useEffect(() => {
         if (drawerInputText) {
-            setDescription(
-                (prevDescription: string) =>
-                    `${prevDescription}\n${drawerInputText}`,
-            );
-            setValue(
-                'description',
-                `${description ?? ''}\n${drawerInputText}`,
-                { shouldDirty: true },
-            );
+            setDescription(prevDescription => `${prevDescription}\n${drawerInputText}`);
+            setValue('description', `${description ?? ''}\n${drawerInputText}`, { shouldDirty: true });
+            setDrawerInputText('');  // Clear the drawer input text after updating
         }
     }, [drawerInputText, setValue, description]);
 
@@ -86,9 +80,7 @@ const CreateDocumentForm: FC = () => {
         const description = watch('description');
         if ((!isDirty && description) || !title) {
             router.push('/dashboard');
-        } else if (
-            confirm('You have unsaved changes. Are you sure you want to leave?')
-        ) {
+        } else if (confirm('You have unsaved changes. Are you sure you want to leave?')) {
             router.push('/dashboard');
         }
     };
