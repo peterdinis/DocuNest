@@ -7,7 +7,6 @@ import 'react-quill/dist/quill.snow.css';
 import CustomDrawer from '../shared/Drawer';
 import { Button } from '@nextui-org/react';
 import AIDoc from './AIDoc';
-import { formats, modules } from './editor/quill-config';
 import { useForm } from 'react-hook-form';
 import useCreateDocument from '@/app/_hooks/documents/useCreateDocument';
 import QuillEditor from './editor/QuillEditor';
@@ -15,11 +14,6 @@ import QuillEditor from './editor/QuillEditor';
 const CreateDocumentForm: FC = () => {
     const [description, setDescription] = useState('');
     const [drawerInputText, setDrawerInputText] = useState('');
-
-    const ReactQuill = useMemo(
-        () => dynamic(() => import('react-quill'), { ssr: false }),
-        [],
-    );
 
     const {
         register,
@@ -52,6 +46,7 @@ const CreateDocumentForm: FC = () => {
     const onSubmit = (formData: any) => {
         formData.description = description;
         createDocumentMut(formData);
+        reset();
         router.push('/dashboard');
     };
 
