@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import { db } from './database';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
 
 export const createStripeCustomer = async (userId: string, email: string) => {
     const customer = await stripe.customers.create({
