@@ -2,9 +2,27 @@
 import { FC } from "react";
 import { Check } from 'lucide-react';
 import useCreateSubscription from "@/app/_hooks/stripe/useCreateSubscription";
+import usePricingPlans from "@/app/_hooks/stripe/usePricingPlans";
+import Loading from "../shared/Loading";
 
 const HeroPricing: FC = () => {
     const { mutate: handleSubscription, isPending: loading, error } = useCreateSubscription();
+    const {data, isLoading, isError} = usePricingPlans();
+
+    if(isLoading) {
+        return <Loading />
+    }
+
+
+    if (isError) {
+        return (
+            <p className='text-xl font-bold text-red-700'>
+                Something went wrong
+            </p>
+        );
+    }
+
+    console.log("D", data);
 
     return (
         <div id='pricing' className='m-auto px-6 py-20 xl:container md:px-12 lg:px-20'>
