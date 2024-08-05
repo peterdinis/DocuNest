@@ -24,14 +24,14 @@ export async function DELETE(request: NextRequest) {
     }
 
     try {
-        const file = await db.file.findUnique({
+        const file = await db.file.findFirst({
             where: { id },
         });
 
-        if (!file || file.userId !== session.user.id) {
+        if (!file) {
             return NextResponse.json(
                 { message: 'File not found or access denied' },
-                { status: 404 },
+                { status: 401 },
             );
         }
 

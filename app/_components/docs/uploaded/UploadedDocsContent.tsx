@@ -13,6 +13,7 @@ import { ReactSortable } from 'react-sortablejs';
 import Link from 'next/link';
 import AppPagination from '../../shared/AppPagination';
 import prettyBytes from 'pretty-bytes';
+import DeleteUploadedDocModal from './DeleteUploadedDocModal';
 
 const UploadedDocsContent: FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -110,6 +111,10 @@ const UploadedDocsContent: FC = () => {
                                         >
                                             <Button>File Info</Button>
                                         </Link>
+                                    </div>
+
+                                    <div className='float-right'>
+                                        <DeleteUploadedDocModal fileId={item.id} />
                                     </div>
                                 </Card>
                             </motion.div>
