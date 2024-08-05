@@ -40,15 +40,6 @@ const SettingsContent: FC = () => {
                         <CardBody className='grid gap-8'>
                             <div className='grid gap-4'>
                                 <label
-                                    htmlFor='theme'
-                                    className='block text-sm font-bold text-gray-700 dark:text-white'
-                                >
-                                    Used AI Functions
-                                </label>
-                                15 / 100
-                            </div>
-                            <div className='grid gap-4'>
-                                <label
                                     htmlFor='font-size'
                                     className='block text-sm font-bold text-gray-700 dark:text-white'
                                 >
@@ -59,16 +50,6 @@ const SettingsContent: FC = () => {
 
                             <div className='grid gap-4'>
                                 Name: {session?.user?.name}
-                            </div>
-
-                            <div className='grid gap-4'>
-                                <label
-                                    htmlFor='font-size'
-                                    className='block text-sm font-bold text-gray-700 dark:text-white'
-                                >
-                                    Has Subscription
-                                </label>
-                                <Checkbox defaultSelected icon={<Check />} />
                             </div>
 
                             <div className='grid gap-4'>
