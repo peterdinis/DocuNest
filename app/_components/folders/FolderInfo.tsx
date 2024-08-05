@@ -61,6 +61,8 @@ const FolderInfo: FC = () => {
         setIsEditMode(!isEditMode);
     };
 
+    console.log("N", name);
+
     return (
         <div>
             <h2 className='prose-h2: prose mt-5 flex justify-center align-top text-3xl dark:text-white'>
@@ -84,7 +86,7 @@ const FolderInfo: FC = () => {
                 <form>
                     <Input
                         placeholder='Input name'
-                        value={name}
+                        value={data.name}
                         className='max-w-[300px]'
                         disabled={!isEditMode}
                         onChange={(e) => setName(e.target.value)}
