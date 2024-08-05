@@ -8,3 +8,7 @@ export type DocumentTableType = {
 };
 
 export type TrashDocument = Partial<DocumentTableType>;
+
+export type AIDocProps = {
+    onContentGenerated: (content: string) => void;
+}
