@@ -2,11 +2,10 @@
 
 import { FC } from 'react';
 import Header from '../shared/Header';
-import { Card, CardBody, CardHeader, Checkbox } from '@nextui-org/react';
+import { Card, CardBody, CardHeader} from '@nextui-org/react';
 import { useSession } from 'next-auth/react';
 import { format } from 'date-fns';
 import Loading from '../shared/Loading';
-import { Check } from 'lucide-react';
 import useUserDetail from '@/app/_hooks/users/useUserDetail';
 
 const SettingsContent: FC = () => {

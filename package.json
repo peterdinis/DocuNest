@@ -9,7 +9,7 @@
         "lint": "next lint",
         "format": "prettier --check --ignore-path .gitignore .",
         "format:fix": "prettier --write --ignore-path .gitignore .",
-        "studio": "pnpm run prisma studio"
+        "studio": "npx prisma studio"
     },
     "dependencies": {
         "@hookform/resolvers": "^3.9.0",
