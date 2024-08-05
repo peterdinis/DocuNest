@@ -11,27 +11,18 @@ import {
     ButtonGroup,
 } from '@nextui-org/react';
 import { X } from 'lucide-react';
-import { useDeleteFolder } from '@/app/_hooks/folders/useDeleteFolder';
-import { useMoveFolderToTrash } from '@/app/_hooks/folders/useMoveFolderToTrash';
+import { useDeleleteFile } from '@/app/_hooks/files/useRemoveFile';
 
-interface IDeleteFolderProps {
-    folderId: string;
+interface IDeleteUploadedDocModalProps {
+    fileId: string;
 }
 
-const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }) => {
+const DeleteUploadedDocModal: FC<IDeleteUploadedDocModalProps> = ({ fileId }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const deleteFolderMut = useDeleteFolder(folderId);
-    const moveToTrashMut = useMoveFolderToTrash();
+    const deleteFileMut = useDeleleteFile(fileId);
 
     const onDelete = () => {
-        deleteFolderMut.mutate();
-    };
-
-    const onMoveToTrash = () => {
-        moveToTrashMut.mutate({
-            folderId,
-            inTrash: true,
-        });
+        deleteFileMut.mutate();
     };
 
     return (
@@ -44,31 +35,19 @@ const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }) => {
                     {(onClose) => (
                         <form>
                             <ModalHeader className='flex flex-col gap-1'>
-                                Do you want to delete the folder?
+                                Do you want to delete the file
                             </ModalHeader>
-                            <p className='prose-p: prose ml-5 text-xl font-bold text-red-700'>
-                                Attention, if you delete this folder, the files
-                                contained in the given folder will also be
-                                deleted.
-                            </p>
                             <ModalFooter>
                                 <ButtonGroup className='mt-5'>
                                     <Button color='danger' onPress={onClose}>
                                         Close
                                     </Button>
                                     <Button
-                                        color='secondary'
-                                        className='ml-2'
-                                        onClick={onMoveToTrash}
-                                    >
-                                        Move to Trash
-                                    </Button>
-                                    <Button
                                         color='success'
                                         className='ml-2'
                                         onClick={onDelete}
                                     >
-                                        Delete Folder
+                                        Delete File
                                     </Button>
                                 </ButtonGroup>
                             </ModalFooter>
@@ -80,4 +59,4 @@ const DeleteFolder: FC<IDeleteFolderProps> = ({ folderId }) => {
     );
 };
 
-export default DeleteFolder;
+export default DeleteUploadedDocModal;

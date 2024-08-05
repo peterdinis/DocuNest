@@ -2,7 +2,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { deleteTrash } from '@/app/_store/mutations/storeMutations';
+import { deleteTrash } from '@/app/_store/mutations/trashMutations';
 import { queryClient } from '@/app/_store/queryClient';
 
 const useCleanTrash = () => {
