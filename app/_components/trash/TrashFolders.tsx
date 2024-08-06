@@ -9,7 +9,6 @@ import {
     TableRow,
     TableCell,
     Pagination,
-    Button,
 } from '@nextui-org/react';
 import useAllTrashFolders from '@/app/_hooks/folders/useAllTrashFolders';
 import Loading from '../shared/Loading';
@@ -50,7 +49,6 @@ const TrashFolders: FC = () => {
                 <TableHeader>
                     <TableColumn>Title</TableColumn>
                     <TableColumn>Created At</TableColumn>
-                    <TableColumn>Remove from trash</TableColumn>
                 </TableHeader>
                 <TableBody>
                     {trashData &&
@@ -60,15 +58,6 @@ const TrashFolders: FC = () => {
                                     <TableCell>{item.name}</TableCell>
                                     <TableCell>
                                         {format(item.createdAt!, 'yyyy-MM-dd')}
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button
-                                            color='danger'
-                                            radius='full'
-                                            size='sm'
-                                        >
-                                            Delete
-                                        </Button>
                                     </TableCell>
                                 </TableRow>
                             );
