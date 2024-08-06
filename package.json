@@ -1,6 +1,6 @@
 {
     "name": "docunest",
-    "version": "1.7.0",
+    "version": "1.8.0",
     "private": true,
     "scripts": {
         "dev": "next dev --turbo",
@@ -51,7 +51,6 @@
         "react-quill": "^2.0.0",
         "react-sortablejs": "^6.1.4",
         "react-toastify": "^10.0.5",
-        "stripe": "^16.2.0",
         "tailwind-merge": "^2.4.0",
         "tailwindcss-animate": "^1.0.7",
         "uploadthing": "^6.13.2",
