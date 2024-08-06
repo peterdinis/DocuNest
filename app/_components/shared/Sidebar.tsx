@@ -11,7 +11,8 @@ import {
     Folder,
     FolderCheck,
     Settings,
-    ArrowUpFromLine
+    ArrowUpFromLine,
+    Users
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -109,8 +110,8 @@ const Sidebar: FC = () => {
                                 </div>
                                 <div className='ml-4 mt-8'>
                                     <Button variant={'ghost'} value='sm'>
-                                        <Settings />
-                                        <Link href='/settings'>Settings</Link>
+                                        <Users />
+                                        <Link href='/profile'>Profile</Link>
                                     </Button>
                                 </div>
                                 <div className='ml-4 mt-8'>
@@ -205,11 +206,11 @@ const Sidebar: FC = () => {
                                     <Tooltip
                                         showArrow={true}
                                         placement='right'
-                                        content='Settings page'
+                                        content='Profile Info'
                                     >
                                         <Button variant={'ghost'} size={'sm'}>
-                                            <Link href='/settings'>
-                                                <Settings />
+                                            <Link href='/profile'>
+                                                <Users />
                                             </Link>
                                         </Button>
                                     </Tooltip>

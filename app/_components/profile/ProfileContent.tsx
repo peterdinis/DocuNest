@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 import Loading from '../shared/Loading';
 import useUserDetail from '@/app/_hooks/users/useUserDetail';
 
-const SettingsContent: FC = () => {
+const ProfileContent: FC = () => {
     const { data: session } = useSession();
 
     const { data, isLoading, isError } = useUserDetail({
@@ -88,4 +88,4 @@ const SettingsContent: FC = () => {
     );
 };
 
-export default SettingsContent;
+export default ProfileContent;
