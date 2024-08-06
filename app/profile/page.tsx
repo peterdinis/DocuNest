@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
 import SettingsWrapper from '../_components/settings/SettingsWrapper';
 
-const SettingsPage: NextPage = () => {
+const ProfilePage: NextPage = () => {
     return <SettingsWrapper />;
 };
 
-export default SettingsPage;
+export default ProfilePage;
