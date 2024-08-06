@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import Sidebar from '../shared/Sidebar';
-import SettingsContent from './SettingsContent';
+import SettingsContent from './ProfileContent';
 
-const SettingsWrapper: FC = () => {
+const ProfileWrapper: FC = () => {
     return (
         <div className='dark:bg-dark dark:text-light flex bg-gray-100 text-gray-900 dark:bg-background'>
             <Sidebar />
@@ -11,4 +11,4 @@ const SettingsWrapper: FC = () => {
     );
 };
 
-export default SettingsWrapper;
+export default ProfileWrapper;
