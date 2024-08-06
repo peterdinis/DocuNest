@@ -32,6 +32,8 @@ const FolderInfo: FC = () => {
 
     const { data, isLoading, isError } = useFolderDetail({ id, isEditMode });
 
+    console.log("D", data);
+
     useEffect(() => {
         if (data) {
             setName(data.name);
@@ -60,8 +62,6 @@ const FolderInfo: FC = () => {
     const handleEditToggle = () => {
         setIsEditMode(!isEditMode);
     };
-
-    console.log("N", name);
 
     return (
         <div>
