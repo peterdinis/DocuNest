@@ -3,13 +3,7 @@
 import { useMutation } from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import { queryClient } from "@/app/_store/queryClient";
-import axios from "axios";
-
-const deleteFile = async(fileId: string) => {
-    if(!fileId) return;
-    return await axios.delete(`/api/files/${fileId}`)
-}
-
+import { deleteFile } from "@/app/_store/mutations/fileMutations";
 
 export const useDeleleteFile = (fileId: string) =>{
     return useMutation({
