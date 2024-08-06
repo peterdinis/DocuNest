@@ -13,11 +13,10 @@ export async function GET(request: Request) {
     }
 
     const url = new URL(request.url);
-    const query = url.searchParams.get('query') || '';
     const page = parseInt(url.searchParams.get('page') || '1', 10);
     const pageSize = 10;
 
-    const allUsersPaginatedDocumentsInTrash = await db.document.findMany({
+    const allUsersPaginatedFoldersInTrash = await db.folder.findMany({
         where: {
             userId: session.user.id,
             inTrash: true,
@@ -26,18 +25,18 @@ export async function GET(request: Request) {
         take: pageSize,
     });
 
-    const totalDocumentsInTrash = await db.document.count({
+    const totalFoldersInTrash = await db.folder.count({
         where: {
             userId: session.user.id,
         },
     });
 
-    if (!allUsersPaginatedDocumentsInTrash) {
-        throw new Error('User does not move any documents to trash');
+    if (!allUsersPaginatedFoldersInTrash) {
+        throw new Error('User does not move any folders to trash');
     }
 
     return NextResponse.json({
-        documents: allUsersPaginatedDocumentsInTrash,
-        totalPages: Math.ceil(totalDocumentsInTrash / pageSize),
+        documents: allUsersPaginatedFoldersInTrash ,
+        totalPages: Math.ceil(totalFoldersInTrash / pageSize),
     });
 }
