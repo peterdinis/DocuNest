@@ -117,7 +117,7 @@ const CreateFolderModal: FC<ICreateFolderModalProps> = ({ btnName }) => {
                                     color='danger'
                                     onPress={handleModalClose}
                                 >
-                                    Close Modal
+                                    Close
                                 </Button>
                                 <Button
                                     color='primary'
