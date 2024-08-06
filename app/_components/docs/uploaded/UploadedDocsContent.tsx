@@ -59,7 +59,7 @@ const UploadedDocsContent: FC = () => {
         <>
             <main className='ml-5 flex-1 flex-grow overflow-x-hidden px-8 py-4'>
                 <div className='flex justify-center align-top'>
-                    <Header text='My Uploaded Content' />
+                    <Header text='My Uploaded Documents' />
                 </div>
                 <Input
                     startContent={<Search className='dark:text-white' />}

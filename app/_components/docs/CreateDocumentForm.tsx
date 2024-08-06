@@ -1,6 +1,5 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import 'react-quill/dist/quill.snow.css';
@@ -90,6 +89,9 @@ const CreateDocumentForm: FC = () => {
             <h2 className='mt-5 flex justify-center align-top text-4xl'>
                 New document
             </h2>
+
+            <p className='text-center mt-5 text-red-800 font-bold text-xl'>
+            New documents are always assigned to the Unassigned documents folder</p>
 
             <div className='mt-5 flex justify-center'>
                 <Button

@@ -9,13 +9,11 @@ import {
     TableRow,
     TableCell,
     Pagination,
-    Button,
 } from '@nextui-org/react';
 import useAllTrashDocuments from '@/app/_hooks/documents/useAllTrashDocuments';
 import Loading from '../shared/Loading';
 import { format } from 'date-fns';
 import { TrashDocument } from '@/app/_types/documentTypes';
-import { useRemoveDocumentFromTrash } from '@/app/_hooks/documents/useRemoveDocFromTrash';
 import { limit } from '@/app/_constants/applicationConstants';
 
 const TrashDocuments: FC = () => {
@@ -27,9 +25,6 @@ const TrashDocuments: FC = () => {
         isError: docError,
         refetch,
     } = useAllTrashDocuments(currentPage, limit);
-
-    const { mutate: removeDocument, isPending: isRemoving } =
-        useRemoveDocumentFromTrash();
 
     if (docLoading) {
         return <Loading />;
@@ -43,19 +38,8 @@ const TrashDocuments: FC = () => {
         );
     }
 
-    const handleDelete = (documentId: string) => {
-        removeDocument(
-            {
-                documentId,
-                inTrash: false,
-            },
-            {
-                onSuccess: () => {
-                    refetch();
-                },
-            },
-        );
-    };
+    const documents = docData?.documents || [];
+    const totalPages = docData?.totalPages || 1;
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
@@ -73,35 +57,16 @@ const TrashDocuments: FC = () => {
                 <TableHeader>
                     <TableColumn>Title</TableColumn>
                     <TableColumn>Created At</TableColumn>
-                    <TableColumn>Remove from trash</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    {docData &&
-                        docData.map((item: TrashDocument) => {
-                            return (
-                                <TableRow key={item.id}>
-                                    <TableCell>{item.title}</TableCell>
-                                    <TableCell>
-                                        {format(item.createdAt!, 'yyyy-MM-dd')}
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button
-                                            color='danger'
-                                            radius='full'
-                                            size='sm'
-                                            isLoading={isRemoving}
-                                            onClick={() =>
-                                                handleDelete(
-                                                    item.id as unknown as string,
-                                                )
-                                            }
-                                        >
-                                            Delete
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                            );
-                        })}
+                    {documents.map((item: TrashDocument) => (
+                        <TableRow key={item.id}>
+                            <TableCell>{item.title}</TableCell>
+                            <TableCell>
+                                {format(new Date(item.createdAt as unknown as Date), 'yyyy-MM-dd')}
+                            </TableCell>
+                        </TableRow>
+                    ))}
                 </TableBody>
             </Table>
             <div className='mt-5 flex justify-center align-top'>
@@ -110,7 +75,7 @@ const TrashDocuments: FC = () => {
                     showControls
                     isCompact
                     color='success'
-                    total={docData?.totalPages || 1}
+                    total={totalPages}
                     initialPage={currentPage}
                     onChange={handlePageChange}
                 />
