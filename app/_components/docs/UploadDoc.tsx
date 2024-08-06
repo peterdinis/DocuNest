@@ -20,7 +20,7 @@ const UploadDoc: FC = () => {
     return (
         <>
             <Button color='default' startContent={<Plus />} onPress={onOpen}>
-                Add document
+                Upload document
             </Button>
             <Modal isOpen={isOpen} backdrop='blur' onOpenChange={onOpenChange}>
                 <ModalContent>

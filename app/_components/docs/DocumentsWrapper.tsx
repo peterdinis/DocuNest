@@ -58,7 +58,7 @@ const DocumentsWrapper: FC = () => {
     return (
         <>
             <div className='flex justify-center align-top'>
-                <Header text='My Documents' />
+                <Header text='My Created Documents' />
             </div>
             <Input
                 startContent={<Search className='dark:text-white' />}
