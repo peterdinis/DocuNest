@@ -36,6 +36,8 @@ const TrashFolders: FC = () => {
             </p>
         );
     }
+
+    const documents = trashData?.documents || [];
     const totalPages = trashData?.totalPages || 1;
 
     return (
@@ -51,17 +53,14 @@ const TrashFolders: FC = () => {
                     <TableColumn>Created At</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    {trashData &&
-                        trashData?.map((item: TrashFolder) => {
-                            return (
-                                <TableRow key={item.id}>
-                                    <TableCell>{item.name}</TableCell>
-                                    <TableCell>
-                                        {format(item.createdAt!, 'yyyy-MM-dd')}
-                                    </TableCell>
-                                </TableRow>
-                            );
-                        })}
+                    {documents.map((item: TrashFolder) => (
+                        <TableRow key={item.id}>
+                            <TableCell>{item.name}</TableCell>
+                            <TableCell>
+                                {format(new Date(item.createdAt), 'yyyy-MM-dd')}
+                            </TableCell>
+                        </TableRow>
+                    ))}
                 </TableBody>
             </Table>
             <div className='mt-5 flex justify-center align-top'>

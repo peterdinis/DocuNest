@@ -9,7 +9,6 @@ import {
     TableRow,
     TableCell,
     Pagination,
-    Button,
 } from '@nextui-org/react';
 import useAllTrashDocuments from '@/app/_hooks/documents/useAllTrashDocuments';
 import Loading from '../shared/Loading';
@@ -39,6 +38,9 @@ const TrashDocuments: FC = () => {
         );
     }
 
+    const documents = docData?.documents || [];
+    const totalPages = docData?.totalPages || 1;
+
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
         refetch();
@@ -57,17 +59,14 @@ const TrashDocuments: FC = () => {
                     <TableColumn>Created At</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    {docData &&
-                        docData.map((item: TrashDocument) => {
-                            return (
-                                <TableRow key={item.id}>
-                                    <TableCell>{item.title}</TableCell>
-                                    <TableCell>
-                                        {format(item.createdAt!, 'yyyy-MM-dd')}
-                                    </TableCell>
-                                </TableRow>
-                            );
-                        })}
+                    {documents.map((item: TrashDocument) => (
+                        <TableRow key={item.id}>
+                            <TableCell>{item.title}</TableCell>
+                            <TableCell>
+                                {format(new Date(item.createdAt as unknown as Date), 'yyyy-MM-dd')}
+                            </TableCell>
+                        </TableRow>
+                    ))}
                 </TableBody>
             </Table>
             <div className='mt-5 flex justify-center align-top'>
@@ -76,7 +75,7 @@ const TrashDocuments: FC = () => {
                     showControls
                     isCompact
                     color='success'
-                    total={docData?.totalPages || 1}
+                    total={totalPages}
                     initialPage={currentPage}
                     onChange={handlePageChange}
                 />
