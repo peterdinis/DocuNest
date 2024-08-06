@@ -5,28 +5,36 @@ import authOptions from '../../auth/authOptions';
 import { revalidatePath } from 'next/cache';
 
 export async function GET(request: NextRequest) {
-    try {
-        const documentDetail = await db.document.findMany({
-            where: {
-                inTrash: true,
-            },
-        });
+    const url = new URL(request.url);
+    const id = url.pathname.split('/').pop();
 
-        if (!documentDetail) {
-            return NextResponse.json(
-                { error: 'Document not found' },
-                { status: 404 },
-            );
-        }
-
-        return NextResponse.json(documentDetail);
-    } catch (error) {
-        console.error('Error fetching document:', error);
+    if (!id) {
         return NextResponse.json(
-            { error: 'Internal Server Error' },
-            { status: 500 },
+            { error: 'Missing id parameter' },
+            { status: 400 },
         );
     }
+
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user) {
+        return NextResponse.json(
+            { error: 'Not authenticated' },
+            { status: 401 },
+        );
+    }
+
+    const findOneDocument = await db.document.findFirst({
+        where: {
+            id
+        }
+    });
+
+    if(!findOneDocument) {
+        throw new Error("Document not found");
+    }
+
+    return NextResponse.json(findOneDocument);
 }
 
 export async function PUT(request: NextRequest) {

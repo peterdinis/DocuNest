@@ -9,7 +9,6 @@ import {
     TableRow,
     TableCell,
     Pagination,
-    Button,
 } from '@nextui-org/react';
 import useAllTrashFolders from '@/app/_hooks/folders/useAllTrashFolders';
 import Loading from '../shared/Loading';
@@ -37,6 +36,8 @@ const TrashFolders: FC = () => {
             </p>
         );
     }
+
+    const documents = trashData?.documents || [];
     const totalPages = trashData?.totalPages || 1;
 
     return (
@@ -50,29 +51,16 @@ const TrashFolders: FC = () => {
                 <TableHeader>
                     <TableColumn>Title</TableColumn>
                     <TableColumn>Created At</TableColumn>
-                    <TableColumn>Remove from trash</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    {trashData &&
-                        trashData?.map((item: TrashFolder) => {
-                            return (
-                                <TableRow key={item.id}>
-                                    <TableCell>{item.name}</TableCell>
-                                    <TableCell>
-                                        {format(item.createdAt!, 'yyyy-MM-dd')}
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button
-                                            color='danger'
-                                            radius='full'
-                                            size='sm'
-                                        >
-                                            Delete
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                            );
-                        })}
+                    {documents.map((item: TrashFolder) => (
+                        <TableRow key={item.id}>
+                            <TableCell>{item.name}</TableCell>
+                            <TableCell>
+                                {format(new Date(item.createdAt), 'yyyy-MM-dd')}
+                            </TableCell>
+                        </TableRow>
+                    ))}
                 </TableBody>
             </Table>
             <div className='mt-5 flex justify-center align-top'>

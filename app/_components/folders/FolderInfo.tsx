@@ -32,6 +32,8 @@ const FolderInfo: FC = () => {
 
     const { data, isLoading, isError } = useFolderDetail({ id, isEditMode });
 
+    console.log("D", data);
+
     useEffect(() => {
         if (data) {
             setName(data.name);
@@ -60,8 +62,6 @@ const FolderInfo: FC = () => {
     const handleEditToggle = () => {
         setIsEditMode(!isEditMode);
     };
-
-    console.log("N", name);
 
     return (
         <div>
@@ -128,7 +128,6 @@ const FolderInfo: FC = () => {
                         <TableColumn key='title'>Title</TableColumn>
                         <TableColumn key='createdAt'>Created At</TableColumn>
                         <TableColumn key='updateAt'>Updated At</TableColumn>
-                        <TableColumn key='userId'>User Id</TableColumn>
                         <TableColumn key='detail'>Detail</TableColumn>
                     </TableHeader>
                     <TableBody
@@ -144,7 +143,6 @@ const FolderInfo: FC = () => {
                                 <TableCell>
                                     {format(item.updatedAt, 'yyyy-MM-dd')}
                                 </TableCell>
-                                <TableCell>{item.userId}</TableCell>
                                 <TableCell>
                                     <Link href={`/documents/${item.id}`}>
                                         Detail
