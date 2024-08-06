@@ -4,28 +4,39 @@ import { NextRequest, NextResponse } from 'next/server';
 import authOptions from '../../auth/authOptions';
 
 export async function GET(request: NextRequest) {
-    try {
-        const folderDetail = await db.folder.findMany({
-            where: {
-                inTrash: true,
-            },
-        });
+    const url = new URL(request.url);
+    const id = url.pathname.split('/').pop();
 
-        if (!folderDetail) {
-            return NextResponse.json(
-                { error: 'Folder not found' },
-                { status: 404 },
-            );
-        }
-
-        return NextResponse.json(folderDetail);
-    } catch (error) {
-        console.error('Error fetching folder:', error);
+    if (!id) {
         return NextResponse.json(
-            { error: 'Internal Server Error' },
-            { status: 500 },
+            { error: 'Missing id parameter' },
+            { status: 400 },
         );
     }
+
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user) {
+        return NextResponse.json(
+            { error: 'Not authenticated' },
+            { status: 401 },
+        );
+    }
+
+    const findOneFolder = await db.folder.findFirst({
+        where: {
+            id
+        },
+        include: {
+            documents: true
+        }
+    });
+
+    if(!findOneFolder) {
+        throw new Error("Document not found");
+    }
+
+    return NextResponse.json(findOneFolder);
 }
 
 export async function PUT(request: NextRequest) {
