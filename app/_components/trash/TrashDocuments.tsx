@@ -15,7 +15,6 @@ import useAllTrashDocuments from '@/app/_hooks/documents/useAllTrashDocuments';
 import Loading from '../shared/Loading';
 import { format } from 'date-fns';
 import { TrashDocument } from '@/app/_types/documentTypes';
-import { useRemoveDocumentFromTrash } from '@/app/_hooks/documents/useRemoveDocFromTrash';
 import { limit } from '@/app/_constants/applicationConstants';
 
 const TrashDocuments: FC = () => {
@@ -28,9 +27,6 @@ const TrashDocuments: FC = () => {
         refetch,
     } = useAllTrashDocuments(currentPage, limit);
 
-    const { mutate: removeDocument, isPending: isRemoving } =
-        useRemoveDocumentFromTrash();
-
     if (docLoading) {
         return <Loading />;
     }
@@ -42,20 +38,6 @@ const TrashDocuments: FC = () => {
             </p>
         );
     }
-
-    const handleDelete = (documentId: string) => {
-        removeDocument(
-            {
-                documentId,
-                inTrash: false,
-            },
-            {
-                onSuccess: () => {
-                    refetch();
-                },
-            },
-        );
-    };
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
@@ -73,7 +55,6 @@ const TrashDocuments: FC = () => {
                 <TableHeader>
                     <TableColumn>Title</TableColumn>
                     <TableColumn>Created At</TableColumn>
-                    <TableColumn>Remove from trash</TableColumn>
                 </TableHeader>
                 <TableBody>
                     {docData &&
@@ -83,21 +64,6 @@ const TrashDocuments: FC = () => {
                                     <TableCell>{item.title}</TableCell>
                                     <TableCell>
                                         {format(item.createdAt!, 'yyyy-MM-dd')}
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button
-                                            color='danger'
-                                            radius='full'
-                                            size='sm'
-                                            isLoading={isRemoving}
-                                            onClick={() =>
-                                                handleDelete(
-                                                    item.id as unknown as string,
-                                                )
-                                            }
-                                        >
-                                            Delete
-                                        </Button>
                                     </TableCell>
                                 </TableRow>
                             );
