@@ -29,7 +29,6 @@ const DocInfo: FC = () => {
     const { data, isLoading, isError } = useDocumentDetail({ id, isEditMode });
     const addToFolderMut = useAddToFolder(id);
     const updateDocumentMut = useUpdateDocument(id);
-
     const {
         data: editData,
         isLoading: editLoading,
