@@ -61,6 +61,7 @@ const UploadedDocsContent: FC = () => {
                 <div className='flex justify-center align-top'>
                     <Header text='My Uploaded Documents' />
                 </div>
+                <span className='mt-4 font-bold text-lg dark:text-white prose prose-p:'>Displaying all uploaded files from Uploadthing</span>
                 <Input
                     startContent={<Search className='dark:text-white' />}
                     className='mt-5'
