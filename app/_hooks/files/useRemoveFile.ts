@@ -7,7 +7,7 @@ import axios from "axios";
 
 const deleteFile = async(fileId: string) => {
     if(!fileId) return;
-    return await axios.delete(`/api/files/${fileId}/remove`)
+    return await axios.delete(`/api/files/${fileId}`)
 }
 
 

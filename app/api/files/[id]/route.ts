@@ -24,11 +24,9 @@ export async function DELETE(request: NextRequest) {
     }
 
     try {
-        const file = await db.file.findFirst({
+        const file = await db.file.findUnique({
             where: { id },
         });
-
-        console.log
         console.log("F", file);
         console.log("FUI", file?.userId);
 

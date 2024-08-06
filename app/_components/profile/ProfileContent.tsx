@@ -2,11 +2,10 @@
 
 import { FC } from 'react';
 import Header from '../shared/Header';
-import { Card, CardBody, CardHeader, Checkbox } from '@nextui-org/react';
+import { Card, CardBody, CardHeader} from '@nextui-org/react';
 import { useSession } from 'next-auth/react';
 import { format } from 'date-fns';
 import Loading from '../shared/Loading';
-import { Check } from 'lucide-react';
 import useUserDetail from '@/app/_hooks/users/useUserDetail';
 
 const ProfileContent: FC = () => {
@@ -40,15 +39,6 @@ const ProfileContent: FC = () => {
                         <CardBody className='grid gap-8'>
                             <div className='grid gap-4'>
                                 <label
-                                    htmlFor='theme'
-                                    className='block text-sm font-bold text-gray-700 dark:text-white'
-                                >
-                                    Used AI Functions
-                                </label>
-                                15 / 100
-                            </div>
-                            <div className='grid gap-4'>
-                                <label
                                     htmlFor='font-size'
                                     className='block text-sm font-bold text-gray-700 dark:text-white'
                                 >
@@ -59,16 +49,6 @@ const ProfileContent: FC = () => {
 
                             <div className='grid gap-4'>
                                 Name: {session?.user?.name}
-                            </div>
-
-                            <div className='grid gap-4'>
-                                <label
-                                    htmlFor='font-size'
-                                    className='block text-sm font-bold text-gray-700 dark:text-white'
-                                >
-                                    Has Subscription
-                                </label>
-                                <Checkbox defaultSelected icon={<Check />} />
                             </div>
 
                             <div className='grid gap-4'>
