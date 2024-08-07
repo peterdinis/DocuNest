@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "User" ADD COLUMN     "aiCount" INTEGER NOT NULL DEFAULT 100;
