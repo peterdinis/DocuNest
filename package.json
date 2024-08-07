@@ -10,7 +10,6 @@
         "format": "prettier --check --ignore-path .gitignore .",
         "format:fix": "prettier --write --ignore-path .gitignore .",
         "studio": "npx prisma studio",
-        "postbuild": "next-sitemap",
         "postinstall": "pnpm prisma generate"
     },
     "dependencies": {

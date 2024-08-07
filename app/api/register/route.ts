@@ -30,6 +30,8 @@ export async function POST(request: NextRequest) {
                 password: hashedPassword,
             },
         });
+
+        return NextResponse.json(user);
     } catch (error) {
         console.error('Error during registration:', error);
         return new NextResponse('Internal Server Error', { status: 500 });

@@ -4,7 +4,7 @@ declare global {
             DATABASE_URL: string;
             NODE_ENV: 'development' | 'production';
             NEXTAUTH_SECRET: string;
-            NEXT_PUBLIC_OPENAI_API_KEY: string;
+            OPENAI_API_KEY: string;
             UPLOADTHING_SECRET: string;
             UPLOADTHING_APP_ID: string;
         }
