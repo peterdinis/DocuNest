@@ -1,10 +1,10 @@
 'use client';
 
 import { fetchUserDetail } from '@/app/_store/queries/userQueries';
-import { UseUserDetailProps } from '@/app/_types/hookTypes';
+import { UserDetailProps } from '@/app/_types/hookTypes';
 import { useQuery } from '@tanstack/react-query';
 
-const useUserDetail = ({ id }: UseUserDetailProps) => {
+const useUserDetail = ({ id }: UserDetailProps) => {
     return useQuery({
         queryKey: ['userDetail', id],
         queryFn: () => fetchUserDetail(id),
