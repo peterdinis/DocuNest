@@ -17,6 +17,7 @@ import '@uploadthing/react/styles.css';
 
 const inter = Roboto({
     weight: '500',
+    subsets: ['latin']
 });
 
 export const metadata: Metadata = {
