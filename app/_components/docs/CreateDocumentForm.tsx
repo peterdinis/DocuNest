@@ -9,6 +9,7 @@ import AIDoc from './AIDoc';
 import { useForm } from 'react-hook-form';
 import useCreateDocument from '@/app/_hooks/documents/useCreateDocument';
 import QuillEditor from './editor/QuillEditor';
+import { Loader2 } from 'lucide-react';
 
 const CreateDocumentForm: FC = () => {
     const [description, setDescription] = useState('');
@@ -94,13 +95,15 @@ const CreateDocumentForm: FC = () => {
             New documents are always assigned to the Unassigned documents folder</p>
 
             <div className='mt-5 flex justify-center'>
+                {/* TODO: Broken fix later */}
+                {/* }
                 <Button
                     variant='flat'
                     color='secondary'
                     onClick={handleDrawerOpen}
                 >
                     Use AI
-                </Button>
+                </Button> */}
                 <Button
                     variant='flat'
                     color='primary'
@@ -142,7 +145,7 @@ const CreateDocumentForm: FC = () => {
                     className='mt-6'
                     disabled={isPending}
                 >
-                    {isPending ? 'Creating...' : 'Create Document'}
+                    {isPending ? <Loader2 className='animate-bounce w-8 h-8' /> : 'Create Document'}
                 </Button>
                 <QuillEditor
                     value={description}
