@@ -52,9 +52,15 @@ const CreateDocumentForm: FC = () => {
 
     useEffect(() => {
         if (drawerInputText) {
-            setDescription(prevDescription => `${prevDescription}\n${drawerInputText}`);
-            setValue('description', `${description ?? ''}\n${drawerInputText}`, { shouldDirty: true });
-            setDrawerInputText('');  // Clear the drawer input text after updating
+            setDescription(
+                (prevDescription) => `${prevDescription}\n${drawerInputText}`,
+            );
+            setValue(
+                'description',
+                `${description ?? ''}\n${drawerInputText}`,
+                { shouldDirty: true },
+            );
+            setDrawerInputText('');
         }
     }, [drawerInputText, setValue, description]);
 
@@ -64,7 +70,7 @@ const CreateDocumentForm: FC = () => {
             const description = watch('description');
             if (isDirty || description || title) {
                 event.preventDefault();
-                event.returnValue = ''; // Show confirmation dialog
+                event.returnValue = '';
             }
         };
 
@@ -80,7 +86,9 @@ const CreateDocumentForm: FC = () => {
         const description = watch('description');
         if ((!isDirty && description) || !title) {
             router.push('/dashboard');
-        } else if (confirm('You have unsaved changes. Are you sure you want to leave?')) {
+        } else if (
+            confirm('You have unsaved changes. Are you sure you want to leave?')
+        ) {
             router.push('/dashboard');
         }
     };
@@ -91,19 +99,19 @@ const CreateDocumentForm: FC = () => {
                 New document
             </h2>
 
-            <p className='text-center mt-5 text-red-800 font-bold text-xl'>
-            New documents are always assigned to the Unassigned documents folder</p>
+            <p className='mt-5 text-center text-xl font-bold text-red-800'>
+                New documents are always assigned to the Unassigned documents
+                folder
+            </p>
 
             <div className='mt-5 flex justify-center'>
-                {/* TODO: Broken fix later */}
-                {/* }
                 <Button
                     variant='flat'
                     color='secondary'
                     onClick={handleDrawerOpen}
                 >
                     Use AI
-                </Button> */}
+                </Button>
                 <Button
                     variant='flat'
                     color='primary'
@@ -145,7 +153,11 @@ const CreateDocumentForm: FC = () => {
                     className='mt-6'
                     disabled={isPending}
                 >
-                    {isPending ? <Loader2 className='animate-bounce w-8 h-8' /> : 'Create Document'}
+                    {isPending ? (
+                        <Loader2 className='h-8 w-8 animate-bounce' />
+                    ) : (
+                        'Create Document'
+                    )}
                 </Button>
                 <QuillEditor
                     value={description}

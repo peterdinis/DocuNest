@@ -5,7 +5,7 @@ import { Button, Input } from '@nextui-org/react';
 import useOpenAI from '@/app/_hooks/shared/useAI';
 import Header from '../shared/Header';
 import { AIDocProps } from '@/app/_types/documentTypes';
-
+import { Loader2 } from 'lucide-react';
 
 const AIDoc: FC<AIDocProps> = ({ onContentGenerated }) => {
     const [prompt, setPrompt] = useState('');
@@ -39,7 +39,7 @@ const AIDoc: FC<AIDocProps> = ({ onContentGenerated }) => {
                 onClick={handleGenerate}
                 disabled={isLoading}
             >
-                {isLoading ? 'Generating...' : 'Generate Content'}
+                {isLoading ? <Loader2 className='animate-spin w-8 h-8' /> : 'Generate Content'}
             </Button>
             {error && <p className='text-red-500'>{error}</p>}
         </div>
