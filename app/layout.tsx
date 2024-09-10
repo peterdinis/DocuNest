@@ -14,6 +14,7 @@ import { Suspense } from 'react';
 import Loading from './_components/shared/Loading';
 import SessionCheckHelper from './_components/auth/SessionCheckHelper';
 import '@uploadthing/react/styles.css';
+import Transition from './_components/shared/Transition';
 
 const inter = Roboto({
     weight: '500',
@@ -39,6 +40,7 @@ export default function RootLayout({
                             <QueryProvider>
                                 <SessionAppProvider>
                                     <SessionCheckHelper>
+                                        <Transition>
                                         <Navigation />
                                         {children}
                                         <ToastContainer
@@ -47,6 +49,7 @@ export default function RootLayout({
                                             draggable
                                         />
                                         <ScrollToTop />
+                                        </Transition>
                                     </SessionCheckHelper>
                                 </SessionAppProvider>
                             </QueryProvider>
