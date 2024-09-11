@@ -11,6 +11,8 @@ import Loading from '../../shared/Loading';
 import javascript from 'highlight.js/lib/languages/javascript';
 import typescript from 'highlight.js/lib/languages/typescript';
 import net from "highlight.js/lib/languages/csharp.js"
+import { SnowTheme } from 'quill-color-picker-enhance';
+import 'quill-color-picker-enhance/dist/index.css';
 
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("typescript", typescript);
@@ -19,6 +21,7 @@ hljs.registerLanguage("csharp", net);
 // Register Quill modules
 Quill.register('modules/magicUrl', MagicUrl);
 Quill.register('modules/cursors', QuillCursors);
+Quill.register('themes/snow-quill-color-picker-enhance', SnowTheme);
 
 // QuillEditor component
 interface QuillEditorProps {
@@ -69,7 +72,7 @@ export const modules = {
     [{ script: 'sub' }, { script: 'super' }],
     ['clean'],
     [{ align: [] }],
-    [{ color: [] }, { background: [] }],
+    [{ color: [] }, { background: [] }]
   ],
 
   history: {
@@ -97,6 +100,7 @@ export const modules = {
         allowedAttr: ['width', 'height'],
       },
     ],
+    theme: 'snow-quill-color-picker-enhance',
     keepSelection: true,
     substituteBlockElements: true,
     magicPasteLinks: true,
