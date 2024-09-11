@@ -15,6 +15,7 @@ import Loading from './_components/shared/Loading';
 import SessionCheckHelper from './_components/auth/SessionCheckHelper';
 import '@uploadthing/react/styles.css';
 import Transition from './_components/shared/Transition';
+import Providers from './_components/shared/Providers';
 
 const inter = Roboto({
     weight: '500',
@@ -34,28 +35,9 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body className={inter.className}>
-                <NextUiProvider>
-                    <Suspense fallback={<Loading />}>
-                        <ThemeProvider>
-                            <QueryProvider>
-                                <SessionAppProvider>
-                                    <SessionCheckHelper>
-                                        <Transition>
-                                        <Navigation />
-                                        {children}
-                                        <ToastContainer
-                                            closeOnClick
-                                            pauseOnHover
-                                            draggable
-                                        />
-                                        <ScrollToTop />
-                                        </Transition>
-                                    </SessionCheckHelper>
-                                </SessionAppProvider>
-                            </QueryProvider>
-                        </ThemeProvider>
-                    </Suspense>
-                </NextUiProvider>
+                <Providers>
+                    {children}
+                </Providers>
             </body>
         </html>
     );
