@@ -11,12 +11,16 @@ import Loading from '../../shared/Loading';
 import javascript from 'highlight.js/lib/languages/javascript';
 import typescript from 'highlight.js/lib/languages/typescript';
 import net from "highlight.js/lib/languages/csharp.js"
+import python from "highlight.js/lib/languages/python.js";
+import sql from "highlight.js/lib/languages/sql.js"
 import { SnowTheme } from 'quill-color-picker-enhance';
 import 'quill-color-picker-enhance/dist/index.css';
 
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("typescript", typescript);
 hljs.registerLanguage("csharp", net);
+hljs.registerLanguage("python", python);
+hljs.registerLanguage("sql", sql);
 
 // Register Quill modules
 Quill.register('modules/magicUrl', MagicUrl);
