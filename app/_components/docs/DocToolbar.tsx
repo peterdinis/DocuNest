@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import {ReactNode, FC} from 'react';
 import {
     Button,
     ButtonGroup,
@@ -19,11 +19,11 @@ interface DocToolbarProps {
     handleEditToggle: () => void;
     handleDownload: () => void;
     handleExportPDF: () => void;
-    folderSelectOrName: React.ReactNode;
+    folderSelectOrName: ReactNode;
     handleDocxDownload: () => void;
 }
 
-const DocToolbar: React.FC<DocToolbarProps> = ({
+const DocToolbar: FC<DocToolbarProps> = ({
     isEditMode,
     handleEditToggle,
     handleDownload,
@@ -33,7 +33,7 @@ const DocToolbar: React.FC<DocToolbarProps> = ({
 }) => {
     return (
         <ButtonGroup className='ml-8 mt-6'>
-            <Button variant='solid' color='primary'>
+            <Button variant='solid' color='success'>
                 <Link href='/dashboard'>Go Back</Link>
             </Button>
             <Button
