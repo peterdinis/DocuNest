@@ -24,7 +24,7 @@ const AIDoc: FC<AIDocProps> = ({ onContentGenerated }) => {
 
     return (
         <div>
-            <Header text='Create prompt here' />
+            <Header text='Use AI for your document' />
             <Input
                 className='ml-3 mr-3 mt-5'
                 type='text'
