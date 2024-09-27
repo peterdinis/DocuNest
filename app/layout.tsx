@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Roboto } from 'next/font/google';
+import { Arimo } from 'next/font/google';
 import './globals.css';
 import NextUiProvider from './_components/shared/providers/NextUiProvider';
 import Navigation from './_components/shared/Navigation';
@@ -16,7 +16,7 @@ import SessionCheckHelper from './_components/auth/SessionCheckHelper';
 import '@uploadthing/react/styles.css';
 import Transition from './_components/shared/Transition';
 
-const inter = Roboto({
+const inter = Arimo({
     weight: '500',
     subsets: ['latin']
 });
